@@ -1,0 +1,116 @@
+<svg width="800" height="900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333" />
+    </marker>
+    <filter id="dropShadow" x="0" y="0" width="200%" height="200%">
+      <feOffset result="offOut" in="SourceAlpha" dx="2" dy="2" />
+      <feGaussianBlur result="blurOut" in="offOut" stdDeviation="3" />
+      <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="900" fill="#f8f9fa" />
+  <text x="400" y="40" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#333">High-Level System Architecture (TalkJourney)</text>
+
+  <!-- === LAYER 1: PRESENTATION === -->
+  <rect x="100" y="100" width="600" height="180" rx="10" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" />
+  <text x="120" y="130" font-family="Arial" font-size="16" font-weight="bold" fill="#1565c0">Presentation Layer (Unity Engine / VR View)</text>
+  <text x="680" y="130" font-family="Arial" font-size="12" text-anchor="end" fill="#1565c0">Handles User I/O</text>
+
+  <!-- Module: VR Rig -->
+  <rect x="130" y="150" width="160" height="50" rx="5" fill="white" stroke="#2196f3" filter="url(#dropShadow)" />
+  <text x="210" y="180" font-family="Arial" font-size="12" text-anchor="middle">VR Rig (Oculus SDK)</text>
+
+  <!-- Module: UI Manager -->
+  <rect x="320" y="150" width="160" height="50" rx="5" fill="white" stroke="#2196f3" filter="url(#dropShadow)" />
+  <text x="400" y="170" font-family="Arial" font-size="12" text-anchor="middle" font-weight="bold">UI Manager</text>
+  <!-- Fixed: & -> &amp; -->
+  <text x="400" y="185" font-family="Arial" font-size="10" text-anchor="middle">(Bubbles &amp; Menus)</text>
+
+  <!-- Module: Audio/Visual -->
+  <rect x="510" y="150" width="160" height="50" rx="5" fill="white" stroke="#2196f3" filter="url(#dropShadow)" />
+  <text x="590" y="180" font-family="Arial" font-size="12" text-anchor="middle">NPC View &amp; Feedback</text>
+
+  <!-- Module: Haptics (Small) -->
+  <rect x="130" y="215" width="160" height="30" rx="5" fill="#bbdefb" stroke="none" />
+  <text x="210" y="235" font-family="Arial" font-size="11" text-anchor="middle">Haptic Feedback</text>
+
+  <!-- Connection Presentation -> Logic -->
+  <line x1="400" y1="280" x2="400" y2="330" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
+  <!-- Fixed: & -> &amp; -->
+  <text x="410" y="310" font-family="Arial" font-size="12" fill="#555">Events &amp; Input</text>
+
+
+  <!-- === LAYER 2: LOGIC === -->
+  <rect x="100" y="340" width="600" height="240" rx="10" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" />
+  <text x="120" y="370" font-family="Arial" font-size="16" font-weight="bold" fill="#2e7d32">Application Logic Layer (C# Controllers)</text>
+  <text x="680" y="370" font-family="Arial" font-size="12" text-anchor="end" fill="#2e7d32">Core Business Logic</text>
+
+  <!-- Module: Event Manager (Central) -->
+  <rect x="300" y="400" width="200" height="60" rx="5" fill="#c8e6c9" stroke="#4caf50" stroke-width="2" filter="url(#dropShadow)" />
+  <text x="400" y="425" font-family="Arial" font-size="13" text-anchor="middle" font-weight="bold">Event Manager</text>
+  <text x="400" y="445" font-family="Arial" font-size="11" text-anchor="middle">(Observer Pattern)</text>
+
+  <!-- Module: Game Manager -->
+  <rect x="130" y="400" width="140" height="50" rx="5" fill="white" stroke="#4caf50" filter="url(#dropShadow)" />
+  <text x="200" y="430" font-family="Arial" font-size="12" text-anchor="middle">Game Manager</text>
+
+  <!-- Module: Voice Handler -->
+  <rect x="530" y="400" width="140" height="50" rx="5" fill="white" stroke="#4caf50" filter="url(#dropShadow)" />
+  <text x="600" y="430" font-family="Arial" font-size="12" text-anchor="middle">Voice Handler</text>
+
+  <!-- Module: NPC Controller -->
+  <rect x="130" y="500" width="140" height="50" rx="5" fill="white" stroke="#4caf50" filter="url(#dropShadow)" />
+  <text x="200" y="530" font-family="Arial" font-size="12" text-anchor="middle">NPC Controller (AI)</text>
+
+  <!-- Module: Transliterator -->
+  <rect x="330" y="500" width="140" height="50" rx="5" fill="white" stroke="#4caf50" filter="url(#dropShadow)" />
+  <text x="400" y="530" font-family="Arial" font-size="12" text-anchor="middle">Transliterator Logic</text>
+
+  <!-- Module: Quest Manager -->
+  <rect x="530" y="500" width="140" height="50" rx="5" fill="white" stroke="#4caf50" filter="url(#dropShadow)" />
+  <text x="600" y="530" font-family="Arial" font-size="12" text-anchor="middle">Quest Manager</text>
+
+  <!-- Internal Logic Lines -->
+  <line x1="270" y1="425" x2="300" y2="425" stroke="#4caf50" stroke-width="2" /> <!-- GM -> Event -->
+  <line x1="530" y1="425" x2="500" y2="425" stroke="#4caf50" stroke-width="2" /> <!-- Voice -> Event -->
+  <line x1="400" y1="460" x2="400" y2="500" stroke="#4caf50" stroke-width="2" stroke-dasharray="4" /> <!-- Event -> Translit -->
+
+  <!-- Connection Logic -> Data -->
+  <line x1="400" y1="580" x2="400" y2="630" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="410" y="610" font-family="Arial" font-size="12" fill="#555">JSON / Save / Load</text>
+
+
+  <!-- === LAYER 3: DATA === -->
+  <rect x="100" y="640" width="600" height="180" rx="10" fill="#fff3e0" stroke="#ff9800" stroke-width="2" />
+  <text x="120" y="670" font-family="Arial" font-size="16" font-weight="bold" fill="#ef6c00">Data &amp; Infrastructure Layer (Model)</text>
+  <!-- Fixed: & -> &amp; -->
+  <text x="680" y="670" font-family="Arial" font-size="12" text-anchor="end" fill="#ef6c00">Persistence &amp; Assets</text>
+
+  <!-- Module: JSON Loader -->
+  <rect x="130" y="700" width="160" height="50" rx="5" fill="white" stroke="#ff9800" filter="url(#dropShadow)" />
+  <text x="210" y="720" font-family="Arial" font-size="12" text-anchor="middle" font-weight="bold">JSON Loader</text>
+  <!-- Fixed: & -> &amp; -->
+  <text x="210" y="735" font-family="Arial" font-size="10" text-anchor="middle">(Vocab &amp; Dialogue)</text>
+
+  <!-- Module: Object Pool -->
+  <rect x="320" y="700" width="160" height="50" rx="5" fill="white" stroke="#ff9800" filter="url(#dropShadow)" />
+  <text x="400" y="720" font-family="Arial" font-size="12" text-anchor="middle" font-weight="bold">Object Pool</text>
+  <text x="400" y="735" font-family="Arial" font-size="10" text-anchor="middle">(Memory Management)</text>
+
+  <!-- Module: Persistence -->
+  <rect x="510" y="700" width="160" height="50" rx="5" fill="white" stroke="#ff9800" filter="url(#dropShadow)" />
+  <text x="590" y="720" font-family="Arial" font-size="12" text-anchor="middle" font-weight="bold">Persistence Mgr</text>
+  <text x="590" y="735" font-family="Arial" font-size="10" text-anchor="middle">(Save System)</text>
+
+  <!-- Module: Addressables -->
+  <rect x="320" y="760" width="160" height="40" rx="5" fill="#ffe0b2" stroke="#ff9800" />
+  <text x="400" y="785" font-family="Arial" font-size="12" text-anchor="middle">Addressables (Assets)</text>
+
+  <!-- Arrows Up (Data Flow) -->
+  <line x1="210" y1="700" x2="210" y2="580" stroke="#ff9800" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arrow)" />
+  <line x1="590" y1="700" x2="590" y2="580" stroke="#ff9800" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arrow)" />
+
+</svg>
