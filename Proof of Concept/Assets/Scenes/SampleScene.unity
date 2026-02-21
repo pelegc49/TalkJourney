@@ -276,7 +276,6 @@ MonoBehaviour:
   logMelSpectro: {fileID: 5022602860645237092, guid: 0c353f1ac6645ab4dbb8e644fb508c7f, type: 3}
   vocabAsset: {fileID: 4900000, guid: c079180d15d5e48459ccd4cadcd8a9cf, type: 3}
   recordingDuration: 30
-  triggerKey: 32
   volumeThreshold: 0.2
   requiredSilence: 1
   fullText: 
@@ -293,15 +292,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1683d858acdb5244b81c55e23ef6cd72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RealtimeWhisper_noCGS
-  audioDecoder1: {fileID: 5022602860645237092, guid: 4596febef0726ee40af2dc589212f015, type: 3}
-  audioDecoder2: {fileID: 5022602860645237092, guid: 73fe85fd2d3e66e4cb9f7111069baa5a, type: 3}
+  audioDecoder1: {fileID: 5022602860645237092, guid: 736eb8b7ba52f1b4f867c2f9ece052a7, type: 3}
+  audioDecoder2: {fileID: 5022602860645237092, guid: 3541112a95167574793c0f674f9ceb55, type: 3}
   audioEncoder: {fileID: 5022602860645237092, guid: 32babde7507d13846b7181f2f1868b50, type: 3}
   logMelSpectro: {fileID: 5022602860645237092, guid: 0c353f1ac6645ab4dbb8e644fb508c7f, type: 3}
   vocabAsset: {fileID: 4900000, guid: c079180d15d5e48459ccd4cadcd8a9cf, type: 3}
   recordingDuration: 30
   triggerKey: 32
-  volumeThreshold: 0.19939016
-  requiredSilence: 0.1
+  volumeThreshold: 0.2
+  requiredSilence: 1
   useHebrew: 0
   englishSentences:
   - hello world
@@ -313,14 +312,6 @@ MonoBehaviour:
   - "\u05D9\u05E4\u05D4 \u05DE\u05D0\u05D5\u05D3"
   matchTolerance: 0.3
   maxTokens: 30
-  minConfidence: 10
-  bannedPhrases:
-  - You
-  - Thank you
-  - MBC
-  - Copyright
-  - Subtitles
-  - watching
   fullText: 
   isThinking: 0
 --- !u!1 &410087039

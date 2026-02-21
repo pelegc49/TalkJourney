@@ -8,6 +8,7 @@ using Unity.Collections;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Text.RegularExpressions; 
+using Unity.Profiling;
 
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
@@ -28,8 +29,8 @@ public class RealtimeWhisper : MonoBehaviour
 
     [Header("VAD Settings")]
     [Range(0.0f, 1.0f)]
-    public float volumeThreshold = 0.02f;   
-    public float requiredSilence = 0.6f;    
+    public float volumeThreshold = 0.2f;   
+    public float requiredSilence = 1f;    
 
     [Header("Languages & Context")]
     public bool useHebrew = false; 
@@ -42,10 +43,6 @@ public class RealtimeWhisper : MonoBehaviour
     
     [Header("Generation Settings")]
     public int maxTokens = 30;
-    
-    [Header("Anti-Hallucination")]
-    public float minConfidence = 10.0f; 
-    public string[] bannedPhrases = new string[] { "You", "Thank you", "MBC", "Copyright", "Subtitles", "watching" };
 
     [Header("Output")]
     public string fullText = ""; 
@@ -59,7 +56,11 @@ public class RealtimeWhisper : MonoBehaviour
     
     // Context
     private string[] _currentSentences;
-    private StringBuilder _sb = new StringBuilder(); 
+    private string[] _cleanedSentences;  // Cache cleaned sentences to avoid redundant cleaning
+    private readonly StringBuilder _sb = new StringBuilder();
+    private readonly StringBuilder _transcriptBuilder = new StringBuilder(256);
+    private readonly StringBuilder _sanitizeBuilder = new StringBuilder(256);
+    private int _tokensLength;  // Cache tokens.Length to avoid repeated field access
 
     // Workers
     private Worker encoderEngine, decoderEngine1, decoderEngine2, spectroEngine, argmaxEngine;
@@ -67,11 +68,33 @@ public class RealtimeWhisper : MonoBehaviour
     // Data
     private NativeArray<int> outputTokens; 
     private NativeArray<int> singleTokenArray; 
+    private readonly List<Tensor> _kvTensorsToDispose = new List<Tensor>(16);
     
     private AudioClip micClip;
     private string micDevice;
     private const int SampleRate = 16000; 
+    private const int VADSampleWindow = 128;
+    private const int MaxAudioSeconds = 30;
     private bool isTranscribing = false;
+    private float[] _vadWaveData;
+    private float[] _speechDataBuffer;
+    private float[] _paddedAudioBuffer;
+    private float[] _wrapReadBuffer;
+    private int[] _levenshteinPrev;
+    private int[] _levenshteinCurr;
+    private int _lastPaddedLength;
+    private readonly bool[] _allowedAscii = new bool[128];
+    private readonly HashSet<int> _recentTokens = new HashSet<int>(16);
+
+    // Threading removed - Sentis GPU operations require main thread
+    // Strategy: Use yield returns in TranscribeRoutine to keep cube smooth
+
+    private const string BasicSymbols = "!@#$%^&*()-_=+[]{};:'\"\\|,.<>/?`~";
+
+    private static readonly ProfilerMarker UpdateMarker = new ProfilerMarker("RealtimeWhisper.Update");
+    private static readonly ProfilerMarker VadMarker = new ProfilerMarker("RealtimeWhisper.VAD");
+    private static readonly ProfilerMarker TranscribeMarker = new ProfilerMarker("RealtimeWhisper.Transcribe");
+    private static readonly ProfilerMarker DecodeMarker = new ProfilerMarker("RealtimeWhisper.Decode");
 
     // Constants
     const int END_OF_TEXT = 50257;
@@ -83,15 +106,21 @@ public class RealtimeWhisper : MonoBehaviour
 
     private string[] tokens;
     private int[] whiteSpaceCharacters = new int[256];
+    private bool[] _basicSymbolsLookup = new bool[256];  // Fast O(1) symbol lookup for ASCII range
 
     void Start()
     {
         SetupWhiteSpaceShifts();
+        SetupBasicSymbolsLookup();  // Initialize symbol lookup table
         LoadVocab();
         SetupEngines();
         SetupMicrophone();
+
+        _vadWaveData = new float[VADSampleWindow];
+        _paddedAudioBuffer = new float[MaxAudioSeconds * SampleRate];
         
-        outputTokens = new NativeArray<int>(100, Allocator.Persistent);
+        int tokenBufferLength = Mathf.Max(100, maxTokens + 4);
+        outputTokens = new NativeArray<int>(tokenBufferLength, Allocator.Persistent);
         singleTokenArray = new NativeArray<int>(1, Allocator.Persistent);
         singleTokenArray[0] = NO_TIME_STAMPS;
 
@@ -102,6 +131,17 @@ public class RealtimeWhisper : MonoBehaviour
     {
         useHebrew = isHebrew;
         _currentSentences = isHebrew ? hebrewSentences : englishSentences;
+        
+        // Pre-clean all sentences to avoid redundant cleaning in FindBestMatch
+        if (_currentSentences != null)
+        {
+            _cleanedSentences = new string[_currentSentences.Length];
+            for (int i = 0; i < _currentSentences.Length; i++)
+            {
+                _cleanedSentences[i] = CleanString(_currentSentences[i]);
+            }
+        }
+        
         Debug.Log($"Language switched to: {(useHebrew ? "Hebrew" : "English")}");
     }
 
@@ -129,7 +169,10 @@ public class RealtimeWhisper : MonoBehaviour
 
     void Update()
     {
+        using (UpdateMarker.Auto())
+        {
         if (isTranscribing) return;
+        if (micClip == null || string.IsNullOrEmpty(micDevice)) return;
 
         bool manualTrigger = false;
         #if ENABLE_INPUT_SYSTEM 
@@ -171,25 +214,33 @@ public class RealtimeWhisper : MonoBehaviour
                 StartCoroutine(TranscribeRoutine(vadStartPos, vadEndPos));
             }
         }
+        }
     }
 
     float GetCurrentVolume()
     {
-        int sampleWindow = 128; 
-        int micPos = Microphone.GetPosition(micDevice);
-        if (micPos < sampleWindow + 1) return 0f;
-        float[] waveData = new float[sampleWindow];
-        micClip.GetData(waveData, micPos - sampleWindow);
-        float max = 0f;
-        foreach (var v in waveData) if (Mathf.Abs(v) > max) max = Mathf.Abs(v);
-        return max;
+        using (VadMarker.Auto())
+        {
+            int micPos = Microphone.GetPosition(micDevice);
+            if (micPos < VADSampleWindow + 1) return 0f;
+            micClip.GetData(_vadWaveData, micPos - VADSampleWindow);
+            float max = 0f;
+            for (int i = 0; i < VADSampleWindow; i++)
+            {
+                float absValue = Mathf.Abs(_vadWaveData[i]);
+                if (absValue > max) max = absValue;
+            }
+            return max;
+        }
     }
 
     IEnumerator TranscribeRoutine(int startSample, int endSample)
     {
+        using (TranscribeMarker.Auto())
+        {
         isTranscribing = true;
         isThinking = true;
-        fullText = ""; 
+        fullText = "";
 
         int totalSamples = micClip.samples;
         if (startSample < 0) startSample = 0;
@@ -197,74 +248,102 @@ public class RealtimeWhisper : MonoBehaviour
         if (endSample < 0) endSample = 0;
         if (endSample >= totalSamples) endSample = 0;
 
+        // Extract audio on main thread
         int length = (endSample >= startSample) ? (endSample - startSample) : ((totalSamples - startSample) + endSample);
-        int maxLen = 30 * SampleRate; 
+        int maxLen = MaxAudioSeconds * SampleRate;
         if (length > maxLen) length = maxLen;
 
         if (length <= 0) { isTranscribing = false; isThinking = false; yield break; }
 
-        float[] speechData = new float[length];
-        bool readSuccess = true;
+        EnsureFloatBuffer(ref _speechDataBuffer, length);
         try
         {
             if (endSample >= startSample)
             {
-                micClip.GetData(speechData, startSample);
+                micClip.GetData(_speechDataBuffer, startSample);
             }
             else
             {
-                float[] part1 = new float[totalSamples - startSample];
-                micClip.GetData(part1, startSample);
-                float[] part2 = new float[endSample];
-                micClip.GetData(part2, 0);
-                System.Array.Copy(part1, 0, speechData, 0, part1.Length);
-                System.Array.Copy(part2, 0, speechData, part1.Length, part2.Length);
+                int part1Length = totalSamples - startSample;
+                EnsureFloatBuffer(ref _wrapReadBuffer, Mathf.Max(part1Length, endSample));
+                micClip.GetData(_wrapReadBuffer, startSample);
+                System.Array.Copy(_wrapReadBuffer, 0, _speechDataBuffer, 0, part1Length);
+                if (endSample > 0)
+                {
+                    micClip.GetData(_wrapReadBuffer, 0);
+                    System.Array.Copy(_wrapReadBuffer, 0, _speechDataBuffer, part1Length, endSample);
+                }
             }
         }
-        catch (System.Exception) { readSuccess = false; }
+        catch
+        {
+            isTranscribing = false;
+            isThinking = false;
+            yield break;
+        }
 
-        if (!readSuccess) { isTranscribing = false; isThinking = false; yield break; }
-
+        // Single-pass normalization: find max and check volume at once
         float maxVol = 0f;
-        foreach(var v in speechData) if(Mathf.Abs(v) > maxVol) maxVol = Mathf.Abs(v);
+        for (int i = 0; i < length; i++)
+        {
+            float absValue = Mathf.Abs(_speechDataBuffer[i]);
+            if (absValue > maxVol) maxVol = absValue;
+        }
         if (maxVol < 0.01f) { isTranscribing = false; isThinking = false; yield break; }
 
-        float scale = 1.0f / Mathf.Max(maxVol, 0.1f); 
-        for(int i=0; i<speechData.Length; i++) speechData[i] *= scale;
+        // Normalize in-place
+        float scale = 1.0f / Mathf.Max(maxVol, 0.1f);
+        for (int i = 0; i < length; i++) _speechDataBuffer[i] *= scale;
 
-        float[] paddedBuffer = new float[maxLen];
-        System.Array.Copy(speechData, paddedBuffer, speechData.Length); 
-
-        Tensor<float> encodedAudioCPU = null;
-
+        // Pad buffer (only clear changed region)
+        if (_lastPaddedLength > length)
         {
-            using Tensor<float> audioInput = new Tensor<float>(new TensorShape(1, paddedBuffer.Length), paddedBuffer);
+            System.Array.Clear(_paddedAudioBuffer, length, _lastPaddedLength - length);
+        }
+        _lastPaddedLength = length;
+        System.Array.Copy(_speechDataBuffer, _paddedAudioBuffer, length);
+
+        // Yield to let cube render before heavy encoding work starts
+        yield return null;
+
+        // Run encoder pipeline (stays on main thread for Sentis GPU safety)
+        Tensor<float> encodedAudioCPU = null;
+        int paddedLen = _paddedAudioBuffer.Length;
+        {
+            using Tensor<float> audioInput = new Tensor<float>(new TensorShape(1, paddedLen), _paddedAudioBuffer);
             spectroEngine.Schedule(audioInput);
             using (var logMel = spectroEngine.PeekOutput() as Tensor<float>)
             {
                 encoderEngine.Schedule(logMel);
                 using (var gpuOutput = encoderEngine.PeekOutput() as Tensor<float>)
                 {
-                    // FIX: Use DownloadToNativeArray instead of ReadbackAndClone to avoid Awaitable/Blocking confusion
                     using (var nativeData = gpuOutput.DownloadToNativeArray())
                     {
-                        // Create a CPU tensor copy from the native data
                         encodedAudioCPU = new Tensor<float>(gpuOutput.shape, nativeData);
                     }
                 }
             }
-        } 
+        }
+
+        // Yield again before decoder to let cube render
+        yield return null;
 
         yield return DecodeLoop(encodedAudioCPU);
 
-        encodedAudioCPU.Dispose(); 
+        encodedAudioCPU.Dispose();
         isTranscribing = false;
         isThinking = false;
+        }
     }
 
     IEnumerator DecodeLoop(Tensor<float> encodedAudio)
     {
-        for (int i = 0; i < outputTokens.Length; i++) outputTokens[i] = 0;
+        using (DecodeMarker.Auto())
+        {
+        // Only clear the portion we'll write to (3 initial tokens + decoder iterations)
+        int maxClear = Mathf.Min(3 + maxTokens, outputTokens.Length);
+        for (int i = 0; i < maxClear; i++) outputTokens[i] = 0;
+        _transcriptBuilder.Clear();
 
         outputTokens[0] = START_OF_TRANSCRIPT;
         outputTokens[1] = useHebrew ? HEBREW : ENGLISH; 
@@ -275,8 +354,10 @@ public class RealtimeWhisper : MonoBehaviour
 
         int consecutiveRepeats = 0;
         int previousToken = -1;
+        int decodeIterations = Mathf.Max(1, maxTokens);
+        _recentTokens.Clear();
 
-        for (int i = 0; i < maxTokens; i++) 
+        for (int i = 0; i < decodeIterations && tokenCount < outputTokens.Length; i++)
         {
             using (var currentInput = new NativeArray<int>(tokenCount, Allocator.Temp))
             {
@@ -289,7 +370,8 @@ public class RealtimeWhisper : MonoBehaviour
                 }
             }
 
-            List<Tensor> linkTensors = PassOutputsToInputs(decoderEngine1, decoderEngine2);
+            _kvTensorsToDispose.Clear();
+            PassOutputsToInputs(decoderEngine1, decoderEngine2, _kvTensorsToDispose);
             try 
             {
                 using (var lastTokenTensor = new Tensor<int>(new TensorShape(1, 1), singleTokenArray))
@@ -300,7 +382,10 @@ public class RealtimeWhisper : MonoBehaviour
             }
             finally
             {
-                foreach (var t in linkTensors) t.Dispose();
+                for (int tensorIndex = 0; tensorIndex < _kvTensorsToDispose.Count; tensorIndex++)
+                {
+                    _kvTensorsToDispose[tensorIndex].Dispose();
+                }
             }
 
             int nextToken = 0;
@@ -310,7 +395,6 @@ public class RealtimeWhisper : MonoBehaviour
                 argmaxEngine.Schedule(logitsTensor);
                 using (var argmaxOutput = argmaxEngine.PeekOutput() as Tensor<int>)
                 {
-                    // FIX: Use DownloadToNativeArray for immediate blocking read
                     using (var nativeTokenData = argmaxOutput.DownloadToNativeArray())
                     {
                         nextToken = nativeTokenData[0];
@@ -325,21 +409,27 @@ public class RealtimeWhisper : MonoBehaviour
 
             if (nextToken == END_OF_TEXT) break;
 
-            if (nextToken == previousToken)
+            // Strict repetition filtering: break on any token repeat to prevent hallucinations
+            if (_recentTokens.Contains(nextToken) || nextToken == previousToken)
             {
                 consecutiveRepeats++;
-                if (consecutiveRepeats >= 2) break;
+                if (consecutiveRepeats >= 1) break;  // Break immediately on any repeat
             }
             else
             {
                 consecutiveRepeats = 0;
             }
             previousToken = nextToken;
+            _recentTokens.Add(nextToken);
 
-            if (nextToken < tokens.Length)
+            // Cache token lookup to avoid repeated array access
+            if (nextToken < _tokensLength && tokens[nextToken] != null)
             {
-                string word = GetUnicodeText(tokens[nextToken]);
-                fullText += word;
+                string word = SanitizeToBasicCharacters(GetUnicodeText(tokens[nextToken]));
+                if (word.Length > 0)  // Faster than string.IsNullOrEmpty
+                {
+                    _transcriptBuilder.Append(word);
+                }
             }
 
             outputTokens[tokenCount] = nextToken; 
@@ -349,16 +439,21 @@ public class RealtimeWhisper : MonoBehaviour
             yield return null; 
         }
 
+        fullText = _transcriptBuilder.ToString();
+
+        // Post-process: remove duplicate consecutive words
+        fullText = RemoveDuplicateWords(fullText);
+
         string cleanUserText = CleanString(fullText);
         
-        foreach(var badPhrase in bannedPhrases)
+        // Reject if result is too short (likely incomplete recognition)
+        if (cleanUserText.Length < 3)
         {
-            if (cleanUserText.Contains(CleanString(badPhrase))) 
-            {
-                Debug.Log($"Hallucination detected: {fullText}");
-                cleanUserText = ""; 
-                fullText = "";
-            }
+            Debug.LogWarning($"[Recognition] Rejected: too short - '{fullText}'");
+            isTranscribing = false;
+            isThinking = false;
+            fullText = "";
+            yield break;
         }
 
         if (!string.IsNullOrEmpty(cleanUserText) && _currentSentences != null)
@@ -369,6 +464,7 @@ public class RealtimeWhisper : MonoBehaviour
         {
             Debug.Log($"FINAL TRANSCRIPT: {fullText}");
         }
+        }
     }
 
     void FindBestMatch(string userText)
@@ -376,15 +472,18 @@ public class RealtimeWhisper : MonoBehaviour
         string bestSentence = "";
         int lowestDistance = 1000;
         
-        foreach (var sentence in _currentSentences)
+        // Use pre-cleaned sentences to avoid redundant CleanString calls
+        for (int i = 0; i < _cleanedSentences.Length; i++)
         {
-            string cleanTarget = CleanString(sentence);
-            int distance = LevenshteinDistance(userText, cleanTarget);
+            int distance = LevenshteinDistance(userText, _cleanedSentences[i]);
             
             if (distance < lowestDistance)
             {
                 lowestDistance = distance;
-                bestSentence = sentence;
+                bestSentence = _currentSentences[i];
+                
+                // Early exit on perfect match
+                if (distance == 0) break;
             }
         }
 
@@ -398,7 +497,7 @@ public class RealtimeWhisper : MonoBehaviour
         }
         else
         {
-            fullText = $"#unmatched# ({fullText})";
+            fullText = $"unmatched: ({fullText})";
             Debug.Log($"<color=red>FAIL. Closest: {bestSentence} (Dist: {lowestDistance})</color>");
         }
     }
@@ -414,27 +513,69 @@ public class RealtimeWhisper : MonoBehaviour
         return _sb.ToString().Trim();
     }
 
-    public static int LevenshteinDistance(string s, string t)
+    string RemoveDuplicateWords(string input)
+    {
+        _sb.Clear();
+        var words = input.Split(new[] { ' ', '\t', '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
+        
+        if (words.Length == 0) return "";
+        if (words.Length == 1) return input.Trim();
+        
+        string lastWord = words[0].ToLower();
+        _sb.Append(words[0]);
+        
+        for (int i = 1; i < words.Length; i++)
+        {
+            string word = words[i].ToLower();
+            // Skip if identical to previous word (case-insensitive)
+            if (word != lastWord)
+            {
+                _sb.Append(" ").Append(words[i]);
+                lastWord = word;
+            }
+        }
+        
+        return _sb.ToString();
+    }
+
+    int LevenshteinDistance(string s, string t)
     {
         int n = s.Length;
         int m = t.Length;
-        int[,] d = new int[n + 1, m + 1];
         if (n == 0) return m;
         if (m == 0) return n;
-        for (int i = 0; i <= n; d[i, 0] = i++) { }
-        for (int j = 0; j <= m; d[0, j] = j++) { }
+
+        EnsureLevenshteinCapacity(m + 1);
+        
+        // Initialize first row
+        for (int j = 0; j <= m; j++) _levenshteinPrev[j] = j;
+
+        // DP: iterate rows avoiding string allocations
         for (int i = 1; i <= n; i++)
+        {
+            _levenshteinCurr[0] = i;
+            char sChar = s[i - 1];  // Cache string access
+            
             for (int j = 1; j <= m; j++)
             {
-                int cost = (t[j - 1] == s[i - 1]) ? 0 : 1;
-                d[i, j] = Mathf.Min(Mathf.Min(d[i - 1, j] + 1, d[i, j - 1] + 1), d[i - 1, j - 1] + cost);
+                int cost = (t[j - 1] == sChar) ? 0 : 1;  // Use cached char
+                int deletion = _levenshteinPrev[j] + 1;
+                int insertion = _levenshteinCurr[j - 1] + 1;
+                int substitution = _levenshteinPrev[j - 1] + cost;
+                // Use inline min to avoid Mathf.Min calls
+                _levenshteinCurr[j] = deletion < insertion ? (deletion < substitution ? deletion : substitution) : (insertion < substitution ? insertion : substitution);
             }
-        return d[n, m];
+
+            var tmp = _levenshteinPrev;
+            _levenshteinPrev = _levenshteinCurr;
+            _levenshteinCurr = tmp;
+        }
+
+        return _levenshteinPrev[m];
     }
 
-    List<Tensor> PassOutputsToInputs(Worker source, Worker dest)
+    void PassOutputsToInputs(Worker source, Worker dest, List<Tensor> tensorsToDispose)
     {
-        var tensorsToDispose = new List<Tensor>();
         for(int layer=0; layer<4; layer++)
         {
             var kDec = source.PeekOutput($"present.{layer}.decoder.key") as Tensor<float>;
@@ -450,7 +591,6 @@ public class RealtimeWhisper : MonoBehaviour
             dest.SetInput($"past_key_values.{layer}.encoder.key", kEnc);
             dest.SetInput($"past_key_values.{layer}.encoder.value", vEnc);
         }
-        return tensorsToDispose;
     }
 
     void SetupEngines()
@@ -472,11 +612,22 @@ public class RealtimeWhisper : MonoBehaviour
         var vocab = JsonConvert.DeserializeObject<Dictionary<string, int>>(vocabAsset.text);
         tokens = new string[vocab.Count];
         foreach (var item in vocab) tokens[item.Value] = item.Key;
+        _tokensLength = tokens.Length;  // Cache length
     }
 
     void SetupWhiteSpaceShifts()
     {
         for (int i = 0, n = 0; i < 256; i++) if (IsWhiteSpace((char)i)) whiteSpaceCharacters[n++] = i;
+    }
+
+    void SetupBasicSymbolsLookup()
+    {
+        // Pre-build lookup table for O(1) symbol checking
+        for (int i = 0; i < BasicSymbols.Length; i++)
+        {
+            char c = BasicSymbols[i];
+            if (c < 256) _basicSymbolsLookup[c] = true;
+        }
     }
 
     bool IsWhiteSpace(char c) => !(('!' <= c && c <= '~') || ('¡' <= c && c <= '¬') || ('®' <= c && c <= 'ÿ'));
@@ -489,9 +640,46 @@ public class RealtimeWhisper : MonoBehaviour
 
     string ShiftCharacterDown(string text)
     {
-        string outText = "";
-        foreach (char letter in text) outText += ((int)letter <= 256) ? letter : (char)whiteSpaceCharacters[(int)(letter - 256)];
-        return outText;
+        // Avoid StringBuilder allocation for small operations - build directly
+        char[] result = new char[text.Length];
+        for (int i = 0; i < text.Length; i++)
+        {
+            char letter = text[i];
+            result[i] = ((int)letter <= 256) ? letter : (char)whiteSpaceCharacters[(int)(letter - 256)];
+        }
+        return new string(result);
+    }
+
+    string SanitizeToBasicCharacters(string input)
+    {
+        _sanitizeBuilder.Clear();
+        for (int i = 0; i < input.Length; i++)
+        {
+            char c = input[i];
+            // Use lookup table for ASCII symbols (O(1) instead of O(n) for IndexOf)
+            if (char.IsLetterOrDigit(c) || char.IsWhiteSpace(c) || (c < 256 && _basicSymbolsLookup[c]))
+            {
+                _sanitizeBuilder.Append(c);
+            }
+        }
+        return _sanitizeBuilder.ToString();
+    }
+
+    void EnsureFloatBuffer(ref float[] buffer, int requiredLength)
+    {
+        if (buffer == null || buffer.Length < requiredLength)
+        {
+            buffer = new float[requiredLength];
+        }
+    }
+
+    void EnsureLevenshteinCapacity(int requiredLength)
+    {
+        if (_levenshteinPrev == null || _levenshteinPrev.Length < requiredLength)
+        {
+            _levenshteinPrev = new int[requiredLength];
+            _levenshteinCurr = new int[requiredLength];
+        }
     }
 
     void OnDestroy()
