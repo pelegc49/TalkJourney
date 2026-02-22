@@ -29,13 +29,17 @@ public class RealtimeWhisper : MonoBehaviour
 
     [Header("VAD Settings")]
     [Range(0.0f, 1.0f)]
-    public float volumeThreshold = 0.2f;   
-    public float requiredSilence = 1f;    
+    public float volumeThreshold = 0.2f;
+    public float requiredSilence = 1f;
 
     [Header("Languages & Context")]
-    public bool useHebrew = false; 
+    public Language currentLanguage = Language.Russian;
     public string[] englishSentences; 
-    public string[] hebrewSentences; 
+    public string[] hebrewSentences;
+    public string[] russianSentences;
+    
+    [Header("Runtime State")]
+    public float CurrentVolume { get; private set; }  // Expose for UI graphs 
     
     [Tooltip("0.0 = Exact match required. 0.4 = Allows loose matching.")]
     [Range(0.0f, 1.0f)]
@@ -96,11 +100,19 @@ public class RealtimeWhisper : MonoBehaviour
     private static readonly ProfilerMarker TranscribeMarker = new ProfilerMarker("RealtimeWhisper.Transcribe");
     private static readonly ProfilerMarker DecodeMarker = new ProfilerMarker("RealtimeWhisper.Decode");
 
+    // Language system
+    public enum Language { English, Hebrew, Russian }
+    
+    private static readonly Dictionary<Language, int> LanguageTokens = new Dictionary<Language, int>
+    {
+        { Language.English, 50259 },
+        { Language.Hebrew, 50279 },
+        { Language.Russian, 50263 }
+    };
+    
     // Constants
     const int END_OF_TEXT = 50257;
     const int START_OF_TRANSCRIPT = 50258;
-    const int ENGLISH = 50259;
-    const int HEBREW = 50279; 
     const int TRANSCRIBE = 50359;
     const int NO_TIME_STAMPS = 50363;
 
@@ -124,16 +136,59 @@ public class RealtimeWhisper : MonoBehaviour
         singleTokenArray = new NativeArray<int>(1, Allocator.Persistent);
         singleTokenArray[0] = NO_TIME_STAMPS;
 
-        SetLanguage(useHebrew);
+        SetLanguage(currentLanguage);
     }
 
-    public void SetLanguage(bool isHebrew)
+    /// <summary>
+    /// Switch language and load default sentences for that language
+    /// </summary>
+    public void SetLanguage(Language language)
     {
-        useHebrew = isHebrew;
-        _currentSentences = isHebrew ? hebrewSentences : englishSentences;
+        currentLanguage = language;
         
+        // Load default sentences for this language
+        switch (language)
+        {
+            case Language.English:
+                _currentSentences = englishSentences;
+                break;
+            case Language.Hebrew:
+                _currentSentences = hebrewSentences;
+                break;
+            case Language.Russian:
+                _currentSentences = russianSentences;
+                break;
+        }
+        
+        PreCleanSentences();
+        Debug.Log($"Language switched to: {language}");
+    }
+    
+    /// <summary>
+    /// Dynamically set custom sentences (useful for different game stages)
+    /// </summary>
+    public void SetSentences(string[] sentences)
+    {
+        _currentSentences = sentences;
+        PreCleanSentences();
+        Debug.Log($"Loaded {sentences?.Length ?? 0} custom sentences");
+    }
+    
+    /// <summary>
+    /// Set language and custom sentences simultaneously
+    /// </summary>
+    public void SetLanguageAndSentences(Language language, string[] sentences)
+    {
+        currentLanguage = language;
+        _currentSentences = sentences;
+        PreCleanSentences();
+        Debug.Log($"Language: {language}, Sentences: {sentences?.Length ?? 0}");
+    }
+    
+    private void PreCleanSentences()
+    {
         // Pre-clean all sentences to avoid redundant cleaning in FindBestMatch
-        if (_currentSentences != null)
+        if (_currentSentences != null && _currentSentences.Length > 0)
         {
             _cleanedSentences = new string[_currentSentences.Length];
             for (int i = 0; i < _currentSentences.Length; i++)
@@ -141,15 +196,17 @@ public class RealtimeWhisper : MonoBehaviour
                 _cleanedSentences[i] = CleanString(_currentSentences[i]);
             }
         }
-        
-        Debug.Log($"Language switched to: {(useHebrew ? "Hebrew" : "English")}");
+        else
+        {
+            _cleanedSentences = new string[0];
+        }
     }
 
     private void OnValidate()
     {
         if (Application.isPlaying)
         {
-            SetLanguage(useHebrew);
+            SetLanguage(currentLanguage);
         }
     }
 
@@ -222,7 +279,11 @@ public class RealtimeWhisper : MonoBehaviour
         using (VadMarker.Auto())
         {
             int micPos = Microphone.GetPosition(micDevice);
-            if (micPos < VADSampleWindow + 1) return 0f;
+            if (micPos < VADSampleWindow + 1)
+            {
+                CurrentVolume = 0f;
+                return 0f;
+            }
             micClip.GetData(_vadWaveData, micPos - VADSampleWindow);
             float max = 0f;
             for (int i = 0; i < VADSampleWindow; i++)
@@ -230,6 +291,7 @@ public class RealtimeWhisper : MonoBehaviour
                 float absValue = Mathf.Abs(_vadWaveData[i]);
                 if (absValue > max) max = absValue;
             }
+            CurrentVolume = max;  // Expose for UI
             return max;
         }
     }
@@ -346,7 +408,7 @@ public class RealtimeWhisper : MonoBehaviour
         _transcriptBuilder.Clear();
 
         outputTokens[0] = START_OF_TRANSCRIPT;
-        outputTokens[1] = useHebrew ? HEBREW : ENGLISH; 
+        outputTokens[1] = LanguageTokens[currentLanguage]; 
         outputTokens[2] = TRANSCRIBE;
         int tokenCount = 3;
         
@@ -426,7 +488,7 @@ public class RealtimeWhisper : MonoBehaviour
             if (nextToken < _tokensLength && tokens[nextToken] != null)
             {
                 string word = SanitizeToBasicCharacters(GetUnicodeText(tokens[nextToken]));
-                if (word.Length > 0)  // Faster than string.IsNullOrEmpty
+                if (word.Length > 0)
                 {
                     _transcriptBuilder.Append(word);
                 }
@@ -612,7 +674,8 @@ public class RealtimeWhisper : MonoBehaviour
         var vocab = JsonConvert.DeserializeObject<Dictionary<string, int>>(vocabAsset.text);
         tokens = new string[vocab.Count];
         foreach (var item in vocab) tokens[item.Value] = item.Key;
-        _tokensLength = tokens.Length;  // Cache length
+        _tokensLength = tokens.Length;
+        
     }
 
     void SetupWhiteSpaceShifts()
@@ -656,8 +719,12 @@ public class RealtimeWhisper : MonoBehaviour
         for (int i = 0; i < input.Length; i++)
         {
             char c = input[i];
-            // Use lookup table for ASCII symbols (O(1) instead of O(n) for IndexOf)
-            if (char.IsLetterOrDigit(c) || char.IsWhiteSpace(c) || (c < 256 && _basicSymbolsLookup[c]))
+            // Support all Unicode letters (including Cyrillic, Hebrew, etc.)
+            // Only filter out control characters and extreme Unicode ranges
+            if (char.IsLetterOrDigit(c) || char.IsWhiteSpace(c) || 
+                (c < 256 && _basicSymbolsLookup[c]) ||
+                (c >= 0x0400 && c <= 0x04FF) ||  // Cyrillic
+                (c >= 0x0590 && c <= 0x05FF))    // Hebrew
             {
                 _sanitizeBuilder.Append(c);
             }

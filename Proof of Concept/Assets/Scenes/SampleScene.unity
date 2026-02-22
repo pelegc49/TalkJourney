@@ -301,15 +301,19 @@ MonoBehaviour:
   triggerKey: 32
   volumeThreshold: 0.2
   requiredSilence: 1
-  useHebrew: 0
+  currentLanguage: 0
   englishSentences:
-  - hello world
-  - i love sushi
-  - open the door
+  - Hello, world
+  - I love sushi
+  - Open the door
   hebrewSentences:
   - "\u05E9\u05DC\u05D5\u05DD \u05E2\u05D5\u05DC\u05DD"
   - "\u05D1\u05D5\u05E7\u05E8 \u05D8\u05D5\u05D1"
   - "\u05D9\u05E4\u05D4 \u05DE\u05D0\u05D5\u05D3"
+  russianSentences:
+  - "\u041F\u0440\u0438\u0432\u0435\u0442, \u043C\u0438\u0440"
+  - "\u042F \u043B\u044E\u0431\u043B\u044E \u0441\u0443\u0448\u0438"
+  - "\u041E\u0442\u043A\u0440\u043E\u0439\u0442\u0435 \u0434\u0432\u0435\u0440\u044C"
   matchTolerance: 0.3
   maxTokens: 30
   fullText: 
