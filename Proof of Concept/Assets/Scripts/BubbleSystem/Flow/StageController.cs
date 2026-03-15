@@ -24,15 +24,6 @@ namespace TalkJourney.BubbleSystem.Flow
         [Tooltip("Prefab used to instantiate each selection bubble.")]
         public SelectionBubbleController selectionBubblePrefab;
 
-        [Tooltip("Local-space origin used for selection bubble layout.")]
-        public Vector3 selectionBubbleLayoutOrigin = Vector3.zero;
-
-        [Tooltip("Horizontal spacing (local X axis) between selection bubbles.")]
-        public float selectionBubbleHorizontalSpacing = 0.6f;
-
-        [Tooltip("When enabled, bubbles are centered around the layout origin.")]
-        public bool centerSelectionBubbleLayout = true;
-
         [Header("Speech")]
         public SelectionSpeechMatcher selectionSpeechMatcher;
 
@@ -118,32 +109,7 @@ namespace TalkJourney.BubbleSystem.Flow
                 }
             }
 
-            ArrangeSelectionBubbles();
-
             PushActiveSelectionsToSpeechMatcher();
-        }
-
-        private void ArrangeSelectionBubbles()
-        {
-            if (_activeSelectionBubbles.Count == 0)
-            {
-                return;
-            }
-
-            var midpoint = centerSelectionBubbleLayout ? (_activeSelectionBubbles.Count - 1) * 0.5f : 0f;
-
-            for (int i = 0; i < _activeSelectionBubbles.Count; i++)
-            {
-                var bubble = _activeSelectionBubbles[i];
-                if (bubble == null)
-                {
-                    continue;
-                }
-
-                var localPosition = selectionBubbleLayoutOrigin;
-                localPosition.x += (i - midpoint) * selectionBubbleHorizontalSpacing;
-                bubble.transform.localPosition = localPosition;
-            }
         }
 
         private void PushActiveSelectionsToSpeechMatcher()

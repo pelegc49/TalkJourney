@@ -19,6 +19,42 @@ MonoBehaviour:
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 3501427949958877238, guid: b3bc69e2fa19eae45b309706ce18a75b, type: 3}
+  - primaryTextKey: sushi1
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 3501427949958877238, guid: b3bc69e2fa19eae45b309706ce18a75b, type: 3}
+  - primaryTextKey: pizza1
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 3501427949958877238, guid: b3bc69e2fa19eae45b309706ce18a75b, type: 3}
+  - primaryTextKey: i love you1
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 3501427949958877238, guid: b3bc69e2fa19eae45b309706ce18a75b, type: 3}
+  - primaryTextKey: i love you1
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 3501427949958877238, guid: b3bc69e2fa19eae45b309706ce18a75b, type: 3}
+  - primaryTextKey: i love you1
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 3501427949958877238, guid: b3bc69e2fa19eae45b309706ce18a75b, type: 3}
+  - primaryTextKey: i love you1
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 3501427949958877238, guid: b3bc69e2fa19eae45b309706ce18a75b, type: 3}
+  - primaryTextKey: i love you1
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 3501427949958877238, guid: b3bc69e2fa19eae45b309706ce18a75b, type: 3}
+  - primaryTextKey: i love you1
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 3501427949958877238, guid: b3bc69e2fa19eae45b309706ce18a75b, type: 3}
+  - primaryTextKey: i love you1
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 3501427949958877238, guid: b3bc69e2fa19eae45b309706ce18a75b, type: 3}
   fullSentenceAudioIdentifier: 
   selectionBubbles:
   - bubble:

@@ -487,7 +487,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 248526171}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 250}
+  m_LocalPosition: {x: 0, y: 0, z: 400}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -508,6 +508,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 567610673}
+  - component: {fileID: 567610675}
+  - component: {fileID: 567610674}
   m_Layer: 0
   m_Name: SelectionArea
   m_TagString: Untagged
@@ -531,9 +533,44 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 800, y: 200}
+  m_AnchoredPosition: {x: 0, y: -150}
+  m_SizeDelta: {x: 800, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &567610674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567610672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 0
+  m_VerticalFit: 0
+--- !u!114 &567610675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567610672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81689024fc1119c40ba5edef7558014f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Layout.FlowLayoutGroup
+  m_Padding:
+    m_Left: 100
+    m_Right: 0
+    m_Top: 30
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  horizontalSpacing: 100
+  verticalSpacing: 0
+  useChildPreferredSize: 1
 --- !u!1 &759403804
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,6 +1033,7 @@ MonoBehaviour:
   audioPlaybackManagerBehaviour: {fileID: 1051208720}
   localizationServiceBehaviour: {fileID: 1051208719}
   sentenceBubbleParent: {fileID: 0}
+  autoConfigureSentenceAreaLayout: 1
   fallbackDisplayBubblePrefab: {fileID: 0}
   speakerButtonInteractable: {fileID: 0}
   playbackMode: 1
@@ -1015,9 +1053,6 @@ MonoBehaviour:
   sentenceBubbleController: {fileID: 1051208722}
   selectionBubbleParent: {fileID: 0}
   selectionBubblePrefab: {fileID: 0}
-  selectionBubbleLayoutOrigin: {x: 0, y: 0, z: 0}
-  selectionBubbleHorizontalSpacing: 100
-  centerSelectionBubbleLayout: 1
   selectionSpeechMatcher: {fileID: 1051208721}
   localizationServiceBehaviour: {fileID: 1051208719}
   audioPlaybackManagerBehaviour: {fileID: 1051208720}
@@ -1036,8 +1071,8 @@ MonoBehaviour:
   initialStage: {fileID: 11400000, guid: ecab973871e32c6459e2c77b3c0a4a34, type: 2}
   sentenceBubbleParent: {fileID: 1733279319}
   selectionBubbleParent: {fileID: 567610673}
-  fallbackDisplayBubblePrefab: {fileID: 3196631869630293756, guid: b3bc69e2fa19eae45b309706ce18a75b, type: 3}
-  selectionBubblePrefab: {fileID: 342917901590182975, guid: e4cae13494e5b6d44afb8a307a5456f1, type: 3}
+  fallbackDisplayBubblePrefab: {fileID: 3596543588046799441, guid: b3bc69e2fa19eae45b309706ce18a75b, type: 3}
+  selectionBubblePrefab: {fileID: 640719624124326762, guid: 52e7dc15d946a9042b206957d4bd7e97, type: 3}
   speakerButtonInteractable: {fileID: 924551163}
   speechRecognitionBehaviour: {fileID: 230240350}
   localizationServiceBehaviour: {fileID: 1051208719}
@@ -1070,6 +1105,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1733279319}
+  - component: {fileID: 1733279321}
+  - component: {fileID: 1733279320}
   m_Layer: 0
   m_Name: SentenceArea
   m_TagString: Untagged
@@ -1093,9 +1130,44 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: 800, y: 200}
+  m_AnchoredPosition: {x: 0, y: 50}
+  m_SizeDelta: {x: 800, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1733279320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733279318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 0
+  m_VerticalFit: 0
+--- !u!114 &1733279321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733279318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81689024fc1119c40ba5edef7558014f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Layout.FlowLayoutGroup
+  m_Padding:
+    m_Left: 100
+    m_Right: 0
+    m_Top: 30
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  horizontalSpacing: 0
+  verticalSpacing: 12
+  useChildPreferredSize: 1
 --- !u!1 &1757033737
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,6 +1218,7 @@ MonoBehaviour:
   audioPlaybackManagerBehaviour: {fileID: 0}
   localizationServiceBehaviour: {fileID: 0}
   sentenceBubbleParent: {fileID: 1733279319}
+  autoConfigureSentenceAreaLayout: 1
   fallbackDisplayBubblePrefab: {fileID: 3196631869630293756, guid: b3bc69e2fa19eae45b309706ce18a75b, type: 3}
   speakerButtonInteractable: {fileID: 924551163}
   playbackMode: 1
@@ -1156,5 +1229,5 @@ SceneRoots:
   - {fileID: 2425657}
   - {fileID: 759403806}
   - {fileID: 44803666}
-  - {fileID: 248526175}
   - {fileID: 1051208725}
+  - {fileID: 248526175}

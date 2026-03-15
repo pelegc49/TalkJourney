@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TalkJourney.BubbleSystem.Audio;
 using TalkJourney.BubbleSystem.Data;
 using TalkJourney.BubbleSystem.Events;
@@ -35,11 +36,22 @@ namespace TalkJourney.BubbleSystem.Bubbles
         [Tooltip("Locale code used for transliteration values in Unity Localization, for example en-he or he-ru.")]
         public string transliteratorLocaleCode = "en-he";
 
+        [Header("Sizing")]
+        [Tooltip("Minimum bubble size in pixels.")]
+        public Vector2 minimumBubbleSize = new Vector2(50f, 50f);
+
+        [Tooltip("Extra width/height padding added around the primary text in pixels.")]
+        public Vector2 bubblePadding = new Vector2(32f, 16f);
+
         private ILocalizationService _localizationService;
         private IAudioPlaybackManager _audioPlaybackManager;
+        private RectTransform _rectTransform;
+        private LayoutElement _layoutElement;
 
         private void Awake()
         {
+            _rectTransform = GetComponent<RectTransform>();
+            _layoutElement = GetComponent<LayoutElement>();
             RefreshDependencies();
         }
 
@@ -104,12 +116,49 @@ namespace TalkJourney.BubbleSystem.Bubbles
             if (primaryText != null)
             {
                 primaryText.text = ResolveKey(bubbleData.primaryTextKey);
+                primaryText.ForceMeshUpdate();
             }
 
             if (transliteratorText != null)
             {
                 transliteratorText.text = ResolveTransliterator(bubbleData.primaryTextKey);
+                transliteratorText.ForceMeshUpdate();
             }
+
+            ApplyPreferredBubbleSize();
+
+            if (_rectTransform != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(_rectTransform);
+            }
+
+            var parentRect = transform.parent as RectTransform;
+            if (parentRect != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(parentRect);
+            }
+        }
+
+        private void ApplyPreferredBubbleSize()
+        {
+            if (_layoutElement == null)
+            {
+                _layoutElement = gameObject.AddComponent<LayoutElement>();
+            }
+
+            var preferredWidth = minimumBubbleSize.x;
+            var preferredHeight = minimumBubbleSize.y;
+
+            if (primaryText != null)
+            {
+                preferredWidth = Mathf.Max(preferredWidth, primaryText.preferredWidth + bubblePadding.x);
+                preferredHeight = Mathf.Max(preferredHeight, primaryText.preferredHeight + bubblePadding.y);
+            }
+
+            _layoutElement.preferredWidth = preferredWidth;
+            _layoutElement.preferredHeight = preferredHeight;
+            _layoutElement.minWidth = minimumBubbleSize.x;
+            _layoutElement.minHeight = minimumBubbleSize.y;
         }
 
         private void OnHoverEntered()

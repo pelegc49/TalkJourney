@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 using TalkJourney.BubbleSystem.Audio;
 using TalkJourney.BubbleSystem.Data;
 using TalkJourney.BubbleSystem.Interaction;
+using TalkJourney.BubbleSystem.Layout;
 using TalkJourney.BubbleSystem.Localization;
 
 namespace TalkJourney.BubbleSystem.Bubbles
@@ -29,6 +31,9 @@ namespace TalkJourney.BubbleSystem.Bubbles
         [Tooltip("Parent transform where display bubbles are instantiated.")]
         public Transform sentenceBubbleParent;
 
+        [Tooltip("If enabled, sentenceBubbleParent will be configured to use FlowLayoutGroup at runtime.")]
+        public bool autoConfigureSentenceAreaLayout = true;
+
         [Tooltip("Fallback prefab if BubbleData.visualElementPrefab is not set.")]
         public DisplayBubbleController fallbackDisplayBubblePrefab;
 
@@ -45,6 +50,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
         private void Awake()
         {
             RefreshDependencies();
+            EnsureSentenceAreaLayout();
         }
 
         private void OnEnable()
@@ -73,6 +79,8 @@ namespace TalkJourney.BubbleSystem.Bubbles
         {
             ClearSpawnedBubbles();
 
+            EnsureSentenceAreaLayout();
+
             if (stageData == null || sentenceBubbleParent == null)
             {
                 return;
@@ -94,6 +102,46 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
                 controller.Initialize(bubbleData);
                 _spawnedBubbles.Add(controller);
+            }
+
+            var sentenceRect = sentenceBubbleParent as RectTransform;
+            if (sentenceRect != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(sentenceRect);
+            }
+        }
+
+        private void EnsureSentenceAreaLayout()
+        {
+            if (!autoConfigureSentenceAreaLayout || sentenceBubbleParent == null)
+            {
+                return;
+            }
+
+            var sentenceRect = sentenceBubbleParent as RectTransform;
+            if (sentenceRect == null)
+            {
+                return;
+            }
+
+            var flowLayout = sentenceRect.GetComponent<FlowLayoutGroup>();
+            if (flowLayout == null)
+            {
+                flowLayout = sentenceRect.gameObject.AddComponent<FlowLayoutGroup>();
+                flowLayout.childAlignment = TextAnchor.UpperLeft;
+                flowLayout.horizontalSpacing = 12f;
+                flowLayout.verticalSpacing = 12f;
+            }
+
+            var horizontalLayout = sentenceRect.GetComponent<HorizontalLayoutGroup>();
+            if (horizontalLayout != null)
+            {
+                horizontalLayout.enabled = false;
+            }
+
+            if (sentenceRect.rect.width <= 1f)
+            {
+                Debug.LogWarning("SentenceArea width is zero or too small. Set a fixed width in RectTransform so wrapping can work.", sentenceRect);
             }
         }
 

@@ -14,7 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Data.StageData
   stageId: intro_stage_02
   stageNotes: 
-  sentenceBubbles: []
+  sentenceBubbles:
+  - primaryTextKey: pizza1
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 3501427949958877238, guid: b3bc69e2fa19eae45b309706ce18a75b, type: 3}
   fullSentenceAudioIdentifier: 
-  selectionBubbles: []
+  selectionBubbles:
+  - bubble:
+      primaryTextKey: sushi1
+      audioIdentifier: 
+      visualType: 0
+      visualElementPrefab: {fileID: 7629667447587253710, guid: e4cae13494e5b6d44afb8a307a5456f1, type: 3}
+    nextStage: {fileID: 11400000, guid: 6027866688ba92a43b27217af6eab77c, type: 2}
   canEndJourney: 0
