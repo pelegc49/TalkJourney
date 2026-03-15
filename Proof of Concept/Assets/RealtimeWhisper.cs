@@ -9,13 +9,16 @@ using Newtonsoft.Json;
 using System.Linq;
 using System.Text.RegularExpressions; 
 using Unity.Profiling;
+using TalkJourney.BubbleSystem.Speech;
 
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
 
-public class RealtimeWhisper : MonoBehaviour
+public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
 {
+    public event System.Action<string> PhraseRecognized;
+
     [Header("Model Assets")]
     public ModelAsset audioDecoder1;
     public ModelAsset audioDecoder2;
@@ -44,6 +47,10 @@ public class RealtimeWhisper : MonoBehaviour
     [Tooltip("0.0 = Exact match required. 0.4 = Allows loose matching.")]
     [Range(0.0f, 1.0f)]
     public float matchTolerance = 0.3f; 
+
+    [Header("Speech Output")]
+    [Tooltip("If true, keeps legacy sentence correction inside STT. Disable to let SelectionSpeechMatcher handle correction.")]
+    public bool useLegacySentenceCorrectionInStt = false;
     
     [Header("Generation Settings")]
     public int maxTokens = 30;
@@ -518,7 +525,9 @@ public class RealtimeWhisper : MonoBehaviour
             yield break;
         }
 
-        if (!string.IsNullOrEmpty(cleanUserText) && _currentSentences != null)
+        EmitRecognizedPhrase(cleanUserText);
+
+        if (useLegacySentenceCorrectionInStt && !string.IsNullOrEmpty(cleanUserText) && _currentSentences != null)
         {
             FindBestMatch(cleanUserText);
         }
@@ -527,6 +536,16 @@ public class RealtimeWhisper : MonoBehaviour
             Debug.Log($"FINAL TRANSCRIPT: {fullText}");
         }
         }
+    }
+
+    void EmitRecognizedPhrase(string recognizedText)
+    {
+        if (string.IsNullOrWhiteSpace(recognizedText))
+        {
+            return;
+        }
+
+        PhraseRecognized?.Invoke(recognizedText);
     }
 
     void FindBestMatch(string userText)
