@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using TalkJourney.BubbleSystem.Audio;
 using TalkJourney.BubbleSystem.Data;
 using TalkJourney.BubbleSystem.Interaction;
-using TalkJourney.BubbleSystem.Layout;
 using TalkJourney.BubbleSystem.Localization;
 
 namespace TalkJourney.BubbleSystem.Bubbles
@@ -50,7 +49,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
         private void Awake()
         {
             RefreshDependencies();
-            EnsureSentenceAreaLayout();
+            // EnsureSentenceAreaLayout();
         }
 
         private void OnEnable()
@@ -79,7 +78,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
         {
             ClearSpawnedBubbles();
 
-            EnsureSentenceAreaLayout();
+            // EnsureSentenceAreaLayout();
 
             if (stageData == null || sentenceBubbleParent == null)
             {
@@ -113,36 +112,9 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
         private void EnsureSentenceAreaLayout()
         {
-            if (!autoConfigureSentenceAreaLayout || sentenceBubbleParent == null)
-            {
-                return;
-            }
-
-            var sentenceRect = sentenceBubbleParent as RectTransform;
-            if (sentenceRect == null)
-            {
-                return;
-            }
-
-            var flowLayout = sentenceRect.GetComponent<FlowLayoutGroup>();
-            if (flowLayout == null)
-            {
-                flowLayout = sentenceRect.gameObject.AddComponent<FlowLayoutGroup>();
-                flowLayout.childAlignment = TextAnchor.UpperLeft;
-                flowLayout.horizontalSpacing = 12f;
-                flowLayout.verticalSpacing = 12f;
-            }
-
-            var horizontalLayout = sentenceRect.GetComponent<HorizontalLayoutGroup>();
-            if (horizontalLayout != null)
-            {
-                horizontalLayout.enabled = false;
-            }
-
-            if (sentenceRect.rect.width <= 1f)
-            {
-                Debug.LogWarning("SentenceArea width is zero or too small. Set a fixed width in RectTransform so wrapping can work.", sentenceRect);
-            }
+            // Runtime-forced layout setup is intentionally disabled.
+            // If needed again, restore this method to add FlowLayoutGroup
+            // and disable HorizontalLayoutGroup programmatically.
         }
 
         public void RefreshDependencies()
