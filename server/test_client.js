@@ -4,9 +4,9 @@ const BASE_URL = "http://localhost:3000";
 
 function test_post() {
     const data = {
-        text: "Hello, this is a test of the text-to-speech functionality",
+        text: "Hello, welcome to TalkJourney! This is a test of the text-to-speech API.",
         languageCode: "en-US",
-        voiceName: "en-US-Chirp3-HD-Rasalgethi"
+        voiceName: "en-US-Standard-I"
     };
 
     const postData = JSON.stringify(data);

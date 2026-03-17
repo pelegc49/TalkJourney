@@ -28,14 +28,41 @@ const ttsClient = new textToSpeech.TextToSpeechClient({
 const app = express();
 app.use(express.json());
 
-app.post('/api/get-audio', async (req, res) => {
-    const { text, languageCode = 'en-US', voiceName='en-US-Standard-A' } = req.body;
+async function verifyToken(req, res, next) {
+    const authHeader = req.headers.authorization;
+    
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        console.warn('Blocked request: Missing or invalid Authorization header');
+        return res.status(401).json({ error: 'Unauthorized: No token provided' });
+    }
 
+    const idToken = authHeader.split('Bearer ')[1];
+
+    try {
+        // Verify the token using Firebase Admin
+        const decodedToken = await admin.auth().verifyIdToken(idToken);
+        req.user = decodedToken; // Save user data for later if needed (e.g., req.user.uid)
+        next(); // Token is valid, proceed to the API logic
+    } catch (error) {
+        console.error('Blocked request: Invalid token', error.message);
+        return res.status(401).json({ error: 'Unauthorized: Invalid token' });
+    }
+}
+
+app.post('/api/get-audio', verifyToken, async (req, res) => {
+    const { text, languageCode = 'en-US', voiceName=null } = req.body;
     if (!text) {
         return res.status(400).json({ error: 'Text parameter is required' });
     }
+    var voice;
+    if (!voiceName) {
+        voice = languageCode+'-Standard-A';
+    }
+    else {
+        voice = voiceName;
+    }
 
-    const hash = crypto.createHash('sha256').update(text + languageCode + voiceName).digest('hex');
+    const hash = crypto.createHash('sha256').update(text + languageCode + voice).digest('hex');
     const fileName = `audio-cache/${hash}.mp3`;
     const file = bucket.file(fileName);
 
@@ -51,7 +78,7 @@ app.post('/api/get-audio', async (req, res) => {
         console.log('Generating new audio via TTS.');
         const request = {
             input: { text: text },
-            voice: { languageCode: languageCode, name: voiceName },
+            voice: { languageCode: languageCode, name: voice },
             audioConfig: { audioEncoding: 'MP3' },
         };
 
