@@ -6,6 +6,7 @@ using TalkJourney.BubbleSystem.Events;
 using TalkJourney.BubbleSystem.Interaction;
 using TalkJourney.BubbleSystem.Localization;
 using TMPro;
+using System;
 
 namespace TalkJourney.BubbleSystem.Bubbles
 {
@@ -34,6 +35,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
         [Header("Transliteration")]
         [Tooltip("Locale code used for transliteration values in Unity Localization, for example en-he or he-ru.")]
+        [Obsolete("The transliterator locale code is now managed by LocalizationResolver. Use its selectedTransliterator dropdown instead.")]
         public string transliteratorLocaleCode = "en-he";
 
         [Header("Sizing")]
@@ -67,6 +69,9 @@ namespace TalkJourney.BubbleSystem.Bubbles
             // Subscribe to language change events to refresh text when language switches
             LocalizationResolver.OnLanguageChanged += RefreshLocalizedTexts;
 
+            // Subscribe to transliterator change events to refresh transliterator text
+            LocalizationResolver.OnTransliteratorChanged += RefreshTransliteratorText;
+
             RefreshLocalizedTexts();
             SetTransliteratorVisible(false);
         }
@@ -82,6 +87,9 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
             // Unsubscribe from language change events
             LocalizationResolver.OnLanguageChanged -= RefreshLocalizedTexts;
+
+            // Unsubscribe from transliterator change events
+            LocalizationResolver.OnTransliteratorChanged -= RefreshTransliteratorText;
         }
 
         public void Initialize(BubbleData data)
@@ -207,13 +215,47 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 return key ?? string.Empty;
             }
 
-            if (!string.IsNullOrWhiteSpace(transliteratorLocaleCode)
-                && _localizationService.TryResolveForLocaleCode(key, transliteratorLocaleCode, out var transliteratedValue))
+            string transliteratorCode = GetCurrentTransliteratorCode();
+            if (!string.IsNullOrWhiteSpace(transliteratorCode)
+                && _localizationService.TryResolveForLocaleCode(key, transliteratorCode, out var transliteratedValue))
             {
                 return transliteratedValue;
             }
 
             return _localizationService.Resolve(key);
+        }
+
+        private void RefreshTransliteratorText()
+        {
+            if (bubbleData == null || transliteratorText == null)
+            {
+                return;
+            }
+
+            transliteratorText.text = ResolveTransliterator(bubbleData.primaryTextKey);
+            transliteratorText.ForceMeshUpdate();
+        }
+
+        private string GetCurrentTransliteratorCode()
+        {
+            // Try to get the transliterator code from LocalizationResolver
+            var localizationResolver = localizationServiceBehaviour as LocalizationResolver;
+            if (localizationResolver != null)
+            {
+                return localizationResolver.GetCurrentTransliteratorCode();
+            }
+
+            // Fallback: try to find LocalizationResolver in scene
+            localizationResolver = FindObjectOfType<LocalizationResolver>();
+            if (localizationResolver != null)
+            {
+                return localizationResolver.GetCurrentTransliteratorCode();
+            }
+
+            // Last resort: use the deprecated field
+            #pragma warning disable CS0618
+            return transliteratorLocaleCode;
+            #pragma warning restore CS0618
         }
 
         private void SetTransliteratorVisible(bool isVisible)

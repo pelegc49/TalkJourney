@@ -15,12 +15,35 @@ namespace TalkJourney.BubbleSystem.Localization
         Russian
     }
 
+    /// <summary>
+    /// Transliterator modes that convert phonetic pronunciation from one language to another script.
+    /// Format: Source Language - Target Script
+    /// For example: en-he means English source with Hebrew script target output
+    /// </summary>
+    public enum TransliteratorMode
+    {
+        EnglishToHebrew,  // en-he
+        EnglishToRussian, // en-ru
+        HebrewToEnglish,  // he-en
+        HebrewToRussian,  // he-ru
+        RussianToEnglish, // ru-en
+        RussianToHebrew   // ru-he
+    }
+
     [DisallowMultipleComponent]
     public class LocalizationResolver : MonoBehaviour, ILocalizationService
     {
+        /// <summary>
         /// Event that fires whenever the display language changes.
         /// Subscribe to this to refresh UI text when the language changes mid-game.
+        /// </summary>
         public static event System.Action OnLanguageChanged;
+
+        /// <summary>
+        /// Event that fires whenever the transliterator mode changes.
+        /// Subscribe to this to refresh transliteration text when the mode changes mid-game.
+        /// </summary>
+        public static event System.Action OnTransliteratorChanged;
 
         [Header("Unity Localization")]
         [Tooltip("Default String Table Collection used when the key does not include an explicit table prefix.")]
@@ -39,6 +62,12 @@ namespace TalkJourney.BubbleSystem.Localization
 
         private DisplayLanguage previousLanguage = DisplayLanguage.English;
 
+        [Header("Transliterator")]
+        [Tooltip("Select the transliterator mode (source-target script conversion). Changing this in the Inspector will immediately update transliterations.")]
+        public TransliteratorMode selectedTransliterator = TransliteratorMode.EnglishToHebrew;
+
+        private TransliteratorMode previousTransliterator = TransliteratorMode.EnglishToHebrew;
+
         private void Awake()
         {
             EnsureLocalizationInitialized();
@@ -51,6 +80,24 @@ namespace TalkJourney.BubbleSystem.Localization
             if (selectedLanguage != previousLanguage)
             {
                 previousLanguage = selectedLanguage;
+
+                // When language changes, verify transliterator is valid for the new language
+                // If not, reset to first valid transliterator option
+                if (!IsTransliteratorValidForLanguage(selectedTransliterator, selectedLanguage))
+                {
+                    var validModes = GetValidTransliteratorModesForLanguage(selectedLanguage);
+                    if (validModes.Count > 0)
+                    {
+                        selectedTransliterator = validModes[0];
+                        previousTransliterator = selectedTransliterator;
+
+                        if (Application.isPlaying)
+                        {
+                            OnTransliteratorChanged?.Invoke();
+                        }
+                    }
+                }
+
                 #if UNITY_EDITOR
                 if (!Application.isPlaying)
                 {
@@ -76,6 +123,17 @@ namespace TalkJourney.BubbleSystem.Localization
                 }
                 #endif
             }
+
+            // Apply transliterator change immediately when edited in Inspector
+            if (selectedTransliterator != previousTransliterator)
+            {
+                previousTransliterator = selectedTransliterator;
+                if (Application.isPlaying)
+                {
+                    // During play mode, trigger transliterator change event
+                    OnTransliteratorChanged?.Invoke();
+                }
+            }
         }
 
         private void ApplySelectedLanguage()
@@ -93,6 +151,85 @@ namespace TalkJourney.BubbleSystem.Localization
                 DisplayLanguage.Russian => "ru",
                 _ => "en"
             };
+        }
+
+        /// <summary>
+        /// Converts a TransliteratorMode enum to its locale code string (e.g., "en-he", "he-ru").
+        /// </summary>
+        private string EnumToTransliteratorCode(TransliteratorMode mode)
+        {
+            return mode switch
+            {
+                TransliteratorMode.EnglishToHebrew => "en-he",
+                TransliteratorMode.EnglishToRussian => "en-ru",
+                TransliteratorMode.HebrewToEnglish => "he-en",
+                TransliteratorMode.HebrewToRussian => "he-ru",
+                TransliteratorMode.RussianToEnglish => "ru-en",
+                TransliteratorMode.RussianToHebrew => "ru-he",
+                _ => "en-he"
+            };
+        }
+
+        /// <summary>
+        /// Returns only the valid transliterator modes for a given source language.
+        /// If the source language is English, returns modes that start with "en-" (target to Hebrew or Russian).
+        /// </summary>
+        private System.Collections.Generic.List<TransliteratorMode> GetValidTransliteratorModesForLanguage(DisplayLanguage language)
+        {
+            var validModes = new System.Collections.Generic.List<TransliteratorMode>();
+
+            return language switch
+            {
+                DisplayLanguage.English => new System.Collections.Generic.List<TransliteratorMode>
+                {
+                    TransliteratorMode.EnglishToHebrew,
+                    TransliteratorMode.EnglishToRussian
+                },
+                DisplayLanguage.Hebrew => new System.Collections.Generic.List<TransliteratorMode>
+                {
+                    TransliteratorMode.HebrewToEnglish,
+                    TransliteratorMode.HebrewToRussian
+                },
+                DisplayLanguage.Russian => new System.Collections.Generic.List<TransliteratorMode>
+                {
+                    TransliteratorMode.RussianToEnglish,
+                    TransliteratorMode.RussianToHebrew
+                },
+                _ => new System.Collections.Generic.List<TransliteratorMode> { TransliteratorMode.EnglishToHebrew }
+            };
+        }
+
+        /// <summary>
+        /// Gets a display name for a transliterator mode (e.g., "To Hebrew", "To Russian").
+        /// </summary>
+        private string GetTransliteratorModeName(TransliteratorMode mode)
+        {
+            return mode switch
+            {
+                TransliteratorMode.EnglishToHebrew => "To Hebrew",
+                TransliteratorMode.EnglishToRussian => "To Russian",
+                TransliteratorMode.HebrewToEnglish => "To English",
+                TransliteratorMode.HebrewToRussian => "To Russian",
+                TransliteratorMode.RussianToEnglish => "To English",
+                TransliteratorMode.RussianToHebrew => "To Hebrew",
+                _ => "Unknown"
+            };
+        }
+
+        /// <summary>
+        /// Checks if a transliterator mode is valid for the currently selected display language.
+        /// </summary>
+        private bool IsTransliteratorValidForLanguage(TransliteratorMode mode, DisplayLanguage language)
+        {
+            return GetValidTransliteratorModesForLanguage(language).Contains(mode);
+        }
+
+        /// <summary>
+        /// Gets the current transliterator locale code based on the selected mode.
+        /// </summary>
+        public string GetCurrentTransliteratorCode()
+        {
+            return EnumToTransliteratorCode(selectedTransliterator);
         }
 
         public string Resolve(string key)
