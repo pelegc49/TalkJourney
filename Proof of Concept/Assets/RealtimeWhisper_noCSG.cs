@@ -22,7 +22,6 @@ public class RealtimeWhisper_noCGS : MonoBehaviour
 
     [Header("Microphone Settings")]
     public int recordingDuration = 30; 
-    public KeyCode triggerKey = KeyCode.Space;
 
     [Header("VAD Settings")]
     [Range(0.0f, 1.0f)]
@@ -160,8 +159,8 @@ public class RealtimeWhisper_noCGS : MonoBehaviour
         if (endSample >= startSample) length = endSample - startSample;
         else length = (totalSamples - startSample) + endSample;
 
-        int maxLen = 30 * SampleRate; 
-        if (length > maxLen) 
+        int maxLen = 30 * SampleRate;
+        if (length > maxLen)
         {
             length = maxLen;
             startSample = endSample - maxLen;
