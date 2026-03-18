@@ -58,6 +58,9 @@ namespace TalkJourney.BubbleSystem.Bubbles
             {
                 speakerButtonInteractable.Clicked += OnSpeakerClicked;
             }
+
+            // Subscribe to language change events to refresh bubbles when language switches
+            LocalizationResolver.OnLanguageChanged += RefreshBubblesForLanguageChange;
         }
 
         private void OnDisable()
@@ -65,6 +68,21 @@ namespace TalkJourney.BubbleSystem.Bubbles
             if (speakerButtonInteractable != null)
             {
                 speakerButtonInteractable.Clicked -= OnSpeakerClicked;
+            }
+
+            // Unsubscribe from language change events
+            LocalizationResolver.OnLanguageChanged -= RefreshBubblesForLanguageChange;
+        }
+
+        private void RefreshBubblesForLanguageChange()
+        {
+            // Refresh all spawned display bubbles when language changes
+            foreach (var bubble in _spawnedBubbles)
+            {
+                if (bubble != null)
+                {
+                    bubble.RefreshLocalizedTexts();
+                }
             }
         }
 
@@ -108,13 +126,6 @@ namespace TalkJourney.BubbleSystem.Bubbles
             {
                 LayoutRebuilder.ForceRebuildLayoutImmediate(sentenceRect);
             }
-        }
-
-        private void EnsureSentenceAreaLayout()
-        {
-            // Runtime-forced layout setup is intentionally disabled.
-            // If needed again, restore this method to add FlowLayoutGroup
-            // and disable HorizontalLayoutGroup programmatically.
         }
 
         public void RefreshDependencies()

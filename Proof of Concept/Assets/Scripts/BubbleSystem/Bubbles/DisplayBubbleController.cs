@@ -64,6 +64,9 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 interactable.Clicked += OnClicked;
             }
 
+            // Subscribe to language change events to refresh text when language switches
+            LocalizationResolver.OnLanguageChanged += RefreshLocalizedTexts;
+
             RefreshLocalizedTexts();
             SetTransliteratorVisible(false);
         }
@@ -76,6 +79,9 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 interactable.HoverExited -= OnHoverExited;
                 interactable.Clicked -= OnClicked;
             }
+
+            // Unsubscribe from language change events
+            LocalizationResolver.OnLanguageChanged -= RefreshLocalizedTexts;
         }
 
         public void Initialize(BubbleData data)

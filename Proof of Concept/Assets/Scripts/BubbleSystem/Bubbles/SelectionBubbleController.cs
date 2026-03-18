@@ -46,6 +46,9 @@ namespace TalkJourney.BubbleSystem.Bubbles
             {
                 interactable.Clicked += ActivateFromClick;
             }
+
+            // Subscribe to language change events
+            LocalizationResolver.OnLanguageChanged += OnLanguageChanged;
         }
 
         private void OnDisable()
@@ -54,6 +57,15 @@ namespace TalkJourney.BubbleSystem.Bubbles
             {
                 interactable.Clicked -= ActivateFromClick;
             }
+
+            // Unsubscribe from language change events
+            LocalizationResolver.OnLanguageChanged -= OnLanguageChanged;
+        }
+
+        private void OnLanguageChanged()
+        {
+            // Language changed - reset activation state and update display if needed
+            _hasActivated = false;
         }
 
         public bool TryActivateFromRecognizedText(string recognizedText)

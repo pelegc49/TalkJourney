@@ -6,9 +6,22 @@ using UnityEngine.Localization.Tables;
 
 namespace TalkJourney.BubbleSystem.Localization
 {
+    /// Available languages that can be selected from the Inspector.
+    /// Add more languages here as needed.
+    public enum DisplayLanguage
+    {
+        English,
+        Hebrew,
+        Russian
+    }
+
     [DisallowMultipleComponent]
     public class LocalizationResolver : MonoBehaviour, ILocalizationService
     {
+        /// Event that fires whenever the display language changes.
+        /// Subscribe to this to refresh UI text when the language changes mid-game.
+        public static event System.Action OnLanguageChanged;
+
         [Header("Unity Localization")]
         [Tooltip("Default String Table Collection used when the key does not include an explicit table prefix.")]
         public string defaultStringTableCollection = "FirstScene";
@@ -20,9 +33,66 @@ namespace TalkJourney.BubbleSystem.Localization
         [Tooltip("If true, unresolved keys return the key itself. If false, unresolved keys return an empty string.")]
         public bool returnKeyWhenMissing = true;
 
+        [Header("Display Language")]
+        [Tooltip("Select the language to display. Changing this in the Inspector will immediately switch the language.")]
+        public DisplayLanguage selectedLanguage = DisplayLanguage.English;
+
+        private DisplayLanguage previousLanguage = DisplayLanguage.English;
+
         private void Awake()
         {
             EnsureLocalizationInitialized();
+            ApplySelectedLanguage();
+        }
+
+        private void OnValidate()
+        {
+            // Apply language change immediately when edited in Inspector
+            if (selectedLanguage != previousLanguage)
+            {
+                previousLanguage = selectedLanguage;
+                #if UNITY_EDITOR
+                if (!Application.isPlaying)
+                {
+                    // In editor, just update the locale without awaiting full initialization
+                    string localeCode = EnumToLocaleCode(selectedLanguage);
+                    var availableLocales = LocalizationSettings.AvailableLocales;
+                    if (availableLocales?.Locales != null)
+                    {
+                        foreach (var locale in availableLocales.Locales)
+                        {
+                            if (locale != null && locale.Identifier.Code == localeCode)
+                            {
+                                LocalizationSettings.SelectedLocale = locale;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else if (Application.isPlaying)
+                {
+                    // During play mode, use the full method to trigger language change event
+                    ApplySelectedLanguage();
+                }
+                #endif
+            }
+        }
+
+        private void ApplySelectedLanguage()
+        {
+            string localeCode = EnumToLocaleCode(selectedLanguage);
+            SetDisplayLanguage(localeCode);
+        }
+
+        private string EnumToLocaleCode(DisplayLanguage language)
+        {
+            return language switch
+            {
+                DisplayLanguage.English => "en",
+                DisplayLanguage.Hebrew => "he",
+                DisplayLanguage.Russian => "ru",
+                _ => "en"
+            };
         }
 
         public string Resolve(string key)
@@ -53,6 +123,46 @@ namespace TalkJourney.BubbleSystem.Localization
         public bool TryResolveForLocaleCode(string key, string localeCode, out string localizedValue)
         {
             return TryResolveInternal(key, localeCode, out localizedValue);
+        }
+
+        /// Sets the display language by locale code (e.g., "en", "he", "ru").
+        /// This changes the language used throughout the bubble system without using the default UI switcher.
+        /// @param localeCode : The locale code to set (e.g., "en" for English, "he" for Hebrew, "ru" for Russian).
+        /// @return : True if the locale was successfully set, false if the locale code was not found.
+        public bool SetDisplayLanguage(string localeCode)
+        {
+            if (string.IsNullOrWhiteSpace(localeCode))
+            {
+                Debug.LogWarning("Locale code cannot be null or empty.");
+                return false;
+            }
+
+            EnsureLocalizationInitialized();
+
+            var availableLocales = LocalizationSettings.AvailableLocales;
+            if (availableLocales?.Locales == null || availableLocales.Locales.Count == 0)
+            {
+                Debug.LogWarning("No locales are available in LocalizationSettings.");
+                return false;
+            }
+
+            for (int i = 0; i < availableLocales.Locales.Count; i++)
+            {
+                var locale = availableLocales.Locales[i];
+                if (locale != null && string.Equals(locale.Identifier.Code, localeCode.Trim(), StringComparison.OrdinalIgnoreCase))
+                {
+                    LocalizationSettings.SelectedLocale = locale;
+                    Debug.Log($"Display language changed to: {localeCode} ({locale.name})");
+                    
+                    // Fire event to notify all listeners (bubbles) to refresh their text
+                    OnLanguageChanged?.Invoke();
+                    
+                    return true;
+                }
+            }
+
+            Debug.LogWarning($"Locale code '{localeCode}' not found in available locales.");
+            return false;
         }
 
         private bool TryResolveInternal(string key, string localeCode, out string localizedValue)

@@ -19,7 +19,7 @@ namespace TalkJourney.BubbleSystem.Audio
     {
         [Header("Backend Endpoint")]
         [Tooltip("Base URL for the custom backend. Example: https://api.example.com/audio")]
-        public string baseUrl = "http://localhost:5000/audio";
+        public string baseUrl = "http://localhost:3000/get_audio";
 
         [Tooltip("If true, the audio identifier is appended as a path segment: {baseUrl}/{id}")]
         public bool appendIdentifierAsPath = true;
