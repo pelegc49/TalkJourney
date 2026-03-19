@@ -18,6 +18,7 @@ using UnityEngine.InputSystem;
 public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
 {
     public event System.Action<string> PhraseRecognized;
+    public event System.Action<Language> LanguageChanged;
 
     [Header("Model Assets")]
     public ModelAsset audioDecoder1;
@@ -151,6 +152,7 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
     /// </summary>
     public void SetLanguage(Language language)
     {
+        bool didChange = currentLanguage != language;
         currentLanguage = language;
         
         // Load default sentences for this language
@@ -169,6 +171,11 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
         
         PreCleanSentences();
         Debug.Log($"Language switched to: {language}");
+
+        if (didChange)
+        {
+            LanguageChanged?.Invoke(language);
+        }
     }
     
     /// <summary>

@@ -53,6 +53,7 @@ namespace TalkJourney.BubbleSystem.Flow
             var sentenceBubbleController = GetOrAddComponent<SentenceBubbleController>();
             var selectionSpeechMatcher = GetOrAddComponent<SelectionSpeechMatcher>();
             var audioPlaybackManager = GetOrAddComponent<AudioPlaybackManager>();
+            var languageSyncBridge = GetOrAddComponent<LanguageSyncBridge>();
 
             localizationServiceBehaviour = EnsureLocalizationService();
             audioBackendClientBehaviour = EnsureAudioBackendClient();
@@ -88,6 +89,9 @@ namespace TalkJourney.BubbleSystem.Flow
 
             selectionSpeechMatcher.speechRecognitionBehaviour = speechRecognitionBehaviour;
             selectionSpeechMatcher.RefreshDependencies();
+
+            languageSyncBridge.localizationResolver = localizationServiceBehaviour as LocalizationResolver;
+            languageSyncBridge.realtimeWhisper = speechRecognitionBehaviour as RealtimeWhisper;
 
             audioPlaybackManager.playbackSource = playbackSource;
             audioPlaybackManager.backendClientBehaviour = audioBackendClientBehaviour;

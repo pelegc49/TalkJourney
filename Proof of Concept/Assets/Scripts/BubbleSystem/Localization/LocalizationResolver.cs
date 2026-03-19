@@ -40,6 +40,11 @@ namespace TalkJourney.BubbleSystem.Localization
         public static event System.Action OnLanguageChanged;
 
         /// <summary>
+        /// Event with payload for systems that need the selected display language value.
+        /// </summary>
+        public static event System.Action<DisplayLanguage> OnDisplayLanguageChanged;
+
+        /// <summary>
         /// Event that fires whenever the transliterator mode changes.
         /// Subscribe to this to refresh transliteration text when the mode changes mid-game.
         /// </summary>
@@ -138,8 +143,18 @@ namespace TalkJourney.BubbleSystem.Localization
 
         private void ApplySelectedLanguage()
         {
-            string localeCode = EnumToLocaleCode(selectedLanguage);
-            SetDisplayLanguage(localeCode);
+            SetDisplayLanguage(selectedLanguage);
+        }
+
+        /// <summary>
+        /// Sets display language from enum and applies the corresponding locale.
+        /// </summary>
+        public bool SetDisplayLanguage(DisplayLanguage language)
+        {
+            selectedLanguage = language;
+            previousLanguage = language;
+            string localeCode = EnumToLocaleCode(language);
+            return SetDisplayLanguage(localeCode);
         }
 
         private string EnumToLocaleCode(DisplayLanguage language)
@@ -289,10 +304,16 @@ namespace TalkJourney.BubbleSystem.Localization
                 if (locale != null && string.Equals(locale.Identifier.Code, localeCode.Trim(), StringComparison.OrdinalIgnoreCase))
                 {
                     LocalizationSettings.SelectedLocale = locale;
+                    if (TryLocaleCodeToDisplayLanguage(locale.Identifier.Code, out var displayLanguage))
+                    {
+                        selectedLanguage = displayLanguage;
+                        previousLanguage = displayLanguage;
+                    }
                     Debug.Log($"Display language changed to: {localeCode} ({locale.name})");
                     
                     // Fire event to notify all listeners (bubbles) to refresh their text
                     OnLanguageChanged?.Invoke();
+                    OnDisplayLanguageChanged?.Invoke(selectedLanguage);
                     
                     return true;
                 }
@@ -420,6 +441,31 @@ namespace TalkJourney.BubbleSystem.Localization
             }
 
             return true;
+        }
+
+        private bool TryLocaleCodeToDisplayLanguage(string localeCode, out DisplayLanguage language)
+        {
+            language = DisplayLanguage.English;
+
+            if (string.IsNullOrWhiteSpace(localeCode))
+            {
+                return false;
+            }
+
+            switch (localeCode.Trim().ToLowerInvariant())
+            {
+                case "en":
+                    language = DisplayLanguage.English;
+                    return true;
+                case "he":
+                    language = DisplayLanguage.Hebrew;
+                    return true;
+                case "ru":
+                    language = DisplayLanguage.Russian;
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }
