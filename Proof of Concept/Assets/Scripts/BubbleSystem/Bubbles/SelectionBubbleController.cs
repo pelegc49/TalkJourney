@@ -28,7 +28,11 @@ namespace TalkJourney.BubbleSystem.Bubbles
         [Tooltip("Prevents duplicate transitions from nearly simultaneous click and speech events.")]
         public bool preventDuplicateActivation = true;
 
+        [Tooltip("When enabled, selection clicks only work after bypass is enabled by the speech matcher.")]
+        public bool requireBypassForClick = true;
+
         private bool _hasActivated;
+        private bool _isBypassEnabled;
         private ILocalizationService _localizationService;
         private IStageController _stageController;
         private readonly StringBuilder _normalizeBuffer = new StringBuilder(128);
@@ -41,6 +45,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
         private void OnEnable()
         {
             _hasActivated = false;
+            _isBypassEnabled = false;
 
             if (interactable != null)
             {
@@ -114,8 +119,18 @@ namespace TalkJourney.BubbleSystem.Bubbles
             }
         }
 
+        public void SetBypassEnabled(bool isEnabled)
+        {
+            _isBypassEnabled = isEnabled;
+        }
+
         private void ActivateFromClick()
         {
+            if (requireBypassForClick && !_isBypassEnabled)
+            {
+                return;
+            }
+
             ActivateSelection();
         }
 

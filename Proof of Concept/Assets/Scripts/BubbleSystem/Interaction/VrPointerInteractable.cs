@@ -13,6 +13,13 @@ namespace TalkJourney.BubbleSystem.Interaction
         public event Action HoverExited;
         public event Action Clicked;
 
+        [Header("Desktop Fallback")]
+        [Tooltip("Enable legacy mouse-based interaction (OnMouseEnter/Exit/Down) for non-VR desktop testing.")]
+        public bool enableDesktopMouseFallback = true;
+
+        private bool _isHovering;
+        private int _lastClickFrame = -1;
+
         [Header("Optional Unity Events")]
         public UnityEvent onHoverEntered;
         public UnityEvent onHoverExited;
@@ -20,36 +27,97 @@ namespace TalkJourney.BubbleSystem.Interaction
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            HoverEntered?.Invoke();
-            onHoverEntered?.Invoke();
+            RaiseHoverEntered();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            HoverExited?.Invoke();
-            onHoverExited?.Invoke();
+            RaiseHoverExited();
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            Clicked?.Invoke();
-            onClicked?.Invoke();
+            RaiseClicked();
+        }
+
+        private void OnMouseEnter()
+        {
+            if (!enableDesktopMouseFallback)
+            {
+                return;
+            }
+
+            RaiseHoverEntered();
+        }
+
+        private void OnMouseExit()
+        {
+            if (!enableDesktopMouseFallback)
+            {
+                return;
+            }
+
+            RaiseHoverExited();
+        }
+
+        private void OnMouseDown()
+        {
+            if (!enableDesktopMouseFallback)
+            {
+                return;
+            }
+
+            // Prevent duplicate click dispatch when both pointer and mouse callbacks fire in the same frame.
+            if (_lastClickFrame == Time.frameCount)
+            {
+                return;
+            }
+
+            RaiseClicked();
         }
 
         public void InvokeHoverEntered()
         {
-            HoverEntered?.Invoke();
-            onHoverEntered?.Invoke();
+            RaiseHoverEntered();
         }
 
         public void InvokeHoverExited()
         {
-            HoverExited?.Invoke();
-            onHoverExited?.Invoke();
+            RaiseHoverExited();
         }
 
         public void InvokeClicked()
         {
+            RaiseClicked();
+        }
+
+        private void RaiseHoverEntered()
+        {
+            if (_isHovering)
+            {
+                return;
+            }
+
+            _isHovering = true;
+            HoverEntered?.Invoke();
+            onHoverEntered?.Invoke();
+        }
+
+        private void RaiseHoverExited()
+        {
+            if (!_isHovering)
+            {
+                return;
+            }
+
+            _isHovering = false;
+            HoverExited?.Invoke();
+            onHoverExited?.Invoke();
+        }
+
+        private void RaiseClicked()
+        {
+            _lastClickFrame = Time.frameCount;
             Clicked?.Invoke();
             onClicked?.Invoke();
         }

@@ -19,6 +19,7 @@ namespace TalkJourney.BubbleSystem.Flow
         public DisplayBubbleController fallbackDisplayBubblePrefab;
         public SelectionBubbleController selectionBubblePrefab;
         public VrPointerInteractable speakerButtonInteractable;
+        public VrPointerInteractable bypassButtonInteractable;
 
         [Header("External Services")]
         [Tooltip("Optional speech recognition component implementing ISpeechRecognitionService.")]
@@ -88,6 +89,7 @@ namespace TalkJourney.BubbleSystem.Flow
             sentenceBubbleController.RefreshDependencies();
 
             selectionSpeechMatcher.speechRecognitionBehaviour = speechRecognitionBehaviour;
+            selectionSpeechMatcher.bypassButtonInteractable = bypassButtonInteractable;
             selectionSpeechMatcher.RefreshDependencies();
 
             languageSyncBridge.localizationResolver = localizationServiceBehaviour as LocalizationResolver;

@@ -3,6 +3,7 @@ using System.Text;
 using UnityEngine;
 using TalkJourney.BubbleSystem.Bubbles;
 using TalkJourney.BubbleSystem.Events;
+using TalkJourney.BubbleSystem.Interaction;
 
 /*
     Should move the correction of text from the STT model to here.
@@ -36,14 +37,32 @@ namespace TalkJourney.BubbleSystem.Speech
         [Tooltip("Minimum allowed absolute edit distance threshold.")]
         public int minimumDistanceThreshold = 1;
 
+        [Header("Bypass")]
+        [Tooltip("Button shown after too many failed speech attempts. Clicking it enables selection by click for the current stage.")]
+        public VrPointerInteractable bypassButtonInteractable;
+
+        [Min(1)]
+        [Tooltip("Failed speech attempts required before bypass button is shown.")]
+        public int failedAttemptsBeforeBypass = 3;
+
+        [Tooltip("Hide bypass button until it is unlocked by failed attempts.")]
+        public bool hideBypassButtonUntilUnlocked = true;
+
+        [Tooltip("When true, bypass state and failure count reset on each stage change.")]
+        public bool resetBypassOnStageChange = true;
+
         private ISpeechRecognitionService _speechRecognitionService;
         private int[] _levenshteinPrev;
         private int[] _levenshteinCurr;
         private readonly StringBuilder _normalizeBuffer = new StringBuilder(128);
+        private int _failedAttempts;
+        private bool _isBypassUnlocked;
+        private bool _isBypassEnabled;
 
         private void Awake()
         {
             RefreshDependencies();
+            ResetBypassState();
         }
 
         private void OnEnable()
@@ -52,6 +71,13 @@ namespace TalkJourney.BubbleSystem.Speech
             {
                 _speechRecognitionService.PhraseRecognized += OnPhraseRecognized;
             }
+
+            if (bypassButtonInteractable != null)
+            {
+                bypassButtonInteractable.Clicked += OnBypassButtonClicked;
+            }
+
+            BubbleEventBus.StageChanged += OnStageChanged;
         }
 
         private void OnDisable()
@@ -60,11 +86,19 @@ namespace TalkJourney.BubbleSystem.Speech
             {
                 _speechRecognitionService.PhraseRecognized -= OnPhraseRecognized;
             }
+
+            if (bypassButtonInteractable != null)
+            {
+                bypassButtonInteractable.Clicked -= OnBypassButtonClicked;
+            }
+
+            BubbleEventBus.StageChanged -= OnStageChanged;
         }
 
         public void SetActiveSelectionBubbles(List<SelectionBubbleController> selectionBubbles)
         {
             activeSelectionBubbles = selectionBubbles ?? new List<SelectionBubbleController>();
+            ApplyBypassStateToActiveSelections();
         }
 
         public void RefreshDependencies()
@@ -85,14 +119,86 @@ namespace TalkJourney.BubbleSystem.Speech
                 return;
             }
 
+            var isMatch = false;
+
             if (tryExactMatchFirst && TryExactMatch(recognizedText))
+            {
+                isMatch = true;
+            }
+            else if (enableFuzzyMatching)
+            {
+                isMatch = TryFuzzyMatch(recognizedText);
+            }
+
+            if (!isMatch)
+            {
+                RegisterFailedSpeechAttempt();
+            }
+        }
+
+        private void RegisterFailedSpeechAttempt()
+        {
+            if (_isBypassEnabled)
             {
                 return;
             }
 
-            if (enableFuzzyMatching)
+            _failedAttempts++;
+            if (!_isBypassUnlocked && _failedAttempts >= failedAttemptsBeforeBypass)
             {
-                TryFuzzyMatch(recognizedText);
+                _isBypassUnlocked = true;
+                SetBypassButtonVisible(true);
+            }
+        }
+
+        private void OnBypassButtonClicked()
+        {
+            if (!_isBypassUnlocked)
+            {
+                return;
+            }
+
+            _isBypassEnabled = true;
+            ApplyBypassStateToActiveSelections();
+            SetBypassButtonVisible(false);
+        }
+
+        private void OnStageChanged(TalkJourney.BubbleSystem.Data.StageData _)
+        {
+            if (!resetBypassOnStageChange)
+            {
+                return;
+            }
+
+            ResetBypassState();
+            ApplyBypassStateToActiveSelections();
+        }
+
+        private void ResetBypassState()
+        {
+            _failedAttempts = 0;
+            _isBypassUnlocked = false;
+            _isBypassEnabled = false;
+            SetBypassButtonVisible(!hideBypassButtonUntilUnlocked);
+        }
+
+        private void ApplyBypassStateToActiveSelections()
+        {
+            for (int i = 0; i < activeSelectionBubbles.Count; i++)
+            {
+                var bubble = activeSelectionBubbles[i];
+                if (bubble != null)
+                {
+                    bubble.SetBypassEnabled(_isBypassEnabled);
+                }
+            }
+        }
+
+        private void SetBypassButtonVisible(bool isVisible)
+        {
+            if (bypassButtonInteractable != null)
+            {
+                bypassButtonInteractable.gameObject.SetActive(isVisible);
             }
         }
 

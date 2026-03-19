@@ -522,16 +522,6 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
 
         string cleanUserText = CleanString(fullText);
         
-        // Reject if result is too short (likely incomplete recognition)
-        if (cleanUserText.Length < 3)
-        {
-            Debug.LogWarning($"[Recognition] Rejected: too short - '{fullText}'");
-            isTranscribing = false;
-            isThinking = false;
-            fullText = "";
-            yield break;
-        }
-
         EmitRecognizedPhrase(cleanUserText);
 
         if (useLegacySentenceCorrectionInStt && !string.IsNullOrEmpty(cleanUserText) && _currentSentences != null)
