@@ -40,6 +40,12 @@ namespace TalkJourney.BubbleSystem.Bubbles
         [Tooltip("Interactable speaker button shown near the sentence bubble.")]
         public VrPointerInteractable speakerButtonInteractable;
 
+        [Tooltip("Optional RectTransform used as sentence area bounds. Defaults to sentenceBubbleParent as RectTransform.")]
+        public RectTransform sentenceAreaRect;
+
+        [Tooltip("Fixed world-space offset from the right edge of SentenceArea to place the speaker button.")]
+        public Vector3 speakerButtonOffsetFromSentenceArea = new Vector3(0.25f, 0f, 0f);
+
         public SentencePlaybackMode playbackMode = SentencePlaybackMode.PreferFullSentenceClip;
 
         private readonly List<DisplayBubbleController> _spawnedBubbles = new List<DisplayBubbleController>();
@@ -50,6 +56,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
         {
             RefreshDependencies();
             // EnsureSentenceAreaLayout();
+            SetSpeakerButtonVisible(false);
         }
 
         private void OnEnable()
@@ -90,6 +97,13 @@ namespace TalkJourney.BubbleSystem.Bubbles
         {
             _activeStage = stageData;
             RebuildSentence(stageData);
+
+            var shouldShowSpeaker = stageData != null;
+            SetSpeakerButtonVisible(shouldShowSpeaker);
+            if (shouldShowSpeaker)
+            {
+                RepositionSpeakerButton();
+            }
         }
 
         public void RebuildSentence(StageData stageData)
@@ -126,6 +140,8 @@ namespace TalkJourney.BubbleSystem.Bubbles
             {
                 LayoutRebuilder.ForceRebuildLayoutImmediate(sentenceRect);
             }
+
+            RepositionSpeakerButton();
         }
 
         public void RefreshDependencies()
@@ -209,6 +225,54 @@ namespace TalkJourney.BubbleSystem.Bubbles
             }
 
             _spawnedBubbles.Clear();
+        }
+
+        private void SetSpeakerButtonVisible(bool isVisible)
+        {
+            var speakerTransform = ResolveSpeakerButtonTransform();
+            if (speakerTransform != null)
+            {
+                speakerTransform.gameObject.SetActive(isVisible);
+            }
+        }
+
+        private Transform ResolveSpeakerButtonTransform()
+        {
+            if (speakerButtonInteractable != null)
+            {
+                return speakerButtonInteractable.transform;
+            }
+
+            return null;
+        }
+
+        private RectTransform ResolveSentenceAreaRect()
+        {
+            if (sentenceAreaRect != null)
+            {
+                return sentenceAreaRect;
+            }
+
+            return sentenceBubbleParent as RectTransform;
+        }
+
+        private void RepositionSpeakerButton()
+        {
+            var speakerTransform = ResolveSpeakerButtonTransform();
+            var areaRect = ResolveSentenceAreaRect();
+            if (speakerTransform == null || areaRect == null)
+            {
+                return;
+            }
+
+            var corners = new Vector3[4];
+            areaRect.GetWorldCorners(corners);
+
+            // 2 = top-right, 3 = bottom-right. Midpoint gives the vertical center of right edge.
+            var rightEdgeCenter = (corners[2] + corners[3]) * 0.5f;
+
+            // Keep local orientation independent from sentence text length by pinning to sentence area bounds.
+            speakerTransform.position = rightEdgeCenter + speakerButtonOffsetFromSentenceArea;
         }
     }
 }

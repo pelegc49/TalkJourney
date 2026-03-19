@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Layout.FlowLayoutGroup
   m_Padding:
-    m_Left: 100
+    m_Left: 230
     m_Right: 0
     m_Top: 30
     m_Bottom: 0
@@ -964,7 +964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397b13823195d0a4eb20e73c51ea1a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Audio.AudioBackendClient
-  baseUrl: http://localhost:5000/audio
+  baseUrl: http://localhost:3000/get_audio
   appendIdentifierAsPath: 1
   queryParameterName: id
   responseAudioType: 20
@@ -984,6 +984,8 @@ MonoBehaviour:
   defaultStringTableCollection: FirstScene
   waitForLocalizationInitialization: 1
   returnKeyWhenMissing: 1
+  selectedLanguage: 0
+  selectedTransliterator: 0
 --- !u!114 &1051208720
 MonoBehaviour:
   m_ObjectHideFlags: 0
