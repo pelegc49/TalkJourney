@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Firebase;
 using Firebase.Auth;
+using TalkJourney.GameServices.Auth;
 using TalkJourney.BubbleSystem.Localization;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -47,6 +48,12 @@ namespace TalkJourney.BubbleSystem.Audio
         [Tooltip("Optional bearer token used for Authorization header. Leave empty if backend does not require auth.")]
         public string bearerToken;
 
+        [Tooltip("Optional component implementing IAuthTokenProvider. If assigned, it is used for auth tokens before local fallback.")]
+        public MonoBehaviour authTokenProviderBehaviour;
+
+        [Tooltip("When enabled, uses authTokenProviderBehaviour first (if available).")]
+        public bool preferExternalAuthTokenProvider = true;
+
         [Tooltip("When enabled, fetches Firebase ID token for Authorization header.")]
         public bool useFirebaseAuthToken = true;
 
@@ -62,6 +69,8 @@ namespace TalkJourney.BubbleSystem.Audio
 
         [Tooltip("Optional LocalizationResolver. If empty, one is found automatically.")]
         public LocalizationResolver localizationResolver;
+
+        private IAuthTokenProvider _authTokenProvider;
 
         private void OnEnable()
         {
@@ -98,7 +107,7 @@ namespace TalkJourney.BubbleSystem.Audio
                 voiceName = voiceName
             };
 
-            var resolvedBearerToken = await ResolveAuthorizationTokenAsync();
+            var resolvedBearerToken = await ResolveAuthorizationTokenAsync(cancellationToken);
 
             var payloadJson = JsonUtility.ToJson(requestPayload);
 
@@ -241,6 +250,15 @@ namespace TalkJourney.BubbleSystem.Audio
 
         private async Task<string> ResolveAuthorizationTokenAsync()
         {
+            if (preferExternalAuthTokenProvider && _authTokenProvider != null)
+            {
+                var externalToken = await _authTokenProvider.GetAuthorizationTokenAsync();
+                if (!string.IsNullOrWhiteSpace(externalToken))
+                {
+                    return externalToken;
+                }
+            }
+
             if (useFirebaseAuthToken)
             {
                 var firebaseToken = await TryGetFirebaseTokenAsync();
@@ -253,11 +271,46 @@ namespace TalkJourney.BubbleSystem.Audio
             return bearerToken;
         }
 
+        private async Task<string> ResolveAuthorizationTokenAsync(CancellationToken cancellationToken)
+        {
+            if (preferExternalAuthTokenProvider && _authTokenProvider != null)
+            {
+                var externalToken = await _authTokenProvider.GetAuthorizationTokenAsync(cancellationToken);
+                if (!string.IsNullOrWhiteSpace(externalToken))
+                {
+                    return externalToken;
+                }
+            }
+
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return null;
+            }
+
+            return await ResolveAuthorizationTokenAsync();
+        }
+
         private void ResolveDependencies()
         {
             if (localizationResolver == null)
             {
                 localizationResolver = FindFirstObjectByType<LocalizationResolver>(FindObjectsInactive.Include);
+            }
+
+            _authTokenProvider = authTokenProviderBehaviour as IAuthTokenProvider;
+            if (_authTokenProvider == null && authTokenProviderBehaviour == null)
+            {
+                var sceneBehaviours = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+                for (int i = 0; i < sceneBehaviours.Length; i++)
+                {
+                    var behaviour = sceneBehaviours[i];
+                    if (behaviour is IAuthTokenProvider sceneProvider)
+                    {
+                        _authTokenProvider = sceneProvider;
+                        authTokenProviderBehaviour = behaviour;
+                        break;
+                    }
+                }
             }
         }
 

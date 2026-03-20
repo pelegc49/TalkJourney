@@ -50,6 +50,12 @@ namespace TalkJourney.BubbleSystem.Localization
         /// </summary>
         public static event System.Action OnTransliteratorChanged;
 
+        /// <summary>
+        /// Event that fires whenever native/learning language pair changes.
+        /// Payload order: native language, learning language.
+        /// </summary>
+        public static event System.Action<DisplayLanguage, DisplayLanguage> OnLanguagePairChanged;
+
         [Header("Unity Localization")]
         [Tooltip("Default String Table Collection used when the key does not include an explicit table prefix.")]
         public string defaultStringTableCollection = "FirstScene";
@@ -62,10 +68,20 @@ namespace TalkJourney.BubbleSystem.Localization
         public bool returnKeyWhenMissing = true;
 
         [Header("Display Language")]
-        [Tooltip("Select the language to display. Changing this in the Inspector will immediately switch the language.")]
+        [Tooltip("Legacy display language. This now follows learningLanguage.")]
         public DisplayLanguage selectedLanguage = DisplayLanguage.English;
 
         private DisplayLanguage previousLanguage = DisplayLanguage.English;
+
+        [Header("Language Pair")]
+        [Tooltip("User native language (target script for transliteration).")]
+        public DisplayLanguage nativeLanguage = DisplayLanguage.Hebrew;
+
+        [Tooltip("Language being learned. This drives display language and speech recognition language.")]
+        public DisplayLanguage learningLanguage = DisplayLanguage.English;
+
+        private DisplayLanguage previousNativeLanguage = DisplayLanguage.Hebrew;
+        private DisplayLanguage previousLearningLanguage = DisplayLanguage.English;
 
         [Header("Transliterator")]
         [Tooltip("Select the transliterator mode (source-target script conversion). Changing this in the Inspector will immediately update transliterations.")]
@@ -76,38 +92,40 @@ namespace TalkJourney.BubbleSystem.Localization
         private void Awake()
         {
             EnsureLocalizationInitialized();
-            ApplySelectedLanguage();
+            selectedLanguage = learningLanguage;
+            previousLanguage = selectedLanguage;
+            previousLearningLanguage = learningLanguage;
+            previousNativeLanguage = nativeLanguage;
+            ApplyLanguagePair();
         }
 
         private void OnValidate()
         {
-            // Apply language change immediately when edited in Inspector
-            if (selectedLanguage != previousLanguage)
+            // Keep legacy selectedLanguage field synchronized as learning language.
+            if (selectedLanguage != learningLanguage)
             {
+                learningLanguage = selectedLanguage;
+            }
+
+            var pairChanged = nativeLanguage != previousNativeLanguage || learningLanguage != previousLearningLanguage;
+            if (pairChanged)
+            {
+                previousNativeLanguage = nativeLanguage;
+                previousLearningLanguage = learningLanguage;
+                selectedLanguage = learningLanguage;
                 previousLanguage = selectedLanguage;
 
-                // When language changes, verify transliterator is valid for the new language
-                // If not, reset to first valid transliterator option
-                if (!IsTransliteratorValidForLanguage(selectedTransliterator, selectedLanguage))
+                if (TryMapLanguagePairToTransliterator(learningLanguage, nativeLanguage, out var mappedMode))
                 {
-                    var validModes = GetValidTransliteratorModesForLanguage(selectedLanguage);
-                    if (validModes.Count > 0)
-                    {
-                        selectedTransliterator = validModes[0];
-                        previousTransliterator = selectedTransliterator;
-
-                        if (Application.isPlaying)
-                        {
-                            OnTransliteratorChanged?.Invoke();
-                        }
-                    }
+                    selectedTransliterator = mappedMode;
+                    previousTransliterator = selectedTransliterator;
                 }
 
                 #if UNITY_EDITOR
                 if (!Application.isPlaying)
                 {
-                    // In editor, just update the locale without awaiting full initialization
-                    string localeCode = EnumToLocaleCode(selectedLanguage);
+                    // In editor, preview locale from learning language.
+                    string localeCode = EnumToLocaleCode(learningLanguage);
                     var availableLocales = LocalizationSettings.AvailableLocales;
                     if (availableLocales?.Locales != null)
                     {
@@ -121,29 +139,26 @@ namespace TalkJourney.BubbleSystem.Localization
                         }
                     }
                 }
-                else if (Application.isPlaying)
+                else
                 {
-                    // During play mode, use the full method to trigger language change event
-                    ApplySelectedLanguage();
+                    SetLanguagePair(nativeLanguage, learningLanguage);
                 }
                 #endif
             }
 
-            // Apply transliterator change immediately when edited in Inspector
             if (selectedTransliterator != previousTransliterator)
             {
                 previousTransliterator = selectedTransliterator;
                 if (Application.isPlaying)
                 {
-                    // During play mode, trigger transliterator change event
                     OnTransliteratorChanged?.Invoke();
                 }
             }
         }
 
-        private void ApplySelectedLanguage()
+        private void ApplyLanguagePair()
         {
-            SetDisplayLanguage(selectedLanguage);
+            SetLanguagePair(nativeLanguage, learningLanguage);
         }
 
         /// <summary>
@@ -151,10 +166,79 @@ namespace TalkJourney.BubbleSystem.Localization
         /// </summary>
         public bool SetDisplayLanguage(DisplayLanguage language)
         {
-            selectedLanguage = language;
-            previousLanguage = language;
-            string localeCode = EnumToLocaleCode(language);
-            return SetDisplayLanguage(localeCode);
+            return SetLearningLanguage(language);
+        }
+
+        public bool SetNativeLanguage(DisplayLanguage language)
+        {
+            var adjustedLearning = learningLanguage;
+            if (language == adjustedLearning)
+            {
+                adjustedLearning = GetAlternativeLanguage(language);
+            }
+
+            return SetLanguagePair(language, adjustedLearning);
+        }
+
+        public bool SetLearningLanguage(DisplayLanguage language)
+        {
+            var adjustedNative = nativeLanguage;
+            if (language == adjustedNative)
+            {
+                adjustedNative = GetAlternativeLanguage(language);
+            }
+
+            return SetLanguagePair(adjustedNative, language);
+        }
+
+        public bool SetLanguagePair(DisplayLanguage native, DisplayLanguage learning)
+        {
+            if (native == learning)
+            {
+                native = GetAlternativeLanguage(learning);
+            }
+
+            var pairChanged = nativeLanguage != native || learningLanguage != learning;
+
+            nativeLanguage = native;
+            learningLanguage = learning;
+            previousNativeLanguage = native;
+            previousLearningLanguage = learning;
+
+            selectedLanguage = learning;
+            previousLanguage = selectedLanguage;
+
+            if (TryMapLanguagePairToTransliterator(learningLanguage, nativeLanguage, out var mappedMode)
+                && selectedTransliterator != mappedMode)
+            {
+                selectedTransliterator = mappedMode;
+                previousTransliterator = selectedTransliterator;
+                OnTransliteratorChanged?.Invoke();
+            }
+
+            var isDisplaySet = SetDisplayLanguage(EnumToLocaleCode(learningLanguage));
+
+            if (pairChanged)
+            {
+                OnLanguagePairChanged?.Invoke(nativeLanguage, learningLanguage);
+            }
+
+            return isDisplaySet;
+        }
+
+        private static DisplayLanguage GetAlternativeLanguage(DisplayLanguage language)
+        {
+            switch (language)
+            {
+                case DisplayLanguage.English:
+                    return DisplayLanguage.Hebrew;
+                case DisplayLanguage.Hebrew:
+                    return DisplayLanguage.English;
+                case DisplayLanguage.Russian:
+                    return DisplayLanguage.English;
+                default:
+                    return DisplayLanguage.English;
+            }
         }
 
         private string EnumToLocaleCode(DisplayLanguage language)
@@ -244,6 +328,11 @@ namespace TalkJourney.BubbleSystem.Localization
         /// </summary>
         public string GetCurrentTransliteratorCode()
         {
+            if (TryMapLanguagePairToTransliterator(learningLanguage, nativeLanguage, out var mappedMode))
+            {
+                return EnumToTransliteratorCode(mappedMode);
+            }
+
             return EnumToTransliteratorCode(selectedTransliterator);
         }
 
@@ -308,12 +397,23 @@ namespace TalkJourney.BubbleSystem.Localization
                     {
                         selectedLanguage = displayLanguage;
                         previousLanguage = displayLanguage;
+                        learningLanguage = displayLanguage;
+                        previousLearningLanguage = displayLanguage;
+
+                        if (TryMapLanguagePairToTransliterator(learningLanguage, nativeLanguage, out var mappedMode)
+                            && selectedTransliterator != mappedMode)
+                        {
+                            selectedTransliterator = mappedMode;
+                            previousTransliterator = selectedTransliterator;
+                            OnTransliteratorChanged?.Invoke();
+                        }
                     }
                     Debug.Log($"Display language changed to: {localeCode} ({locale.name})");
                     
                     // Fire event to notify all listeners (bubbles) to refresh their text
                     OnLanguageChanged?.Invoke();
                     OnDisplayLanguageChanged?.Invoke(selectedLanguage);
+                    OnLanguagePairChanged?.Invoke(nativeLanguage, learningLanguage);
                     
                     return true;
                 }
@@ -466,6 +566,54 @@ namespace TalkJourney.BubbleSystem.Localization
                 default:
                     return false;
             }
+        }
+
+        private bool TryMapLanguagePairToTransliterator(DisplayLanguage sourceLanguage, DisplayLanguage targetLanguage, out TransliteratorMode mode)
+        {
+            mode = TransliteratorMode.EnglishToHebrew;
+
+            if (sourceLanguage == targetLanguage)
+            {
+                return false;
+            }
+
+            if (sourceLanguage == DisplayLanguage.English && targetLanguage == DisplayLanguage.Hebrew)
+            {
+                mode = TransliteratorMode.EnglishToHebrew;
+                return true;
+            }
+
+            if (sourceLanguage == DisplayLanguage.English && targetLanguage == DisplayLanguage.Russian)
+            {
+                mode = TransliteratorMode.EnglishToRussian;
+                return true;
+            }
+
+            if (sourceLanguage == DisplayLanguage.Hebrew && targetLanguage == DisplayLanguage.English)
+            {
+                mode = TransliteratorMode.HebrewToEnglish;
+                return true;
+            }
+
+            if (sourceLanguage == DisplayLanguage.Hebrew && targetLanguage == DisplayLanguage.Russian)
+            {
+                mode = TransliteratorMode.HebrewToRussian;
+                return true;
+            }
+
+            if (sourceLanguage == DisplayLanguage.Russian && targetLanguage == DisplayLanguage.English)
+            {
+                mode = TransliteratorMode.RussianToEnglish;
+                return true;
+            }
+
+            if (sourceLanguage == DisplayLanguage.Russian && targetLanguage == DisplayLanguage.Hebrew)
+            {
+                mode = TransliteratorMode.RussianToHebrew;
+                return true;
+            }
+
+            return false;
         }
     }
 }
