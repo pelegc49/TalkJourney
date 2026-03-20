@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Firebase;
 using Firebase.Auth;
+using TalkJourney.BubbleSystem.Localization;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -58,6 +59,25 @@ namespace TalkJourney.BubbleSystem.Audio
         [Min(1)]
         [Tooltip("Network timeout for each audio request.")]
         public int timeoutSeconds = 15;
+
+        [Tooltip("Optional LocalizationResolver. If empty, one is found automatically.")]
+        public LocalizationResolver localizationResolver;
+
+        private void OnEnable()
+        {
+            ResolveDependencies();
+            LocalizationResolver.OnDisplayLanguageChanged += OnDisplayLanguageChanged;
+
+            if (localizationResolver != null)
+            {
+                ApplyVoiceSettingsForDisplayLanguage(localizationResolver.selectedLanguage);
+            }
+        }
+
+        private void OnDisable()
+        {
+            LocalizationResolver.OnDisplayLanguageChanged -= OnDisplayLanguageChanged;
+        }
 
         public async Task<AudioRequestResult> RequestAudioFromTextAsync(string text, CancellationToken cancellationToken = default)
         {
@@ -231,6 +251,42 @@ namespace TalkJourney.BubbleSystem.Audio
             }
 
             return bearerToken;
+        }
+
+        private void ResolveDependencies()
+        {
+            if (localizationResolver == null)
+            {
+                localizationResolver = FindFirstObjectByType<LocalizationResolver>(FindObjectsInactive.Include);
+            }
+        }
+
+        private void OnDisplayLanguageChanged(DisplayLanguage language)
+        {
+            ApplyVoiceSettingsForDisplayLanguage(language);
+        }
+
+        private void ApplyVoiceSettingsForDisplayLanguage(DisplayLanguage language)
+        {
+            switch (language)
+            {
+                case DisplayLanguage.English:
+                    languageCode = "en-US";
+                    voiceName = "en-US-Standard-A";
+                    break;
+                case DisplayLanguage.Hebrew:
+                    languageCode = "he-IL";
+                    voiceName = "he-IL-Standard-A";
+                    break;
+                case DisplayLanguage.Russian:
+                    languageCode = "ru-RU";
+                    voiceName = "ru-RU-Standard-A";
+                    break;
+                default:
+                    languageCode = "en-US";
+                    voiceName = "en-US-Standard-A";
+                    break;
+            }
         }
 
         private async Task<string> TryGetFirebaseTokenAsync()
