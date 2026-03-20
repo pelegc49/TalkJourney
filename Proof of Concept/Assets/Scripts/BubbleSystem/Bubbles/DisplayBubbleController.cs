@@ -195,7 +195,12 @@ namespace TalkJourney.BubbleSystem.Bubbles
             }
 
             BubbleEventBus.PublishBubbleClicked(bubbleData);
-            _ = _audioPlaybackManager.PlayByIdentifierAsync(bubbleData.audioIdentifier);
+
+            var bubbleContent = ResolveKey(bubbleData.primaryTextKey);
+            if (!string.IsNullOrWhiteSpace(bubbleContent))
+            {
+                _ = _audioPlaybackManager.PlayByTextAsync(bubbleContent);
+            }
         }
 
         private string ResolveKey(string key)
@@ -246,7 +251,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
             }
 
             // Fallback: try to find LocalizationResolver in scene
-            localizationResolver = FindObjectOfType<LocalizationResolver>();
+            localizationResolver = FindFirstObjectByType<LocalizationResolver>();
             if (localizationResolver != null)
             {
                 return localizationResolver.GetCurrentTransliteratorCode();

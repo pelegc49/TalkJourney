@@ -5,6 +5,6 @@ namespace TalkJourney.BubbleSystem.Audio
 {
     public interface IAudioBackendClient
     {
-        Task<AudioRequestResult> RequestAudioAsync(string audioIdentifier, CancellationToken cancellationToken = default);
+        Task<AudioRequestResult> RequestAudioFromTextAsync(string text, CancellationToken cancellationToken = default);
     }
 }

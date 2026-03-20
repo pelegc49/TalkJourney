@@ -5,12 +5,6 @@ using TalkJourney.BubbleSystem.Bubbles;
 using TalkJourney.BubbleSystem.Events;
 using TalkJourney.BubbleSystem.Interaction;
 
-/*
-    Should move the correction of text from the STT model to here.
-    Because here will be all of the words, and here we should calculate
-    the distance between the recognized text and the displayed text. 
-*/
-
 namespace TalkJourney.BubbleSystem.Speech
 {
     [DisallowMultipleComponent]

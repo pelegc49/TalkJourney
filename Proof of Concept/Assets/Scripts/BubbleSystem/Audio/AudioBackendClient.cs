@@ -1,96 +1,270 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Firebase;
+using Firebase.Auth;
 using UnityEngine;
 using UnityEngine.Networking;
-
-/*
-    gets the audio from the back end
-    if appendIdentifierAsPath = true
-        url = {baseUrl}/{id}
-    else
-        url = {baseUrl}?{id}={value}
-*/
 
 namespace TalkJourney.BubbleSystem.Audio
 {
     [DisallowMultipleComponent]
     public class AudioBackendClient : MonoBehaviour, IAudioBackendClient
     {
+        [Serializable]
+        private class TtsAudioRequest
+        {
+            public string text;
+            public string languageCode;
+            public string voiceName;
+        }
+
+        [Serializable]
+        private class TtsAudioResponse
+        {
+            public string url;
+            public bool isCached;
+        }
+
         [Header("Backend Endpoint")]
-        [Tooltip("Base URL for the custom backend. Example: https://api.example.com/audio")]
-        public string baseUrl = "http://localhost:3000/get_audio";
-
-        [Tooltip("If true, the audio identifier is appended as a path segment: {baseUrl}/{id}")]
-        public bool appendIdentifierAsPath = true;
-
-        [Tooltip("If appendIdentifierAsPath is false, identifier is sent as query param name below.")]
-        public string queryParameterName = "id";
+        [Tooltip("TTS POST endpoint. Example: http://localhost:3000/api/get-audio")]
+        public string ttsPostUrl = "http://localhost:3000/api/get-audio";
 
         [Header("Request Settings")]
         [Tooltip("Expected response audio format.")]
-        public AudioType responseAudioType = AudioType.WAV;
+        public AudioType responseAudioType = AudioType.MPEG;
+
+        [Tooltip("If enabled, infer audio format from the file URL extension (mp3, wav, ogg) before decoding.")]
+        public bool inferAudioTypeFromUrl = true;
+
+        [Tooltip("Language code sent with TTS request body.")]
+        public string languageCode = "en-US";
+
+        [Tooltip("Voice name sent with TTS request body.")]
+        public string voiceName = "en-US-Standard-A";
+
+        [Tooltip("Optional bearer token used for Authorization header. Leave empty if backend does not require auth.")]
+        public string bearerToken;
+
+        [Tooltip("When enabled, fetches Firebase ID token for Authorization header.")]
+        public bool useFirebaseAuthToken = true;
+
+        [Tooltip("If true, refreshes Firebase token before each request.")]
+        public bool forceRefreshFirebaseToken = true;
+
+        [Tooltip("If enabled, performs anonymous sign-in when no Firebase user is available.")]
+        public bool signInAnonymouslyIfNeeded = true;
 
         [Min(1)]
         [Tooltip("Network timeout for each audio request.")]
         public int timeoutSeconds = 15;
 
-        public async Task<AudioRequestResult> RequestAudioAsync(string audioIdentifier, CancellationToken cancellationToken = default)
+        public async Task<AudioRequestResult> RequestAudioFromTextAsync(string text, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(audioIdentifier))
+            if (string.IsNullOrWhiteSpace(text))
             {
-                return AudioRequestResult.Failure("Audio identifier is missing.");
+                return AudioRequestResult.Failure("TTS text is missing.");
             }
 
-            if (string.IsNullOrWhiteSpace(baseUrl))
+            if (string.IsNullOrWhiteSpace(ttsPostUrl))
             {
-                return AudioRequestResult.Failure("Audio backend base URL is not configured.");
+                return AudioRequestResult.Failure("TTS POST URL is not configured.");
             }
 
-            var requestUrl = BuildRequestUrl(audioIdentifier.Trim());
-
-            using (var request = UnityWebRequestMultimedia.GetAudioClip(requestUrl, responseAudioType))
+            var requestPayload = new TtsAudioRequest
             {
-                request.timeout = timeoutSeconds;
-                var operation = request.SendWebRequest();
+                text = text.Trim(),
+                languageCode = languageCode,
+                voiceName = voiceName
+            };
 
-                while (!operation.isDone)
+            var resolvedBearerToken = await ResolveAuthorizationTokenAsync();
+
+            var payloadJson = JsonUtility.ToJson(requestPayload);
+
+            using (var postRequest = new UnityWebRequest(ttsPostUrl, UnityWebRequest.kHttpVerbPOST))
+            {
+                var bodyRaw = System.Text.Encoding.UTF8.GetBytes(payloadJson);
+                postRequest.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                postRequest.downloadHandler = new DownloadHandlerBuffer();
+                postRequest.timeout = timeoutSeconds;
+                postRequest.SetRequestHeader("Content-Type", "application/json");
+
+                if (!string.IsNullOrWhiteSpace(resolvedBearerToken))
+                {
+                    postRequest.SetRequestHeader("Authorization", "Bearer " + resolvedBearerToken.Trim());
+                }
+
+                var postOperation = postRequest.SendWebRequest();
+
+                while (!postOperation.isDone)
                 {
                     if (cancellationToken.IsCancellationRequested)
                     {
-                        request.Abort();
-                        return AudioRequestResult.Failure("Audio request was cancelled.");
+                        postRequest.Abort();
+                        return AudioRequestResult.Failure("TTS request was cancelled.");
                     }
 
                     await Task.Yield();
                 }
 
-                if (request.result != UnityWebRequest.Result.Success)
+                if (postRequest.result != UnityWebRequest.Result.Success)
                 {
-                    return AudioRequestResult.Failure($"Audio request failed: {request.error}");
+                    if (postRequest.responseCode == 401)
+                    {
+                        return AudioRequestResult.Failure("TTS request failed: 401 Unauthorized. Provide a valid bearerToken if your backend requires auth.");
+                    }
+
+                    return AudioRequestResult.Failure($"TTS request failed: {postRequest.error}");
                 }
 
-                var clip = DownloadHandlerAudioClip.GetContent(request);
+                var responseJson = postRequest.downloadHandler.text;
+                if (string.IsNullOrWhiteSpace(responseJson))
+                {
+                    return AudioRequestResult.Failure("TTS response was empty.");
+                }
+
+                var response = JsonUtility.FromJson<TtsAudioResponse>(responseJson);
+                if (response == null || string.IsNullOrWhiteSpace(response.url))
+                {
+                    return AudioRequestResult.Failure("TTS response did not contain an audio URL.");
+                }
+
+                return await DownloadClipFromUrlAsync(response.url, cancellationToken);
+            }
+        }
+
+        private async Task<AudioRequestResult> DownloadClipFromUrlAsync(string fileUrl, CancellationToken cancellationToken)
+        {
+            var resolvedAudioType = ResolveAudioType(fileUrl);
+
+            using (var audioRequest = UnityWebRequestMultimedia.GetAudioClip(fileUrl, resolvedAudioType))
+            {
+                audioRequest.timeout = timeoutSeconds;
+                audioRequest.SetRequestHeader("Accept", "audio/*");
+                var audioOperation = audioRequest.SendWebRequest();
+
+                while (!audioOperation.isDone)
+                {
+                    if (cancellationToken.IsCancellationRequested)
+                    {
+                        audioRequest.Abort();
+                        return AudioRequestResult.Failure("Audio download was cancelled.");
+                    }
+
+                    await Task.Yield();
+                }
+
+                if (audioRequest.result != UnityWebRequest.Result.Success)
+                {
+                    return AudioRequestResult.Failure($"Audio download failed: {audioRequest.error}");
+                }
+
+                var contentType = audioRequest.GetResponseHeader("Content-Type");
+                if (!string.IsNullOrWhiteSpace(contentType)
+                    && !contentType.StartsWith("audio/", StringComparison.OrdinalIgnoreCase))
+                {
+                    return AudioRequestResult.Failure($"Audio download returned non-audio content-type '{contentType}' from URL '{fileUrl}'.");
+                }
+
+                AudioClip clip;
+                try
+                {
+                    clip = DownloadHandlerAudioClip.GetContent(audioRequest);
+                }
+                catch (Exception exception)
+                {
+                    return AudioRequestResult.Failure($"Audio decode failed for URL '{fileUrl}' using type '{resolvedAudioType}': {exception.Message}");
+                }
+
                 if (clip == null)
                 {
-                    return AudioRequestResult.Failure("Audio response was empty.");
+                    return AudioRequestResult.Failure($"Downloaded audio clip was empty for URL '{fileUrl}' using type '{resolvedAudioType}'.");
                 }
 
                 return AudioRequestResult.Success(clip);
             }
         }
 
-        private string BuildRequestUrl(string audioIdentifier)
+        private AudioType ResolveAudioType(string fileUrl)
         {
-            var encoded = UnityWebRequest.EscapeURL(audioIdentifier);
-
-            if (appendIdentifierAsPath)
+            if (!inferAudioTypeFromUrl || string.IsNullOrWhiteSpace(fileUrl))
             {
-                return $"{baseUrl.TrimEnd('/')}/{encoded}";
+                return responseAudioType;
             }
 
-            var separator = baseUrl.Contains("?") ? "&" : "?";
-            return $"{baseUrl}{separator}{queryParameterName}={encoded}";
+            var trimmedUrl = fileUrl.Trim();
+            var queryIndex = trimmedUrl.IndexOf('?');
+            if (queryIndex >= 0)
+            {
+                trimmedUrl = trimmedUrl.Substring(0, queryIndex);
+            }
+
+            var lowerUrl = trimmedUrl.ToLowerInvariant();
+            if (lowerUrl.EndsWith(".mp3") || lowerUrl.EndsWith(".mpeg"))
+            {
+                return AudioType.MPEG;
+            }
+
+            if (lowerUrl.EndsWith(".wav"))
+            {
+                return AudioType.WAV;
+            }
+
+            if (lowerUrl.EndsWith(".ogg"))
+            {
+                return AudioType.OGGVORBIS;
+            }
+
+            return responseAudioType;
+        }
+
+        private async Task<string> ResolveAuthorizationTokenAsync()
+        {
+            if (useFirebaseAuthToken)
+            {
+                var firebaseToken = await TryGetFirebaseTokenAsync();
+                if (!string.IsNullOrWhiteSpace(firebaseToken))
+                {
+                    return firebaseToken;
+                }
+            }
+
+            return bearerToken;
+        }
+
+        private async Task<string> TryGetFirebaseTokenAsync()
+        {
+            try
+            {
+                var dependencyStatus = await FirebaseApp.CheckAndFixDependenciesAsync();
+                if (dependencyStatus != DependencyStatus.Available)
+                {
+                    Debug.LogWarning($"Firebase dependencies unavailable: {dependencyStatus}", this);
+                    return null;
+                }
+
+                var auth = FirebaseAuth.DefaultInstance;
+                var user = auth.CurrentUser;
+
+                if (user == null && signInAnonymouslyIfNeeded)
+                {
+                    var signInResult = await auth.SignInAnonymouslyAsync();
+                    user = signInResult?.User;
+                }
+
+                if (user == null)
+                {
+                    return null;
+                }
+
+                return await user.TokenAsync(forceRefreshFirebaseToken);
+            }
+            catch (Exception exception)
+            {
+                Debug.LogWarning($"Firebase token fetch failed: {exception.Message}", this);
+                return null;
+            }
         }
     }
 }

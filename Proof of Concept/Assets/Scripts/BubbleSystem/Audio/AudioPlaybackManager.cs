@@ -50,7 +50,7 @@ namespace TalkJourney.BubbleSystem.Audio
             }
         }
 
-        public Task<bool> PlayByIdentifierAsync(string audioIdentifier, CancellationToken cancellationToken = default)
+        public Task<bool> PlayByTextAsync(string text, CancellationToken cancellationToken = default)
         {
             if (_backendClient == null)
             {
@@ -59,27 +59,27 @@ namespace TalkJourney.BubbleSystem.Audio
 
             if (overlapPolicy == OverlapPolicy.Queue)
             {
-                return EnqueuePlayback(() => PlayByIdentifierInternalAsync(audioIdentifier, cancellationToken));
+                return EnqueuePlayback(() => PlayByTextInternalAsync(text, cancellationToken));
             }
 
-            return PlayByIdentifierInternalAsync(audioIdentifier, cancellationToken);
+            return PlayByTextInternalAsync(text, cancellationToken);
         }
 
-        public async Task PlaySequenceAsync(IEnumerable<string> audioIdentifiers, CancellationToken cancellationToken = default)
+        public async Task PlaySequenceAsync(IEnumerable<string> texts, CancellationToken cancellationToken = default)
         {
-            if (audioIdentifiers == null)
+            if (texts == null)
             {
                 return;
             }
 
-            foreach (var audioIdentifier in audioIdentifiers)
+            foreach (var text in texts)
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     return;
                 }
 
-                await PlayByIdentifierAsync(audioIdentifier, cancellationToken);
+                await PlayByTextAsync(text, cancellationToken);
             }
         }
 
@@ -98,43 +98,33 @@ namespace TalkJourney.BubbleSystem.Audio
             _cache.Clear();
         }
 
-        private async Task<bool> PlayByIdentifierInternalAsync(string audioIdentifier, CancellationToken cancellationToken)
+        private async Task<bool> PlayByTextInternalAsync(string text, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrWhiteSpace(audioIdentifier))
+            if (string.IsNullOrWhiteSpace(text))
             {
                 return false;
             }
 
-            var clip = await GetClipAsync(audioIdentifier.Trim(), cancellationToken);
-            if (clip == null)
+            var cacheKey = $"tts::{text.Trim()}";
+            if (enableCaching && _cache.TryGetValue(cacheKey, out var cachedClip) && cachedClip != null)
             {
-                return false;
+                return await PlayClipInternalAsync(cachedClip, cancellationToken);
             }
 
-            return await PlayClipInternalAsync(clip, cancellationToken);
-        }
-
-        private async Task<AudioClip> GetClipAsync(string audioIdentifier, CancellationToken cancellationToken)
-        {
-            if (enableCaching && _cache.TryGetValue(audioIdentifier, out var cachedClip) && cachedClip != null)
-            {
-                return cachedClip;
-            }
-
-            var result = await _backendClient.RequestAudioAsync(audioIdentifier, cancellationToken);
+            var result = await _backendClient.RequestAudioFromTextAsync(text, cancellationToken);
             if (!result.IsSuccess || result.Clip == null)
             {
-                Debug.LogWarning($"Failed to fetch audio '{audioIdentifier}': {result.Error}", this);
-                BubbleEventBus.PublishAudioPlaybackFailed(audioIdentifier);
-                return null;
+                Debug.LogWarning($"Failed to fetch TTS audio for text '{text}': {result.Error}", this);
+                BubbleEventBus.PublishAudioPlaybackFailed(text);
+                return false;
             }
 
             if (enableCaching)
             {
-                _cache[audioIdentifier] = result.Clip;
+                _cache[cacheKey] = result.Clip;
             }
 
-            return result.Clip;
+            return await PlayClipInternalAsync(result.Clip, cancellationToken);
         }
 
         private Task<bool> EnqueuePlayback(Func<Task<bool>> playbackOperation)

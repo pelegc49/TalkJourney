@@ -7,8 +7,8 @@ namespace TalkJourney.BubbleSystem.Audio
 {
     public interface IAudioPlaybackManager
     {
-        Task<bool> PlayByIdentifierAsync(string audioIdentifier, CancellationToken cancellationToken = default);
-        Task PlaySequenceAsync(IEnumerable<string> audioIdentifiers, CancellationToken cancellationToken = default);
+        Task<bool> PlayByTextAsync(string text, CancellationToken cancellationToken = default);
+        Task PlaySequenceAsync(IEnumerable<string> texts, CancellationToken cancellationToken = default);
         Task<bool> PlayClipAsync(AudioClip clip, CancellationToken cancellationToken = default);
         void ClearCache();
     }

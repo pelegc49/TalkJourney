@@ -50,6 +50,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
         private readonly List<DisplayBubbleController> _spawnedBubbles = new List<DisplayBubbleController>();
         private IAudioPlaybackManager _audioPlaybackManager;
+        private ILocalizationService _localizationService;
         private StageData _activeStage;
 
         private void Awake()
@@ -147,6 +148,8 @@ namespace TalkJourney.BubbleSystem.Bubbles
         public void RefreshDependencies()
         {
             _audioPlaybackManager = audioPlaybackManagerBehaviour as IAudioPlaybackManager;
+            _localizationService = localizationServiceBehaviour as ILocalizationService;
+
             if (_audioPlaybackManager == null)
             {
                 Debug.LogError("SentenceBubbleController requires audioPlaybackManagerBehaviour implementing IAudioPlaybackManager.", this);
@@ -160,27 +163,55 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 return;
             }
 
-            if (playbackMode == SentencePlaybackMode.PreferFullSentenceClip
-                && !string.IsNullOrWhiteSpace(_activeStage.fullSentenceAudioIdentifier))
+            var sentenceTexts = BuildSentenceTexts();
+            if (sentenceTexts.Count == 0)
             {
-                var played = await _audioPlaybackManager.PlayByIdentifierAsync(_activeStage.fullSentenceAudioIdentifier, cancellationToken);
+                return;
+            }
+
+            if (playbackMode == SentencePlaybackMode.PreferFullSentenceClip)
+            {
+                var fullSentenceText = string.Join(" ", sentenceTexts).Trim();
+                var played = await _audioPlaybackManager.PlayByTextAsync(fullSentenceText, cancellationToken);
                 if (played)
                 {
                     return;
                 }
             }
 
-            var identifiers = new List<string>(_activeStage.sentenceBubbles.Count);
+            await _audioPlaybackManager.PlaySequenceAsync(sentenceTexts, cancellationToken);
+        }
+
+        private List<string> BuildSentenceTexts()
+        {
+            var texts = new List<string>(_activeStage.sentenceBubbles.Count);
+
             for (int i = 0; i < _activeStage.sentenceBubbles.Count; i++)
             {
                 var bubble = _activeStage.sentenceBubbles[i];
-                if (bubble != null && !string.IsNullOrWhiteSpace(bubble.audioIdentifier))
+                if (bubble == null || string.IsNullOrWhiteSpace(bubble.primaryTextKey))
                 {
-                    identifiers.Add(bubble.audioIdentifier);
+                    continue;
+                }
+
+                var resolved = ResolveText(bubble.primaryTextKey).Trim();
+                if (!string.IsNullOrWhiteSpace(resolved))
+                {
+                    texts.Add(resolved);
                 }
             }
 
-            await _audioPlaybackManager.PlaySequenceAsync(identifiers, cancellationToken);
+            return texts;
+        }
+
+        private string ResolveText(string key)
+        {
+            if (_localizationService == null || string.IsNullOrWhiteSpace(key))
+            {
+                return key ?? string.Empty;
+            }
+
+            return _localizationService.Resolve(key);
         }
 
         private void OnSpeakerClicked()
