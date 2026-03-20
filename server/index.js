@@ -5,6 +5,13 @@ const textToSpeech = require('@google-cloud/text-to-speech');
 const crypto = require('crypto');
 const PORT = 3000;
 
+function log(message, level = 'info') {
+    const time = new Date();
+    const timestamp = time.toLocaleDateString('en-IL') + ' ' + time.toLocaleTimeString('en-IL');        
+    console[level](`[${timestamp}] ${message}`);
+}
+
+
 const privateKey = process.env.FIREBASE_PRIVATE_KEY
 const credentials = {
     projectId: process.env.FIREBASE_PROJECT_ID,
@@ -29,10 +36,10 @@ const app = express();
 app.use(express.json());
 
 async function verifyToken(req, res, next) {
+    log('\x1b[33m[NEW]\x1b[0m Received request, verifying token...');
     const authHeader = req.headers.authorization;
-    
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        console.warn('Blocked request: Missing or invalid Authorization header');
+        log('\x1b[31m[ERR]\x1b[0m Blocked request: Missing or invalid Authorization header', 'warn');
         return res.status(401).json({ error: 'Unauthorized: No token provided' });
     }
 
@@ -41,16 +48,18 @@ async function verifyToken(req, res, next) {
     try {
         // Verify the token using Firebase Admin
         const decodedToken = await admin.auth().verifyIdToken(idToken);
+        log('Token verified successfully, user ID: ' + decodedToken.uid);
         req.user = decodedToken; // Save user data for later if needed (e.g., req.user.uid)
         next(); // Token is valid, proceed to the API logic
     } catch (error) {
-        console.error('Blocked request: Invalid token', error.message);
+        log('\x1b[31m[ERR]\x1b[0m Blocked request: Invalid token', 'error');
         return res.status(401).json({ error: 'Unauthorized: Invalid token' });
     }
 }
 
 app.post('/api/get-audio', verifyToken, async (req, res) => {
     const { text, languageCode = 'en-US', voiceName=null } = req.body;
+    log('Received request for audio retrieval from user: ' + req.user.uid);
     if (!text) {
         return res.status(400).json({ error: 'Text parameter is required' });
     }
@@ -70,12 +79,12 @@ app.post('/api/get-audio', verifyToken, async (req, res) => {
         const [exists] = await file.exists();
 
         if (exists) {
-            console.log('File found in cache.');
+            log('\x1b[32m[END]\x1b[0m File found in cache.');
             const url = await getDownloadUrl(file);
             return res.json({ url: url, isCached: true });
         }
 
-        console.log('Generating new audio via TTS.');
+        log('Generating new audio via TTS.');
         const request = {
             input: { text: text },
             voice: { languageCode: languageCode, name: voice },
@@ -87,12 +96,12 @@ app.post('/api/get-audio', verifyToken, async (req, res) => {
             metadata: { contentType: 'audio/mpeg' },
         });
 
-        console.log('Audio saved to Firebase Storage.');
+        log('\x1b[32m[END]\x1b[0m Audio saved to Firebase Storage.');
         const url = await getDownloadUrl(file);
         return res.json({ url: url, isCached: false });
 
     } catch (error) {
-        console.error('Error:', error);
+        log('\x1b[31m[ERR]\x1b[0m Error:', 'error');
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 });
@@ -105,5 +114,5 @@ async function getDownloadUrl(file) {
 }
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    log(`Server running on port ${PORT}`);
 });
