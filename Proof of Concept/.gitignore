@@ -103,3 +103,7 @@ InitTestScene*.unity*
 /[Aa]ssets/Localization/FirstScene/Google Sheets Service.asset.meta
 /[Aa]ssets/Localization/LocalizationGoogleSecret.json
 /[Aa]ssets/Localization/LocalizationGoogleSecret.json.meta
+
+# Firebase app config (keep local; contains project credentials)
+/[Aa]ssets/google-services.json
+/[Aa]ssets/google-services.json.meta
