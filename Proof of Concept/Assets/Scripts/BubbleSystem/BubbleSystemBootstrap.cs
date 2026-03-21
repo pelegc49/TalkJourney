@@ -40,8 +40,13 @@ namespace TalkJourney.BubbleSystem.Flow
         public bool strictGlobalServiceMode = true;
 
         [Header("Auto Setup")]
+        [Tooltip("When enabled, setup runs in Awake. Disable if this bootstrap is instantiated/started by a launcher on demand.")]
+        public bool initializeOnAwake = true;
+
         public bool autoFindSpeechRecognitionBehaviour = true;
         public bool autoCreateAudioSource = true;
+
+        private bool _isSetupComplete;
 
         private void Reset()
         {
@@ -50,11 +55,19 @@ namespace TalkJourney.BubbleSystem.Flow
 
         private void Awake()
         {
-            EnsureSetup();
+            if (initializeOnAwake)
+            {
+                EnsureSetup();
+            }
         }
 
         public void EnsureSetup()
         {
+            if (_isSetupComplete)
+            {
+                return;
+            }
+
             var stageController = GetOrAddComponent<StageController>();
             var sentenceBubbleController = GetOrAddComponent<SentenceBubbleController>();
             var selectionSpeechMatcher = GetOrAddComponent<SelectionSpeechMatcher>();
@@ -96,6 +109,46 @@ namespace TalkJourney.BubbleSystem.Flow
             audioPlaybackManager.playbackSource = playbackSource;
             audioPlaybackManager.backendClientBehaviour = audioBackendClientBehaviour;
             audioPlaybackManager.RefreshDependencies();
+
+            _isSetupComplete = true;
+        }
+
+        /// <summary>
+        /// Starts BubbleSystem for a specific stage. Useful for menu buttons (Level 1, Level 2, ...).
+        /// </summary>
+        public void StartStage(StageData stageData)
+        {
+            if (stageData == null)
+            {
+                Debug.LogWarning("BubbleSystemBootstrap.StartStage was called with null stageData.", this);
+                return;
+            }
+
+            EnsureSetup();
+
+            var stageController = GetComponent<StageController>();
+            if (stageController == null)
+            {
+                Debug.LogError("BubbleSystemBootstrap could not find StageController after setup.", this);
+                return;
+            }
+
+            stageController.autoStartInitialStage = false;
+            stageController.LoadStage(stageData);
+        }
+
+        /// <summary>
+        /// Starts BubbleSystem using the configured initialStage field.
+        /// </summary>
+        public void StartInitialStage()
+        {
+            if (initialStage == null)
+            {
+                Debug.LogWarning("BubbleSystemBootstrap.StartInitialStage was called but initialStage is not assigned.", this);
+                return;
+            }
+
+            StartStage(initialStage);
         }
 
         private MonoBehaviour EnsureLocalizationService()

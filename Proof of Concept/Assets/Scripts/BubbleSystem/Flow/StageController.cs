@@ -14,6 +14,9 @@ namespace TalkJourney.BubbleSystem.Flow
         [Header("Stage")]
         public StageData initialStage;
 
+        [Tooltip("If true, initialStage is loaded automatically on Start. Disable to start BubbleSystem manually via StartInitialStage().")]
+        public bool autoStartInitialStage = true;
+
         [Header("Sentence")]
         public SentenceBubbleController sentenceBubbleController;
 
@@ -41,10 +44,24 @@ namespace TalkJourney.BubbleSystem.Flow
 
         private void Start()
         {
-            if (initialStage != null)
+            if (autoStartInitialStage && initialStage != null)
             {
                 LoadStage(initialStage);
             }
+        }
+
+        /// <summary>
+        /// Starts BubbleSystem by loading initialStage. Useful for wiring to a UI button OnClick event.
+        /// </summary>
+        public void StartInitialStage()
+        {
+            if (initialStage == null)
+            {
+                Debug.LogWarning("StageController.StartInitialStage was called but initialStage is not assigned.", this);
+                return;
+            }
+
+            LoadStage(initialStage);
         }
 
         public bool TransitionToStage(StageData nextStage)
