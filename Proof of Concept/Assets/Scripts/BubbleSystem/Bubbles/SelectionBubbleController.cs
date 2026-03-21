@@ -151,7 +151,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
         private bool ActivateSelection()
         {
-            if (_stageController == null || selectionData == null || selectionData.nextStage == null)
+            if (_stageController == null || selectionData == null)
             {
                 return false;
             }
@@ -161,13 +161,13 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 return false;
             }
 
-            var didTransition = _stageController.TransitionToStage(selectionData.nextStage);
-            if (didTransition)
+            var didHandleSelection = _stageController.TryHandleSelection(selectionData);
+            if (didHandleSelection)
             {
                 _hasActivated = true;
             }
 
-            return didTransition;
+            return didHandleSelection;
         }
 
         private bool MatchesRecognizedText(string recognizedText)

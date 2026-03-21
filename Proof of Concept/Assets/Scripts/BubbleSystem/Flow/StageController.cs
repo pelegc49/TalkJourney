@@ -69,11 +69,66 @@ namespace TalkJourney.BubbleSystem.Flow
             return LoadStage(nextStage);
         }
 
+        public bool TryHandleSelection(SelectionBubbleData selectionData)
+        {
+            if (selectionData == null)
+            {
+                return false;
+            }
+
+            if (!HasValidSingleCorrectSelection(CurrentStage))
+            {
+                Debug.LogError("Current stage has invalid selection setup. Exactly one correct selection is required.", this);
+                return false;
+            }
+
+            if (!selectionData.isCorrect)
+            {
+                if (selectionData.nextStage == null)
+                {
+                    Debug.Log("<color=blue>Selection incorrect (no next stage). Trigger incorrect haptic feedback here.</color>", this);
+                }
+                else
+                {
+                    Debug.Log("<color=blue>Selection incorrect (next stage ignored because isCorrect is false). Trigger incorrect haptic feedback here.</color>", this);
+                }
+
+                BubbleEventBus.PublishSelectionIncorrect(selectionData);
+                return false;
+            }
+
+            if (selectionData.nextStage != null)
+            {
+                Debug.Log("<color=green>Selection correct (has next stage). Trigger correct haptic feedback here.</color>", this);
+            }
+            else
+            {
+                Debug.Log("<color=green>Selection correct (terminal). Trigger correct haptic feedback here.</color>", this);
+            }
+
+            BubbleEventBus.PublishSelectionCorrect(selectionData);
+
+            if (selectionData.nextStage != null)
+            {
+                return LoadStage(selectionData.nextStage);
+            }
+
+            // Terminal rule: correct selection with no next stage completes the journey.
+            BubbleEventBus.PublishJourneyCompleted(CurrentStage, selectionData);
+            return true;
+        }
+
         public bool LoadStage(StageData nextStage)
         {
             if (nextStage == null)
             {
                 Debug.LogWarning("Cannot load null stage.", this);
+                return false;
+            }
+
+            if (!HasValidSingleCorrectSelection(nextStage))
+            {
+                Debug.LogError($"Stage '{nextStage.name}' must contain exactly one correct selection bubble.", this);
                 return false;
             }
 
@@ -88,6 +143,30 @@ namespace TalkJourney.BubbleSystem.Flow
             StageChanged?.Invoke(nextStage);
             BubbleEventBus.PublishStageChanged(nextStage);
             return true;
+        }
+
+        private bool HasValidSingleCorrectSelection(StageData stageData)
+        {
+            if (stageData == null || stageData.selectionBubbles == null || stageData.selectionBubbles.Count == 0)
+            {
+                return false;
+            }
+
+            var correctCount = 0;
+            for (int i = 0; i < stageData.selectionBubbles.Count; i++)
+            {
+                var selection = stageData.selectionBubbles[i];
+                if (selection != null && selection.isCorrect)
+                {
+                    correctCount++;
+                    if (correctCount > 1)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return correctCount == 1;
         }
 
         private void RebuildSelectionBubbles(StageData stageData)

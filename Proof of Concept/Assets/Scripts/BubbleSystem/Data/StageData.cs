@@ -27,9 +27,5 @@ namespace TalkJourney.BubbleSystem.Data
         [Header("Selection Bubbles")]
         [Tooltip("Branching options available in this stage.")]
         public List<SelectionBubbleData> selectionBubbles = new List<SelectionBubbleData>();
-
-        [Header("Flow")]
-        [Tooltip("If true, this stage can be considered terminal when no selections are present.")]
-        public bool canEndJourney; // is it the final bubble? or error bubble? btw, not used in the project..
     }
 }
