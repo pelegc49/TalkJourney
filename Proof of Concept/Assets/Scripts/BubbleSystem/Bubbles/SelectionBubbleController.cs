@@ -105,6 +105,16 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
         public void RefreshDependencies()
         {
+            if (stageControllerBehaviour == null)
+            {
+                stageControllerBehaviour = GetComponentInParent<StageController>(true);
+            }
+
+            if (localizationServiceBehaviour == null)
+            {
+                localizationServiceBehaviour = GetComponentInParent<LocalizationResolver>(true);
+            }
+
             _localizationService = localizationServiceBehaviour as ILocalizationService;
             _stageController = stageControllerBehaviour as IStageController;
 
@@ -115,7 +125,12 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
             if (_stageController == null)
             {
-                Debug.LogError("SelectionBubbleController requires stageControllerBehaviour implementing IStageController.", this);
+                _stageController = FindFirstObjectByType<StageController>(FindObjectsInactive.Include);
+            }
+
+            if (_stageController == null && selectionData != null)
+            {
+                Debug.LogWarning("SelectionBubbleController could not resolve IStageController. Selection activation will be disabled.", this);
             }
         }
 

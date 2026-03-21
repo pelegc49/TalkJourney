@@ -5,6 +5,7 @@ using TalkJourney.BubbleSystem.Data;
 using TalkJourney.BubbleSystem.Events;
 using TalkJourney.BubbleSystem.Interaction;
 using TalkJourney.BubbleSystem.Localization;
+using TalkJourney.GameServices;
 using TMPro;
 using System;
 
@@ -101,6 +102,24 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
         public void RefreshDependencies()
         {
+            if (localizationServiceBehaviour == null)
+            {
+                var globalServices = GlobalGameServicesBootstrap.Instance;
+                if (globalServices != null && globalServices.localizationResolver != null)
+                {
+                    localizationServiceBehaviour = globalServices.localizationResolver;
+                }
+                else
+                {
+                    localizationServiceBehaviour = GetComponentInParent<LocalizationResolver>(true);
+                }
+            }
+
+            if (audioPlaybackManagerBehaviour == null)
+            {
+                audioPlaybackManagerBehaviour = GetComponentInParent<AudioPlaybackManager>(true);
+            }
+
             _localizationService = localizationServiceBehaviour as ILocalizationService;
             _audioPlaybackManager = audioPlaybackManagerBehaviour as IAudioPlaybackManager;
 
@@ -111,12 +130,22 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
             if (_localizationService == null)
             {
-                Debug.LogError("DisplayBubbleController requires localizationServiceBehaviour implementing ILocalizationService.", this);
+                _localizationService = FindFirstObjectByType<LocalizationResolver>(FindObjectsInactive.Include);
             }
 
             if (_audioPlaybackManager == null)
             {
-                Debug.LogError("DisplayBubbleController requires audioPlaybackManagerBehaviour implementing IAudioPlaybackManager.", this);
+                _audioPlaybackManager = FindFirstObjectByType<AudioPlaybackManager>(FindObjectsInactive.Include);
+            }
+
+            if (_localizationService == null && bubbleData != null)
+            {
+                Debug.LogWarning("DisplayBubbleController could not resolve ILocalizationService. Text will fall back to keys.", this);
+            }
+
+            if (_audioPlaybackManager == null && bubbleData != null)
+            {
+                Debug.LogWarning("DisplayBubbleController could not resolve IAudioPlaybackManager. Bubble click audio will be disabled.", this);
             }
         }
 
