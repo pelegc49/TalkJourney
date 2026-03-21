@@ -12,6 +12,7 @@ namespace TalkJourney.BubbleSystem.Events
         public static event Action<SelectionBubbleData> SelectionCorrect;
         public static event Action<SelectionBubbleData> SelectionIncorrect;
         public static event Action<StageData, SelectionBubbleData> JourneyCompleted;
+        public static event Action BypassEnabled;
         public static event Action<string> SpeechPhraseRecognized;
         public static event Action<string> AudioPlaybackStarted;
         public static event Action<string> AudioPlaybackEnded;
@@ -50,6 +51,11 @@ namespace TalkJourney.BubbleSystem.Events
         public static void PublishJourneyCompleted(StageData stageData, SelectionBubbleData terminalSelection)
         {
             JourneyCompleted?.Invoke(stageData, terminalSelection);
+        }
+
+        public static void PublishBypassEnabled()
+        {
+            BypassEnabled?.Invoke();
         }
 
         public static void PublishSpeechPhraseRecognized(string recognizedText)

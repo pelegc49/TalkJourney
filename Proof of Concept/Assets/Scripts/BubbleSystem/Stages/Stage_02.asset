@@ -26,5 +26,5 @@ MonoBehaviour:
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 7629667447587253710, guid: e4cae13494e5b6d44afb8a307a5456f1, type: 3}
-    nextStage: {fileID: 11400000, guid: 6027866688ba92a43b27217af6eab77c, type: 2}
-  canEndJourney: 0
+    isCorrect: 1
+    nextStage: {fileID: 0}

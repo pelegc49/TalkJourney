@@ -62,17 +62,19 @@ MonoBehaviour:
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 7629667447587253710, guid: e4cae13494e5b6d44afb8a307a5456f1, type: 3}
+    isCorrect: 1
     nextStage: {fileID: 11400000, guid: e8882db00c368f947bc21582d201c5ca, type: 2}
   - bubble:
       primaryTextKey: water1
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 7629667447587253710, guid: e4cae13494e5b6d44afb8a307a5456f1, type: 3}
-    nextStage: {fileID: 11400000, guid: 6027866688ba92a43b27217af6eab77c, type: 2}
+    isCorrect: 0
+    nextStage: {fileID: 0}
   - bubble:
       primaryTextKey: sushi1
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 7629667447587253710, guid: e4cae13494e5b6d44afb8a307a5456f1, type: 3}
-    nextStage: {fileID: 11400000, guid: f28c5250a2b410c4788040f21a47009e, type: 2}
-  canEndJourney: 0
+    isCorrect: 0
+    nextStage: {fileID: 0}

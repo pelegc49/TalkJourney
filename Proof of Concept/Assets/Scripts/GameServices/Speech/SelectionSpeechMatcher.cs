@@ -155,6 +155,7 @@ namespace TalkJourney.BubbleSystem.Speech
             _isBypassEnabled = true;
             ApplyBypassStateToActiveSelections();
             SetBypassButtonVisible(false);
+            BubbleEventBus.PublishBypassEnabled();
         }
 
         private void OnStageChanged(TalkJourney.BubbleSystem.Data.StageData _)

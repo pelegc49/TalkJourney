@@ -114,6 +114,14 @@ namespace TalkJourney.BubbleSystem.Flow
             }
 
             // Terminal rule: correct selection with no next stage completes the journey.
+            ClearSelectionBubbles();
+            PushActiveSelectionsToSpeechMatcher();
+
+            if (sentenceBubbleController != null)
+            {
+                sentenceBubbleController.ClearStageVisuals();
+            }
+
             BubbleEventBus.PublishJourneyCompleted(CurrentStage, selectionData);
             return true;
         }

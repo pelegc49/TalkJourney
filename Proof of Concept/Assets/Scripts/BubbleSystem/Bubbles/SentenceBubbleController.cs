@@ -145,6 +145,16 @@ namespace TalkJourney.BubbleSystem.Bubbles
             RepositionSpeakerButton();
         }
 
+        /// <summary>
+        /// Clears currently spawned sentence bubbles and hides sentence controls.
+        /// </summary>
+        public void ClearStageVisuals()
+        {
+            _activeStage = null;
+            ClearSpawnedBubbles();
+            SetSpeakerButtonVisible(false);
+        }
+
         public void RefreshDependencies()
         {
             _audioPlaybackManager = audioPlaybackManagerBehaviour as IAudioPlaybackManager;
