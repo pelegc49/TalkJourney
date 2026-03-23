@@ -44,7 +44,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
         public RectTransform sentenceAreaRect;
 
         [Tooltip("Fixed world-space offset from the right edge of SentenceArea to place the speaker button.")]
-        public Vector3 speakerButtonOffsetFromSentenceArea = new Vector3(0.25f, 0f, 0f);
+        public Vector3 speakerButtonOffsetFromSentenceArea = new Vector3(0f, 0f, 0f);
 
         public SentencePlaybackMode playbackMode = SentencePlaybackMode.PreferFullSentenceClip;
 
@@ -300,20 +300,64 @@ namespace TalkJourney.BubbleSystem.Bubbles
         private void RepositionSpeakerButton()
         {
             var speakerTransform = ResolveSpeakerButtonTransform();
-            var areaRect = ResolveSentenceAreaRect();
-            if (speakerTransform == null || areaRect == null)
+            if (speakerTransform == null)
             {
                 return;
+            }
+
+            var anchorPosition = ResolveSpeakerAnchorPosition();
+            if (!anchorPosition.HasValue)
+            {
+                return;
+            }
+
+            // Keep local orientation independent from sentence text length by pinning to the last bubble (or sentence area fallback).
+            speakerTransform.position = anchorPosition.Value + speakerButtonOffsetFromSentenceArea;
+        }
+
+        private Vector3? ResolveSpeakerAnchorPosition()
+        {
+            var lastBubbleRect = FindLastSpawnedBubbleRect();
+            if (lastBubbleRect != null)
+            {
+                var bubbleCorners = new Vector3[4];
+                lastBubbleRect.GetWorldCorners(bubbleCorners);
+
+                // 2 = top-right, 3 = bottom-right. Midpoint gives the vertical center of right edge.
+                return (bubbleCorners[2] + bubbleCorners[3]) * 0.5f;
+            }
+
+            var areaRect = ResolveSentenceAreaRect();
+            if (areaRect == null)
+            {
+                return null;
             }
 
             var corners = new Vector3[4];
             areaRect.GetWorldCorners(corners);
 
             // 2 = top-right, 3 = bottom-right. Midpoint gives the vertical center of right edge.
-            var rightEdgeCenter = (corners[2] + corners[3]) * 0.5f;
+            return (corners[2] + corners[3]) * 0.5f;
+        }
 
-            // Keep local orientation independent from sentence text length by pinning to sentence area bounds.
-            speakerTransform.position = rightEdgeCenter + speakerButtonOffsetFromSentenceArea;
+        private RectTransform FindLastSpawnedBubbleRect()
+        {
+            for (int i = _spawnedBubbles.Count - 1; i >= 0; i--)
+            {
+                var bubble = _spawnedBubbles[i];
+                if (bubble == null)
+                {
+                    continue;
+                }
+
+                var rect = bubble.transform as RectTransform;
+                if (rect != null)
+                {
+                    return rect;
+                }
+            }
+
+            return null;
         }
     }
 }

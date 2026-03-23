@@ -174,7 +174,7 @@ MonoBehaviour:
   fallbackDisplayBubblePrefab: {fileID: 0}
   speakerButtonInteractable: {fileID: 0}
   sentenceAreaRect: {fileID: 0}
-  speakerButtonOffsetFromSentenceArea: {x: 0.25, y: 0, z: 0}
+  speakerButtonOffsetFromSentenceArea: {x: 50, y: 0, z: 0}
   playbackMode: 1
 --- !u!114 &2563719111414984670
 MonoBehaviour:
