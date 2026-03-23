@@ -299,5 +299,6 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 transliteratorText.enabled = isVisible;
             }
         }
+
     }
 }

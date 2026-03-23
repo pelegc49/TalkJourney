@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using TalkJourney.BubbleSystem.Events;
+using TalkJourney.BubbleSystem.Localization;
 
 namespace TalkJourney.BubbleSystem.Audio
 {
@@ -38,6 +39,18 @@ namespace TalkJourney.BubbleSystem.Audio
         private void Awake()
         {
             RefreshDependencies();
+        }
+
+        private void OnEnable()
+        {
+            LocalizationResolver.OnLanguagePairChanged += OnLanguagePairChanged;
+            LocalizationResolver.OnDisplayLanguageChanged += OnDisplayLanguageChanged;
+        }
+
+        private void OnDisable()
+        {
+            LocalizationResolver.OnLanguagePairChanged -= OnLanguagePairChanged;
+            LocalizationResolver.OnDisplayLanguageChanged -= OnDisplayLanguageChanged;
         }
 
         public void RefreshDependencies()
@@ -105,7 +118,7 @@ namespace TalkJourney.BubbleSystem.Audio
                 return false;
             }
 
-            var cacheKey = $"tts::{text.Trim()}";
+            var cacheKey = BuildCacheKey(text);
             if (enableCaching && _cache.TryGetValue(cacheKey, out var cachedClip) && cachedClip != null)
             {
                 return await PlayClipInternalAsync(cachedClip, cancellationToken);
@@ -185,6 +198,31 @@ namespace TalkJourney.BubbleSystem.Audio
 
             BubbleEventBus.PublishAudioPlaybackEnded(clip.name);
             return true;
+        }
+
+        private string BuildCacheKey(string text)
+        {
+            var normalizedText = text == null ? string.Empty : text.Trim();
+            var context = "default";
+
+            if (backendClientBehaviour is AudioBackendClient concreteClient)
+            {
+                var language = string.IsNullOrWhiteSpace(concreteClient.languageCode) ? "unknown-language" : concreteClient.languageCode.Trim();
+                var voice = string.IsNullOrWhiteSpace(concreteClient.voiceName) ? "unknown-voice" : concreteClient.voiceName.Trim();
+                context = language + "::" + voice;
+            }
+
+            return "tts::" + context + "::" + normalizedText;
+        }
+
+        private void OnLanguagePairChanged(DisplayLanguage _, DisplayLanguage __)
+        {
+            ClearCache();
+        }
+
+        private void OnDisplayLanguageChanged(DisplayLanguage _)
+        {
+            ClearCache();
         }
     }
 }

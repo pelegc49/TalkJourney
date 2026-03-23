@@ -20,11 +20,20 @@ namespace TalkJourney.BubbleSystem.Flow
         [Tooltip("Optional parent for instantiated bootstrap.")]
         public Transform runtimeParent;
 
+        [Header("Results Presenter")]
+        [Tooltip("Optional existing JourneyResultsPresenter already in scene.")]
+        public JourneyResultsPresenter existingResultsPresenter;
+
+        [Tooltip("Optional presenter prefab instantiated when existingResultsPresenter is not assigned.")]
+        public JourneyResultsPresenter resultsPresenterPrefab;
+
         private BubbleSystemBootstrap _activeBootstrap;
+        private JourneyResultsPresenter _activeResultsPresenter;
 
         private void Awake()
         {
             _activeBootstrap = existingBootstrap;
+            _activeResultsPresenter = existingResultsPresenter;
         }
 
         public void StartStageFromButton(StageData stageData)
@@ -42,6 +51,8 @@ namespace TalkJourney.BubbleSystem.Flow
                 return;
             }
 
+            EnsureResultsPresenter();
+
             bootstrap.StartStage(stageData);
         }
 
@@ -53,6 +64,8 @@ namespace TalkJourney.BubbleSystem.Flow
                 Debug.LogError("BubbleSystemLauncher could not resolve BubbleSystemBootstrap. Assign existingBootstrap or bootstrapPrefab.", this);
                 return;
             }
+
+            EnsureResultsPresenter();
 
             bootstrap.StartInitialStage();
         }
@@ -71,6 +84,12 @@ namespace TalkJourney.BubbleSystem.Flow
 
             Destroy(_activeBootstrap.gameObject);
             _activeBootstrap = null;
+
+            if (_activeResultsPresenter != null && _activeResultsPresenter != existingResultsPresenter)
+            {
+                Destroy(_activeResultsPresenter.gameObject);
+                _activeResultsPresenter = null;
+            }
         }
 
         private BubbleSystemBootstrap ResolveBootstrap()
@@ -98,6 +117,31 @@ namespace TalkJourney.BubbleSystem.Flow
             _activeBootstrap.initializeOnAwake = false;
             _activeBootstrap.EnsureSetup();
             return _activeBootstrap;
+        }
+
+        private JourneyResultsPresenter EnsureResultsPresenter()
+        {
+            if (_activeResultsPresenter != null)
+            {
+                return _activeResultsPresenter;
+            }
+
+            if (existingResultsPresenter != null)
+            {
+                _activeResultsPresenter = existingResultsPresenter;
+                return _activeResultsPresenter;
+            }
+
+            if (resultsPresenterPrefab == null)
+            {
+                return null;
+            }
+
+            _activeResultsPresenter = runtimeParent != null
+                ? Instantiate(resultsPresenterPrefab, runtimeParent)
+                : Instantiate(resultsPresenterPrefab);
+
+            return _activeResultsPresenter;
         }
     }
 }
