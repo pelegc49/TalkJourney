@@ -74,6 +74,16 @@ namespace TalkJourney.BubbleSystem.Flow
         [Tooltip("If true, panel is hidden on Awake.")]
         public bool hidePanelOnAwake = true;
 
+        [Header("Close Button Behavior")]
+        [Tooltip("If enabled, closing results also requests BubbleSystemLauncher to destroy runtime-created containers.")]
+        public bool destroyRuntimeContainersOnClose = true;
+
+        [Tooltip("Optional launcher used to destroy runtime-created bubble/results containers on close.")]
+        public BubbleSystemLauncher bubbleSystemLauncher;
+
+        [Tooltip("If enabled, auto-resolves BubbleSystemLauncher when reference is empty.")]
+        public bool autoResolveBubbleSystemLauncher = true;
+
         private readonly JourneySessionStats _stats = new JourneySessionStats();
         private readonly List<DisplayBubbleController> _spawnedResultBubbles = new List<DisplayBubbleController>();
         private readonly List<BubbleData> _runtimeBubbleData = new List<BubbleData>();
@@ -84,6 +94,7 @@ namespace TalkJourney.BubbleSystem.Flow
         {
             _stats.BeginSession();
             RefreshDependencies();
+            ResolveBubbleSystemLauncher();
 
             if (hidePanelOnAwake)
             {
@@ -118,6 +129,27 @@ namespace TalkJourney.BubbleSystem.Flow
             ClearResultBubbles();
 
             _stats.BeginSession();
+        }
+
+        /// <summary>
+        /// Intended for Close button OnClick: hides results and optionally destroys runtime containers via launcher.
+        /// </summary>
+        public void OnCloseButtonClicked()
+        {
+            HideResultsAndStartNewSession();
+
+            if (!destroyRuntimeContainersOnClose)
+            {
+                return;
+            }
+
+            var launcher = ResolveBubbleSystemLauncher();
+            if (launcher == null)
+            {
+                return;
+            }
+
+            launcher.StopAndDestroyActiveBootstrap();
         }
 
         private void OnStageChanged(StageData stageData)
@@ -427,6 +459,22 @@ namespace TalkJourney.BubbleSystem.Flow
             return _localizationService.TryResolve(key, out var localizedValue)
                 ? localizedValue
                 : fallback;
+        }
+
+        private BubbleSystemLauncher ResolveBubbleSystemLauncher()
+        {
+            if (bubbleSystemLauncher != null)
+            {
+                return bubbleSystemLauncher;
+            }
+
+            if (!autoResolveBubbleSystemLauncher)
+            {
+                return null;
+            }
+
+            bubbleSystemLauncher = FindFirstObjectByType<BubbleSystemLauncher>(FindObjectsInactive.Include);
+            return bubbleSystemLauncher;
         }
 
         private void SetResultsVisibility(bool isVisible)

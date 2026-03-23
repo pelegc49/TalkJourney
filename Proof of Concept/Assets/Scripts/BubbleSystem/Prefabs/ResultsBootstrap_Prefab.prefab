@@ -67,6 +67,9 @@ MonoBehaviour:
   incorrectSelectionsLabelKey: results.incorrect
   accuracyLabelKey: results.accuracy
   hidePanelOnAwake: 1
+  destroyRuntimeContainersOnClose: 1
+  bubbleSystemLauncher: {fileID: 0}
+  autoResolveBubbleSystemLauncher: 1
 --- !u!1 &1281673588058924174
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,10 +327,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 450421649702850779}
         m_TargetAssemblyTypeName: TalkJourney.BubbleSystem.Flow.JourneyResultsPresenter,
           Assembly-CSharp
-        m_MethodName: HideResultsAndStartNewSession
+        m_MethodName: OnCloseButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -1049,7 +1049,7 @@ MonoBehaviour:
         m_MethodName: StartStageFromButton
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: e8882db00c368f947bc21582d201c5ca, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: ecab973871e32c6459e2c77b3c0a4a34, type: 2}
           m_ObjectArgumentAssemblyTypeName: TalkJourney.BubbleSystem.Data.StageData,
             Assembly-CSharp
           m_IntArgument: 0
