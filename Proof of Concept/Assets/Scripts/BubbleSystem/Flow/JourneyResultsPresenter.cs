@@ -19,6 +19,9 @@ namespace TalkJourney.BubbleSystem.Flow
         [Tooltip("Panel/canvas root shown when journey is completed.")]
         public GameObject resultsPanelRoot;
 
+        [Tooltip("Optional close button root that follows the same visibility as resultsPanelRoot.")]
+        public GameObject closeButtonRoot;
+
         [Tooltip("If enabled, render the results as display bubbles using localization/transliterator flow.")]
         public bool useBubbleResults = true;
 
@@ -82,9 +85,9 @@ namespace TalkJourney.BubbleSystem.Flow
             _stats.BeginSession();
             RefreshDependencies();
 
-            if (hidePanelOnAwake && resultsPanelRoot != null)
+            if (hidePanelOnAwake)
             {
-                resultsPanelRoot.SetActive(false);
+                SetResultsVisibility(false);
             }
         }
 
@@ -110,10 +113,7 @@ namespace TalkJourney.BubbleSystem.Flow
 
         public void HideResultsAndStartNewSession()
         {
-            if (resultsPanelRoot != null)
-            {
-                resultsPanelRoot.SetActive(false);
-            }
+            SetResultsVisibility(false);
 
             ClearResultBubbles();
 
@@ -139,11 +139,7 @@ namespace TalkJourney.BubbleSystem.Flow
         {
             _stats.Complete();
             RefreshUI();
-
-            if (resultsPanelRoot != null)
-            {
-                resultsPanelRoot.SetActive(true);
-            }
+            SetResultsVisibility(true);
         }
 
         private void RefreshUI()
@@ -431,6 +427,19 @@ namespace TalkJourney.BubbleSystem.Flow
             return _localizationService.TryResolve(key, out var localizedValue)
                 ? localizedValue
                 : fallback;
+        }
+
+        private void SetResultsVisibility(bool isVisible)
+        {
+            if (resultsPanelRoot != null)
+            {
+                resultsPanelRoot.SetActive(isVisible);
+            }
+
+            if (closeButtonRoot != null)
+            {
+                closeButtonRoot.SetActive(isVisible);
+            }
         }
     }
 }
