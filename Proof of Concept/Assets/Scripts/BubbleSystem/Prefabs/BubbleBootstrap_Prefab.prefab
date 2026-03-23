@@ -174,7 +174,7 @@ MonoBehaviour:
   fallbackDisplayBubblePrefab: {fileID: 0}
   speakerButtonInteractable: {fileID: 0}
   sentenceAreaRect: {fileID: 0}
-  speakerButtonOffsetFromSentenceArea: {x: 0, y: 0, z: 0}
+  speakerButtonOffsetFromSentenceArea: {x: 50, y: 0, z: 0}
   playbackMode: 1
 --- !u!114 &2563719111414984670
 MonoBehaviour:
@@ -456,8 +456,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1655594252711559790}
-  - component: {fileID: 4858126320757739878}
   - component: {fileID: 7984316717549919237}
+  - component: {fileID: 1141603896640086863}
   m_Layer: 0
   m_Name: SelectionArea
   m_TagString: Untagged
@@ -481,31 +481,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: 800, y: 100}
+  m_AnchoredPosition: {x: 0, y: -120}
+  m_SizeDelta: {x: 700, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4858126320757739878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3869011220668828319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81689024fc1119c40ba5edef7558014f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Layout.FlowLayoutGroup
-  m_Padding:
-    m_Left: 230
-    m_Right: 0
-    m_Top: 30
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  horizontalSpacing: 100
-  verticalSpacing: 0
-  useChildPreferredSize: 1
-  rightToLeft: 0
 --- !u!114 &7984316717549919237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,6 +498,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 0
   m_VerticalFit: 0
+--- !u!114 &1141603896640086863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3869011220668828319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.HorizontalLayoutGroup
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &4396783725114278813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,8 +1061,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 800, y: 300}
+  m_AnchoredPosition: {x: 0, y: 20}
+  m_SizeDelta: {x: 700, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3277223345175928064
 MonoBehaviour:
@@ -1073,9 +1077,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Layout.FlowLayoutGroup
   m_Padding:
-    m_Left: 50
+    m_Left: 0
     m_Right: 0
-    m_Top: 30
+    m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
   horizontalSpacing: 0
