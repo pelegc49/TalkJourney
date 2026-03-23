@@ -41,11 +41,8 @@ namespace TalkJourney.BubbleSystem.Bubbles
         [Tooltip("Interactable speaker button shown near the sentence bubble.")]
         public VrPointerInteractable speakerButtonInteractable;
 
-        [Tooltip("Optional RectTransform used as sentence area bounds. Defaults to sentenceBubbleParent as RectTransform.")]
-        public RectTransform sentenceAreaRect;
-
-        [Tooltip("Fixed world-space offset from the right edge of SentenceArea to place the speaker button.")]
-        public Vector3 speakerButtonOffsetFromSentenceArea = new Vector3(0f, 0f, 0f);
+        [Tooltip("If enabled, speaker button becomes a child of sentenceBubbleParent and participates in its layout flow.")]
+        public bool includeSpeakerInSentenceLayout = true;
 
         public SentencePlaybackMode playbackMode = SentencePlaybackMode.PreferFullSentenceClip;
 
@@ -106,7 +103,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
             SetSpeakerButtonVisible(shouldShowSpeaker);
             if (shouldShowSpeaker)
             {
-                RepositionSpeakerButton();
+                SyncSpeakerWithSentenceLayout();
             }
         }
 
@@ -147,7 +144,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 LayoutRebuilder.ForceRebuildLayoutImmediate(sentenceRect);
             }
 
-            RepositionSpeakerButton();
+            SyncSpeakerWithSentenceLayout();
         }
 
         /// <summary>
@@ -294,75 +291,12 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
         private RectTransform ResolveSentenceAreaRect()
         {
-            if (sentenceAreaRect != null)
-            {
-                return sentenceAreaRect;
-            }
-
-            return sentenceBubbleParent as RectTransform;
-        }
-
-        private void RepositionSpeakerButton()
-        {
-            var speakerTransform = ResolveSpeakerButtonTransform();
-            if (speakerTransform == null)
-            {
-                return;
-            }
-
-            var anchorPosition = ResolveSpeakerAnchorPosition();
-            if (!anchorPosition.HasValue)
-            {
-                return;
-            }
-
-            // Keep local orientation independent from sentence text length by pinning to the last bubble (or sentence area fallback).
-            speakerTransform.position = anchorPosition.Value + speakerButtonOffsetFromSentenceArea;
-        }
-
-        private Vector3? ResolveSpeakerAnchorPosition()
-        {
-            var lastBubbleRect = FindLastSpawnedBubbleRect();
-            if (lastBubbleRect != null)
-            {
-                var bubbleCorners = new Vector3[4];
-                lastBubbleRect.GetWorldCorners(bubbleCorners);
-
-                // 2 = top-right, 3 = bottom-right. Midpoint gives the vertical center of right edge.
-                return (bubbleCorners[2] + bubbleCorners[3]) * 0.5f;
-            }
-
-            var areaRect = ResolveSentenceAreaRect();
-            if (areaRect == null)
+            if (sentenceBubbleParent == null)
             {
                 return null;
             }
 
-            var corners = new Vector3[4];
-            areaRect.GetWorldCorners(corners);
-
-            // 2 = top-right, 3 = bottom-right. Midpoint gives the vertical center of right edge.
-            return (corners[2] + corners[3]) * 0.5f;
-        }
-
-        private RectTransform FindLastSpawnedBubbleRect()
-        {
-            for (int i = _spawnedBubbles.Count - 1; i >= 0; i--)
-            {
-                var bubble = _spawnedBubbles[i];
-                if (bubble == null)
-                {
-                    continue;
-                }
-
-                var rect = bubble.transform as RectTransform;
-                if (rect != null)
-                {
-                    return rect;
-                }
-            }
-
-            return null;
+            return sentenceBubbleParent as RectTransform;
         }
 
         private void ApplySentenceLayoutDirection()
@@ -385,8 +319,37 @@ namespace TalkJourney.BubbleSystem.Bubbles
             }
 
             flowLayout.rightToLeft = LocalizationResolver.IsRightToLeftLanguage(localizationResolver.learningLanguage);
+            SyncSpeakerWithSentenceLayout();
 
             var sentenceRect = sentenceBubbleParent as RectTransform;
+            if (sentenceRect != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(sentenceRect);
+            }
+        }
+
+        private void SyncSpeakerWithSentenceLayout()
+        {
+            if (!includeSpeakerInSentenceLayout || sentenceBubbleParent == null)
+            {
+                return;
+            }
+
+            var speakerTransform = ResolveSpeakerButtonTransform();
+            if (speakerTransform == null)
+            {
+                return;
+            }
+
+            if (speakerTransform.parent != sentenceBubbleParent)
+            {
+                speakerTransform.SetParent(sentenceBubbleParent, false);
+            }
+
+            // Keep speaker after all sentence bubbles in hierarchy order.
+            speakerTransform.SetAsLastSibling();
+
+            var sentenceRect = ResolveSentenceAreaRect();
             if (sentenceRect != null)
             {
                 LayoutRebuilder.ForceRebuildLayoutImmediate(sentenceRect);
