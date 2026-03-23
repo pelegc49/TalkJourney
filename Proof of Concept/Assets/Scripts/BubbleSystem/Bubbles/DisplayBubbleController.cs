@@ -156,6 +156,8 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 return;
             }
 
+            ApplyTextDirectionSettings();
+
             if (primaryText != null)
             {
                 primaryText.text = ResolveKey(bubbleData.primaryTextKey);
@@ -266,8 +268,39 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 return;
             }
 
+            ApplyTextDirectionSettings();
             transliteratorText.text = ResolveTransliterator(bubbleData.primaryTextKey);
             transliteratorText.ForceMeshUpdate();
+        }
+
+        private void ApplyTextDirectionSettings()
+        {
+            var localizationResolver = ResolveLocalizationResolver();
+            if (localizationResolver == null)
+            {
+                return;
+            }
+
+            if (primaryText != null)
+            {
+                primaryText.isRightToLeftText = LocalizationResolver.IsRightToLeftLanguage(localizationResolver.learningLanguage);
+            }
+
+            if (transliteratorText != null)
+            {
+                transliteratorText.isRightToLeftText = LocalizationResolver.IsRightToLeftLanguage(localizationResolver.nativeLanguage);
+            }
+        }
+
+        private LocalizationResolver ResolveLocalizationResolver()
+        {
+            var localizationResolver = localizationServiceBehaviour as LocalizationResolver;
+            if (localizationResolver != null)
+            {
+                return localizationResolver;
+            }
+
+            return FindFirstObjectByType<LocalizationResolver>(FindObjectsInactive.Include);
         }
 
         private string GetCurrentTransliteratorCode()

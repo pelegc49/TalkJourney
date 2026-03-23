@@ -34,7 +34,7 @@ RectTransform:
   m_GameObject: {fileID: 598673396303755336}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8269527510087269374}
@@ -174,7 +174,7 @@ MonoBehaviour:
   fallbackDisplayBubblePrefab: {fileID: 0}
   speakerButtonInteractable: {fileID: 0}
   sentenceAreaRect: {fileID: 0}
-  speakerButtonOffsetFromSentenceArea: {x: 50, y: 0, z: 0}
+  speakerButtonOffsetFromSentenceArea: {x: 0, y: 0, z: 0}
   playbackMode: 1
 --- !u!114 &2563719111414984670
 MonoBehaviour:
@@ -505,6 +505,7 @@ MonoBehaviour:
   horizontalSpacing: 100
   verticalSpacing: 0
   useChildPreferredSize: 1
+  rightToLeft: 0
 --- !u!114 &7984316717549919237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,7 +1073,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Layout.FlowLayoutGroup
   m_Padding:
-    m_Left: 100
+    m_Left: 50
     m_Right: 0
     m_Top: 30
     m_Bottom: 0
@@ -1080,6 +1081,7 @@ MonoBehaviour:
   horizontalSpacing: 0
   verticalSpacing: 12
   useChildPreferredSize: 1
+  rightToLeft: 0
 --- !u!114 &4946006325369072983
 MonoBehaviour:
   m_ObjectHideFlags: 0

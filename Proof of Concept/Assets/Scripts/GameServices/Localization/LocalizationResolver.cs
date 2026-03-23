@@ -253,6 +253,18 @@ namespace TalkJourney.BubbleSystem.Localization
         }
 
         /// <summary>
+        /// Returns whether the language should be rendered with right-to-left text direction.
+        /// </summary>
+        public static bool IsRightToLeftLanguage(DisplayLanguage language)
+        {
+            return language switch
+            {
+                DisplayLanguage.Hebrew => true,
+                _ => false
+            };
+        }
+
+        /// <summary>
         /// Converts a TransliteratorMode enum to its locale code string (e.g., "en-he", "he-ru").
         /// </summary>
         private string EnumToTransliteratorCode(TransliteratorMode mode)

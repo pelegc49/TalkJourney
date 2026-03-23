@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TalkJourney.BubbleSystem.Audio;
 using TalkJourney.BubbleSystem.Data;
 using TalkJourney.BubbleSystem.Interaction;
+using TalkJourney.BubbleSystem.Layout;
 using TalkJourney.BubbleSystem.Localization;
 
 namespace TalkJourney.BubbleSystem.Bubbles
@@ -84,6 +85,8 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
         private void RefreshBubblesForLanguageChange()
         {
+            ApplySentenceLayoutDirection();
+
             // Refresh all spawned display bubbles when language changes
             foreach (var bubble in _spawnedBubbles)
             {
@@ -112,6 +115,8 @@ namespace TalkJourney.BubbleSystem.Bubbles
             ClearSpawnedBubbles();
 
             // EnsureSentenceAreaLayout();
+
+            ApplySentenceLayoutDirection();
 
             if (stageData == null || sentenceBubbleParent == null)
             {
@@ -358,6 +363,45 @@ namespace TalkJourney.BubbleSystem.Bubbles
             }
 
             return null;
+        }
+
+        private void ApplySentenceLayoutDirection()
+        {
+            if (sentenceBubbleParent == null)
+            {
+                return;
+            }
+
+            var flowLayout = sentenceBubbleParent.GetComponent<FlowLayoutGroup>();
+            if (flowLayout == null)
+            {
+                return;
+            }
+
+            var localizationResolver = ResolveLocalizationResolver();
+            if (localizationResolver == null)
+            {
+                return;
+            }
+
+            flowLayout.rightToLeft = LocalizationResolver.IsRightToLeftLanguage(localizationResolver.learningLanguage);
+
+            var sentenceRect = sentenceBubbleParent as RectTransform;
+            if (sentenceRect != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(sentenceRect);
+            }
+        }
+
+        private LocalizationResolver ResolveLocalizationResolver()
+        {
+            var resolverFromBehaviour = localizationServiceBehaviour as LocalizationResolver;
+            if (resolverFromBehaviour != null)
+            {
+                return resolverFromBehaviour;
+            }
+
+            return FindFirstObjectByType<LocalizationResolver>(FindObjectsInactive.Include);
         }
     }
 }
