@@ -15,6 +15,9 @@ namespace TalkJourney.BubbleSystem.Layout
         [Tooltip("If true, uses each child preferred width/height. If false, uses min size.")]
         public bool useChildPreferredSize = true;
 
+        [Tooltip("If true, children are laid out from right-to-left.")]
+        public bool rightToLeft = false;
+
         public override void CalculateLayoutInputHorizontal()
         {
             base.CalculateLayoutInputHorizontal();
@@ -86,10 +89,45 @@ namespace TalkJourney.BubbleSystem.Layout
         private void LayoutChildren(float parentWidth, bool setHorizontal)
         {
             var contentWidth = Mathf.Max(0f, parentWidth - padding.horizontal);
-            var startX = padding.left;
-            var currentX = startX;
             var currentY = padding.top;
             var rowHeight = 0f;
+
+            if (!rightToLeft)
+            {
+                var startX = padding.left;
+                var currentX = startX;
+
+                for (int i = 0; i < rectChildren.Count; i++)
+                {
+                    var child = rectChildren[i];
+                    var childWidth = GetChildSize(child, 0);
+                    var childHeight = GetChildSize(child, 1);
+
+                    if (currentX > startX && (currentX - startX + childWidth) > contentWidth)
+                    {
+                        currentX = startX;
+                        currentY += (int)(rowHeight + verticalSpacing);
+                        rowHeight = 0f;
+                    }
+
+                    if (setHorizontal)
+                    {
+                        SetChildAlongAxis(child, 0, currentX, childWidth);
+                    }
+                    else
+                    {
+                        SetChildAlongAxis(child, 1, currentY, childHeight);
+                    }
+
+                    currentX += (int)(childWidth + horizontalSpacing);
+                    rowHeight = Mathf.Max(rowHeight, childHeight);
+                }
+
+                return;
+            }
+
+            var rtlStartX = parentWidth - padding.right;
+            var rtlCurrentX = rtlStartX;
 
             for (int i = 0; i < rectChildren.Count; i++)
             {
@@ -97,23 +135,23 @@ namespace TalkJourney.BubbleSystem.Layout
                 var childWidth = GetChildSize(child, 0);
                 var childHeight = GetChildSize(child, 1);
 
-                if (currentX > startX && (currentX - startX + childWidth) > contentWidth)
+                if (rtlCurrentX < rtlStartX && (rtlStartX - rtlCurrentX + childWidth) > contentWidth)
                 {
-                    currentX = startX;
+                    rtlCurrentX = rtlStartX;
                     currentY += (int)(rowHeight + verticalSpacing);
                     rowHeight = 0f;
                 }
 
                 if (setHorizontal)
                 {
-                    SetChildAlongAxis(child, 0, currentX, childWidth);
+                    SetChildAlongAxis(child, 0, rtlCurrentX - childWidth, childWidth);
                 }
                 else
                 {
                     SetChildAlongAxis(child, 1, currentY, childHeight);
                 }
 
-                currentX += (int)(childWidth + horizontalSpacing);
+                rtlCurrentX -= (int)(childWidth + horizontalSpacing);
                 rowHeight = Mathf.Max(rowHeight, childHeight);
             }
         }

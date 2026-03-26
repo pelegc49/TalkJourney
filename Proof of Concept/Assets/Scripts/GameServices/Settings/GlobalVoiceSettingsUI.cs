@@ -132,21 +132,21 @@ namespace TalkJourney.GameServices.Settings
 
         private void OnLanguagePairChanged(DisplayLanguage _, DisplayLanguage learningLanguage)
         {
-            RefreshVoiceOptionsForLanguage(learningLanguage);
+            RefreshVoiceOptionsForLanguage(learningLanguage, true);
         }
 
         private void OnDisplayLanguageChanged(DisplayLanguage learningLanguage)
         {
-            RefreshVoiceOptionsForLanguage(learningLanguage);
+            RefreshVoiceOptionsForLanguage(learningLanguage, true);
         }
 
         private void RefreshVoiceOptionsForLearningLanguage()
         {
             var learningLanguage = localizationResolver != null ? localizationResolver.learningLanguage : DisplayLanguage.English;
-            RefreshVoiceOptionsForLanguage(learningLanguage);
+            RefreshVoiceOptionsForLanguage(learningLanguage, false);
         }
 
-        private void RefreshVoiceOptionsForLanguage(DisplayLanguage learningLanguage)
+        private void RefreshVoiceOptionsForLanguage(DisplayLanguage learningLanguage, bool forceSelectFirstOption)
         {
             if (voiceDropdown == null)
             {
@@ -162,9 +162,42 @@ namespace TalkJourney.GameServices.Settings
                 voiceDropdown.options.Add(new TMP_Dropdown.OptionData(voiceOptions[i]));
             }
 
-            EnsureCurrentVoiceMatchesAvailableOptions(voiceOptions);
+            if (forceSelectFirstOption)
+            {
+                ApplyVoiceSelection(voiceOptions, 0);
+            }
+            else
+            {
+                EnsureCurrentVoiceMatchesAvailableOptions(voiceOptions);
+            }
+
             SyncDropdownSelectionToCurrentVoice();
             _isUpdatingDropdown = false;
+        }
+
+        private void ApplyVoiceSelection(string[] availableOptions, int optionIndex)
+        {
+            if (availableOptions == null || availableOptions.Length == 0)
+            {
+                return;
+            }
+
+            if (optionIndex < 0 || optionIndex >= availableOptions.Length)
+            {
+                return;
+            }
+
+            var selectedVoice = availableOptions[optionIndex];
+            if (audioBackendClient != null)
+            {
+                audioBackendClient.voiceName = selectedVoice;
+            }
+
+            var globalServices = GlobalGameServicesBootstrap.Instance;
+            if (globalServices != null)
+            {
+                globalServices.SetVoiceNamePreference(selectedVoice);
+            }
         }
 
         private void EnsureCurrentVoiceMatchesAvailableOptions(string[] availableOptions)
@@ -183,14 +216,7 @@ namespace TalkJourney.GameServices.Settings
                 }
             }
 
-            var defaultVoice = availableOptions[0];
-            audioBackendClient.voiceName = defaultVoice;
-
-            var globalServices = GlobalGameServicesBootstrap.Instance;
-            if (globalServices != null)
-            {
-                globalServices.SetVoiceNamePreference(defaultVoice);
-            }
+            ApplyVoiceSelection(availableOptions, 0);
         }
 
         private static string[] GetVoiceOptionsForLanguage(DisplayLanguage language)

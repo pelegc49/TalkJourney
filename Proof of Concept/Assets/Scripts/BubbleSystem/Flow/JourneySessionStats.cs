@@ -15,10 +15,6 @@ namespace TalkJourney.BubbleSystem.Flow
         public int IncorrectSelections { get; private set; }
         public bool BypassUsed { get; private set; }
 
-        private readonly List<string> _visitedStageIds = new List<string>(32);
-
-        public IReadOnlyList<string> VisitedStageIds => _visitedStageIds;
-
         public int TotalSelections => CorrectSelections + IncorrectSelections;
 
         public float Accuracy => TotalSelections > 0
@@ -35,7 +31,6 @@ namespace TalkJourney.BubbleSystem.Flow
             CorrectSelections = 0;
             IncorrectSelections = 0;
             BypassUsed = false;
-            _visitedStageIds.Clear();
         }
 
         public void RegisterStage(StageData stageData)
@@ -49,7 +44,6 @@ namespace TalkJourney.BubbleSystem.Flow
                 ? stageData.name
                 : stageData.stageId;
 
-            _visitedStageIds.Add(stageId);
         }
 
         public void RegisterCorrectSelection()
@@ -76,27 +70,6 @@ namespace TalkJourney.BubbleSystem.Flow
 
             IsCompleted = true;
             EndTimeUtc = DateTime.UtcNow;
-        }
-
-        public string BuildVisitedPathText(string separator = " -> ")
-        {
-            if (_visitedStageIds.Count == 0)
-            {
-                return "-";
-            }
-
-            var builder = new StringBuilder(128);
-            for (int i = 0; i < _visitedStageIds.Count; i++)
-            {
-                if (i > 0)
-                {
-                    builder.Append(separator);
-                }
-
-                builder.Append(_visitedStageIds[i]);
-            }
-
-            return builder.ToString();
         }
     }
 }

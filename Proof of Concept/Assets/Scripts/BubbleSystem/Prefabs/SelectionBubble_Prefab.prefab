@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 5289312576073974606}
   - component: {fileID: 5499084061500503128}
   - component: {fileID: 8783353656388054748}
-  - component: {fileID: 640719624124326762}
   - component: {fileID: 2330948381462396522}
   - component: {fileID: 5782699650918250976}
   - component: {fileID: 3348594010940016137}
+  - component: {fileID: 640719624124326762}
   m_Layer: 0
   m_Name: SelectionBubble_Prefab
   m_TagString: Untagged
@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bcd48acc1023443874d661dd8702ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Interaction.VrPointerInteractable
+  enableDesktopMouseFallback: 1
   onHoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -109,30 +110,7 @@ MonoBehaviour:
   transliteratorText: {fileID: 1439045635818390087}
   transliteratorLocaleCode: en-he
   minimumBubbleSize: {x: 0, y: 0}
-  bubblePadding: {x: 20, y: 0}
---- !u!114 &640719624124326762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1035698926332650203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 685d5d047dfff524cb5bff0f9dda552d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Bubbles.SelectionBubbleController
-  selectionData:
-    bubble:
-      primaryTextKey: 
-      audioIdentifier: 
-      visualType: 0
-      visualElementPrefab: {fileID: 0}
-    nextStage: {fileID: 0}
-  interactable: {fileID: 5499084061500503128}
-  localizationServiceBehaviour: {fileID: 0}
-  stageControllerBehaviour: {fileID: 0}
-  preventDuplicateActivation: 1
+  bubblePadding: {x: 10, y: 0}
 --- !u!114 &2330948381462396522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,6 +171,31 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &640719624124326762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035698926332650203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 685d5d047dfff524cb5bff0f9dda552d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Bubbles.SelectionBubbleController
+  selectionData:
+    bubble:
+      primaryTextKey: 
+      audioIdentifier: 
+      visualType: 0
+      visualElementPrefab: {fileID: 0}
+    isCorrect: 0
+    nextStage: {fileID: 0}
+  interactable: {fileID: 5499084061500503128}
+  localizationServiceBehaviour: {fileID: 0}
+  stageControllerBehaviour: {fileID: 0}
+  preventDuplicateActivation: 1
+  requireBypassForClick: 1
 --- !u!1 &2706113665907131349
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +231,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3497822741841824175
 CanvasRenderer:
@@ -301,7 +304,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -467,7 +470,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5018900933592595633
 CanvasRenderer:
@@ -540,7 +543,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
