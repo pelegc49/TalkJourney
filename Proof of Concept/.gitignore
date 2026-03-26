@@ -107,4 +107,6 @@ InitTestScene*.unity*
 # Firebase app config (keep local; contains project credentials)
 /[Aa]ssets/google-services.json
 /[Aa]ssets/google-services.json.meta
+/[Aa]ssets/StreamingAssets/google-services-desktop.json
+/[Aa]ssets/StreamingAssets/google-services-desktop.json.meta
 /[Aa]ssets/Firebase
