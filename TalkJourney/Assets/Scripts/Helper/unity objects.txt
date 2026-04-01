@@ -1,0 +1,53 @@
+GameServices | Scripts: Transform
+--> GlobalGameServicesBootstrap | Scripts: Transform, GlobalGameServicesBootstrap
+----> LocalizationResolver | Scripts: Transform, LocalizationResolver
+----> RealtimeWhisper | Scripts: Transform, RealtimeWhisper
+----> AudioBackendClient | Scripts: Transform, AudioBackendClient
+----> FirebaseAuthTokenProvider | Scripts: Transform, FirebaseAuthTokenProvider
+----> LanguageSyncBridge | Scripts: Transform, LanguageSyncBridge
+--> GlobalLanguageSwitcherUI | Scripts: Transform, GlobalLanguageSwitcherUI
+--> GlobalVoiceSettingsUI | Scripts: Transform, GlobalVoiceSettingsUI
+Settings | Scripts: RectTransform, Canvas, CanvasScaler, GraphicRaycaster, TrackedDeviceGraphicRaycaster
+--> NativeLanguageSettingsUI | Scripts: RectTransform, CanvasRenderer, Image, TMP_Dropdown
+----> Label | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+----> Arro\nw | Scripts: RectTransform, CanvasRenderer, Image
+----> Template | Scripts: RectTransform, CanvasRenderer, Image, ScrollRect
+------> Viewport | Scripts: RectTransform, Mask, CanvasRenderer, Image
+--------> Content | Scripts: RectTransform
+----------> Item | Scripts: RectTransform, Toggle
+------------> Item Background | Scripts: RectTransform, CanvasRenderer, Image
+------------> Item Checkmark | Scripts: RectTransform, CanvasRenderer, Image
+------------> Item Label | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+------> Scrollbar | Scripts: RectTransform, CanvasRenderer, Image, Scrollbar
+--------> Sliding Area | Scripts: RectTransform
+----------> Handle | Scripts: RectTransform, CanvasRenderer, Image
+--> LearningLanguageSettingsUI | Scripts: RectTransform, CanvasRenderer, Image, TMP_Dropdown
+----> Label | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+----> Arrow | Scripts: RectTransform, CanvasRenderer, Image
+----> Template | Scripts: RectTransform, CanvasRenderer, Image, ScrollRect
+------> Viewport | Scripts: RectTransform, Mask, CanvasRenderer, Image
+--------> Content | Scripts: RectTransform
+----------> Item | Scripts: RectTransform, Toggle
+------------> Item Background | Scripts: RectTransform, CanvasRenderer, Image
+------------> Item Checkmark | Scripts: RectTransform, CanvasRenderer, Image
+------------> Item Label | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+------> Scrollbar | Scripts: RectTransform, CanvasRenderer, Image, Scrollbar
+--------> Sliding Area | Scripts: RectTransform
+----------> Handle | Scripts: RectTransform, CanvasRenderer, Image
+--> VoiceSettingsUI | Scripts: RectTransform, CanvasRenderer, Image, TMP_Dropdown
+----> Label | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+----> Arrow | Scripts: RectTransform, CanvasRenderer, Image
+----> Template | Scripts: RectTransform, CanvasRenderer, Image, ScrollRect
+------> Viewport | Scripts: RectTransform, Mask, CanvasRenderer, Image
+--------> Content | Scripts: RectTransform
+----------> Item | Scripts: RectTransform, Toggle
+------------> Item Background | Scripts: RectTransform, CanvasRenderer, Image
+------------> Item Checkmark | Scripts: RectTransform, CanvasRenderer, Image
+------------> Item Label | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+------> Scrollbar | Scripts: RectTransform, CanvasRenderer, Image, Scrollbar
+--------> Sliding Area | Scripts: RectTransform
+----------> Handle | Scripts: RectTransform, CanvasRenderer, Image
+--> EXANPLE_OF_START_LEVEL | Scripts: RectTransform, CanvasRenderer, Image, Button
+----> Text (TMP) | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+BubbleSystemLauncher | Scripts: Transform, BubbleSystemLauncher
+
