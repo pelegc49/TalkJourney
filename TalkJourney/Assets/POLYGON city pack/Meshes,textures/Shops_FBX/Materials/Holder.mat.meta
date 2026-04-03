@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a8c3a82a8614e204a8b43ed61c625dad
+timeCreated: 1520410834
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Meshes,textures/Shops_FBX/Materials/Holder.mat
+  uploadId: 658773

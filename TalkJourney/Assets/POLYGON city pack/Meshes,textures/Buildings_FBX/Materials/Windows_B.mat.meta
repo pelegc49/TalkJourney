@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 92de6af25a03e134f8d98cb28ae4aea4
+timeCreated: 1517850051
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Meshes,textures/Buildings_FBX/Materials/Windows_B.mat
+  uploadId: 658773

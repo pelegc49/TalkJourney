@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 1b90c39ac2e752540903e202baf5df56
+timeCreated: 1520410824
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Meshes,textures/Shops_FBX/Materials/Metal.mat
+  uploadId: 658773

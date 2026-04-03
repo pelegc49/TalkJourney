@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 937333d453eaea246af48ac0fc62b5e0
+timeCreated: 1517460505
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Props/Bus stop pole prefabe.prefab
+  uploadId: 658773

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: c4030c76fa38da2428b2b850b66f0ea8
+timeCreated: 1520410834
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Meshes,textures/Shops_FBX/Materials/Window_frame.mat
+  uploadId: 658773

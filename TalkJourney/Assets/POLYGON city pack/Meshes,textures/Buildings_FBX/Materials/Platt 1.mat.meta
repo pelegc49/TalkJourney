@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f4150965db08c5f4e8c84db04176be17
+timeCreated: 1520410823
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Meshes,textures/Buildings_FBX/Materials/Platt
+    1.mat
+  uploadId: 658773

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 2c1f60045e2f58f48966f8cea8354944
+timeCreated: 1517356101
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Buildings/Bank_prefab.prefab
+  uploadId: 658773

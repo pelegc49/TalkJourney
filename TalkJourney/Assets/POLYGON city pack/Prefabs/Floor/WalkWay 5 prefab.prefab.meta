@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7446a392a730ac14d9cc70d21cf7ace0
+timeCreated: 1517452808
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Floor/WalkWay 5 prefab.prefab
+  uploadId: 658773

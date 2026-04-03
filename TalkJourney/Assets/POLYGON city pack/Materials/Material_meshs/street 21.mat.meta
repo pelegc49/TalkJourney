@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: b104df4148bcf294b9ec4a842c8e5b51
+timeCreated: 1517540047
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Materials/Material_meshs/street 21.mat
+  uploadId: 658773

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: f2f02f2d34418854d80798cb0fa82bc7
+timeCreated: 1517418589
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Materials/Material_meshs/Grid.mat
+  uploadId: 658773

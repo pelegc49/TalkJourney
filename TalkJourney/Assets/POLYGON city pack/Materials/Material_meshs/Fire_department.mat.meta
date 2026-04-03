@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 75eba861b5688674a9259d1205f4c4b7
+timeCreated: 1517415570
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Materials/Material_meshs/Fire_department.mat
+  uploadId: 658773

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 334aad2b5d3ce18449f0aac7e90fe56e
+timeCreated: 1517526600
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Props/Traffic light 4 Prefab.prefab
+  uploadId: 658773

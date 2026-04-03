@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 290fd4174e49c64499d7ec94dbd7e10e
+timeCreated: 1520410834
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Meshes,textures/Shops_FBX/Materials/Street.mat
+  uploadId: 658773

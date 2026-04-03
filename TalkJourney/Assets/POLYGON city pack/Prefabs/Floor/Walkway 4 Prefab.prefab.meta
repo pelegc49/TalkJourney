@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: f05e5e37b07893d42b4d91839e7299d0
+timeCreated: 1517452578
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Floor/Walkway 4 Prefab.prefab
+  uploadId: 658773

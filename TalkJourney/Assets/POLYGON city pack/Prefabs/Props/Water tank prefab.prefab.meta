@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 12ba3d1ec135f1b4e9caddc7e211dd72
+timeCreated: 1517533635
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Props/Water tank prefab.prefab
+  uploadId: 658773

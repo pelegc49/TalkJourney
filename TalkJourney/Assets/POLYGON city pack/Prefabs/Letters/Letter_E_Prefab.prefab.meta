@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 3a8c76fe5ec38c6458fcafb62cb2a0d9
+timeCreated: 1517436097
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Letters/Letter_E_Prefab.prefab
+  uploadId: 658773

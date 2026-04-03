@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: da8a78518451eed42b9a2e954aaf81cb
+timeCreated: 1520410834
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Meshes,textures/Shops_FBX/Materials/Drive_in_01.mat
+  uploadId: 658773

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: eaf4027e814ae974ea89d54622c9c11a
+timeCreated: 1517626496
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Meshes,textures/ways_FBX/Materials/Sideway.010.mat
+  uploadId: 658773

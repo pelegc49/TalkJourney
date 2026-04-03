@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 6066b734d430a6a4ba57239e13dd4538
+timeCreated: 1520410810
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Meshes,textures/Letters FBX/Materials/No Name.mat
+  uploadId: 658773

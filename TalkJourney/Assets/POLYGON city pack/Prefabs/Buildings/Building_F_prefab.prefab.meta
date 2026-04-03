@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 406aca78ed1cb18449485b10b9cffa85
+timeCreated: 1517358979
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Buildings/Building_F_prefab.prefab
+  uploadId: 658773

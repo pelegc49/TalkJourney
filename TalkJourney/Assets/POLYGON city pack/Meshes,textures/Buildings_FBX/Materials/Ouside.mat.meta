@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 52ee13d2187aa1746a4e16fb6274b8db
+timeCreated: 1520410811
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Meshes,textures/Buildings_FBX/Materials/Ouside.mat
+  uploadId: 658773

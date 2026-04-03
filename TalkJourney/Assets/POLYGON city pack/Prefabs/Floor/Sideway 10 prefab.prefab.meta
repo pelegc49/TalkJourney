@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: f48ca42bbf7370343a33a9e87b1d9fdb
+timeCreated: 1517456692
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Floor/Sideway 10 prefab.prefab
+  uploadId: 658773

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 40f811db462dd7b4db94f7634d68e2aa
+timeCreated: 1517454210
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Floor/Street 11 Prefab.prefab
+  uploadId: 658773

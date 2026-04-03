@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: b6e4dbecc938a2948b3839b7d1409514
+timeCreated: 1517459823
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Materials/Material_meshs/Big_trash_bin.mat
+  uploadId: 658773

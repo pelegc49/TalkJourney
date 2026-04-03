@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a48e7d2fc673f7e4ea6df4cffad97a56
+timeCreated: 1517454202
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Floor/Street 7 Prefab.prefab
+  uploadId: 658773

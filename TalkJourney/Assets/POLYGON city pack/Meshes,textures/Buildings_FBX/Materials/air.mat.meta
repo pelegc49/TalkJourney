@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 562511c18ddd2274f99dd4ec957c133b
+timeCreated: 1520410822
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Meshes,textures/Buildings_FBX/Materials/air.mat
+  uploadId: 658773

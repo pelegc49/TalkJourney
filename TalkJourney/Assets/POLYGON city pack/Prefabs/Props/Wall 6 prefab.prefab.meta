@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: facc5fd5141efde4491e095867e3730e
+timeCreated: 1517530859
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Props/Wall 6 prefab.prefab
+  uploadId: 658773

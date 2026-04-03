@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 1f3aed826d0deb142ae61d35be7f4ff8
+timeCreated: 1517417213
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Materials/Material_meshs/gas pump.mat
+  uploadId: 658773

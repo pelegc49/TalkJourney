@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 13c91d5bb9e0fb54cb9a8f01a7fc2db6
+timeCreated: 1520410822
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Meshes,textures/props_FBX/Materials/pole.mat
+  uploadId: 658773

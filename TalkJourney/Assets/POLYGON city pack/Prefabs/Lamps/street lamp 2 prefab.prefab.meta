@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 3744e668ae9047e4b9590c326355161c
+timeCreated: 1517507812
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Lamps/street lamp 2 prefab.prefab
+  uploadId: 658773

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 18f25be2998f44b408dcd9ba703fd231
+timeCreated: 1517457323
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Floor/Street 12 Prefab.prefab
+  uploadId: 658773

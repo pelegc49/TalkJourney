@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: e70233268e8d3e64187fc14a41cacef0
+timeCreated: 1517506784
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Props/shopping cart prefab.prefab
+  uploadId: 658773

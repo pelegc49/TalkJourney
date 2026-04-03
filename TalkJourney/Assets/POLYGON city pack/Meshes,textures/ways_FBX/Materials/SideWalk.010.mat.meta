@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: f1362e56c179d2f45bc64be15c5684d4
+timeCreated: 1517626495
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Meshes,textures/ways_FBX/Materials/SideWalk.010.mat
+  uploadId: 658773

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: ea27830310984ee42a182381495d5561
+timeCreated: 1517540493
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Floor/Street 17 Prefab.prefab
+  uploadId: 658773

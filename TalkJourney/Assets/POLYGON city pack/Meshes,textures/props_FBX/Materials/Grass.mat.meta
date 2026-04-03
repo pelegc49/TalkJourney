@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: cf541363ff7987b49909c09eeb42ffff
+timeCreated: 1520410818
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Meshes,textures/props_FBX/Materials/Grass.mat
+  uploadId: 658773

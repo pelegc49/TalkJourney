@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a560b249e984af144b222ea1d93fe697
+timeCreated: 1517505546
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Props/Parking_barrier prefab.prefab
+  uploadId: 658773

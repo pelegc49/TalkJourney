@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a0be46bd354c1ae4fa9dce3dfe7a25c1
+timeCreated: 1517436533
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Lamps/Lamp_6_prefab.prefab
+  uploadId: 658773

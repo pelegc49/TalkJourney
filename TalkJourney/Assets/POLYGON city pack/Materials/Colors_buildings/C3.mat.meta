@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 91155d9f14bc7c24885accb7c3b9025f
+timeCreated: 1517355036
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Materials/Colors_buildings/C3.mat
+  uploadId: 658773

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 35f821cdab3dffa47bf9968640a8ce3a
+timeCreated: 1520410846
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Meshes,textures/Buildings_FBX/Materials/Fire
+    escape.mat
+  uploadId: 658773

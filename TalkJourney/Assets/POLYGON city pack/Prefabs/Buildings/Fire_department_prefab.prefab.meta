@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7eb437ce89e76c640809f70f15bde317
+timeCreated: 1517415625
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Prefabs/Buildings/Fire_department_prefab.prefab
+  uploadId: 658773

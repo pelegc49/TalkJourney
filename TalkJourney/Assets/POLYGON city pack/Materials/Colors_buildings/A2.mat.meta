@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 5188c7492ef51d143a7128aa9700788a
+timeCreated: 1517354877
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Materials/Colors_buildings/A2.mat
+  uploadId: 658773

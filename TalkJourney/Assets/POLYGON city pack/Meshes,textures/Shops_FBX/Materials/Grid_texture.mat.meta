@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 928b61234d75021409b88eb67c742fc9
+timeCreated: 1520410831
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 107224
+  packageName: CITY package
+  packageVersion: 1.0
+  assetPath: Assets/POLYGON city pack/Meshes,textures/Shops_FBX/Materials/Grid_texture.mat
+  uploadId: 658773
