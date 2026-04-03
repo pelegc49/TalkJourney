@@ -10,6 +10,13 @@ namespace TalkJourney.BubbleSystem.Flow
     [DisallowMultipleComponent]
     public class BubbleSystemLauncher : MonoBehaviour
     {
+        [System.Serializable]
+        public class StageLaunchBinding
+        {
+            public StageData stageData;
+            public Transform stageRuntimeParent;
+        }
+
         [Header("Bootstrap Source")]
         [Tooltip("Optional existing bootstrap already in scene. If null, bootstrapPrefab is instantiated on first start.")]
         public BubbleSystemBootstrap existingBootstrap;
@@ -17,8 +24,12 @@ namespace TalkJourney.BubbleSystem.Flow
         [Tooltip("Prefab instantiated when no existing bootstrap is assigned.")]
         public BubbleSystemBootstrap bootstrapPrefab;
 
-        [Tooltip("Optional parent for instantiated bootstrap.")]
+        [Tooltip("Optional default parent for instantiated bootstrap when no stageRuntimeParent is passed.")]
         public Transform runtimeParent;
+
+        [Header("Button Bindings")]
+        [Tooltip("Configure stage + canvas pairs here, then call StartStageFromBindingIndex(index) from a UI Button.")]
+        public StageLaunchBinding[] stageLaunchBindings;
 
         [Header("Results Presenter")]
         [Tooltip("Optional existing JourneyResultsPresenter already in scene.")]
@@ -36,7 +47,7 @@ namespace TalkJourney.BubbleSystem.Flow
             _activeResultsPresenter = existingResultsPresenter;
         }
 
-        public void StartStageFromButton(StageData stageData)
+        public void StartStageFromButton(StageData stageData, Transform stageRuntimeParent)
         {
             if (stageData == null)
             {
@@ -44,28 +55,70 @@ namespace TalkJourney.BubbleSystem.Flow
                 return;
             }
 
-            var bootstrap = ResolveBootstrap();
+            var resolvedParent = stageRuntimeParent != null ? stageRuntimeParent : runtimeParent;
+
+            if (_activeBootstrap != null && _activeBootstrap != existingBootstrap && _activeBootstrap.transform.parent != resolvedParent)
+            {
+                StopAndDestroyActiveBootstrap();
+            }
+
+            var bootstrap = ResolveBootstrap(resolvedParent);
             if (bootstrap == null)
             {
                 Debug.LogError("BubbleSystemLauncher could not resolve BubbleSystemBootstrap. Assign existingBootstrap or bootstrapPrefab.", this);
                 return;
             }
 
-            EnsureResultsPresenter();
+            EnsureResultsPresenter(resolvedParent);
 
             bootstrap.StartStage(stageData);
         }
 
+        /// <summary>
+        /// Unity UI Button friendly overload: pass one integer index from OnClick.
+        /// stageData and stageRuntimeParent are read from stageLaunchBindings[index].
+        /// </summary>
+        public void StartStageFromBindingIndex(int bindingIndex)
+        {
+            if (stageLaunchBindings == null || stageLaunchBindings.Length == 0)
+            {
+                Debug.LogWarning("BubbleSystemLauncher has no stageLaunchBindings configured.", this);
+                return;
+            }
+
+            if (bindingIndex < 0 || bindingIndex >= stageLaunchBindings.Length)
+            {
+                Debug.LogWarning($"BubbleSystemLauncher binding index out of range: {bindingIndex}.", this);
+                return;
+            }
+
+            var binding = stageLaunchBindings[bindingIndex];
+            if (binding == null)
+            {
+                Debug.LogWarning($"BubbleSystemLauncher binding at index {bindingIndex} is null.", this);
+                return;
+            }
+
+            StartStageFromButton(binding.stageData, binding.stageRuntimeParent);
+        }
+
         public void StartInitialStageFromButton()
         {
-            var bootstrap = ResolveBootstrap();
+            var resolvedParent = runtimeParent;
+
+            if (_activeBootstrap != null && _activeBootstrap != existingBootstrap && _activeBootstrap.transform.parent != resolvedParent)
+            {
+                StopAndDestroyActiveBootstrap();
+            }
+
+            var bootstrap = ResolveBootstrap(resolvedParent);
             if (bootstrap == null)
             {
                 Debug.LogError("BubbleSystemLauncher could not resolve BubbleSystemBootstrap. Assign existingBootstrap or bootstrapPrefab.", this);
                 return;
             }
 
-            EnsureResultsPresenter();
+            EnsureResultsPresenter(resolvedParent);
 
             bootstrap.StartInitialStage();
         }
@@ -92,7 +145,7 @@ namespace TalkJourney.BubbleSystem.Flow
             }
         }
 
-        private BubbleSystemBootstrap ResolveBootstrap()
+        private BubbleSystemBootstrap ResolveBootstrap(Transform spawnParent)
         {
             if (_activeBootstrap != null)
             {
@@ -110,8 +163,8 @@ namespace TalkJourney.BubbleSystem.Flow
                 return null;
             }
 
-            _activeBootstrap = runtimeParent != null
-                ? Instantiate(bootstrapPrefab, runtimeParent)
+            _activeBootstrap = spawnParent != null
+                ? Instantiate(bootstrapPrefab, spawnParent)
                 : Instantiate(bootstrapPrefab);
 
             _activeBootstrap.initializeOnAwake = false;
@@ -119,7 +172,7 @@ namespace TalkJourney.BubbleSystem.Flow
             return _activeBootstrap;
         }
 
-        private JourneyResultsPresenter EnsureResultsPresenter()
+        private JourneyResultsPresenter EnsureResultsPresenter(Transform spawnParent)
         {
             if (_activeResultsPresenter != null)
             {
@@ -137,11 +190,12 @@ namespace TalkJourney.BubbleSystem.Flow
                 return null;
             }
 
-            _activeResultsPresenter = runtimeParent != null
-                ? Instantiate(resultsPresenterPrefab, runtimeParent)
+            _activeResultsPresenter = spawnParent != null
+                ? Instantiate(resultsPresenterPrefab, spawnParent)
                 : Instantiate(resultsPresenterPrefab);
 
             return _activeResultsPresenter;
         }
+
     }
 }
