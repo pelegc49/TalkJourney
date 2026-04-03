@@ -11,8 +11,7 @@ namespace TalkJourney.BubbleSystem.Localization
         [Tooltip("Localization resolver that controls display language.")]
         public LocalizationResolver localizationResolver;
 
-        [Tooltip("RealtimeWhisper component that controls speech language.")]
-        public RealtimeWhisper realtimeWhisper;
+        private RealtimeWhisper realtimeWhisper => RealtimeWhisper.Instance;
 
         private bool _isSyncing;
 
@@ -52,11 +51,6 @@ namespace TalkJourney.BubbleSystem.Localization
             if (localizationResolver == null)
             {
                 localizationResolver = FindFirstObjectByType<LocalizationResolver>(FindObjectsInactive.Include);
-            }
-
-            if (realtimeWhisper == null)
-            {
-                realtimeWhisper = FindFirstObjectByType<RealtimeWhisper>(FindObjectsInactive.Include);
             }
         }
 

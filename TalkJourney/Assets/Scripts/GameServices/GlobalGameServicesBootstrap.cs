@@ -17,9 +17,6 @@ namespace TalkJourney.GameServices
         [Tooltip("Global localization resolver used across the whole game.")]
         public LocalizationResolver localizationResolver;
 
-        [Tooltip("Global speech recognition service used across the whole game.")]
-        public RealtimeWhisper realtimeWhisper;
-
         [Tooltip("Global TTS backend client used across the whole game.")]
         public AudioBackendClient audioBackendClient;
 
@@ -121,11 +118,6 @@ namespace TalkJourney.GameServices
                 localizationResolver = FindFirstObjectByType<LocalizationResolver>(FindObjectsInactive.Include);
             }
 
-            if (realtimeWhisper == null)
-            {
-                realtimeWhisper = FindFirstObjectByType<RealtimeWhisper>(FindObjectsInactive.Include);
-            }
-
             if (audioBackendClient == null)
             {
                 audioBackendClient = FindFirstObjectByType<AudioBackendClient>(FindObjectsInactive.Include);
@@ -152,11 +144,6 @@ namespace TalkJourney.GameServices
             if (localizationResolver != null)
             {
                 languageSyncBridge.localizationResolver = localizationResolver;
-            }
-
-            if (realtimeWhisper != null)
-            {
-                languageSyncBridge.realtimeWhisper = realtimeWhisper;
             }
 
             WireAudioAuthProvider();

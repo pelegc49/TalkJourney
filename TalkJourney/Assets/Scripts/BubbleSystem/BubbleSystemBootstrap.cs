@@ -267,11 +267,11 @@ namespace TalkJourney.BubbleSystem.Flow
                 return speechRecognitionBehaviour;
             }
 
-            // Priority 1: Try to get from GlobalGameServicesBootstrap (persistent global services)
-            var globalServices = GlobalGameServicesBootstrap.Instance;
-            if (globalServices != null && globalServices.realtimeWhisper != null)
+            // Priority 1: Use RealtimeWhisper singleton
+            var realtimeWhisper = RealtimeWhisper.Instance;
+            if (realtimeWhisper != null && realtimeWhisper is ISpeechRecognitionService speechService)
             {
-                speechRecognitionBehaviour = globalServices.realtimeWhisper;
+                speechRecognitionBehaviour = (MonoBehaviour)speechService;
                 return speechRecognitionBehaviour;
             }
 
@@ -289,7 +289,7 @@ namespace TalkJourney.BubbleSystem.Flow
 
             Debug.LogError(
                 "BubbleSystemBootstrap could not resolve ISpeechRecognitionService. " +
-                "Ensure GlobalGameServicesBootstrap is present with realtimeWhisper assigned.",
+                "Ensure RealtimeWhisper component is present in the scene.",
                 this);
 
             return null;

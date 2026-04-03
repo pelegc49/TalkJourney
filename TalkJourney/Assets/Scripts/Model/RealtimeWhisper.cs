@@ -20,6 +20,26 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
     public event System.Action<string> PhraseRecognized;
     public event System.Action<Language> LanguageChanged;
 
+    // Singleton pattern
+    private static RealtimeWhisper _instance;
+    public static RealtimeWhisper Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindFirstObjectByType<RealtimeWhisper>(FindObjectsInactive.Include);
+                if (_instance == null)
+                {
+                    Debug.LogWarning("RealtimeWhisper singleton not found in scene. Creating a new instance.");
+                    GameObject whisperGO = new GameObject("RealtimeWhisper");
+                    _instance = whisperGO.AddComponent<RealtimeWhisper>();
+                }
+            }
+            return _instance;
+        }
+    }
+
     [Header("Model Assets")]
     public ModelAsset audioDecoder1;
     public ModelAsset audioDecoder2;
@@ -127,6 +147,19 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
     private string[] tokens;
     private int[] whiteSpaceCharacters = new int[256];
     private bool[] _basicSymbolsLookup = new bool[256];  // Fast O(1) symbol lookup for ASCII range
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Debug.LogWarning("RealtimeWhisper singleton duplicate detected. Destroying duplicate instance.", this);
+            Destroy(gameObject);
+            return;
+        }
+
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
     void Start()
     {
@@ -767,6 +800,13 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
 
     void OnDestroy()
     {
+        // Singleton cleanup
+        if (_instance == this)
+        {
+            _instance = null;
+        }
+
+        // Engine and memory cleanup
         encoderEngine?.Dispose(); decoderEngine1?.Dispose();
         decoderEngine2?.Dispose(); spectroEngine?.Dispose(); argmaxEngine?.Dispose();
         
