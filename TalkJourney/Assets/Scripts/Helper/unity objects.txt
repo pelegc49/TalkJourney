@@ -1,0 +1,42 @@
+
+STAGE_CANVAS_EXAMPLE | Scripts: RectTransform, Canvas, CanvasScaler, GraphicRaycaster, TrackedDeviceGraphicRaycaster, CanvasRenderer, Image
+--> BubbleBootstrap_Prefab(Clone) | Scripts: RectTransform, Canvas, CanvasScaler, GraphicRaycaster, BubbleSystemBootstrap, StageController, SentenceBubbleController, SelectionSpeechMatcher, AudioPlaybackManager, AudioSource, TrackedDeviceGraphicRaycaster
+----> SentenceArea | Scripts: RectTransform, FlowLayoutGroup, ContentSizeFitter
+------> DisplayBubble_Prefab(Clone) | Scripts: RectTransform, BoxCollider, VrPointerInteractable, DisplayBubbleController, ContentSizeFitter, HorizontalLayoutGroup, LayoutElement
+--------> Canvas | Scripts: RectTransform, Canvas, CanvasScaler, GraphicRaycaster
+----------> PrimaryText_UI | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+----------> TransliteratorText_UI | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+------> DisplayBubble_Prefab(Clone) | Scripts: RectTransform, BoxCollider, VrPointerInteractable, DisplayBubbleController, ContentSizeFitter, HorizontalLayoutGroup, LayoutElement
+--------> Canvas | Scripts: RectTransform, Canvas, CanvasScaler, GraphicRaycaster
+----------> PrimaryText_UI | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+----------> TransliteratorText_UI | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+------> DisplayBubble_Prefab(Clone) | Scripts: RectTransform, BoxCollider, VrPointerInteractable, DisplayBubbleController, ContentSizeFitter, HorizontalLayoutGroup, LayoutElement
+--------> Canvas | Scripts: RectTransform, Canvas, CanvasScaler, GraphicRaycaster
+----------> PrimaryText_UI | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+----------> TransliteratorText_UI | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+------> DisplayBubble_Prefab(Clone) | Scripts: RectTransform, BoxCollider, VrPointerInteractable, DisplayBubbleController, ContentSizeFitter, HorizontalLayoutGroup, LayoutElement
+--------> Canvas | Scripts: RectTransform, Canvas, CanvasScaler, GraphicRaycaster
+----------> PrimaryText_UI | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+----------> TransliteratorText_UI | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+------> SpeakerButton | Scripts: RectTransform, CanvasRenderer, Image, Button, BoxCollider, VrPointerInteractable, LayoutElement
+--------> Text (TMP) | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+----> SelectionArea | Scripts: RectTransform, ContentSizeFitter, HorizontalLayoutGroup
+------> SelectionBubble_Prefab(Clone) | Scripts: RectTransform, BoxCollider, VrPointerInteractable, DisplayBubbleController, ContentSizeFitter, HorizontalLayoutGroup, LayoutElement, SelectionBubbleController
+--------> Canvas | Scripts: RectTransform, Canvas, CanvasScaler, GraphicRaycaster
+----------> PrimaryText_UI | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+----------> TransliteratorText_UI | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+------> SelectionBubble_Prefab(Clone) | Scripts: RectTransform, BoxCollider, VrPointerInteractable, DisplayBubbleController, ContentSizeFitter, HorizontalLayoutGroup, LayoutElement, SelectionBubbleController
+--------> Canvas | Scripts: RectTransform, Canvas, CanvasScaler, GraphicRaycaster
+----------> PrimaryText_UI | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+----------> TransliteratorText_UI | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+------> SelectionBubble_Prefab(Clone) | Scripts: RectTransform, BoxCollider, VrPointerInteractable, DisplayBubbleController, ContentSizeFitter, HorizontalLayoutGroup, LayoutElement, SelectionBubbleController
+--------> Canvas | Scripts: RectTransform, Canvas, CanvasScaler, GraphicRaycaster
+----------> PrimaryText_UI | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+----------> TransliteratorText_UI | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+----> BypassButton | Scripts: RectTransform, CanvasRenderer, Image, Button, BoxCollider, VrPointerInteractable
+------> Text (TMP) | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
+--> ResultsBootstrap_Prefab(Clone) | Scripts: RectTransform, JourneyResultsPresenter, Canvas, CanvasScaler, GraphicRaycaster
+----> ResultsPanelRoot | Scripts: RectTransform
+------> ResultsBubbleArea | Scripts: RectTransform, VerticalLayoutGroup, ContentSizeFitter
+----> CloseButton | Scripts: RectTransform, CanvasRenderer, Image, Button, BoxCollider
+------> Text (TMP) | Scripts: RectTransform, CanvasRenderer, TextMeshProUGUI
