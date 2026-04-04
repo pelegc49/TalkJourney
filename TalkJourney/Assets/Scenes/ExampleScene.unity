@@ -5233,7 +5233,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Localization.LanguageSyncBridge
   localizationResolver: {fileID: 250759262}
-  realtimeWhisper: {fileID: 788201817}
 --- !u!1 &528032898
 GameObject:
   m_ObjectHideFlags: 0
@@ -12604,7 +12603,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.GameServices.GlobalGameServicesBootstrap
   persistAcrossScenes: 1
   localizationResolver: {fileID: 250759262}
-  realtimeWhisper: {fileID: 788201817}
   audioBackendClient: {fileID: 1863388533}
   firebaseAuthTokenProvider: {fileID: 1955105395}
   languageSyncBridge: {fileID: 504419316}
