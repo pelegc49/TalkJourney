@@ -26,6 +26,82 @@ MonoBehaviour:
     m_Localized: pomoshkh'
     m_Metadata:
       m_Items: []
+  - m_Id: 1170213615300608
+    m_Localized: khto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660736
+    m_Localized: yavlyayetsya
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660737
+    m_Localized: tvoy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660738
+    m_Localized: imya
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660739
+    m_Localized: "\u0420\u0435\u0443\u0432\u0435\u043D"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660740
+    m_Localized: "\u041F\u0435\u043B\u0435\u0433"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660741
+    m_Localized: Moshe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660742
+    m_Localized: delat'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660743
+    m_Localized: ty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660744
+    m_Localized: nravit'sya
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660745
+    m_Localized: sushi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660746
+    m_Localized: da
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660747
+    m_Localized: net
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660748
+    m_Localized: zaversheny
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660749
+    m_Localized: prodolzhitel'nost'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660750
+    m_Localized: polny vybor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660751
+    m_Localized: pravil'ny
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660752
+    m_Localized: neverno
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1170213644660753
+    m_Localized: tokhnost'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
