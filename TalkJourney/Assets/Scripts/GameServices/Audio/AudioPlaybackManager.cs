@@ -208,7 +208,7 @@ namespace TalkJourney.BubbleSystem.Audio
             if (backendClientBehaviour is AudioBackendClient concreteClient)
             {
                 var language = string.IsNullOrWhiteSpace(concreteClient.languageCode) ? "unknown-language" : concreteClient.languageCode.Trim();
-                var voice = string.IsNullOrWhiteSpace(concreteClient.voiceName) ? "unknown-voice" : concreteClient.voiceName.Trim();
+                var voice = string.IsNullOrWhiteSpace(concreteClient.VoiceName) ? "unknown-voice" : concreteClient.VoiceName.Trim();
                 context = language + "::" + voice;
             }
 
