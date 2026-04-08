@@ -12,6 +12,7 @@
   <Project Path="Unity.RenderPipelines.Core.Editor.csproj" />
   <Project Path="Unity.Collections.csproj" />
   <Project Path="UnityEngine.UI.csproj" />
+  <Project Path="Unity.TerrainTools.Editor.csproj" />
   <Project Path="Unity.Addressables.Editor.csproj" />
   <Project Path="Unity.RenderPipelines.Universal.2D.Runtime.csproj" />
   <Project Path="Unity.InferenceEngine.Microsoft.Msagl.csproj" />
@@ -31,11 +32,11 @@
   <Project Path="Unity.VisualStudio.Editor.csproj" />
   <Project Path="Unity.InputSystem.csproj" />
   <Project Path="Unity.XR.Interaction.Toolkit.Editor.csproj" />
-  <Project Path="PPv2URPConverters.csproj" />
   <Project Path="Unity.InferenceEngine.csproj" />
   <Project Path="Unity.XR.CoreUtils.csproj" />
   <Project Path="Unity.XR.Simulation.Editor.csproj" />
   <Project Path="Unity.Searcher.Editor.csproj" />
+  <Project Path="PPv2URPConverters.csproj" />
   <Project Path="Unity.XR.Hands.csproj" />
   <Project Path="Unity.InferenceEngine.Tokenization.csproj" />
   <Project Path="Unity.ResourceManager.csproj" />
@@ -109,6 +110,7 @@
   <Project Path="Unity.XR.Interaction.Toolkit.Samples.Hands.csproj" />
   <Project Path="Unity.XR.Hands.Samples.VisualizerSample.csproj" />
   <Project Path="Unity.XR.OpenXR.Features.MetaQuestSupport.csproj" />
+  <Project Path="Unity.TerrainTools.csproj" />
   <Project Path="Unity.RenderPipeline.Universal.ShaderLibrary.csproj" />
   <Project Path="Unity.XR.OpenXR.Features.RuntimeDebugger.csproj" />
   <Project Path="UnityEngine.SpatialTracking.csproj" />
