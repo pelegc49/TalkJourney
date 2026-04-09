@@ -42,8 +42,11 @@ namespace TalkJourney.BubbleSystem.Audio
         [Tooltip("Language code sent with TTS request body.")]
         public string languageCode = "en-US";
 
-        [Tooltip("Voice name sent with TTS request body.")]
-        public string voiceName = "en-US-Standard-A";
+        [HideInInspector]
+        [SerializeField]
+        private string voiceName = "en-US-Standard-A";
+
+        public string VoiceName => voiceName;
 
         [Tooltip("Optional bearer token used for Authorization header. Leave empty if backend does not require auth.")]
         public string bearerToken;

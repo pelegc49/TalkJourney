@@ -43,12 +43,6 @@ namespace TalkJourney.GameServices
         [Tooltip("PlayerPrefs key used to store native language.")]
         public string nativeLanguagePlayerPrefsKey = "TalkJourney.Settings.NativeLanguage";
 
-        [Tooltip("When enabled, load the saved voice name on startup and save changes automatically.")]
-        public bool persistVoiceName = true;
-
-        [Tooltip("PlayerPrefs key used to store selected voice name.")]
-        public string voiceNamePlayerPrefsKey = "TalkJourney.Settings.VoiceName";
-
         private static GlobalGameServicesBootstrap _instance;
 
         public static GlobalGameServicesBootstrap Instance => _instance;
@@ -89,7 +83,6 @@ namespace TalkJourney.GameServices
         private void Start()
         {
             ApplyPersistedLanguagePreferencesIfAvailable();
-            ApplyPersistedVoiceIfAvailable();
         }
 
         private void OnDestroy()
@@ -227,51 +220,5 @@ namespace TalkJourney.GameServices
             return System.Enum.TryParse(value.Trim(), true, out language);
         }
 
-        private void ApplyPersistedVoiceIfAvailable()
-        {
-            if (!persistVoiceName || audioBackendClient == null || string.IsNullOrWhiteSpace(voiceNamePlayerPrefsKey))
-            {
-                return;
-            }
-
-            if (!PlayerPrefs.HasKey(voiceNamePlayerPrefsKey))
-            {
-                return;
-            }
-
-            var savedVoiceName = PlayerPrefs.GetString(voiceNamePlayerPrefsKey, string.Empty);
-            if (!string.IsNullOrWhiteSpace(savedVoiceName))
-            {
-                audioBackendClient.voiceName = savedVoiceName;
-            }
-        }
-
-        public void SetVoiceNamePreference(string voiceName)
-        {
-            if (!persistVoiceName || string.IsNullOrWhiteSpace(voiceNamePlayerPrefsKey))
-            {
-                return;
-            }
-
-            if (audioBackendClient != null)
-            {
-                audioBackendClient.voiceName = voiceName;
-            }
-
-            PlayerPrefs.SetString(voiceNamePlayerPrefsKey, voiceName);
-            PlayerPrefs.Save();
-        }
-
-        public string GetVoiceNamePreference()
-        {
-            if (!persistVoiceName || string.IsNullOrWhiteSpace(voiceNamePlayerPrefsKey))
-            {
-                return null;
-            }
-
-            return PlayerPrefs.HasKey(voiceNamePlayerPrefsKey) 
-                ? PlayerPrefs.GetString(voiceNamePlayerPrefsKey) 
-                : null;
-        }
     }
 }
