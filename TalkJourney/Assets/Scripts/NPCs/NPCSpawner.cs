@@ -81,6 +81,19 @@ public class NPCSpawner : MonoBehaviour
             randomizer.RandomizeCharacter();
         }
 
+        RandomWalker walker = npc.GetComponent<RandomWalker>();
+        if (walker != null)
+        {
+            if (randomizer != null && randomizer.TryGetSelectedGender(out bool isMale))
+            {
+                walker.ApplyGenderAnimation(isMale);
+            }
+            else
+            {
+                walker.InitializeGenderFromHierarchy();
+            }
+        }
+
         SpawnedNPC spawnedNPC = npc.GetComponent<SpawnedNPC>();
         if (spawnedNPC == null)
         {

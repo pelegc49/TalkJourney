@@ -2,11 +2,20 @@ using UnityEngine;
 
 public class SMChrAllRandomizer : MonoBehaviour
 {
+    public enum CharacterGender
+    {
+        Unknown,
+        Male,
+        Female
+    }
+
     [Header("Start Behavior")]
     [SerializeField] private bool randomizeOnAwake = true;
 
     [Header("Optional Accessories")]
     [SerializeField, Range(0f, 1f)] private float optionalAccessoryChance = 0.5f;
+
+    public CharacterGender SelectedGender { get; private set; } = CharacterGender.Unknown;
 
     public void Awake()
     {
@@ -24,11 +33,13 @@ public class SMChrAllRandomizer : MonoBehaviour
 
         if (maleRoot == null || femaleRoot == null || skeletonRoot == null)
         {
+            SelectedGender = CharacterGender.Unknown;
             Debug.LogWarning($"{name}: Expected top-level children named Male, Female, and Root.");
             return;
         }
 
         bool isMale = Random.value < 0.5f;
+        SelectedGender = isMale ? CharacterGender.Male : CharacterGender.Female;
         maleRoot.gameObject.SetActive(isMale);
         femaleRoot.gameObject.SetActive(!isMale);
 
@@ -43,6 +54,10 @@ public class SMChrAllRandomizer : MonoBehaviour
         }
 
         Transform genderAccessoryRoot = FindDirectChild(head, isMale ? "Male" : "Female");
+        Transform genderAccessoryMaleRoot = FindDirectChild(head, "Male");
+        Transform genderAccessoryFemaleRoot = FindDirectChild(head, "Female");
+        genderAccessoryMaleRoot.gameObject.SetActive(isMale);
+        genderAccessoryFemaleRoot.gameObject.SetActive(!isMale);
         if (genderAccessoryRoot == null)
         {
             Debug.LogWarning($"{name}: Could not find the gender-specific accessory branch under Head.");
@@ -61,6 +76,24 @@ public class SMChrAllRandomizer : MonoBehaviour
             RandomizeAccessoryGroup(genderAccessoryRoot, "Glasses", mustChooseOne: false);
             RandomizeAccessoryGroup(genderAccessoryRoot, "Earring", mustChooseOne: false);
         }
+    }
+
+    public bool TryGetSelectedGender(out bool isMale)
+    {
+        if (SelectedGender == CharacterGender.Male)
+        {
+            isMale = true;
+            return true;
+        }
+
+        if (SelectedGender == CharacterGender.Female)
+        {
+            isMale = false;
+            return true;
+        }
+
+        isMale = false;
+        return false;
     }
 
     private void RandomizeAccessoryGroup(Transform parent, string groupName, bool mustChooseOne)

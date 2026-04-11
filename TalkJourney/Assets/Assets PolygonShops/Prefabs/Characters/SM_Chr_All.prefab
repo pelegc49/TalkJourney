@@ -1211,7 +1211,7 @@ Animator:
   m_GameObject: {fileID: 1349454168831766}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0be15d3e163aef642a9c70f34e53d7b0, type: 3}
-  m_Controller: {fileID: 9100000, guid: e31cc0755aa40e242a57a5c3e1eb787a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4c1dce1aa72b30b47a9c2b16a60a4e71, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1247,7 +1247,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.3
-  m_Speed: 1.3
+  m_Speed: 0
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1271,7 +1271,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9fd53d2a8d202744bafab5b8256fa85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RandomWalker
-  walkRadius: 400
+  walkRadius: 50
+  speedParameter: Speed
+  walkVariantParameter: WalkVariant
+  idleVariantParameter: IdleVariant
+  walkVariantCount: 3
+  idleVariantCount: 4
+  movingThreshold: 0.05
+  minIdleSeconds: 3
+  maxIdleSeconds: 10
+  maleProfile:
+    overrideController: {fileID: 22100000, guid: 71dbff327ad0b9443a171ef3ba14772f, type: 2}
+    walkSpeeds:
+    - 1.9
+    - 0.7
+    - 0.7
+  femaleProfile:
+    overrideController: {fileID: 22100000, guid: 50c66525d4d8be748b0b6b908ad8710a, type: 2}
+    walkSpeeds:
+    - 1.9
+    - 0.7
+    - 0.7
 --- !u!1 &1373475605492354
 GameObject:
   m_ObjectHideFlags: 0
@@ -3926,7 +3946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5382306377474961093
 Transform:
   m_ObjectHideFlags: 0
@@ -4392,7 +4412,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6839090543314082959
 Transform:
   m_ObjectHideFlags: 0
@@ -4554,7 +4574,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2901897912840748159
 Transform:
   m_ObjectHideFlags: 0
@@ -4771,7 +4791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2298772742662093378
 Transform:
   m_ObjectHideFlags: 0
