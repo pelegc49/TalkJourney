@@ -49,7 +49,7 @@ Properties {
 	_StencilWriteMask	("Stencil Write Mask", Float) = 255
 	_StencilReadMask	("Stencil Read Mask", Float) = 255
 
-	_CullMode			("Cull Mode", Float) = 0
+	_CullMode			("Cull Mode", Float) = 2
 	_ColorMask			("Color Mask", Float) = 15
 }
 
