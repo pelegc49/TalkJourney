@@ -72,6 +72,7 @@
   <Project Path="Unity.Postprocessing.Runtime.csproj" />
   <Project Path="Unity.InternalAPIEngineBridge.007.csproj" />
   <Project Path="Unity.XR.Hands.Analytics.Editor.csproj" />
+  <Project Path="Unity.2D.Sprite.Editor.csproj" />
   <Project Path="Unity.InternalAPIEditorBridge.013.csproj" />
   <Project Path="Unity.XR.CoreUtils.Editor.csproj" />
   <Project Path="Unity.AI.Navigation.Editor.csproj" />

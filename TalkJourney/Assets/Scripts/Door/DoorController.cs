@@ -5,8 +5,10 @@ public class DoorController : MonoBehaviour
     private Animator animator;
     private bool isDoorOpen = false;
     
-    [Tooltip("גרור לכאן את בועת ההנחיה שיצרת")]
+    [Tooltip("Drag the instruction bubble you created here")]
     public GameObject instructionBubble;
+    private Animator instructionBubbleAnimator;
+    private bool isDoorHover = false;
 
     private void Awake()
     {
@@ -23,30 +25,27 @@ public class DoorController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        instructionBubbleAnimator = instructionBubble.GetComponent<Animator>();
     }
 
-    // פונקציה לפתיחה וסגירה של הדלת
+    // Function to open and close the door
     public void ToggleDoor()
     {
-        isDoorOpen = !isDoorOpen; // הופך את המצב (אם פתוח אז נסגר, ולהפך)
+        isDoorOpen = !isDoorOpen; // Toggle state (if open then close, and vice versa)
         animator.SetBool("IsOpen", isDoorOpen);
     }
 
-    // פונקציות להצגה והסתרה של הבועה
+    // Functions to show and hide the bubble
     public void ShowBubble()
     {
-        if (instructionBubble != null)
-        {
-            instructionBubble.SetActive(true);
-        }
+        isDoorHover = true;
+        instructionBubbleAnimator.SetBool("IsHover", isDoorHover);
     }
 
     public void HideBubble()
     {
-        if (instructionBubble != null)
-        {
-            instructionBubble.SetActive(false);
-        }
+        isDoorHover = false;
+        instructionBubbleAnimator.SetBool("IsHover", isDoorHover);
     }
 
     private Transform FindDirectChild(Transform parent, string childName)
