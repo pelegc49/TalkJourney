@@ -6,6 +6,7 @@ using TalkJourney.BubbleSystem.Interaction;
 using TalkJourney.BubbleSystem.Localization;
 using TalkJourney.BubbleSystem.Speech;
 using TalkJourney.GameServices;
+using UnityEngine.UI;
 
 namespace TalkJourney.BubbleSystem.Flow
 {
@@ -21,6 +22,11 @@ namespace TalkJourney.BubbleSystem.Flow
         public SelectionBubbleController selectionBubblePrefab;
         public VrPointerInteractable speakerButtonInteractable;
         public VrPointerInteractable bypassButtonInteractable;
+
+        [Header("Layout")]
+        [Min(0f)]
+        [Tooltip("Vertical spacing in pixels between SentenceArea and SelectionArea.")]
+        public float sentenceSelectionSpacing = 100f;
 
         [Header("External Services")]
         [Tooltip("Optional speech recognition component implementing ISpeechRecognitionService. If empty, GlobalGameServicesBootstrap.realtimeWhisper is used first.")]
@@ -46,7 +52,14 @@ namespace TalkJourney.BubbleSystem.Flow
         public bool autoFindSpeechRecognitionBehaviour = true;
         public bool autoCreateAudioSource = true;
 
+        [Tooltip("When enabled, SentenceArea and SelectionArea heights are recalculated from wrapped child rows every frame during play mode.")]
+        public bool autoResizeAreasByRows = true;
+
         private bool _isSetupComplete;
+        private int _lastSentenceChildCount = -1;
+        private int _lastSelectionChildCount = -1;
+        private float _lastSentenceWidth = -1f;
+        private float _lastSelectionWidth = -1f;
 
         private void Reset()
         {
@@ -59,6 +72,51 @@ namespace TalkJourney.BubbleSystem.Flow
             {
                 EnsureSetup();
             }
+        }
+
+        private void OnValidate()
+        {
+            if (!Application.isPlaying)
+            {
+                CenterSentenceAndSelectionAreas();
+            }
+        }
+
+        private void LateUpdate()
+        {
+            if (!Application.isPlaying || !autoResizeAreasByRows)
+            {
+                return;
+            }
+
+            var sentenceRect = sentenceBubbleParent as RectTransform;
+            var selectionRect = selectionBubbleParent as RectTransform;
+            if (sentenceRect == null || selectionRect == null)
+            {
+                return;
+            }
+
+            var sentenceChildCount = CountActiveChildren(sentenceRect);
+            var selectionChildCount = CountActiveChildren(selectionRect);
+            var sentenceWidth = sentenceRect.rect.width;
+            var selectionWidth = selectionRect.rect.width;
+
+            var hasChanged = sentenceChildCount != _lastSentenceChildCount
+                || selectionChildCount != _lastSelectionChildCount
+                || !Mathf.Approximately(sentenceWidth, _lastSentenceWidth)
+                || !Mathf.Approximately(selectionWidth, _lastSelectionWidth);
+
+            if (!hasChanged)
+            {
+                return;
+            }
+
+            _lastSentenceChildCount = sentenceChildCount;
+            _lastSelectionChildCount = selectionChildCount;
+            _lastSentenceWidth = sentenceWidth;
+            _lastSelectionWidth = selectionWidth;
+
+            CenterSentenceAndSelectionAreas();
         }
 
         public void EnsureSetup()
@@ -109,6 +167,8 @@ namespace TalkJourney.BubbleSystem.Flow
             audioPlaybackManager.playbackSource = playbackSource;
             audioPlaybackManager.backendClientBehaviour = audioBackendClientBehaviour;
             audioPlaybackManager.RefreshDependencies();
+
+            CenterSentenceAndSelectionAreas();
 
             _isSetupComplete = true;
         }
@@ -328,6 +388,177 @@ namespace TalkJourney.BubbleSystem.Flow
             }
 
             return null;
+        }
+
+        private void CenterSentenceAndSelectionAreas()
+        {
+            var sentenceRect = sentenceBubbleParent as RectTransform;
+            var selectionRect = selectionBubbleParent as RectTransform;
+            if (sentenceRect == null || selectionRect == null)
+            {
+                return;
+            }
+
+            ApplyHeightFromRows(sentenceRect);
+            ApplyHeightFromRows(selectionRect);
+
+            var sentenceAnchorMin = sentenceRect.anchorMin;
+            sentenceAnchorMin.y = 0.5f;
+            sentenceRect.anchorMin = sentenceAnchorMin;
+
+            var sentenceAnchorMax = sentenceRect.anchorMax;
+            sentenceAnchorMax.y = 0.5f;
+            sentenceRect.anchorMax = sentenceAnchorMax;
+
+            var sentencePivot = sentenceRect.pivot;
+            sentencePivot.y = 0.5f;
+            sentenceRect.pivot = sentencePivot;
+
+            var selectionAnchorMin = selectionRect.anchorMin;
+            selectionAnchorMin.y = 0.5f;
+            selectionRect.anchorMin = selectionAnchorMin;
+
+            var selectionAnchorMax = selectionRect.anchorMax;
+            selectionAnchorMax.y = 0.5f;
+            selectionRect.anchorMax = selectionAnchorMax;
+
+            var selectionPivot = selectionRect.pivot;
+            selectionPivot.y = 0.5f;
+            selectionRect.pivot = selectionPivot;
+
+            var sentenceHeight = sentenceRect.rect.height > 0f ? sentenceRect.rect.height : sentenceRect.sizeDelta.y;
+            var selectionHeight = selectionRect.rect.height > 0f ? selectionRect.rect.height : selectionRect.sizeDelta.y;
+            var halfSpacing = sentenceSelectionSpacing * 0.5f;
+
+            var sentencePosition = sentenceRect.anchoredPosition;
+            sentencePosition.y = halfSpacing + (selectionHeight * 0.5f);
+            sentenceRect.anchoredPosition = sentencePosition;
+
+            var selectionPosition = selectionRect.anchoredPosition;
+            selectionPosition.y = -(halfSpacing + (sentenceHeight * 0.5f));
+            selectionRect.anchoredPosition = selectionPosition;
+        }
+
+        private static int CountActiveChildren(RectTransform parent)
+        {
+            var count = 0;
+            for (int i = 0; i < parent.childCount; i++)
+            {
+                var child = parent.GetChild(i);
+                if (child != null && child.gameObject.activeSelf)
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        private void ApplyHeightFromRows(RectTransform areaRect)
+        {
+            var requiredHeight = CalculateRequiredHeightForRows(areaRect);
+            var size = areaRect.sizeDelta;
+            size.y = requiredHeight;
+            areaRect.sizeDelta = size;
+        }
+
+        private float CalculateRequiredHeightForRows(RectTransform areaRect)
+        {
+            if (areaRect == null)
+            {
+                return 0f;
+            }
+
+            var layoutGroup = areaRect.GetComponent<LayoutGroup>();
+            var paddingTop = 0f;
+            var paddingBottom = 0f;
+            var paddingHorizontal = 0f;
+            var horizontalSpacing = 0f;
+            var verticalSpacing = 0f;
+
+            if (layoutGroup != null)
+            {
+                paddingTop = layoutGroup.padding.top;
+                paddingBottom = layoutGroup.padding.bottom;
+                paddingHorizontal = layoutGroup.padding.left + layoutGroup.padding.right;
+
+                var horizontalOrVertical = layoutGroup as HorizontalOrVerticalLayoutGroup;
+                if (horizontalOrVertical != null)
+                {
+                    horizontalSpacing = horizontalOrVertical.spacing;
+                    verticalSpacing = horizontalOrVertical.spacing;
+                }
+            }
+
+            var availableWidth = Mathf.Max(0f, areaRect.rect.width - paddingHorizontal);
+            if (availableWidth <= 0f)
+            {
+                return paddingTop + paddingBottom;
+            }
+
+            var totalRowsHeight = 0f;
+            var currentRowWidth = 0f;
+            var currentRowHeight = 0f;
+            var rowCount = 0;
+
+            for (int i = 0; i < areaRect.childCount; i++)
+            {
+                var child = areaRect.GetChild(i) as RectTransform;
+                if (child == null || !child.gameObject.activeSelf)
+                {
+                    continue;
+                }
+
+                var childWidth = ResolveChildSize(child, 0);
+                var childHeight = ResolveChildSize(child, 1);
+
+                if (rowCount == 0)
+                {
+                    rowCount = 1;
+                    currentRowWidth = childWidth;
+                    currentRowHeight = childHeight;
+                    continue;
+                }
+
+                var rowWidthWithChild = currentRowWidth + horizontalSpacing + childWidth;
+                if (rowWidthWithChild > availableWidth)
+                {
+                    totalRowsHeight += currentRowHeight;
+                    rowCount++;
+                    currentRowWidth = childWidth;
+                    currentRowHeight = childHeight;
+                }
+                else
+                {
+                    currentRowWidth = rowWidthWithChild;
+                    currentRowHeight = Mathf.Max(currentRowHeight, childHeight);
+                }
+            }
+
+            if (rowCount > 0)
+            {
+                totalRowsHeight += currentRowHeight;
+            }
+
+            var totalVerticalSpacing = rowCount > 1 ? (rowCount - 1) * verticalSpacing : 0f;
+            return paddingTop + totalRowsHeight + totalVerticalSpacing + paddingBottom;
+        }
+
+        private static float ResolveChildSize(RectTransform child, int axis)
+        {
+            var preferred = LayoutUtility.GetPreferredSize(child, axis);
+            if (preferred > 0f)
+            {
+                return preferred;
+            }
+
+            var minimum = LayoutUtility.GetMinSize(child, axis);
+            if (minimum > 0f)
+            {
+                return minimum;
+            }
+
+            return axis == 0 ? child.rect.width : child.rect.height;
         }
     }
 }

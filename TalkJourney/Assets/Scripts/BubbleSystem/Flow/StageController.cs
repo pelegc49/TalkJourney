@@ -205,6 +205,7 @@ namespace TalkJourney.BubbleSystem.Flow
                 var displayBubble = instance.GetComponent<DisplayBubbleController>();
                 if (displayBubble != null)
                 {
+                    displayBubble.matchPrimaryTextAndDisplayBubbleToContent = true;
                     displayBubble.bubbleData = selectionData.bubble;
                     displayBubble.localizationServiceBehaviour = localizationServiceBehaviour;
                     displayBubble.audioPlaybackManagerBehaviour = audioPlaybackManagerBehaviour;

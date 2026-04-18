@@ -8,6 +8,7 @@ using TalkJourney.BubbleSystem.Localization;
 using TalkJourney.GameServices;
 using TMPro;
 using System;
+using UnityEngine.Serialization;
 
 namespace TalkJourney.BubbleSystem.Bubbles
 {
@@ -45,6 +46,37 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
         [Tooltip("Extra width/height padding added around the primary text in pixels.")]
         public Vector2 bubblePadding = new Vector2(32f, 16f);
+
+        [Tooltip("When enabled, PrimaryText_UI RectTransform is resized to the exact preferred text size and DisplayBubble is matched 1:1 to it.")]
+        public bool matchPrimaryTextAndDisplayBubbleToContent = true;
+
+        [Tooltip("Optional explicit RectTransform for PrimaryText_UI. If empty, primaryText.rectTransform is used.")]
+        public RectTransform primaryTextRectTransform;
+
+        [FormerlySerializedAs("primaryTextMargin")]
+        [Tooltip("Extra width/height padding added to PrimaryText_UI around its content.")]
+        public Vector2 primaryTextPadding = Vector2.zero;
+
+        [Tooltip("Optional explicit RectTransform for DisplayBubble image. If empty, it is auto-resolved under PrimaryText_UI/DisplayBubble.")]
+        public RectTransform primaryDisplayBubbleRectTransform;
+
+        [FormerlySerializedAs("primaryDisplayBubbleMargin")]
+        [Tooltip("Extra width/height padding added to DisplayBubble around PrimaryText_UI.")]
+        public Vector2 primaryDisplayBubblePadding = Vector2.zero;
+
+        [Tooltip("Optional explicit RectTransform for TransliteratorText_UI. If empty, transliteratorText.rectTransform is used.")]
+        public RectTransform transliteratorTextRectTransform;
+
+        [FormerlySerializedAs("transliteratorTextMargin")]
+        [Tooltip("Extra width/height padding added to TransliteratorText_UI around its content.")]
+        public Vector2 transliteratorTextPadding = Vector2.zero;
+
+        [Tooltip("Optional explicit RectTransform for TransliteratorBubble image. If empty, it is auto-resolved under TransliteratorText_UI/TransliteratorBubble.")]
+        public RectTransform transliteratorBubbleRectTransform;
+
+        [FormerlySerializedAs("transliteratorBubbleMargin")]
+        [Tooltip("Extra width/height padding added to TransliteratorBubble around TransliteratorText_UI.")]
+        public Vector2 transliteratorBubblePadding = Vector2.zero;
 
         private ILocalizationService _localizationService;
         private IAudioPlaybackManager _audioPlaybackManager;
@@ -191,6 +223,19 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 _layoutElement = gameObject.AddComponent<LayoutElement>();
             }
 
+            if (matchPrimaryTextAndDisplayBubbleToContent)
+            {
+                var primarySize = ResizePrimaryTextAndDisplayBubbleToContent();
+                var transliteratorSize = ResizeTransliteratorTextAndBubbleToContent();
+                var finalWidth = Mathf.Max(primarySize.x, transliteratorSize.x);
+                var finalHeight = Mathf.Max(primarySize.y, transliteratorSize.y);
+                _layoutElement.preferredWidth = finalWidth;
+                _layoutElement.preferredHeight = finalHeight;
+                _layoutElement.minWidth = finalWidth;
+                _layoutElement.minHeight = finalHeight;
+                return;
+            }
+
             var preferredWidth = minimumBubbleSize.x;
             var preferredHeight = minimumBubbleSize.y;
 
@@ -204,6 +249,136 @@ namespace TalkJourney.BubbleSystem.Bubbles
             _layoutElement.preferredHeight = preferredHeight;
             _layoutElement.minWidth = minimumBubbleSize.x;
             _layoutElement.minHeight = minimumBubbleSize.y;
+        }
+
+        private Vector2 ResizePrimaryTextAndDisplayBubbleToContent()
+        {
+            var primaryRect = ResolvePrimaryTextRectTransform();
+            if (primaryText == null || primaryRect == null)
+            {
+                return minimumBubbleSize;
+            }
+
+            var preferred = primaryText.GetPreferredValues(primaryText.text, Mathf.Infinity, Mathf.Infinity);
+            var textWidth = Mathf.Max(0f, preferred.x + primaryTextPadding.x);
+            var textHeight = Mathf.Max(0f, preferred.y + primaryTextPadding.y);
+
+            primaryRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, textWidth);
+            primaryRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, textHeight);
+
+            var bubbleWidth = Mathf.Max(0f, textWidth + primaryDisplayBubblePadding.x);
+            var bubbleHeight = Mathf.Max(0f, textHeight + primaryDisplayBubblePadding.y);
+
+            var displayBubbleRect = ResolvePrimaryDisplayBubbleRectTransform(primaryRect);
+            if (displayBubbleRect != null)
+            {
+                displayBubbleRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, bubbleWidth);
+                displayBubbleRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, bubbleHeight);
+            }
+
+            return new Vector2(Mathf.Max(textWidth, bubbleWidth), Mathf.Max(textHeight, bubbleHeight));
+        }
+
+        private RectTransform ResolvePrimaryTextRectTransform()
+        {
+            if (primaryTextRectTransform != null)
+            {
+                return primaryTextRectTransform;
+            }
+
+            if (primaryText != null)
+            {
+                return primaryText.rectTransform;
+            }
+
+            return null;
+        }
+
+        private RectTransform ResolvePrimaryDisplayBubbleRectTransform(RectTransform primaryRect)
+        {
+            if (primaryDisplayBubbleRectTransform != null)
+            {
+                return primaryDisplayBubbleRectTransform;
+            }
+
+            if (primaryRect == null)
+            {
+                return null;
+            }
+
+            var displayBubble = primaryRect.Find("DisplayBubble") as RectTransform;
+            if (displayBubble != null)
+            {
+                return displayBubble;
+            }
+
+            var image = primaryRect.GetComponentInChildren<Image>(true);
+            return image != null ? image.rectTransform : null;
+        }
+
+        private Vector2 ResizeTransliteratorTextAndBubbleToContent()
+        {
+            var transliteratorRect = ResolveTransliteratorTextRectTransform();
+            if (transliteratorText == null || transliteratorRect == null)
+            {
+                return Vector2.zero;
+            }
+
+            var preferred = transliteratorText.GetPreferredValues(transliteratorText.text, Mathf.Infinity, Mathf.Infinity);
+            var textWidth = Mathf.Max(0f, preferred.x + transliteratorTextPadding.x);
+            var textHeight = Mathf.Max(0f, preferred.y + transliteratorTextPadding.y);
+
+            transliteratorRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, textWidth);
+            transliteratorRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, textHeight);
+
+            var bubbleWidth = Mathf.Max(0f, textWidth + transliteratorBubblePadding.x);
+            var bubbleHeight = Mathf.Max(0f, textHeight + transliteratorBubblePadding.y);
+
+            var transliteratorBubbleRect = ResolveTransliteratorBubbleRectTransform(transliteratorRect);
+            if (transliteratorBubbleRect != null)
+            {
+                transliteratorBubbleRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, bubbleWidth);
+                transliteratorBubbleRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, bubbleHeight);
+            }
+
+            return new Vector2(Mathf.Max(textWidth, bubbleWidth), Mathf.Max(textHeight, bubbleHeight));
+        }
+
+        private RectTransform ResolveTransliteratorTextRectTransform()
+        {
+            if (transliteratorTextRectTransform != null)
+            {
+                return transliteratorTextRectTransform;
+            }
+
+            if (transliteratorText != null)
+            {
+                return transliteratorText.rectTransform;
+            }
+
+            return null;
+        }
+
+        private RectTransform ResolveTransliteratorBubbleRectTransform(RectTransform transliteratorRect)
+        {
+            if (transliteratorBubbleRectTransform != null)
+            {
+                return transliteratorBubbleRectTransform;
+            }
+
+            if (transliteratorRect == null)
+            {
+                return null;
+            }
+
+            var transliteratorBubble = transliteratorRect.Find("TransliteratorBubble") as RectTransform;
+            if (transliteratorBubble != null)
+            {
+                return transliteratorBubble;
+            }
+
+            var image = transliteratorRect.GetComponentInChildren<Image>(true);
+            return image != null ? image.rectTransform : null;
         }
 
         private void OnHoverEntered()
@@ -271,6 +446,11 @@ namespace TalkJourney.BubbleSystem.Bubbles
             ApplyTextDirectionSettings();
             transliteratorText.text = ResolveTransliterator(bubbleData.primaryTextKey);
             transliteratorText.ForceMeshUpdate();
+
+            if (matchPrimaryTextAndDisplayBubbleToContent)
+            {
+                ApplyPreferredBubbleSize();
+            }
         }
 
         private void ApplyTextDirectionSettings()
