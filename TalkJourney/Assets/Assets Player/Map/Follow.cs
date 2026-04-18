@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Follow : MonoBehaviour
@@ -35,4 +36,5 @@ public class Follow : MonoBehaviour
             transform.rotation = Quaternion.Euler(90f, 0f, 0f);
         }
     }
+  
 }
