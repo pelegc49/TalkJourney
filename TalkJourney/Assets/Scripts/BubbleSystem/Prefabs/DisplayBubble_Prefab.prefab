@@ -381,19 +381,19 @@ MonoBehaviour:
   audioPlaybackManagerBehaviour: {fileID: 0}
   interactable: {fileID: 6978475858993551341}
   primaryText: {fileID: 861316924493752318}
-  transliteratorText: {fileID: 2877555756207389480}
+  transliteratorTextObject: {fileID: 788094582226483123}
   transliteratorLocaleCode: en-he
   minimumBubbleSize: {x: 50, y: 50}
   bubblePadding: {x: 32, y: 16}
   matchPrimaryTextAndDisplayBubbleToContent: 1
   primaryTextRectTransform: {fileID: 0}
-  primaryTextPadding: {x: 20, y: 10}
+  primaryTextPadding: {x: 15, y: 10}
   primaryDisplayBubbleRectTransform: {fileID: 0}
-  primaryDisplayBubblePadding: {x: 20, y: 10}
+  primaryDisplayBubblePadding: {x: 0, y: 10}
   transliteratorTextRectTransform: {fileID: 0}
-  transliteratorTextPadding: {x: 20, y: 10}
+  transliteratorTextPadding: {x: 0, y: 10}
   transliteratorBubbleRectTransform: {fileID: 0}
-  transliteratorBubblePadding: {x: 20, y: 10}
+  transliteratorBubblePadding: {x: 50, y: 10}
 --- !u!114 &4130022384379200567
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -32,8 +32,8 @@ namespace TalkJourney.BubbleSystem.Bubbles
         [Tooltip("Primary localized word/phrase text.")]
         public TMP_Text primaryText;
 
-        [Tooltip("Transliteration text shown only while hovering.")]
-        public TMP_Text transliteratorText;
+        [Tooltip("Root object of TransliteratorText_UI shown only while hovering.")]
+        public GameObject transliteratorTextObject;
 
         [Header("Transliteration")]
         [Tooltip("Locale code used for transliteration values in Unity Localization, for example en-he or he-ru.")]
@@ -64,7 +64,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
         [Tooltip("Extra width/height padding added to DisplayBubble around PrimaryText_UI.")]
         public Vector2 primaryDisplayBubblePadding = Vector2.zero;
 
-        [Tooltip("Optional explicit RectTransform for TransliteratorText_UI. If empty, transliteratorText.rectTransform is used.")]
+        [Tooltip("Optional explicit RectTransform for TransliteratorText_UI. If empty, TMP_Text on transliteratorTextObject is used.")]
         public RectTransform transliteratorTextRectTransform;
 
         [FormerlySerializedAs("transliteratorTextMargin")]
@@ -196,6 +196,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 primaryText.ForceMeshUpdate();
             }
 
+            var transliteratorText = ResolveTransliteratorTextComponent();
             if (transliteratorText != null)
             {
                 transliteratorText.text = ResolveTransliterator(bubbleData.primaryTextKey);
@@ -227,8 +228,8 @@ namespace TalkJourney.BubbleSystem.Bubbles
             {
                 var primarySize = ResizePrimaryTextAndDisplayBubbleToContent();
                 var transliteratorSize = ResizeTransliteratorTextAndBubbleToContent();
-                var finalWidth = Mathf.Max(primarySize.x, transliteratorSize.x);
-                var finalHeight = Mathf.Max(primarySize.y, transliteratorSize.y);
+                var finalWidth = primarySize.x; //Mathf.Max(primarySize.x, transliteratorSize.x);
+                var finalHeight = primarySize.y; //Mathf.Max(primarySize.y, transliteratorSize.y);
                 _layoutElement.preferredWidth = finalWidth;
                 _layoutElement.preferredHeight = finalHeight;
                 _layoutElement.minWidth = finalWidth;
@@ -318,6 +319,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
         private Vector2 ResizeTransliteratorTextAndBubbleToContent()
         {
+            var transliteratorText = ResolveTransliteratorTextComponent();
             var transliteratorRect = ResolveTransliteratorTextRectTransform();
             if (transliteratorText == null || transliteratorRect == null)
             {
@@ -351,12 +353,23 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 return transliteratorTextRectTransform;
             }
 
+            var transliteratorText = ResolveTransliteratorTextComponent();
             if (transliteratorText != null)
             {
                 return transliteratorText.rectTransform;
             }
 
             return null;
+        }
+
+        private TMP_Text ResolveTransliteratorTextComponent()
+        {
+            if (transliteratorTextObject == null)
+            {
+                return null;
+            }
+
+            return transliteratorTextObject.GetComponent<TMP_Text>();
         }
 
         private RectTransform ResolveTransliteratorBubbleRectTransform(RectTransform transliteratorRect)
@@ -438,6 +451,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
         private void RefreshTransliteratorText()
         {
+            var transliteratorText = ResolveTransliteratorTextComponent();
             if (bubbleData == null || transliteratorText == null)
             {
                 return;
@@ -466,6 +480,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 primaryText.isRightToLeftText = LocalizationResolver.IsRightToLeftLanguage(localizationResolver.learningLanguage);
             }
 
+            var transliteratorText = ResolveTransliteratorTextComponent();
             if (transliteratorText != null)
             {
                 transliteratorText.isRightToLeftText = LocalizationResolver.IsRightToLeftLanguage(localizationResolver.nativeLanguage);
@@ -507,9 +522,16 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
         private void SetTransliteratorVisible(bool isVisible)
         {
-            if (transliteratorText != null)
+            if (transliteratorTextObject != null)
             {
-                transliteratorText.enabled = isVisible;
+                transliteratorTextObject.SetActive(isVisible);
+            }
+
+            var transliteratorRect = ResolveTransliteratorTextRectTransform();
+            var transliteratorBubbleRect = ResolveTransliteratorBubbleRectTransform(transliteratorRect);
+            if (transliteratorBubbleRect != null && transliteratorBubbleRect.gameObject != transliteratorTextObject)
+            {
+                transliteratorBubbleRect.gameObject.SetActive(isVisible);
             }
         }
 

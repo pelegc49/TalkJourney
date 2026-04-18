@@ -182,7 +182,7 @@ MonoBehaviour:
   audioPlaybackManagerBehaviour: {fileID: 0}
   interactable: {fileID: 1884320560938301556}
   primaryText: {fileID: 5758754462421847196}
-  transliteratorText: {fileID: 1439045635818390087}
+  transliteratorTextObject: {fileID: 5165588314125888735}
   transliteratorLocaleCode: en-he
   minimumBubbleSize: {x: 50, y: 50}
   bubblePadding: {x: 32, y: 16}
