@@ -227,13 +227,10 @@ namespace TalkJourney.BubbleSystem.Bubbles
             if (matchPrimaryTextAndDisplayBubbleToContent)
             {
                 var primarySize = ResizePrimaryTextAndDisplayBubbleToContent();
-                var transliteratorSize = ResizeTransliteratorTextAndBubbleToContent();
-                var finalWidth = primarySize.x; //Mathf.Max(primarySize.x, transliteratorSize.x);
-                var finalHeight = primarySize.y; //Mathf.Max(primarySize.y, transliteratorSize.y);
-                _layoutElement.preferredWidth = finalWidth;
-                _layoutElement.preferredHeight = finalHeight;
-                _layoutElement.minWidth = finalWidth;
-                _layoutElement.minHeight = finalHeight;
+                _layoutElement.preferredWidth = primarySize.x;
+                _layoutElement.preferredHeight = primarySize.y;
+                _layoutElement.minWidth = primarySize.x;
+                _layoutElement.minHeight = primarySize.y;
                 return;
             }
 
