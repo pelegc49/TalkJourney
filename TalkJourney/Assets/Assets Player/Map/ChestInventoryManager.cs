@@ -13,14 +13,20 @@ public class ChestInventoryManager : MonoBehaviour
     private XRGrabInteractable tabletInteractable;
 
     [Header("Left Hand Settings")]
-    [Tooltip("Drag the LEFT Hand Interactor (Direct or Near-Far) here.")]
-    public NearFarInteractor leftHandInteractor;
+    [Tooltip("Drag the LEFT Hand Direct Interactor here.")]
+    public XRBaseInteractor leftHandDirectInteractor;
+    [Tooltip("Drag the LEFT Hand Near-Far Interactor here.")]
+    public XRBaseInteractor leftHandNearFarInteractor;
     [Tooltip("The trigger input action for the LEFT hand.")]
     public InputActionReference leftSpawnAction;
 
     [Header("Right Hand Settings")]
-    [Tooltip("Drag the RIGHT Hand Interactor (Direct or Near-Far) here.")]
-    public NearFarInteractor rightHandInteractor;
+    [Tooltip("Drag the RIGHT Hand Direct Interactor here.")]
+    public XRBaseInteractor rightHandDirectInteractor;
+    [Tooltip("Drag the RIGHT Hand Near-Far Interactor here.")]
+    public XRBaseInteractor rightHandNearFarInteractor;
+
+
     [Tooltip("The trigger input action for the RIGHT hand.")]
     public InputActionReference rightSpawnAction;
 
@@ -28,6 +34,8 @@ public class ChestInventoryManager : MonoBehaviour
     private bool isLeftHandInChest = false;
     private bool isRightHandInChest = false;
 
+    private float hideAt = float.PositiveInfinity;
+    private float checkReleasedAt = float.PositiveInfinity;
     void Start()
     {
         Debug.Log("ChestInventoryManager started. Initializing tablet and input actions.");
@@ -46,7 +54,9 @@ public class ChestInventoryManager : MonoBehaviour
     {
         Debug.Log("ChestInventoryManager enabled. Subscribing to input actions.");
         if (leftSpawnAction != null) leftSpawnAction.action.performed += OnLeftTriggerPressed;
+        if (leftSpawnAction != null) leftSpawnAction.action.canceled += OnLeftTriggerReleased;
         if (rightSpawnAction != null) rightSpawnAction.action.performed += OnRightTriggerPressed;
+        if (rightSpawnAction != null) rightSpawnAction.action.canceled += OnRightTriggerReleased;
 
         // Subscribe each hand to its specific input action
 
@@ -56,68 +66,103 @@ public class ChestInventoryManager : MonoBehaviour
     {
         Debug.Log("ChestInventoryManager disabled. Unsubscribing from input actions.");
         if (leftSpawnAction != null) leftSpawnAction.action.performed -= OnLeftTriggerPressed;
+        if (leftSpawnAction != null) leftSpawnAction.action.canceled -= OnLeftTriggerReleased;
         if (rightSpawnAction != null) rightSpawnAction.action.performed -= OnRightTriggerPressed;
-
-        if (tabletInteractable != null)
-        {
-            tabletInteractable.selectExited.RemoveListener(OnTabletReleased);
-        }
+        if (rightSpawnAction != null) rightSpawnAction.action.canceled -= OnRightTriggerReleased;
     }
 
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("Trigger entered by: " + other.name);
         // Identify exactly which hand entered the chest trigger
-        NearFarInteractor interactor = other.GetComponentInChildren<NearFarInteractor>(false);
+        XRBaseInteractor interactor = other.GetComponentInChildren<XRDirectInteractor>(false);
         Debug.Log("Interactor found: " + (interactor != null ? interactor.name : "None"));
-        if (interactor == leftHandInteractor)
+        if (interactor == leftHandDirectInteractor)
         {
             isLeftHandInChest = true;
         }
-        else if (interactor == rightHandInteractor)
+        else if (interactor == rightHandDirectInteractor)
         {
             isRightHandInChest = true;
         }
     }
 
-     void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
         Debug.Log("Trigger exited by: " + other.name);
         // Identify exactly which hand exited the chest trigger
-        NearFarInteractor interactor = other.GetComponentInChildren<NearFarInteractor>(false);
+        XRBaseInteractor interactor = other.GetComponentInChildren<XRDirectInteractor>(false);
 
-        if (interactor == leftHandInteractor)
+        if (interactor == leftHandDirectInteractor)
         {
             isLeftHandInChest = false;
         }
-        else if (interactor == rightHandInteractor)
+        else if (interactor == rightHandDirectInteractor)
         {
             isRightHandInChest = false;
         }
     }
 
-     void OnLeftTriggerPressed(InputAction.CallbackContext context)
+    void OnLeftTriggerPressed(InputAction.CallbackContext context)
     {
         Debug.Log("Left trigger pressed. Left hand in chest: " + isLeftHandInChest);
         // Only spawn if the left hand is inside the chest
         if (isLeftHandInChest)
         {
-            SpawnTabletOnHand(leftHandInteractor);
+            SpawnTabletOnHand(leftHandDirectInteractor);
+            hideAt = float.PositiveInfinity;
         }
     }
 
-     void OnRightTriggerPressed(InputAction.CallbackContext context)
+    void OnLeftTriggerReleased(InputAction.CallbackContext context)
+    {
+        bool grabbing = false;
+        foreach (IXRSelectInteractable inter in leftHandDirectInteractor.interactablesSelected)
+        {
+            if (tabletInteractable == inter)
+            {
+                grabbing = true;
+            }
+        }
+        if (grabbing)
+        {
+            leftHandDirectInteractor.EndManualInteraction();
+        }
+
+    }
+    void OnRightTriggerReleased(InputAction.CallbackContext context)
+    {
+        bool grabbing = false;
+        foreach (IXRSelectInteractable inter in rightHandDirectInteractor.interactablesSelected)
+        {
+            if (tabletInteractable == inter)
+            {
+                grabbing = true;
+            }
+        }
+        if (grabbing)
+        {
+            rightHandDirectInteractor.EndManualInteraction();
+        }
+
+    }
+    void OnRightTriggerPressed(InputAction.CallbackContext context)
     {
         Debug.Log("Right trigger pressed. Right hand in chest: " + isRightHandInChest);
         // Only spawn if the right hand is inside the chest
         if (isRightHandInChest)
         {
-            SpawnTabletOnHand(rightHandInteractor);
+            SpawnTabletOnHand(rightHandDirectInteractor);
+            hideAt = float.PositiveInfinity;
         }
     }
 
-     void SpawnTabletOnHand(XRBaseInteractor targetHand)
+    void SpawnTabletOnHand(XRBaseInteractor targetHand)
     {
+        if (!float.IsPositiveInfinity(hideAt))
+        {
+            tabletInstance.SetActive(false);
+        }
         // Make sure we only spawn the tablet if it's currently hidden
         if (!tabletInstance.activeInHierarchy && targetHand != null)
         {
@@ -138,9 +183,29 @@ public class ChestInventoryManager : MonoBehaviour
         }
     }
 
-     void OnTabletReleased(SelectExitEventArgs args)
+    void OnTabletReleased(SelectExitEventArgs args)
     {
-        tabletInstance.SetActive(false);
+        checkReleasedAt = Time.time + 0.1f;
     }
-    
+
+    void LateUpdate()
+    {
+        if (Time.time >= checkReleasedAt)
+        {
+            if (tabletInteractable.interactorsSelecting.Count == 0)
+            {
+                Debug.Log("released");
+                // set a time 2 seconds from now
+                hideAt = Time.time + 2f;
+            }
+            checkReleasedAt = float.PositiveInfinity;
+        }
+
+        if (Time.time >= hideAt)
+        {
+            tabletInstance.SetActive(false);
+            hideAt = float.PositiveInfinity;
+        }
+    }
+
 }
