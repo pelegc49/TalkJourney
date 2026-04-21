@@ -178,6 +178,8 @@ MonoBehaviour:
   autoConfigureSentenceAreaLayout: 1
   fallbackDisplayBubblePrefab: {fileID: 0}
   speakerButtonInteractable: {fileID: 0}
+  speakerIconObject: {fileID: 0}
+  loadingIconObject: {fileID: 0}
   includeSpeakerInSentenceLayout: 1
   playbackMode: 1
 --- !u!114 &3984251827163612947
