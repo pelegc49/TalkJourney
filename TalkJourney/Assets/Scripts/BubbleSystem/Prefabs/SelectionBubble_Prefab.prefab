@@ -183,17 +183,19 @@ MonoBehaviour:
   interactable: {fileID: 1884320560938301556}
   primaryText: {fileID: 5758754462421847196}
   transliteratorTextObject: {fileID: 5165588314125888735}
+  transliteratorAnimator: {fileID: 355721160126778855}
+  transliteratorVisibleBool: IsVisible
   transliteratorLocaleCode: en-he
   minimumBubbleSize: {x: 50, y: 50}
   bubblePadding: {x: 32, y: 16}
   matchPrimaryTextAndDisplayBubbleToContent: 1
-  primaryTextRectTransform: {fileID: 0}
+  primaryTextRectTransform: {fileID: 1891915454015958432}
   primaryTextPadding: {x: 20, y: 10}
-  primaryDisplayBubbleRectTransform: {fileID: 0}
+  primaryDisplayBubbleRectTransform: {fileID: 794289408900105944}
   primaryDisplayBubblePadding: {x: 20, y: 10}
-  transliteratorTextRectTransform: {fileID: 0}
+  transliteratorTextRectTransform: {fileID: 1241294528299246876}
   transliteratorTextPadding: {x: 20, y: 10}
-  transliteratorBubbleRectTransform: {fileID: 0}
+  transliteratorBubbleRectTransform: {fileID: 7035709300344233711}
   transliteratorBubblePadding: {x: 20, y: 10}
 --- !u!114 &2330948381462396522
 MonoBehaviour:
@@ -552,6 +554,8 @@ GameObject:
   - component: {fileID: 1241294528299246876}
   - component: {fileID: 5018900933592595633}
   - component: {fileID: 1439045635818390087}
+  - component: {fileID: 355721160126778855}
+  - component: {fileID: 1305653540401889536}
   m_Layer: 0
   m_Name: TransliteratorText_UI
   m_TagString: Untagged
@@ -679,6 +683,40 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!95 &355721160126778855
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5165588314125888735}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2945854f4d36e2248b1b9b2ff06f014b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!225 &1305653540401889536
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5165588314125888735}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5528835226205592176
 GameObject:
   m_ObjectHideFlags: 0
