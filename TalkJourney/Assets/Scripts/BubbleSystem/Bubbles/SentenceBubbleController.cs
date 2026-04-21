@@ -41,6 +41,12 @@ namespace TalkJourney.BubbleSystem.Bubbles
         [Tooltip("Interactable speaker button shown near the sentence bubble.")]
         public VrPointerInteractable speakerButtonInteractable;
 
+        [Tooltip("Optional Speaker child GameObject. If empty, a child named 'Speaker' is used.")]
+        public GameObject speakerIconObject;
+
+        [Tooltip("Optional Loading child GameObject. If empty, a child named 'Loading' is used.")]
+        public GameObject loadingIconObject;
+
         [Tooltip("If enabled, speaker button becomes a child of sentenceBubbleParent and participates in its layout flow.")]
         public bool includeSpeakerInSentenceLayout = true;
 
@@ -56,6 +62,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
             RefreshDependencies();
             // EnsureSentenceAreaLayout();
             SetSpeakerButtonVisible(false);
+            SetSpeakerPlaybackState(false);
         }
 
         private void OnEnable()
@@ -103,6 +110,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
             SetSpeakerButtonVisible(shouldShowSpeaker);
             if (shouldShowSpeaker)
             {
+                SetSpeakerPlaybackState(false);
                 SyncSpeakerWithSentenceLayout();
             }
         }
@@ -181,17 +189,26 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 return;
             }
 
-            if (playbackMode == SentencePlaybackMode.PreferFullSentenceClip)
-            {
-                var fullSentenceText = string.Join(" ", sentenceTexts).Trim();
-                var played = await _audioPlaybackManager.PlayByTextAsync(fullSentenceText, cancellationToken);
-                if (played)
-                {
-                    return;
-                }
-            }
+            SetSpeakerPlaybackState(true);
 
-            await _audioPlaybackManager.PlaySequenceAsync(sentenceTexts, cancellationToken);
+            try
+            {
+                if (playbackMode == SentencePlaybackMode.PreferFullSentenceClip)
+                {
+                    var fullSentenceText = string.Join(" ", sentenceTexts).Trim();
+                    var played = await _audioPlaybackManager.PlayByTextAsync(fullSentenceText, cancellationToken);
+                    if (played)
+                    {
+                        return;
+                    }
+                }
+
+                await _audioPlaybackManager.PlaySequenceAsync(sentenceTexts, cancellationToken);
+            }
+            finally
+            {
+                SetSpeakerPlaybackState(false);
+            }
         }
 
         private List<string> BuildSentenceTexts()
@@ -279,6 +296,22 @@ namespace TalkJourney.BubbleSystem.Bubbles
             }
         }
 
+        private void SetSpeakerPlaybackState(bool isLoading)
+        {
+            var speakerObject = ResolveSpeakerIconObject();
+            var loadingObject = ResolveLoadingIconObject();
+
+            if (speakerObject != null)
+            {
+                speakerObject.SetActive(!isLoading);
+            }
+
+            if (loadingObject != null)
+            {
+                loadingObject.SetActive(isLoading);
+            }
+        }
+
         private Transform ResolveSpeakerButtonTransform()
         {
             if (speakerButtonInteractable != null)
@@ -287,6 +320,50 @@ namespace TalkJourney.BubbleSystem.Bubbles
             }
 
             return null;
+        }
+
+        private GameObject ResolveSpeakerIconObject()
+        {
+            if (speakerIconObject != null)
+            {
+                return speakerIconObject;
+            }
+
+            var speakerTransform = ResolveSpeakerButtonTransform();
+            if (speakerTransform == null)
+            {
+                return null;
+            }
+
+            var child = speakerTransform.Find("Speaker");
+            if (child != null)
+            {
+                speakerIconObject = child.gameObject;
+            }
+
+            return speakerIconObject;
+        }
+
+        private GameObject ResolveLoadingIconObject()
+        {
+            if (loadingIconObject != null)
+            {
+                return loadingIconObject;
+            }
+
+            var speakerTransform = ResolveSpeakerButtonTransform();
+            if (speakerTransform == null)
+            {
+                return null;
+            }
+
+            var child = speakerTransform.Find("Loading");
+            if (child != null)
+            {
+                loadingIconObject = child.gameObject;
+            }
+
+            return loadingIconObject;
         }
 
         private RectTransform ResolveSentenceAreaRect()
