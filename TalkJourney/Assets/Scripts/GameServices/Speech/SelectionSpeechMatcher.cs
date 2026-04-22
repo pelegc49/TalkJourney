@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -154,8 +155,31 @@ namespace TalkJourney.BubbleSystem.Speech
 
             _isBypassEnabled = true;
             ApplyBypassStateToActiveSelections();
-            SetBypassButtonVisible(false);
+            StartCoroutine(HideBypassButtonAfterClick());
             BubbleEventBus.PublishBypassEnabled();
+        }
+
+        private IEnumerator HideBypassButtonAfterClick()
+        {
+            var animator = bypassButtonInteractable != null ? bypassButtonInteractable.GetComponent<Animator>() : null;
+            if (animator != null)
+            {
+                animator.SetBool("IsClicked", true);
+                yield return null;
+
+                var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+                var waitTime = stateInfo.length / Mathf.Max(0.01f, stateInfo.speed);
+                if (waitTime > 0f)
+                {
+                    yield return new WaitForSeconds(waitTime);
+                }
+            }
+            else
+            {
+                yield return null;
+            }
+
+            SetBypassButtonVisible(false);
         }
 
         private void OnStageChanged(TalkJourney.BubbleSystem.Data.StageData _)
