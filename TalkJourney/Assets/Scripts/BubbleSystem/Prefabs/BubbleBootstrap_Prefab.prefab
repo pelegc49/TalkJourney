@@ -110,6 +110,8 @@ GameObject:
   - component: {fileID: 3933484982578997305}
   - component: {fileID: 1846992402601521912}
   - component: {fileID: 3161978996610773013}
+  - component: {fileID: 7658032646213365320}
+  - component: {fileID: 1505288895680987917}
   m_Layer: 5
   m_Name: BubbleBootstrap_Prefab
   m_TagString: Untagged
@@ -184,7 +186,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &3128877150862483405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +233,12 @@ MonoBehaviour:
   autoFindSpeechRecognitionBehaviour: 1
   autoCreateAudioSource: 1
   autoResizeAreasByRows: 1
+  bootstrapAnimator: {fileID: 7658032646213365320}
+  showAnimationBool: IsVisible
+  showAnimationTrigger: FadeIn
+  hideAnimationBool: IsVisible
+  hideAnimationTrigger: FadeOut
+  hideAnimationDuration: 0.5
 --- !u!114 &8496763678097340384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +259,10 @@ MonoBehaviour:
   selectionSpeechMatcher: {fileID: 3984251827163612947}
   localizationServiceBehaviour: {fileID: 0}
   audioPlaybackManagerBehaviour: {fileID: 3933484982578997305}
+  transitionAnimator: {fileID: 7658032646213365320}
+  fadeOutBool: FadeOut
+  fadeInBool: FadeIn
+  fadeDuration: 0.5
 --- !u!114 &2047445298037219905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,6 +439,40 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
+--- !u!95 &7658032646213365320
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598673396303755336}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 03510ef0f48343444bae4a55421992e9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!225 &1505288895680987917
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598673396303755336}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2220974929936561860
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,7 +598,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -80}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 900, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7984316717549919237
@@ -1010,7 +1056,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 900, y: 60}
+  m_SizeDelta: {x: 900, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &212077487489574558
 MonoBehaviour:

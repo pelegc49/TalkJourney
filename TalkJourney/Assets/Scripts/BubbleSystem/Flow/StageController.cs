@@ -37,10 +37,24 @@ namespace TalkJourney.BubbleSystem.Flow
         [Tooltip("Component implementing audio playback manager; injected into spawned selection bubble display controllers.")]
         public MonoBehaviour audioPlaybackManagerBehaviour;
 
+        [Header("Stage Transition")]
+        [Tooltip("Optional animator used to fade stages out and in.")]
+        public Animator transitionAnimator;
+
+        [Tooltip("Animator bool parameter used to start the fade-out animation.")]
+        public string fadeOutBool = "FadeOut";
+
+        [Tooltip("Animator bool parameter used to start the fade-in animation.")]
+        public string fadeInBool = "FadeIn";
+
+        [Tooltip("Fallback duration for the stage fade animation.")]
+        public float fadeDuration = 0.5f;
+
         public StageData CurrentStage { get; private set; }
         public event Action<StageData> StageChanged;
 
         private readonly List<SelectionBubbleController> _activeSelectionBubbles = new List<SelectionBubbleController>();
+        private Coroutine _stageTransitionCoroutine;
 
         private void Start()
         {
@@ -66,7 +80,7 @@ namespace TalkJourney.BubbleSystem.Flow
 
         public bool TransitionToStage(StageData nextStage)
         {
-            return LoadStage(nextStage);
+            return StartStageTransition(nextStage);
         }
 
         public bool TryHandleSelection(SelectionBubbleData selectionData)
@@ -110,7 +124,7 @@ namespace TalkJourney.BubbleSystem.Flow
 
             if (selectionData.nextStage != null)
             {
-                return LoadStage(selectionData.nextStage);
+                return StartStageTransition(selectionData.nextStage);
             }
 
             // Terminal rule: correct selection with no next stage completes the journey.
@@ -151,6 +165,58 @@ namespace TalkJourney.BubbleSystem.Flow
             StageChanged?.Invoke(nextStage);
             BubbleEventBus.PublishStageChanged(nextStage);
             return true;
+        }
+
+        private bool StartStageTransition(StageData nextStage)
+        {
+            if (nextStage == null)
+            {
+                return false;
+            }
+
+            if (_stageTransitionCoroutine != null)
+            {
+                return false;
+            }
+
+            if (transitionAnimator == null)
+            {
+                return LoadStage(nextStage);
+            }
+
+            _stageTransitionCoroutine = StartCoroutine(StageTransitionRoutine(nextStage));
+            return true;
+        }
+
+        private System.Collections.IEnumerator StageTransitionRoutine(StageData nextStage)
+        {
+            if (transitionAnimator != null && !string.IsNullOrEmpty(fadeOutBool))
+            {
+                transitionAnimator.SetBool(fadeOutBool, true);
+            }
+
+            yield return new WaitForSeconds(Mathf.Max(0f, fadeDuration));
+
+            if (transitionAnimator != null && !string.IsNullOrEmpty(fadeOutBool))
+            {
+                transitionAnimator.SetBool(fadeOutBool, false);
+            }
+
+            LoadStage(nextStage);
+
+            if (transitionAnimator != null && !string.IsNullOrEmpty(fadeInBool))
+            {
+                transitionAnimator.SetBool(fadeInBool, true);
+            }
+
+            yield return new WaitForSeconds(Mathf.Max(0f, fadeDuration));
+
+            if (transitionAnimator != null && !string.IsNullOrEmpty(fadeInBool))
+            {
+                transitionAnimator.SetBool(fadeInBool, false);
+            }
+
+            _stageTransitionCoroutine = null;
         }
 
         private bool HasValidSingleCorrectSelection(StageData stageData)

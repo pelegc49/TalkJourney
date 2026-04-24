@@ -43,6 +43,16 @@ namespace TalkJourney.BubbleSystem.Flow
         [Tooltip("Optional title/status text.")]
         public TMP_Text completionStatusText;
 
+        [Header("Animation")]
+        [Tooltip("Optional animator used to play the results fade-in animation.")]
+        public Animator resultsAnimator;
+
+        [Tooltip("Animator bool parameter used to show results.")]
+        public string resultsShowBool = "IsVisible";
+
+        [Tooltip("Animator trigger parameter used to show results.")]
+        public string resultsShowTrigger = "FadeIn";
+
         public TMP_Text durationText;
         public TMP_Text totalSelectionsText;
         public TMP_Text correctSelectionsText;
@@ -89,6 +99,7 @@ namespace TalkJourney.BubbleSystem.Flow
         private readonly List<BubbleData> _runtimeBubbleData = new List<BubbleData>();
         private readonly List<ResultRowView> _spawnedRows = new List<ResultRowView>();
         private ILocalizationService _localizationService;
+        private bool _pendingShowResults;
 
         private void Awake()
         {
@@ -108,6 +119,7 @@ namespace TalkJourney.BubbleSystem.Flow
             BubbleEventBus.SelectionCorrect += OnSelectionCorrect;
             BubbleEventBus.SelectionIncorrect += OnSelectionIncorrect;
             BubbleEventBus.JourneyCompleted += OnJourneyCompleted;
+            BubbleEventBus.BubbleSystemHidden += OnBubbleSystemHidden;
             LocalizationResolver.OnLanguageChanged += OnLanguageChanged;
             LocalizationResolver.OnTransliteratorChanged += OnTransliteratorChanged;
         }
@@ -118,6 +130,7 @@ namespace TalkJourney.BubbleSystem.Flow
             BubbleEventBus.SelectionCorrect -= OnSelectionCorrect;
             BubbleEventBus.SelectionIncorrect -= OnSelectionIncorrect;
             BubbleEventBus.JourneyCompleted -= OnJourneyCompleted;
+            BubbleEventBus.BubbleSystemHidden -= OnBubbleSystemHidden;
             LocalizationResolver.OnLanguageChanged -= OnLanguageChanged;
             LocalizationResolver.OnTransliteratorChanged -= OnTransliteratorChanged;
         }
@@ -171,7 +184,18 @@ namespace TalkJourney.BubbleSystem.Flow
         {
             _stats.Complete();
             RefreshUI();
+            _pendingShowResults = true;
+        }
+
+        private void OnBubbleSystemHidden()
+        {
+            if (!_pendingShowResults)
+            {
+                return;
+            }
+
             SetResultsVisibility(true);
+            _pendingShowResults = false;
         }
 
         private void RefreshUI()
@@ -487,6 +511,33 @@ namespace TalkJourney.BubbleSystem.Flow
             if (closeButtonRoot != null)
             {
                 closeButtonRoot.SetActive(isVisible);
+            }
+
+            if (!isVisible)
+            {
+                return;
+            }
+
+            var animator = resultsAnimator;
+            if (animator == null && resultsPanelRoot != null)
+            {
+                animator = resultsPanelRoot.GetComponent<Animator>();
+            }
+
+            if (animator == null)
+            {
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(resultsShowTrigger))
+            {
+                animator.SetTrigger(resultsShowTrigger);
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(resultsShowBool))
+            {
+                animator.SetBool(resultsShowBool, true);
             }
         }
     }

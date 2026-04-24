@@ -1,7 +1,9 @@
+using System.Collections;
 using UnityEngine;
 using TalkJourney.BubbleSystem.Audio;
 using TalkJourney.BubbleSystem.Bubbles;
 using TalkJourney.BubbleSystem.Data;
+using TalkJourney.BubbleSystem.Events;
 using TalkJourney.BubbleSystem.Interaction;
 using TalkJourney.BubbleSystem.Localization;
 using TalkJourney.BubbleSystem.Speech;
@@ -55,7 +57,27 @@ namespace TalkJourney.BubbleSystem.Flow
         [Tooltip("When enabled, SentenceArea and SelectionArea heights are recalculated from wrapped child rows every frame during play mode.")]
         public bool autoResizeAreasByRows = true;
 
+        [Header("Animation")]
+        [Tooltip("Optional animator used to play the show/hide animations on the BubbleSystemBootstrap.")]
+        public Animator bootstrapAnimator;
+
+        [Tooltip("Animator bool parameter that triggers the show animation when this object becomes visible.")]
+        public string showAnimationBool = "IsVisible";
+
+        [Tooltip("Animator trigger parameter that triggers the show animation when this object becomes visible.")]
+        public string showAnimationTrigger = "FadeIn";
+
+        [Tooltip("Animator bool parameter that triggers the hide animation on journey completion.")]
+        public string hideAnimationBool = "IsVisible";
+
+        [Tooltip("Animator trigger parameter that triggers the hide animation on journey completion.")]
+        public string hideAnimationTrigger = "FadeOut";
+
+        [Tooltip("Duration of the hide animation after journey completion.")]
+        public float hideAnimationDuration = 0.5f;
+
         private bool _isSetupComplete;
+        private Coroutine _hideCompletionCoroutine;
         private int _lastSentenceChildCount = -1;
         private int _lastSelectionChildCount = -1;
         private float _lastSentenceWidth = -1f;
@@ -74,12 +96,87 @@ namespace TalkJourney.BubbleSystem.Flow
             }
         }
 
+        private void OnEnable()
+        {
+            PlayShowAnimation();
+            BubbleEventBus.JourneyCompleted += OnJourneyCompleted;
+        }
+
+        private void OnDisable()
+        {
+            ResetShowAnimationState();
+            BubbleEventBus.JourneyCompleted -= OnJourneyCompleted;
+        }
+
         private void OnValidate()
         {
             if (!Application.isPlaying)
             {
                 CenterSentenceAndSelectionAreas();
             }
+        }
+
+        private void PlayShowAnimation()
+        {
+            var animator = bootstrapAnimator != null ? bootstrapAnimator : GetComponent<Animator>();
+            if (animator == null)
+            {
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(showAnimationTrigger))
+            {
+                animator.SetTrigger(showAnimationTrigger);
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(showAnimationBool))
+            {
+                animator.SetBool(showAnimationBool, true);
+            }
+        }
+
+        private void OnJourneyCompleted(StageData _, SelectionBubbleData __)
+        {
+            if (_hideCompletionCoroutine != null)
+            {
+                return;
+            }
+
+            _hideCompletionCoroutine = StartCoroutine(HideOnJourneyCompletedRoutine());
+        }
+
+        private System.Collections.IEnumerator HideOnJourneyCompletedRoutine()
+        {
+            var animator = bootstrapAnimator != null ? bootstrapAnimator : GetComponent<Animator>();
+            if (animator != null)
+            {
+                if (!string.IsNullOrEmpty(hideAnimationTrigger))
+                {
+                    animator.SetTrigger(hideAnimationTrigger);
+                }
+                else if (!string.IsNullOrEmpty(hideAnimationBool))
+                {
+                    animator.SetBool(hideAnimationBool, false);
+                }
+            }
+
+            yield return new WaitForSeconds(Mathf.Max(0f, hideAnimationDuration));
+
+            gameObject.SetActive(false);
+            BubbleEventBus.PublishBubbleSystemHidden();
+            _hideCompletionCoroutine = null;
+        }
+
+        private void ResetShowAnimationState()
+        {
+            var animator = bootstrapAnimator != null ? bootstrapAnimator : GetComponent<Animator>();
+            if (animator == null || string.IsNullOrEmpty(showAnimationBool))
+            {
+                return;
+            }
+
+            animator.SetBool(showAnimationBool, false);
         }
 
         private void LateUpdate()
