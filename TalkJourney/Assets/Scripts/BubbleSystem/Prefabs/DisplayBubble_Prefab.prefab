@@ -436,12 +436,12 @@ MonoBehaviour:
   primaryText: {fileID: 861316924493752318}
   transliteratorTextObject: {fileID: 788094582226483123}
   transliteratorAnimator: {fileID: 6428516055767404135}
-  transliteratorShowTrigger: Show
-  transliteratorHideTrigger: Hide
+  transliteratorVisibleBool: IsVisible
   transliteratorLocaleCode: en-he
   minimumBubbleSize: {x: 50, y: 50}
   bubblePadding: {x: 32, y: 16}
   matchPrimaryTextAndDisplayBubbleToContent: 1
+  matchTransliteratorTextAndTransliteratorBubbleToContent: 1
   primaryTextRectTransform: {fileID: 0}
   primaryTextPadding: {x: 15, y: 10}
   primaryDisplayBubbleRectTransform: {fileID: 0}
