@@ -1,6 +1,7 @@
 using System.Text;
 using UnityEngine;
 using TalkJourney.BubbleSystem.Data;
+using TalkJourney.BubbleSystem.Events;
 using TalkJourney.BubbleSystem.Flow;
 using TalkJourney.BubbleSystem.Interaction;
 using TalkJourney.BubbleSystem.Localization;
@@ -31,6 +32,28 @@ namespace TalkJourney.BubbleSystem.Bubbles
         [Tooltip("When enabled, selection clicks only work after bypass is enabled by the speech matcher.")]
         public bool requireBypassForClick = true;
 
+        [Header("Selection Feedback")]
+        [Tooltip("Animator used to play correct/incorrect feedback animations on this bubble.")]
+        public Animator feedbackAnimator;
+
+        [Tooltip("Trigger name for the correct selection feedback animation.")]
+        public string correctSelectionTrigger = "Correct";
+
+        [Tooltip("Trigger name for the incorrect selection feedback animation.")]
+        public string incorrectSelectionTrigger = "Incorrect";
+
+        [Tooltip("Audio source used for playing correct/incorrect feedback sounds.")]
+        public AudioSource feedbackAudioSource;
+
+        [Tooltip("Audio clip played when the selection is correct.")]
+        public AudioClip correctSelectionClip;
+
+        [Tooltip("Audio clip played when the selection is incorrect.")]
+        public AudioClip incorrectSelectionClip;
+
+        [Tooltip("If enabled, automatically resolve an AudioSource on the same GameObject.")]
+        public bool autoResolveFeedbackAudioSource = true;
+
         private bool _hasActivated;
         private bool _isBypassEnabled;
         private ILocalizationService _localizationService;
@@ -52,6 +75,9 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 interactable.Clicked += ActivateFromClick;
             }
 
+            BubbleEventBus.SelectionCorrect += OnSelectionCorrect;
+            BubbleEventBus.SelectionIncorrect += OnSelectionIncorrect;
+
             // Subscribe to language change events
             LocalizationResolver.OnLanguageChanged += OnLanguageChanged;
         }
@@ -62,6 +88,9 @@ namespace TalkJourney.BubbleSystem.Bubbles
             {
                 interactable.Clicked -= ActivateFromClick;
             }
+
+            BubbleEventBus.SelectionCorrect -= OnSelectionCorrect;
+            BubbleEventBus.SelectionIncorrect -= OnSelectionIncorrect;
 
             // Unsubscribe from language change events
             LocalizationResolver.OnLanguageChanged -= OnLanguageChanged;
@@ -123,6 +152,16 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 interactable = GetComponent<VrPointerInteractable>();
             }
 
+            if (feedbackAnimator == null)
+            {
+                feedbackAnimator = GetComponent<Animator>();
+            }
+
+            if (feedbackAudioSource == null && autoResolveFeedbackAudioSource)
+            {
+                feedbackAudioSource = GetComponent<AudioSource>();
+            }
+
             if (_stageController == null)
             {
                 _stageController = FindFirstObjectByType<StageController>(FindObjectsInactive.Include);
@@ -168,6 +207,43 @@ namespace TalkJourney.BubbleSystem.Bubbles
             }
 
             return didHandleSelection;
+        }
+
+        private void OnSelectionCorrect(SelectionBubbleData selectedData)
+        {
+            if (selectedData == selectionData)
+            {
+                PlaySelectionFeedback(true);
+            }
+        }
+
+        private void OnSelectionIncorrect(SelectionBubbleData selectedData)
+        {
+            if (selectedData == selectionData)
+            {
+                PlaySelectionFeedback(false);
+            }
+        }
+
+        private void PlaySelectionFeedback(bool isCorrect)
+        {
+            if (feedbackAnimator != null)
+            {
+                var trigger = isCorrect ? correctSelectionTrigger : incorrectSelectionTrigger;
+                if (!string.IsNullOrEmpty(trigger))
+                {
+                    feedbackAnimator.SetTrigger(trigger);
+                }
+            }
+
+            if (feedbackAudioSource != null)
+            {
+                var clip = isCorrect ? correctSelectionClip : incorrectSelectionClip;
+                if (clip != null)
+                {
+                    feedbackAudioSource.PlayOneShot(clip);
+                }
+            }
         }
 
         private bool MatchesRecognizedText(string recognizedText)

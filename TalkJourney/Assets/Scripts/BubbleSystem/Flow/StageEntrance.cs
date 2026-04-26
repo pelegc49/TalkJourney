@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Locomotion;
 using TalkJourney.BubbleSystem.Data;
 
 namespace TalkJourney.BubbleSystem.Flow
@@ -59,6 +61,7 @@ namespace TalkJourney.BubbleSystem.Flow
         public static StageEntrance ActiveStageEntrance { get; private set; }
 
         private XRSimpleInteractable _xrSimpleInteractable;
+        private readonly List<LocomotionProvider> _disabledLocomotionProviders = new List<LocomotionProvider>();
         private Vector3 _savedRigPosition;
         private Quaternion _savedRigRotation;
         private bool _hasSavedRigPose;
@@ -149,6 +152,7 @@ namespace TalkJourney.BubbleSystem.Flow
             }
 
             SaveRigPose();
+            DisableLocomotionProviders();
             TeleportRigToSeat();
 
             if (stageCanvasRoot != null)
@@ -192,6 +196,8 @@ namespace TalkJourney.BubbleSystem.Flow
                 bubbleSystemLauncher.StopAndDestroyActiveBootstrap();
             }
 
+            RestoreLocomotionProviders();
+
             if (ActiveStageEntrance == this)
             {
                 ActiveStageEntrance = null;
@@ -234,10 +240,49 @@ namespace TalkJourney.BubbleSystem.Flow
 
             var localCameraPosition = xrOriginRoot.InverseTransformPoint(xrCamera.position);
             var localCameraRotation = Quaternion.Inverse(xrOriginRoot.rotation) * xrCamera.rotation;
-            var newRigRotation = targetWorldRotation * Quaternion.Inverse(localCameraRotation);
+            var localCameraYaw = Quaternion.Euler(0f, localCameraRotation.eulerAngles.y, 0f);
+            var newRigRotation = targetWorldRotation * Quaternion.Inverse(localCameraYaw);
 
             xrOriginRoot.rotation = newRigRotation;
             xrOriginRoot.position = targetWorldPosition - newRigRotation * localCameraPosition;
+        }
+
+        private void DisableLocomotionProviders()
+        {
+            _disabledLocomotionProviders.Clear();
+            if (xrOriginRoot == null)
+            {
+                return;
+            }
+
+            var providers = FindObjectsByType<LocomotionProvider>(FindObjectsSortMode.None);
+            foreach (var provider in providers)
+            {
+                if (provider == null || !provider.isActiveAndEnabled)
+                {
+                    continue;
+                }
+
+                if (provider.transform == xrOriginRoot || provider.transform.IsChildOf(xrOriginRoot))
+                {
+                    provider.enabled = false;
+                    _disabledLocomotionProviders.Add(provider);
+                }
+            }
+        }
+
+        private void RestoreLocomotionProviders()
+        {
+            for (int i = 0; i < _disabledLocomotionProviders.Count; i++)
+            {
+                var provider = _disabledLocomotionProviders[i];
+                if (provider != null)
+                {
+                    provider.enabled = true;
+                }
+            }
+
+            _disabledLocomotionProviders.Clear();
         }
     }
 }
