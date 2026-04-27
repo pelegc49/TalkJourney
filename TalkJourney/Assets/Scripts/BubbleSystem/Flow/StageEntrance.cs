@@ -76,6 +76,8 @@ namespace TalkJourney.BubbleSystem.Flow
                 return;
             }
 
+            // NOTE: To make this work with trigger button only (not grip), rebind the Select action in your Input Actions
+            // from Grip to Trigger in Project Settings > XR Plug-in Management > Input
             _xrSimpleInteractable.selectEntered.AddListener(OnSelectEntered);
         }
 

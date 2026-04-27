@@ -235,11 +235,11 @@ MonoBehaviour:
   autoCreateAudioSource: 1
   autoResizeAreasByRows: 1
   bootstrapAnimator: {fileID: 7658032646213365320}
-  showAnimationBool: IsVisible
+  showAnimationBool: 
   showAnimationTrigger: FadeIn
-  hideAnimationBool: IsVisible
+  hideAnimationBool: 
   hideAnimationTrigger: FadeOut
-  hideAnimationDuration: 0.5
+  hideAnimationDuration: 1.5
 --- !u!114 &8496763678097340384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,7 +263,7 @@ MonoBehaviour:
   transitionAnimator: {fileID: 7658032646213365320}
   fadeOutBool: FadeOut
   fadeInBool: FadeIn
-  fadeDuration: 0.5
+  fadeDuration: 1.5
 --- !u!114 &2047445298037219905
 MonoBehaviour:
   m_ObjectHideFlags: 0

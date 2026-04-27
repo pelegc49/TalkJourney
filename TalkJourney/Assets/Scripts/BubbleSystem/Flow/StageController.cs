@@ -128,6 +128,18 @@ namespace TalkJourney.BubbleSystem.Flow
             }
 
             // Terminal rule: correct selection with no next stage completes the journey.
+            // Keep current visuals visible so BubbleSystemBootstrap can fade them out,
+            // then clear visuals after fade completion.
+            BubbleEventBus.PublishJourneyCompleted(CurrentStage, selectionData);
+            return true;
+        }
+
+        /// <summary>
+        /// Clears current stage visuals and active selection tracking.
+        /// Intended to run after terminal fade-out completes.
+        /// </summary>
+        public void ClearCurrentStageVisuals()
+        {
             ClearSelectionBubbles();
             PushActiveSelectionsToSpeechMatcher();
 
@@ -135,9 +147,6 @@ namespace TalkJourney.BubbleSystem.Flow
             {
                 sentenceBubbleController.ClearStageVisuals();
             }
-
-            BubbleEventBus.PublishJourneyCompleted(CurrentStage, selectionData);
-            return true;
         }
 
         public bool LoadStage(StageData nextStage)

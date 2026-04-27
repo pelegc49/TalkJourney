@@ -163,6 +163,12 @@ namespace TalkJourney.BubbleSystem.Flow
 
             yield return new WaitForSeconds(Mathf.Max(0f, hideAnimationDuration));
 
+            var stageController = GetComponent<StageController>();
+            if (stageController != null)
+            {
+                stageController.ClearCurrentStageVisuals();
+            }
+
             gameObject.SetActive(false);
             BubbleEventBus.PublishBubbleSystemHidden();
             _hideCompletionCoroutine = null;
