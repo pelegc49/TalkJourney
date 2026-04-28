@@ -8,9 +8,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ExampleScene.unity
     guid: 55daccc09a3b69647bbab145b54a3ab3
-  - enabled: 1
-    path: Assets/Scenes/City.unity
-    guid: 22f81827dd03e944299de65064cbc087
+  - enabled: 0
+    path: Assets/Scenes/TalkJourney.unity
+    guid: d4974c4fa8390314fa1abd3606e85624
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
