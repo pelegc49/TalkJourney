@@ -1,17 +1,23 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.InferenceEngine;
+using UnityEngine.Networking;
+using Firebase;
+using Firebase.Auth;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Unity.Collections;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Text.RegularExpressions; 
 using Unity.Profiling;
 using TalkJourney.BubbleSystem.Speech;
+using System;
 
-#if ENABLE_INPUT_SYSTEM 
+
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
@@ -76,6 +82,16 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
     [Header("Generation Settings")]
     public int maxTokens = 30;
 
+    [Header("Cloud STT")]
+    public bool useCloudSpeechToText = true;
+    public string cloudTranscriptionFunctionUrl = "http://localhost:3000/api/transcribe";
+    [Tooltip("If true, fetches Firebase ID token for Authorization header.")]
+    public bool useFirebaseAuthToken = true;
+    [Tooltip("If true, refreshes Firebase token before each request.")]
+    public bool forceRefreshFirebaseToken = true;
+    [Tooltip("If enabled, performs anonymous sign-in when no Firebase user is available.")]
+    public bool signInAnonymouslyIfNeeded = true;
+
     [Header("Output")]
     public string fullText = ""; 
     public bool isThinking = false;
@@ -117,6 +133,19 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
     private int _lastPaddedLength;
     private readonly bool[] _allowedAscii = new bool[128];
     private readonly HashSet<int> _recentTokens = new HashSet<int>(16);
+
+    [Serializable]
+    private class TranscribeRequest
+    {
+        public string audioBase64;
+        public string languageCode;
+    }
+
+    [Serializable]
+    private class TranscribeResponse
+    {
+        public string transcript;
+    }
 
     // Threading removed - Sentis GPU operations require main thread
     // Strategy: Use yield returns in TranscribeRoutine to keep cube smooth
@@ -415,6 +444,31 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
         // Yield to let cube render before heavy encoding work starts
         yield return null;
 
+        if (useCloudSpeechToText && !string.IsNullOrWhiteSpace(cloudTranscriptionFunctionUrl))
+        {
+            Task<string> cloudTask = UploadAudioToCloudAsync(_speechDataBuffer, length, cloudTranscriptionFunctionUrl, GetCloudLanguageCode());
+            while (!cloudTask.IsCompleted)
+            {
+                yield return null;
+            }
+
+            if (cloudTask.IsCompletedSuccessfully)
+            {
+                string cloudTranscript = cloudTask.Result;
+                if (!string.IsNullOrWhiteSpace(cloudTranscript))
+                {
+                    FinalizeTranscript(cloudTranscript);
+                    isTranscribing = false;
+                    isThinking = false;
+                    yield break;
+                }
+            }
+            else if (cloudTask.IsFaulted)
+            {
+                Debug.LogError($"Cloud transcription failed: {cloudTask.Exception?.GetBaseException().Message}");
+            }
+        }
+
         // Run encoder pipeline (stays on main thread for Sentis GPU safety)
         Tensor<float> encodedAudioCPU = null;
         int paddedLen = _paddedAudioBuffer.Length;
@@ -548,13 +602,126 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
             yield return null; 
         }
 
-        fullText = _transcriptBuilder.ToString();
+        FinalizeTranscript(_transcriptBuilder.ToString());
+        }
+    }
 
-        // Post-process: remove duplicate consecutive words
-        fullText = RemoveDuplicateWords(fullText);
+    private async Task<string> UploadAudioToCloudAsync(float[] samples, int length, string functionUrl, string languageCode = "ru-RU")
+    {
+        byte[] pcm = new byte[length * 2];
+        int index = 0;
+
+        for (int i = 0; i < length; i++)
+        {
+            float sample = Mathf.Clamp(samples[i], -1f, 1f);
+            short pcm16 = (short)(sample < 0 ? sample * 32768f : sample * 32767f);
+            pcm[index++] = (byte)(pcm16 & 0xff);
+            pcm[index++] = (byte)((pcm16 >> 8) & 0xff);
+        }
+
+        TranscribeRequest request = new TranscribeRequest
+        {
+            audioBase64 = System.Convert.ToBase64String(pcm),
+            languageCode = languageCode
+        };
+
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(JsonUtility.ToJson(request));
+        string resolvedBearerToken = await ResolveAuthorizationTokenAsync();
+
+        using (UnityWebRequest webRequest = new UnityWebRequest(functionUrl, "POST"))
+        {
+            webRequest.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            webRequest.downloadHandler = new DownloadHandlerBuffer();
+            webRequest.SetRequestHeader("Content-Type", "application/json");
+
+            if (!string.IsNullOrWhiteSpace(resolvedBearerToken))
+            {
+                webRequest.SetRequestHeader("Authorization", "Bearer " + resolvedBearerToken.Trim());
+            }
+
+            UnityWebRequestAsyncOperation operation = webRequest.SendWebRequest();
+            while (!operation.isDone)
+            {
+                await Task.Yield();
+            }
+
+            if (webRequest.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"Upload failed: {webRequest.error} Body: {webRequest.downloadHandler.text}");
+                return null;
+            }
+
+            try
+            {
+                TranscribeResponse response = JsonUtility.FromJson<TranscribeResponse>(webRequest.downloadHandler.text);
+                return response != null ? response.transcript : null;
+            }
+            catch
+            {
+                Debug.LogError($"Failed to parse function response: {webRequest.downloadHandler.text}");
+                return null;
+            }
+        }
+    }
+
+    private async Task<string> ResolveAuthorizationTokenAsync()
+    {
+        if (!useFirebaseAuthToken)
+        {
+            return null;
+        }
+
+        try
+        {
+            DependencyStatus dependencyStatus = await FirebaseApp.CheckAndFixDependenciesAsync();
+            if (dependencyStatus != DependencyStatus.Available)
+            {
+                Debug.LogWarning($"Firebase dependencies unavailable: {dependencyStatus}", this);
+                return null;
+            }
+
+            FirebaseAuth auth = FirebaseAuth.DefaultInstance;
+            FirebaseUser user = auth.CurrentUser;
+
+            if (user == null && signInAnonymouslyIfNeeded)
+            {
+                var signInResult = await auth.SignInAnonymouslyAsync();
+                user = signInResult?.User;
+            }
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            return await user.TokenAsync(forceRefreshFirebaseToken);
+        }
+        catch (System.Exception exception)
+        {
+            Debug.LogWarning($"Firebase token fetch failed: {exception.Message}", this);
+            return null;
+        }
+    }
+
+    private string GetCloudLanguageCode()
+    {
+        switch (currentLanguage)
+        {
+            case Language.English:
+                return "en-US";
+            case Language.Hebrew:
+                return "he-IL";
+            case Language.Russian:
+            default:
+                return "ru-RU";
+        }
+    }
+
+    private void FinalizeTranscript(string transcript)
+    {
+        fullText = RemoveDuplicateWords(transcript ?? "");
 
         string cleanUserText = CleanString(fullText);
-        
         EmitRecognizedPhrase(cleanUserText);
 
         if (useLegacySentenceCorrectionInStt && !string.IsNullOrEmpty(cleanUserText) && _currentSentences != null)
@@ -564,7 +731,6 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
         else
         {
             Debug.Log($"FINAL TRANSCRIPT: {fullText}");
-        }
         }
     }
 

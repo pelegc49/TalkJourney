@@ -33,7 +33,8 @@ const ttsClient = new textToSpeech.TextToSpeechClient({
     projectId: credentials.projectId
 });
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 async function verifyToken(req, res, next) {
     log('\x1b[33m[NEW]\x1b[0m Received request, verifying token...');
@@ -115,4 +116,45 @@ async function getDownloadUrl(file) {
 
 app.listen(PORT, () => {
     log(`Server running on port ${PORT}`);
+});
+
+
+const speech = require('@google-cloud/speech');
+
+const sttClient = new speech.SpeechClient({
+    credentials: {
+        client_email: process.env.FIREBASE_CLIENT_EMAIL,
+        private_key: process.env.FIREBASE_PRIVATE_KEY,
+    },
+    projectId: process.env.FIREBASE_PROJECT_ID,
+});
+
+app.post('/api/transcribe', verifyToken, async (req, res) => {
+    try {
+        const { audioBase64, languageCode = 'en-US' } = req.body;
+
+        if (!audioBase64) {
+            return res.status(400).json({ error: 'audioBase64 required' });
+        }
+
+        const [response] = await sttClient.recognize({
+            audio: { content: audioBase64 },
+            config: {
+                encoding: 'LINEAR16',
+                sampleRateHertz: 16000,
+                languageCode,
+                enableAutomaticPunctuation: true,
+            },
+        });
+
+        const transcript = (response.results || [])
+            .map(r => r.alternatives?.[0]?.transcript || '')
+            .join(' ')
+            .trim();
+
+        return res.json({ transcript });
+    } catch (error) {
+        log('[ERR] STT failed', 'error');
+        return res.status(500).json({ error: error.message || 'Internal Server Error' });
+    }
 });
