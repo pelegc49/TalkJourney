@@ -144,6 +144,7 @@ app.post('/api/transcribe', verifyToken, async (req, res) => {
                 sampleRateHertz: 16000,
                 languageCode,
                 enableAutomaticPunctuation: true,
+                useEnhanced: true
             },
         });
 
