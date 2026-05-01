@@ -500,17 +500,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57885106}
   m_CullTransparentMesh: 1
---- !u!114 &73476977 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1897108578803551515, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
-  m_PrefabInstance: {fileID: 1201795285}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &73808061
 GameObject:
   m_ObjectHideFlags: 0
@@ -5388,157 +5377,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Localization.LanguageSyncBridge
   localizationResolver: {fileID: 250759262}
---- !u!1 &510999537 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5648130919276084443, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
-  m_PrefabInstance: {fileID: 1201795285}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &510999546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510999537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ffd3eaf0ddad34cb788c21f7e0a1cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DynamicSettingsBuilder
-  menuTitle: Settings
-  contentArea: {fileID: 565330724}
-  headerTextComponent: {fileID: 73476977}
-  sliderPrefab: {fileID: 2179057468902719980, guid: 41d89b59fe3e9964a83686ff24b7d0c5, type: 3}
-  dropdownPrefab: {fileID: 2179057468902719980, guid: f47ad6ac315a3ea428b59e2cac6f2a2e, type: 3}
-  buttonPrefab: {fileID: 2397425259038431699, guid: fa5ef3b56cfeb4f4ba855cdf2610a578, type: 3}
-  togglePrefab: {fileID: 6345562874480820535, guid: e1f0d4bc2d67ddb4295e73f51f3ca4f7, type: 3}
-  settingsList:
-  - settingName: main audio
-    uiType: 0
-    dropdownOptions: []
-    sliderMin: -80
-    sliderMax: 0
-    sliderType: dB
-    targetSubMenu: {fileID: 0}
-    onSliderValueChanged:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: test, Assembly-CSharp
-          m_MethodName: OnSliderValueChanged
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    onDropdownValueChanged:
-      m_PersistentCalls:
-        m_Calls: []
-    onButtonClicked:
-      m_PersistentCalls:
-        m_Calls: []
-    onToggleValueChanged:
-      m_PersistentCalls:
-        m_Calls: []
-  - settingName: languages
-    uiType: 4
-    dropdownOptions: []
-    sliderMin: -80
-    sliderMax: 0
-    sliderType: dB
-    targetSubMenu: {fileID: 510999547}
-    onSliderValueChanged:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: test, Assembly-CSharp
-          m_MethodName: OnSliderValueChanged
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    onDropdownValueChanged:
-      m_PersistentCalls:
-        m_Calls: []
-    onButtonClicked:
-      m_PersistentCalls:
-        m_Calls: []
-    onToggleValueChanged:
-      m_PersistentCalls:
-        m_Calls: []
---- !u!114 &510999547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510999537}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ffd3eaf0ddad34cb788c21f7e0a1cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DynamicSettingsBuilder
-  menuTitle: Settings
-  contentArea: {fileID: 0}
-  headerTextComponent: {fileID: 0}
-  sliderPrefab: {fileID: 2179057468902719980, guid: 41d89b59fe3e9964a83686ff24b7d0c5, type: 3}
-  dropdownPrefab: {fileID: 2179057468902719980, guid: f47ad6ac315a3ea428b59e2cac6f2a2e, type: 3}
-  buttonPrefab: {fileID: 2397425259038431699, guid: fa5ef3b56cfeb4f4ba855cdf2610a578, type: 3}
-  togglePrefab: {fileID: 6345562874480820535, guid: e1f0d4bc2d67ddb4295e73f51f3ca4f7, type: 3}
-  settingsList:
-  - settingName: Native Language
-    uiType: 1
-    dropdownOptions:
-    - English
-    - Hebrew
-    - Russian
-    sliderMin: 0
-    sliderMax: 0
-    sliderType: 
-    targetSubMenu: {fileID: 0}
-    onSliderValueChanged:
-      m_PersistentCalls:
-        m_Calls: []
-    onDropdownValueChanged:
-      m_PersistentCalls:
-        m_Calls: []
-    onButtonClicked:
-      m_PersistentCalls:
-        m_Calls: []
-    onToggleValueChanged:
-      m_PersistentCalls:
-        m_Calls: []
-  - settingName: Learning Language
-    uiType: 1
-    dropdownOptions:
-    - English
-    - Hebrew
-    - Russian
-    sliderMin: 0
-    sliderMax: 0
-    sliderType: 
-    targetSubMenu: {fileID: 0}
-    onSliderValueChanged:
-      m_PersistentCalls:
-        m_Calls: []
-    onDropdownValueChanged:
-      m_PersistentCalls:
-        m_Calls: []
-    onButtonClicked:
-      m_PersistentCalls:
-        m_Calls: []
-    onToggleValueChanged:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &519216179 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7917674758919744183, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
@@ -6223,11 +6061,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558498187}
   m_CullTransparentMesh: 1
---- !u!224 &565330724 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1035790433963668018, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
-  m_PrefabInstance: {fileID: 1201795285}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &575323018
 GameObject:
   m_ObjectHideFlags: 0
@@ -9800,54 +9633,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 873179097}
   m_CullTransparentMesh: 1
---- !u!1 &885765683
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 885765685}
-  - component: {fileID: 885765686}
-  m_Layer: 0
-  m_Name: Settings manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &885765685
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 885765683}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.91, y: 0.986, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1201795286}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &885765686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 885765683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 278510b48cc8ebb4aabbc9be8dd1b35a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SettingsSpawner
-  settingsPanel: {fileID: 510999537}
-  player: {fileID: 1373153108}
-  spawnAction: {fileID: 2426174461529724431, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!224 &888636339 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8072890477496077224, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
@@ -10643,6 +10428,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 976442729}
   m_CullTransparentMesh: 1
+--- !u!1 &984978913 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5648130919276084443, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
+  m_PrefabInstance: {fileID: 1201795285}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &984978914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984978913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa25a52b65c51134fba421eec9f88958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SettingsMenuBuilder
+  currentSettings: {fileID: 11400000, guid: 411f87b2f744f23429f506a4c6095c46, type: 2}
+  scrollContentParent: {fileID: 1201795286}
+  dropdownPrefab: {fileID: 2179057468902719980, guid: f47ad6ac315a3ea428b59e2cac6f2a2e, type: 3}
+  sliderPrefab: {fileID: 2179057468902719980, guid: 41d89b59fe3e9964a83686ff24b7d0c5, type: 3}
+  buttonPrefab: {fileID: 2397425259038431699, guid: fa5ef3b56cfeb4f4ba855cdf2610a578, type: 3}
 --- !u!4 &986458564 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5790362245941073629, guid: 753505d367f39d04c8ef944e9491a149, type: 3}
@@ -13236,7 +13043,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 885765685}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1035790433963668018, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
       propertyPath: m_SizeDelta.y
@@ -13360,11 +13167,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8072890477496077224, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1.91
       objectReference: {fileID: 0}
     - target: {fileID: 8072890477496077224, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.986
       objectReference: {fileID: 0}
     - target: {fileID: 8072890477496077224, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -13388,14 +13195,11 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5648130919276084443, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 510999546}
-    - targetCorrespondingSourceObject: {fileID: 5648130919276084443, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 510999547}
+      addedObject: {fileID: 984978914}
   m_SourcePrefab: {fileID: 100100000, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
 --- !u!224 &1201795286 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8072890477496077224, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1035790433963668018, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
   m_PrefabInstance: {fileID: 1201795285}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1215012699
@@ -15252,11 +15056,6 @@ PrefabInstance:
 --- !u!20 &1373153107 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 7917674758326848207, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
-  m_PrefabInstance: {fileID: 1373153106}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1373153108 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7917674758326848201, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
   m_PrefabInstance: {fileID: 1373153106}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1373153111 stripped
@@ -24359,5 +24158,5 @@ SceneRoots:
   - {fileID: 1826548637}
   - {fileID: 88826750}
   - {fileID: 1652699856}
-  - {fileID: 885765685}
+  - {fileID: 1201795285}
   - {fileID: 610263332}
