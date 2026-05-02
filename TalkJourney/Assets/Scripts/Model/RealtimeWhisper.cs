@@ -25,6 +25,7 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
 {
     public event System.Action<string> PhraseRecognized;
     public event System.Action<Language> LanguageChanged;
+    public event System.Action<bool> ThinkingStateChanged;
 
     // Singleton pattern
     private static RealtimeWhisper _instance;
@@ -188,6 +189,17 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
 
         _instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void SetThinkingState(bool value)
+    {
+        if (isThinking == value)
+        {
+            return;
+        }
+
+        isThinking = value;
+        ThinkingStateChanged?.Invoke(value);
     }
 
     void Start()
@@ -377,7 +389,7 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
         using (TranscribeMarker.Auto())
         {
         isTranscribing = true;
-        isThinking = true;
+        SetThinkingState(true);
         fullText = "";
 
         int totalSamples = micClip.samples;
@@ -391,7 +403,7 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
         int maxLen = MaxAudioSeconds * SampleRate;
         if (length > maxLen) length = maxLen;
 
-        if (length <= 0) { isTranscribing = false; isThinking = false; yield break; }
+        if (length <= 0) { isTranscribing = false; SetThinkingState(false); yield break; }
 
         EnsureFloatBuffer(ref _speechDataBuffer, length);
         try
@@ -416,7 +428,7 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
         catch
         {
             isTranscribing = false;
-            isThinking = false;
+            SetThinkingState(false);
             yield break;
         }
 
@@ -427,7 +439,7 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
             float absValue = Mathf.Abs(_speechDataBuffer[i]);
             if (absValue > maxVol) maxVol = absValue;
         }
-        if (maxVol < 0.01f) { isTranscribing = false; isThinking = false; yield break; }
+        if (maxVol < 0.01f) { isTranscribing = false; SetThinkingState(false); yield break; }
 
         // Normalize in-place
         float scale = 1.0f / Mathf.Max(maxVol, 0.1f);
@@ -459,7 +471,7 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
                 {
                     FinalizeTranscript(cloudTranscript);
                     isTranscribing = false;
-                    isThinking = false;
+                    SetThinkingState(false);
                     yield break;
                 }
             }
@@ -495,7 +507,7 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
 
         encodedAudioCPU.Dispose();
         isTranscribing = false;
-        isThinking = false;
+        SetThinkingState(false);
         }
     }
 

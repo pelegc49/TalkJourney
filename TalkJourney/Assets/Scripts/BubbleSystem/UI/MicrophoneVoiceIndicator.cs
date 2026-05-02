@@ -10,6 +10,12 @@ namespace TalkJourney.BubbleSystem.UI
         [Tooltip("Image used for the vertical fill inside the microphone icon.")]
         public Image fillImage;
 
+        [Tooltip("Optional MicOutline child GameObject. If empty, a child named 'MicOutline' is used.")]
+        public GameObject micOutlineObject;
+
+        [Tooltip("Optional Loading child GameObject. If empty, a child named 'Loading' is used.")]
+        public GameObject loadingIconObject;
+
         [Tooltip("Optional RealtimeWhisper instance. If empty, the script resolves the singleton automatically.")]
         public RealtimeWhisper voiceSource;
 
@@ -29,12 +35,27 @@ namespace TalkJourney.BubbleSystem.UI
         public float currentFill;
 
         private float _targetFill;
+        private bool _isLoading;
 
         private void Start()
         {
             if (voiceSource == null)
             {
                 voiceSource = RealtimeWhisper.Instance;
+            }
+
+            if (voiceSource != null)
+            {
+                voiceSource.ThinkingStateChanged += OnThinkingStateChanged;
+                SetLoadingState(voiceSource.isThinking);
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (voiceSource != null)
+            {
+                voiceSource.ThinkingStateChanged -= OnThinkingStateChanged;
             }
         }
 
@@ -50,6 +71,29 @@ namespace TalkJourney.BubbleSystem.UI
             }
         }
 
+        private void OnThinkingStateChanged(bool isThinking)
+        {
+            SetLoadingState(isThinking);
+        }
+
+        private void SetLoadingState(bool isLoading)
+        {
+            _isLoading = isLoading;
+
+            var micOutline = ResolveMicOutlineObject();
+            var loadingIcon = ResolveLoadingIconObject();
+
+            if (micOutline != null)
+            {
+                micOutline.SetActive(!isLoading);
+            }
+
+            if (loadingIcon != null)
+            {
+                loadingIcon.SetActive(isLoading);
+            }
+        }
+
         private float GetVoiceVolume()
         {
             if (voiceSource == null)
@@ -58,6 +102,38 @@ namespace TalkJourney.BubbleSystem.UI
             }
 
             return Mathf.Clamp01(voiceSource.CurrentVolume);
+        }
+
+        private GameObject ResolveMicOutlineObject()
+        {
+            if (micOutlineObject != null)
+            {
+                return micOutlineObject;
+            }
+
+            var child = transform.Find("MicOutline");
+            if (child != null)
+            {
+                micOutlineObject = child.gameObject;
+            }
+
+            return micOutlineObject;
+        }
+
+        private GameObject ResolveLoadingIconObject()
+        {
+            if (loadingIconObject != null)
+            {
+                return loadingIconObject;
+            }
+
+            var child = transform.Find("Loading");
+            if (child != null)
+            {
+                loadingIconObject = child.gameObject;
+            }
+
+            return loadingIconObject;
         }
     }
 }
