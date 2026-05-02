@@ -4,6 +4,9 @@ using TalkJourney.BubbleSystem.Events;
 using TalkJourney.BubbleSystem.Localization;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using System.Collections.Generic;
 
 namespace TalkJourney.BubbleSystem.Flow
@@ -13,6 +16,7 @@ namespace TalkJourney.BubbleSystem.Flow
     /// Attach to a persistent scene object and assign results panel/text references.
     /// </summary>
     [DisallowMultipleComponent]
+    [RequireComponent(typeof(XRSimpleInteractable))]
     public class JourneyResultsPresenter : MonoBehaviour
     {
         [Header("UI")]
@@ -91,8 +95,15 @@ namespace TalkJourney.BubbleSystem.Flow
         [Tooltip("Optional launcher used to destroy runtime-created bubble/results containers on close.")]
         public BubbleSystemLauncher bubbleSystemLauncher;
 
+        [Tooltip("Optional bridge that exits the active stage when the close button is used.")]
+        public StageExitButtonBridge stageExitButtonBridge;
+
         [Tooltip("If enabled, auto-resolves BubbleSystemLauncher when reference is empty.")]
         public bool autoResolveBubbleSystemLauncher = true;
+
+        [Header("Close Button Input")]
+        [Tooltip("Assign the XRI Default Input Actions Activate action from the XRI Right Interaction map.")]
+        public InputActionReference activateAction;
 
         private readonly JourneySessionStats _stats = new JourneySessionStats();
         private readonly List<DisplayBubbleController> _spawnedResultBubbles = new List<DisplayBubbleController>();
@@ -100,12 +111,26 @@ namespace TalkJourney.BubbleSystem.Flow
         private readonly List<ResultRowView> _spawnedRows = new List<ResultRowView>();
         private ILocalizationService _localizationService;
         private bool _pendingShowResults;
+        private XRSimpleInteractable _xrSimpleInteractable;
+        private bool _isHovered;
 
         private void Awake()
         {
+            _xrSimpleInteractable = GetComponent<XRSimpleInteractable>();
             _stats.BeginSession();
             RefreshDependencies();
             ResolveBubbleSystemLauncher();
+
+            if (stageExitButtonBridge == null)
+            {
+                stageExitButtonBridge = FindFirstObjectByType<StageExitButtonBridge>();
+            }
+
+            if (_xrSimpleInteractable != null)
+            {
+                _xrSimpleInteractable.hoverEntered.AddListener(OnHoverEntered);
+                _xrSimpleInteractable.hoverExited.AddListener(OnHoverExited);
+            }
 
             if (hidePanelOnAwake)
             {
@@ -122,6 +147,11 @@ namespace TalkJourney.BubbleSystem.Flow
             BubbleEventBus.BubbleSystemHidden += OnBubbleSystemHidden;
             LocalizationResolver.OnLanguageChanged += OnLanguageChanged;
             LocalizationResolver.OnTransliteratorChanged += OnTransliteratorChanged;
+
+            if (activateAction != null && activateAction.action != null)
+            {
+                activateAction.action.performed += OnActivatePerformed;
+            }
         }
 
         private void OnDisable()
@@ -133,6 +163,17 @@ namespace TalkJourney.BubbleSystem.Flow
             BubbleEventBus.BubbleSystemHidden -= OnBubbleSystemHidden;
             LocalizationResolver.OnLanguageChanged -= OnLanguageChanged;
             LocalizationResolver.OnTransliteratorChanged -= OnTransliteratorChanged;
+
+            if (activateAction != null && activateAction.action != null)
+            {
+                activateAction.action.performed -= OnActivatePerformed;
+            }
+
+            if (_xrSimpleInteractable != null)
+            {
+                _xrSimpleInteractable.hoverEntered.RemoveListener(OnHoverEntered);
+                _xrSimpleInteractable.hoverExited.RemoveListener(OnHoverExited);
+            }
         }
 
         public void HideResultsAndStartNewSession()
@@ -144,12 +185,37 @@ namespace TalkJourney.BubbleSystem.Flow
             _stats.BeginSession();
         }
 
+        private void OnActivatePerformed(InputAction.CallbackContext context)
+        {
+            if (!_isHovered)
+            {
+                return;
+            }
+
+            OnCloseButtonClicked();
+        }
+
+        private void OnHoverEntered(HoverEnterEventArgs args)
+        {
+            _isHovered = true;
+        }
+
+        private void OnHoverExited(HoverExitEventArgs args)
+        {
+            _isHovered = false;
+        }
+
         /// <summary>
         /// Intended for Close button OnClick: hides results and optionally destroys runtime containers via launcher.
         /// </summary>
         public void OnCloseButtonClicked()
         {
             HideResultsAndStartNewSession();
+
+            if (stageExitButtonBridge != null)
+            {
+                stageExitButtonBridge.ExitActiveStage();
+            }
 
             if (!destroyRuntimeContainersOnClose)
             {

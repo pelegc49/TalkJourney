@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion;
@@ -57,6 +58,10 @@ namespace TalkJourney.BubbleSystem.Flow
         public UnityEvent onStageStarted;
         public UnityEvent onStageExited;
 
+        [Header("Input")]
+        [Tooltip("Assign the XRI Default Input Actions Activate action from the XRI Right Interaction map.")]
+        public InputActionReference activateAction;
+
         public bool IsStageActive { get; private set; }
         public static StageEntrance ActiveStageEntrance { get; private set; }
 
@@ -65,6 +70,7 @@ namespace TalkJourney.BubbleSystem.Flow
         private Vector3 _savedRigPosition;
         private Quaternion _savedRigRotation;
         private bool _hasSavedRigPose;
+        private bool _isHovered;
 
         private void Awake()
         {
@@ -76,9 +82,16 @@ namespace TalkJourney.BubbleSystem.Flow
                 return;
             }
 
-            // NOTE: To make this work with trigger button only (not grip), rebind the Select action in your Input Actions
-            // from Grip to Trigger in Project Settings > XR Plug-in Management > Input
-            _xrSimpleInteractable.selectEntered.AddListener(OnSelectEntered);
+            _xrSimpleInteractable.hoverEntered.AddListener(OnHoverEntered);
+            _xrSimpleInteractable.hoverExited.AddListener(OnHoverExited);
+        }
+
+        private void OnEnable()
+        {
+            if (activateAction != null && activateAction.action != null)
+            {
+                activateAction.action.performed += OnActivatePerformed;
+            }
         }
 
         private void Start()
@@ -117,17 +130,46 @@ namespace TalkJourney.BubbleSystem.Flow
             }
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
-            if (_xrSimpleInteractable != null)
+            if (activateAction != null && activateAction.action != null)
             {
-                _xrSimpleInteractable.selectEntered.RemoveListener(OnSelectEntered);
+                activateAction.action.performed -= OnActivatePerformed;
             }
 
+            if (_xrSimpleInteractable != null)
+            {
+                _xrSimpleInteractable.hoverEntered.RemoveListener(OnHoverEntered);
+                _xrSimpleInteractable.hoverExited.RemoveListener(OnHoverExited);
+            }
+        }
+
+        private void OnDestroy()
+        {
             if (ActiveStageEntrance == this)
             {
                 ActiveStageEntrance = null;
             }
+        }
+
+        private void OnActivatePerformed(InputAction.CallbackContext context)
+        {
+            if (!_isHovered)
+            {
+                return;
+            }
+
+            StartStage();
+        }
+
+        private void OnHoverEntered(HoverEnterEventArgs args)
+        {
+            _isHovered = true;
+        }
+
+        private void OnHoverExited(HoverExitEventArgs args)
+        {
+            _isHovered = false;
         }
 
         public void OnClicked()
@@ -135,10 +177,7 @@ namespace TalkJourney.BubbleSystem.Flow
             StartStage();
         }
 
-        public void OnSelectEntered(SelectEnterEventArgs args)
-        {
-            StartStage();
-        }
+
 
         public void StartStage()
         {

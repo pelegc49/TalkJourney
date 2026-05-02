@@ -188,19 +188,7 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6295621844554145358}
-        m_TargetAssemblyTypeName: DoorController, Assembly-CSharp
-        m_MethodName: ToggleDoor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_SelectExited:
     m_PersistentCalls:
       m_Calls: []
@@ -239,7 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481b9771ecd9d254a8b48e26b0c6b54f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorController
-  instructionBubble: {fileID: 0}
+  activateAction: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  instructionBubble: {fileID: 8427074885536971292}
 --- !u!95 &2737181119787831912
 Animator:
   serializedVersion: 7
@@ -720,19 +709,7 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5230801061180835248}
-        m_TargetAssemblyTypeName: DoorController, Assembly-CSharp
-        m_MethodName: ToggleDoor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_SelectExited:
     m_PersistentCalls:
       m_Calls: []
@@ -771,7 +748,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481b9771ecd9d254a8b48e26b0c6b54f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorController
-  instructionBubble: {fileID: 0}
+  activateAction: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  instructionBubble: {fileID: 672513971044999615}
 --- !u!95 &3360080111363633460
 Animator:
   serializedVersion: 7
@@ -1075,6 +1053,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3424564429555301303, guid: bb3d05f39dc06e04094ac33aba238983, type: 3}
   m_PrefabInstance: {fileID: 1634790710520253091}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8427074885536971292 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7087832971652165823, guid: bb3d05f39dc06e04094ac33aba238983, type: 3}
+  m_PrefabInstance: {fileID: 1634790710520253091}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7712473101325242624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1196,6 +1179,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb3d05f39dc06e04094ac33aba238983, type: 3}
+--- !u!1 &672513971044999615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7087832971652165823, guid: bb3d05f39dc06e04094ac33aba238983, type: 3}
+  m_PrefabInstance: {fileID: 7712473101325242624}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4939967583193131703 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3424564429555301303, guid: bb3d05f39dc06e04094ac33aba238983, type: 3}
