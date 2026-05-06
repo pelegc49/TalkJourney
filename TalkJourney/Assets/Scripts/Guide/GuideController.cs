@@ -23,9 +23,6 @@ public class GuideController : MonoBehaviour
     [Tooltip("TextMeshProUGUI used for subtitles (UI). Optional but recommended.")]
     public TextMeshProUGUI subtitleText;
 
-    [Tooltip("Optional GuidePointer instance used to visualize targets in the world.")]
-    public GuidePointer guidePointer;
-
     [Header("Services (auto-resolve if left empty)")]
     public LocalizationResolver localizationResolver;
     public AudioBackendClient audioBackendClient;
@@ -235,32 +232,6 @@ public class GuideController : MonoBehaviour
             _ = PlayInstruction("guide_use_controller_key");
             VoiceFallbackUnlocked?.Invoke();
         }
-    }
-
-    /// <summary>
-    /// Show the world-space pointer above the specified target Transform.
-    /// Call with null to hide.
-    /// </summary>
-    public void ShowPointer(Transform target)
-    {
-        if (guidePointer == null)
-            return;
-
-        if (target == null)
-            guidePointer.Clear();
-        else
-            guidePointer.PointAt(target);
-    }
-
-    /// <summary>
-    /// Hide any active guide pointer.
-    /// </summary>
-    public void HidePointer()
-    {
-        if (guidePointer == null)
-            return;
-
-        guidePointer.Clear();
     }
 
     #region Editor helpers

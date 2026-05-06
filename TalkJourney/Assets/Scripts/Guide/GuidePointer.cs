@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 /// <summary>
 /// World-space arrow that points at a target Transform.
@@ -6,8 +8,11 @@ using UnityEngine;
 /// </summary>
 public class GuidePointer : MonoBehaviour
 {
-    [Tooltip("Vertical offset from the target's position where the arrow will be placed.")]
-    public float heightOffset = 0.6f;
+    [Tooltip("Offset from target position where the arrow will be placed (X/Y/Z in world space).")]
+    public Vector3 targetOffset = new Vector3(0f, 0.6f, 0f);
+
+    [Tooltip("Additional Euler rotation offset (X/Y/Z) applied after camera-facing rotation.")]
+    public Vector3 rotationOffsetEuler = Vector3.zero;
 
     [Tooltip("Bob amplitude in meters.")]
     public float bobAmplitude = 0.05f;
@@ -20,6 +25,15 @@ public class GuidePointer : MonoBehaviour
 
     [Tooltip("Pulse speed in cycles per second.")]
     public float pulseSpeed = 1.2f;
+
+    [Header("Input")]
+    [Tooltip("Optional: Assign the XRI Default Input Actions Activate action to activate pointer via VR controller button.")]
+    public InputActionReference activateAction;
+
+    /// <summary>
+    /// Event fired when the pointer is activated via trigger button while active.
+    /// </summary>
+    public UnityEvent OnPointerActivated;
 
     private Transform _target;
     private Vector3 _basePosition;
@@ -36,11 +50,27 @@ public class GuidePointer : MonoBehaviour
     void OnEnable()
     {
         _active = true;
+        if (activateAction != null && activateAction.action != null)
+        {
+            activateAction.action.performed += OnActivatePerformed;
+        }
     }
 
     void OnDisable()
     {
         _active = false;
+        if (activateAction != null && activateAction.action != null)
+        {
+            activateAction.action.performed -= OnActivatePerformed;
+        }
+    }
+
+    private void OnActivatePerformed(InputAction.CallbackContext context)
+    {
+        if (_active && _target != null)
+        {
+            OnPointerActivated?.Invoke();
+        }
     }
 
     void Update()
@@ -50,19 +80,25 @@ public class GuidePointer : MonoBehaviour
 
         var cam = Camera.main;
         // position above target
-        _basePosition = _target.position + Vector3.up * heightOffset;
+        _basePosition = _target.position + targetOffset;
+
+        // Compute target rotation first so bob can follow the pointer's rotated up axis (including Z roll offset).
+        Quaternion targetRotation;
+        if (cam != null)
+        {
+            var lookDir = (cam.transform.position - _basePosition).normalized;
+            targetRotation = Quaternion.LookRotation(lookDir, Vector3.up) * Quaternion.Euler(rotationOffsetEuler);
+        }
+        else
+        {
+            targetRotation = Quaternion.Euler(rotationOffsetEuler);
+        }
 
         // bob
         var bob = Mathf.Sin(Time.time * bobSpeed * Mathf.PI * 2f) * bobAmplitude;
-        transform.position = _basePosition + Vector3.up * bob;
-
-        // face camera (billboard)
-        if (cam != null)
-        {
-            var lookDir = (cam.transform.position - transform.position).normalized;
-            // keep arrow upright and face camera
-            transform.rotation = Quaternion.LookRotation(lookDir, Vector3.up);
-        }
+        var bobAxis = targetRotation * Vector3.up;
+        transform.position = _basePosition + bobAxis * bob;
+        transform.rotation = targetRotation;
 
         // pulse scale
         var pulse = 1.0f + Mathf.Sin(Time.time * pulseSpeed * Mathf.PI * 2f) * pulseAmount;
@@ -83,7 +119,7 @@ public class GuidePointer : MonoBehaviour
 
         gameObject.SetActive(true);
         SetRenderersEnabled(true);
-        _basePosition = _target.position + Vector3.up * heightOffset;
+        _basePosition = _target.position + targetOffset;
     }
 
     /// <summary>
