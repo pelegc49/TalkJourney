@@ -1,4 +1,5 @@
 using UnityEngine;
+using TalkJourney.BubbleSystem.Interaction;
 
 /// <summary>
 /// Simple trigger component to invoke guide lines when the player enters a trigger volume.
@@ -18,12 +19,43 @@ public class GuideTrigger : MonoBehaviour
 
     private bool _hasTriggered = false;
 
+    [Header("Pointer")]
+    [Tooltip("Optional target Transform that the guide arrow will point at when triggered.")]
+    public Transform pointerTarget;
+
+    [Tooltip("If true, show the guide pointer on trigger enter when a pointer target is set.")]
+    public bool showPointerOnEnter = true;
+
+    [Header("Completion")]
+    [Tooltip("Optional interactable on the target object. When clicked, the guide pointer will hide.")]
+    public VrPointerInteractable completionInteractable;
+
+    [Tooltip("If true, try to find a VrPointerInteractable on pointerTarget automatically.")]
+    public bool autoResolveCompletionInteractable = true;
+
     void Reset()
     {
         // Ensure collider is a trigger by default when added
         var col = GetComponent<Collider>();
         if (col != null)
             col.isTrigger = true;
+    }
+
+    void OnEnable()
+    {
+        ResolveCompletionInteractable();
+        if (completionInteractable != null)
+        {
+            completionInteractable.Clicked += OnCompletionClicked;
+        }
+    }
+
+    void OnDisable()
+    {
+        if (completionInteractable != null)
+        {
+            completionInteractable.Clicked -= OnCompletionClicked;
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -37,6 +69,10 @@ public class GuideTrigger : MonoBehaviour
         if (GuideController.Instance != null)
         {
             _ = GuideController.Instance.PlayInstruction(dialogueKey);
+            if (showPointerOnEnter && pointerTarget != null)
+            {
+                GuideController.Instance.ShowPointer(pointerTarget);
+            }
         }
         else
         {
@@ -45,6 +81,24 @@ public class GuideTrigger : MonoBehaviour
 
         if (triggerOnce)
             _hasTriggered = true;
+    }
+
+    private void OnCompletionClicked()
+    {
+        if (GuideController.Instance != null)
+        {
+            GuideController.Instance.HidePointer();
+        }
+    }
+
+    private void ResolveCompletionInteractable()
+    {
+        if (!autoResolveCompletionInteractable || completionInteractable != null || pointerTarget == null)
+        {
+            return;
+        }
+
+        completionInteractable = pointerTarget.GetComponent<VrPointerInteractable>();
     }
 
     [ContextMenu("Reset Trigger")]
