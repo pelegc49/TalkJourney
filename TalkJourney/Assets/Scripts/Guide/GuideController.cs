@@ -34,6 +34,22 @@ public class GuideController : MonoBehaviour
     [Tooltip("How long (seconds) to wait before clearing the subtitle after playback finishes.")]
     public float subtitleClearDelay = 1.0f;
 
+    [Header("Subtitle World Space Follow")]
+    [Tooltip("When enabled, subtitle text transform follows a target in world space.")]
+    public bool enableWorldSpaceSubtitleFollow = false;
+
+    [Tooltip("Target transform to follow (typically XR camera/head). If empty, Camera.main is used when available.")]
+    public Transform subtitleFollowTarget;
+
+    [Tooltip("World-space offset from subtitleFollowTarget position.")]
+    public Vector3 subtitleWorldOffset = new Vector3(0f, -0.2f, 1.2f);
+
+    [Tooltip("Smooth follow speed. Set <= 0 for snap movement.")]
+    public float subtitleFollowLerpSpeed = 10f;
+
+    [Tooltip("If enabled, the subtitle faces the main camera.")]
+    public bool subtitleFaceCamera = true;
+
     private CancellationTokenSource _playbackCts;
 
     /// <summary>
@@ -71,6 +87,46 @@ public class GuideController : MonoBehaviour
         if (Instance == this) Instance = null;
         _playbackCts?.Cancel();
         _playbackCts?.Dispose();
+    }
+
+    void LateUpdate()
+    {
+        if (!enableWorldSpaceSubtitleFollow || subtitleText == null)
+            return;
+
+        var follow = subtitleFollowTarget;
+        if (follow == null && Camera.main != null)
+        {
+            follow = Camera.main.transform;
+        }
+
+        if (follow == null)
+            return;
+
+        var targetPosition = follow.TransformPoint(subtitleWorldOffset);
+        var subtitleTransform = subtitleText.transform;
+
+        if (subtitleFollowLerpSpeed <= 0f)
+        {
+            subtitleTransform.position = targetPosition;
+        }
+        else
+        {
+            subtitleTransform.position = Vector3.Lerp(
+                subtitleTransform.position,
+                targetPosition,
+                Time.deltaTime * subtitleFollowLerpSpeed);
+        }
+
+        if (subtitleFaceCamera && Camera.main != null)
+        {
+            var cam = Camera.main.transform;
+            var lookDirection = subtitleTransform.position - cam.position;
+            if (lookDirection.sqrMagnitude > 0.0001f)
+            {
+                subtitleTransform.rotation = Quaternion.LookRotation(lookDirection.normalized, Vector3.up);
+            }
+        }
     }
 
     /// <summary>
