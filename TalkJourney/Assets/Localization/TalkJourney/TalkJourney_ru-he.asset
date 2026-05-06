@@ -102,6 +102,10 @@ MonoBehaviour:
     m_Localized: "\u05EA\u05D5\u05DB\u05E0\u05D5\u05E1\u05D9\u05D8"
     m_Metadata:
       m_Items: []
+  - m_Id: 12029809422626816
+    m_Localized: '#ERROR!'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

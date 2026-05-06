@@ -67,6 +67,8 @@ namespace TalkJourney.BubbleSystem.Speech
                 _speechRecognitionService.PhraseRecognized += OnPhraseRecognized;
             }
 
+            GuideController.VoiceFallbackUnlocked += OnVoiceFallbackUnlocked;
+
             if (bypassButtonInteractable != null)
             {
                 bypassButtonInteractable.Clicked += OnBypassButtonClicked;
@@ -81,6 +83,8 @@ namespace TalkJourney.BubbleSystem.Speech
             {
                 _speechRecognitionService.PhraseRecognized -= OnPhraseRecognized;
             }
+
+            GuideController.VoiceFallbackUnlocked -= OnVoiceFallbackUnlocked;
 
             if (bypassButtonInteractable != null)
             {
@@ -157,6 +161,17 @@ namespace TalkJourney.BubbleSystem.Speech
             ApplyBypassStateToActiveSelections();
             StartCoroutine(HideBypassButtonAfterClick());
             BubbleEventBus.PublishBypassEnabled();
+        }
+
+        private void OnVoiceFallbackUnlocked()
+        {
+            if (_isBypassUnlocked)
+            {
+                return;
+            }
+
+            _isBypassUnlocked = true;
+            SetBypassButtonVisible(true);
         }
 
         private IEnumerator HideBypassButtonAfterClick()

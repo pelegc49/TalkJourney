@@ -102,6 +102,10 @@ MonoBehaviour:
     m_Localized: tokhnost'
     m_Metadata:
       m_Items: []
+  - m_Id: 12029809422626816
+    m_Localized: '#ERROR!'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -102,6 +102,11 @@ MonoBehaviour:
     m_Localized: accuracy
     m_Metadata:
       m_Items: []
+  - m_Id: 12029809422626816
+    m_Localized: great! you entered the door, now try to sit on the sofa using the
+      trigger button.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

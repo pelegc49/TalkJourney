@@ -99,6 +99,10 @@ MonoBehaviour:
     m_Key: results.accuracy
     m_Metadata:
       m_Items: []
+  - m_Id: 12029809422626816
+    m_Key: guide.door.enter
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
