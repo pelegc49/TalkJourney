@@ -99,8 +99,24 @@ MonoBehaviour:
     m_Key: results.accuracy
     m_Metadata:
       m_Items: []
-  - m_Id: 12029809422626816
-    m_Key: guide.door.enter
+  - m_Id: 13000156217208832
+    m_Key: guide.Sofa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13000156259151872
+    m_Key: guide.BubbleSystemSentence
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13000156259151873
+    m_Key: guide.Speaker
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13000156259151874
+    m_Key: guide.SelectionBubble
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13000156259151875
+    m_Key: guide.VoiceIndicator
     m_Metadata:
       m_Items: []
   m_Metadata:
