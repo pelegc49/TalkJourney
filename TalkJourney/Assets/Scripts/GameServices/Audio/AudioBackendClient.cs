@@ -98,6 +98,24 @@ namespace TalkJourney.BubbleSystem.Audio
                 return AudioRequestResult.Failure("TTS text is missing.");
             }
 
+            return await RequestAudioFromTextAsync(text, null, cancellationToken);
+        }
+
+        public async Task<AudioRequestResult> RequestAudioFromTextAsync(string text, DisplayLanguage? language, CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                return AudioRequestResult.Failure("TTS text is missing.");
+            }
+
+            var previousLanguageCode = languageCode;
+            var previousVoiceName = voiceName;
+
+            if (language.HasValue)
+            {
+                ApplyVoiceSettingsForDisplayLanguage(language.Value);
+            }
+
             if (string.IsNullOrWhiteSpace(ttsPostUrl))
             {
                 return AudioRequestResult.Failure("TTS POST URL is not configured.");
@@ -134,6 +152,11 @@ namespace TalkJourney.BubbleSystem.Audio
                     if (cancellationToken.IsCancellationRequested)
                     {
                         postRequest.Abort();
+                        if (language.HasValue)
+                        {
+                            languageCode = previousLanguageCode;
+                            voiceName = previousVoiceName;
+                        }
                         return AudioRequestResult.Failure("TTS request was cancelled.");
                     }
 
@@ -142,6 +165,11 @@ namespace TalkJourney.BubbleSystem.Audio
 
                 if (postRequest.result != UnityWebRequest.Result.Success)
                 {
+                    if (language.HasValue)
+                    {
+                        languageCode = previousLanguageCode;
+                        voiceName = previousVoiceName;
+                    }
                     if (postRequest.responseCode == 401)
                     {
                         return AudioRequestResult.Failure("TTS request failed: 401 Unauthorized. Provide a valid bearerToken if your backend requires auth.");
@@ -153,16 +181,32 @@ namespace TalkJourney.BubbleSystem.Audio
                 var responseJson = postRequest.downloadHandler.text;
                 if (string.IsNullOrWhiteSpace(responseJson))
                 {
+                    if (language.HasValue)
+                    {
+                        languageCode = previousLanguageCode;
+                        voiceName = previousVoiceName;
+                    }
                     return AudioRequestResult.Failure("TTS response was empty.");
                 }
 
                 var response = JsonUtility.FromJson<TtsAudioResponse>(responseJson);
                 if (response == null || string.IsNullOrWhiteSpace(response.url))
                 {
+                    if (language.HasValue)
+                    {
+                        languageCode = previousLanguageCode;
+                        voiceName = previousVoiceName;
+                    }
                     return AudioRequestResult.Failure("TTS response did not contain an audio URL.");
                 }
 
-                return await DownloadClipFromUrlAsync(response.url, cancellationToken);
+                var result = await DownloadClipFromUrlAsync(response.url, cancellationToken);
+                if (language.HasValue)
+                {
+                    languageCode = previousLanguageCode;
+                    voiceName = previousVoiceName;
+                }
+                return result;
             }
         }
 

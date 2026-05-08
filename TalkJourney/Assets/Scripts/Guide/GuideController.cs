@@ -101,6 +101,8 @@ public class GuideController : MonoBehaviour
             return;
 
         var targetPosition = follow.TransformPoint(subtitleWorldOffset);
+        // Keep Y tied to world-height + offset (jump/crouch), not head pitch/roll rotation.
+        targetPosition.y = follow.position.y + subtitleWorldOffset.y;
         var subtitleTransform = subtitleText.transform;
 
         if (subtitleFollowLerpSpeed <= 0f)
@@ -144,12 +146,16 @@ public class GuideController : MonoBehaviour
             try
             {
                 if (localizationResolver != null)
-                    subtitle = localizationResolver.Resolve(dialogueKey) ?? dialogueKey;
+                    subtitle = localizationResolver.ResolveForLanguage(dialogueKey, localizationResolver.nativeLanguage) ?? dialogueKey;
             }
             catch (Exception) { /* swallow - fall back to key */ }
 
             if (subtitleText != null)
             {
+                var useRtl = localizationResolver != null
+                    && LocalizationResolver.IsRightToLeftLanguage(localizationResolver.nativeLanguage);
+                subtitleText.isRightToLeftText = useRtl;
+                subtitleText.alignment = useRtl ? TMPro.TextAlignmentOptions.Right : TMPro.TextAlignmentOptions.Left;
                 subtitleText.text = subtitle;
                 subtitleText.gameObject.SetActive(true);
             }
@@ -160,7 +166,7 @@ public class GuideController : MonoBehaviour
             {
                 if (audioBackendClient != null)
                 {
-                    var audioResult = await audioBackendClient.RequestAudioFromTextAsync(subtitle, token);
+                    var audioResult = await audioBackendClient.RequestAudioFromTextAsync(subtitle, localizationResolver?.nativeLanguage, token);
                     if (audioResult.IsSuccess)
                     {
                         clip = audioResult.Clip;

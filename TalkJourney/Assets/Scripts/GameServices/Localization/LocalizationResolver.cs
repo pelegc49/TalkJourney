@@ -373,6 +373,11 @@ namespace TalkJourney.BubbleSystem.Localization
             return returnKeyWhenMissing ? key : string.Empty;
         }
 
+        public string ResolveForLanguage(string key, DisplayLanguage language)
+        {
+            return ResolveForLocaleCode(key, EnumToLocaleCode(language));
+        }
+
         public bool TryResolveForLocaleCode(string key, string localeCode, out string localizedValue)
         {
             return TryResolveInternal(key, localeCode, out localizedValue);
