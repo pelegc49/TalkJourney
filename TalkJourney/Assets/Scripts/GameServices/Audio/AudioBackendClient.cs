@@ -129,6 +129,16 @@ namespace TalkJourney.BubbleSystem.Audio
             };
 
             var resolvedBearerToken = await ResolveAuthorizationTokenAsync(cancellationToken);
+            if (useFirebaseAuthToken && string.IsNullOrWhiteSpace(resolvedBearerToken))
+            {
+                if (language.HasValue)
+                {
+                    languageCode = previousLanguageCode;
+                    voiceName = previousVoiceName;
+                }
+
+                return AudioRequestResult.Failure("Auth token is missing. Firebase auth is enabled, but no ID token was resolved. Check device Firebase config/dependencies and sign-in state.");
+            }
 
             var payloadJson = JsonUtility.ToJson(requestPayload);
 
@@ -411,6 +421,7 @@ namespace TalkJourney.BubbleSystem.Audio
 
                 if (user == null)
                 {
+                    Debug.LogWarning("Firebase auth user is null after token resolution attempt.", this);
                     return null;
                 }
 

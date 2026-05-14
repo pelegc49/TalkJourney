@@ -639,6 +639,11 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
 
         byte[] bodyRaw = Encoding.UTF8.GetBytes(JsonUtility.ToJson(request));
         string resolvedBearerToken = await ResolveAuthorizationTokenAsync();
+        if (useFirebaseAuthToken && string.IsNullOrWhiteSpace(resolvedBearerToken))
+        {
+            Debug.LogError("Cloud transcription aborted: Firebase auth is enabled but no ID token was resolved. Check Firebase Android build config/dependencies and sign-in state.", this);
+            return null;
+        }
 
         using (UnityWebRequest webRequest = new UnityWebRequest(functionUrl, "POST"))
         {
@@ -703,6 +708,7 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
 
             if (user == null)
             {
+                Debug.LogWarning("Firebase auth user is null after token resolution attempt.", this);
                 return null;
             }
 
