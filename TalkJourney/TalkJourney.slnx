@@ -76,12 +76,12 @@
   <Project Path="Unity.InternalAPIEditorBridge.013.csproj" />
   <Project Path="Unity.XR.CoreUtils.Editor.csproj" />
   <Project Path="Unity.AI.Navigation.Editor.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Unity.AppUI.MVVM.csproj" />
   <Project Path="Unity.InternalAPIEditorBridge.007.csproj" />
   <Project Path="Unity.XR.OpenXR.Editor.csproj" />
   <Project Path="Unity.XR.AndroidOpenXR.Editor.csproj" />
   <Project Path="Unity.Multiplayer.Center.Common.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Unity.XR.Interaction.Toolkit.Analytics.Editor.csproj" />
   <Project Path="Unity.XR.Management.Editor.csproj" />
   <Project Path="Unity.XR.OpenXR.Features.MetaQuestSupport.Editor.csproj" />
