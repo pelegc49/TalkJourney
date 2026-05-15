@@ -1,0 +1,395 @@
+version=1
+
+# This file caches language service data to improve the performance of C# Dev Kit.
+# It is not intended for manual editing. It can safely be deleted and will be
+# regenerated automatically. For more information, see https://aka.ms/lscache
+#
+# To control where cache files are stored, use the following VS Code setting:
+#   "dotnet.projectsystem.cacheInProjectFolder": true
+
+[project]
+language=C#
+primary
+lastDtbSucceeded
+
+[properties]
+AssemblyName=Unity.RenderPipelines.Universal.Editor
+CommandLineArgsForDesignTimeEvaluation=-langversion:9.0 -define:UNITY_6000_2_10;UNITY_6000_2;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_6000_1_OR_NEWER;UNITY_6000_2_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_UNITY_CONSENT;ENABLE_UNITY_CLOUD_IDENTIFIERS;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_AMD;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_CLOUD_SERVICES_ENGINE_DIAGNOSTICS;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;ENABLE_MONO;NET_4_6;NET_UNITY_4_8;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;ENABLE_XR_MODULE;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;UNITY_EDITOR_ONLY_COMPILATION
+CompilerGeneratedFilesOutputPath=
+MaxSupportedLangVersion=8.0
+ProjectAssetsFile=<PATH>Temp/obj/Unity.RenderPipelines.Universal.Editor/project.assets.json
+RootNamespace=
+RunAnalyzers=
+RunAnalyzersDuringLiveAnalysis=
+SolutionPath=<PATH>../server.sln
+TargetFrameworkIdentifier=.NETStandard
+TargetPath=<PATH>Temp/bin/Debug/Unity.RenderPipelines.Universal.Editor.dll
+TargetRefPath=
+TemporaryDependencyNodeTargetIdentifier=netstandard2.1
+
+[commandLineArguments]
+/noconfig
+/unsafe+
+/checked-
+/nowarn:0169,USG0001,1701,1702
+/fullpaths
+/nostdlib+
+/errorreport:prompt
+/define:UNITY_6000_2_10;UNITY_6000_2;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_6000_1_OR_NEWER;UNITY_6000_2_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_UNITY_CONSENT;ENABLE_UNITY_CLOUD_IDENTIFIERS;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_AMD;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_CLOUD_SERVICES_ENGINE_DIAGNOSTICS;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;ENABLE_MONO;NET_4_6;NET_UNITY_4_8;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;ENABLE_XR_MODULE;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;UNITY_EDITOR_ONLY_COMPILATION;DEBUG;NETSTANDARD;NETSTANDARD2_1;NETSTANDARD1_0_OR_GREATER;NETSTANDARD1_1_OR_GREATER;NETSTANDARD1_2_OR_GREATER;NETSTANDARD1_3_OR_GREATER;NETSTANDARD1_4_OR_GREATER;NETSTANDARD1_5_OR_GREATER;NETSTANDARD1_6_OR_GREATER;NETSTANDARD2_0_OR_GREATER;NETSTANDARD2_1_OR_GREATER
+/highentropyva+
+/debug+
+/debug:portable
+/filealign:512
+/optimize-
+/out:Temp\obj\Unity.RenderPipelines.Universal.Editor\Unity.RenderPipelines.Universal.Editor.dll
+/target:library
+/warnaserror-
+/utf8output
+/deterministic+
+/langversion:9.0
+/warnaserror+:NU1605
+
+[sourceFiles]
+Library/PackageCache/com.unity.render-pipelines.universal@4976252adeb8/Editor/2D/
+ CinemachineUniversalPixelPerfectEditor.cs
+ CompositeShadowCaster2DEditor.cs
+ Converter/
+  BuiltInToURP2DConverterContainer.cs
+  BuiltInToURP2DMaterialUpgrader.cs
+  ParametricToFreeformLightUpgrader.cs
+  UpgradeURP2DAssetsContainer.cs
+  URP2DConverterUtility.cs
+ FreeformPathPresets.cs
+ GameObjectCreation.cs
+ Light2DEditor.cs
+ Light2DEditorUtility.cs
+ LightBatchingDebugger/LightBatchingDebugger.cs
+ PixelPerfectCameraEditor.cs
+ Renderer2DAnalytics.cs
+ Renderer2DDataEditor.cs
+ Renderer2DMenus.cs
+ ShaderGraph/AssetCallbacks/
+  CreateSpriteCustomLitShaderGraph.cs
+  CreateSpriteLitShaderGraph.cs
+  CreateSpriteUnlitShaderGraph.cs
+ ShaderGraph/Nodes/
+  LightTextureNode.cs
+  SpriteSkinningNode.cs
+ ShaderGraph/Targets/
+  SpriteSubTargetUtility.cs
+  UniversalSpriteCustomLitSubTarget.cs
+  UniversalSpriteLitSubTarget.cs
+  UniversalSpriteUnlitSubTarget.cs
+ Shadows/
+  CastingSourceDropDown.cs
+  ShadowCaster2DEditor.cs
+  ShadowCaster2DShapeTool.cs
+  ShadowProvider/
+   ShadowShape2DProvider_ProperyDrawer.cs
+   ShadowShape2DProvider_SpriteSkin_PropertyDrawer.cs
+ ShapeEditor/EditablePath/
+  BezierUtility.cs
+  ControlPoint.cs
+  EditablePath.cs
+  EditablePathController.cs
+  EditablePathExtensions.cs
+  EditablePathUtility.cs
+  IEditablePath.cs
+  IEditablePathController.cs
+  ISnapping.cs
+  IUndoObject.cs
+  MultipleEditablePathController.cs
+  Snapping.cs
+ ShapeEditor/EditorTool/
+  GenericScriptablePath.cs
+  GenericScriptablePathInspector.cs
+  PathComponentEditor.cs
+  PathEditorTool.cs
+  PathEditorToolExtensions.cs
+  ScriptableData.cs
+  ScriptablePath.cs
+  ScriptablePathInspector.cs
+ ShapeEditor/GUIFramework/
+  ClickAction.cs
+  CommandAction.cs
+  Control.cs
+  DefaultControl.cs
+  GenericControl.cs
+  GenericDefaultControl.cs
+  GUIAction.cs
+  GUIState.cs
+  GUISystem.cs
+  HoveredControlAction.cs
+  IGUIState.cs
+  LayoutData.cs
+  SliderAction.cs
+ ShapeEditor/Selection/
+  IndexedSelection.cs
+  ISelectable.cs
+  ISelection.cs
+  ISelector.cs
+  PointRectSelector.cs
+  RectSelector.cs
+  SerializableSelection.cs
+ ShapeEditor/Shapes/
+  IShape.cs
+  Polygon.cs
+  ShapeExtensions.cs
+  Spline.cs
+ ShapeEditor/View/
+  CreatePointAction.cs
+  Drawer.cs
+  EditablePathView.cs
+  IDrawer.cs
+  IEditablePathView.cs
+ SortingLayerDropDown.cs
+Library/PackageCache/com.unity.render-pipelines.universal@4976252adeb8/Editor/Analytics/
+ AssetReimporterAnalytic.cs
+ PostProcessDataAnalytics.cs
+Library/PackageCache/com.unity.render-pipelines.universal@4976252adeb8/Editor/
+ AnimationClipUpgrader.cs
+ AnimationClipUpgrader_Types.cs
+ AssemblyInfo.cs
+ AssetPostProcessors/
+  AutodeskInteractiveMaterialImport.cs
+  FBXArnoldSurfaceMaterialDescriptionPreprocessor.cs
+  FBXMaterialDescriptionPreprocessor.cs
+  MaterialPostprocessor.cs
+  ModelPostProcessor.cs
+  PhysicalMaterial3DsMaxPreprocessor.cs
+  ShaderGraphMaterialsUpdater.cs
+  SketchupMaterialDescriptionPostprocessor.cs
+  ThreeDSMaterialDescriptionPostprocessor.cs
+  UniversalRenderPipelineGlobalSettingsPostprocessor.cs
+ AssetVersion.cs
+ BuildProcessors/GraphicsSettingsStrippers/
+  RendererStripper.cs
+  ScreenSpaceAmbientOcclusionStripper.cs
+ BuildProcessors/
+  URPBuildData.cs
+  URPBuildDataValidator.cs
+  URPPreprocessBuild.cs
+  URPProcessScene.cs
+ Camera/
+  UniversalRenderPipelineCameraEditor.cs
+  UniversalRenderPipelineCameraUI.Drawers.cs
+  UniversalRenderPipelineCameraUI.Environment.Drawers.cs
+  UniversalRenderPipelineCameraUI.Environment.Skin.cs
+  UniversalRenderPipelineCameraUI.Output.Drawers.cs
+  UniversalRenderPipelineCameraUI.Output.Skin.cs
+  UniversalRenderPipelineCameraUI.PhysicalCamera.Drawers.cs
+  UniversalRenderPipelineCameraUI.PresetInspector.cs
+  UniversalRenderPipelineCameraUI.Rendering.Drawers.cs
+  UniversalRenderPipelineCameraUI.Rendering.Skin.cs
+  UniversalRenderPipelineCameraUI.Skin.cs
+  UniversalRenderPipelineSerializedCamera.cs
+ ContextualMenuDispatcher.cs
+ Converter/
+  AnimationClipConverter.cs
+  BuiltInToURPConverterContainer.cs
+  ConversionIndexers.cs
+  ConverterItemDescriptor.cs
+  ConverterItemInfo.cs
+  Converters.cs
+  Converters/RenderSettingsConverter.cs
+  InitializeConverterContext.cs
+  MaterialReferenceBuilder.cs
+  ReadonlyMaterialConverter.cs
+  RenderPipelineConverter.cs
+  RenderPipelineConverterContainer.cs
+  RenderPipelineConvertersEditor.cs
+  RunItemContext.cs
+ Decal/
+  CreateDecalProjector.cs
+  CreateDecalShaderGraph.cs
+  DecalProjectorEditor.cs
+  DecalProjectorEditor.Skin.cs
+  DecalShaderGraphGUI.cs
+  DisplacableRectHandles.cs
+  ProjectedTransform.cs
+ DefaultScene/UniversalProjectSettings.cs
+ Deprecated.cs
+ EditorUtils.cs
+ LightExplorer.cs
+ Lighting/
+  UniversalRenderPipelineLightUI.Drawers.cs
+  UniversalRenderPipelineLightUI.PresetInspector.cs
+  UniversalRenderPipelineLightUI.Skin.cs
+  UniversalRenderPipelineSerializedLight.cs
+ Overrides/
+  BloomEditor.cs
+  ChannelMixerEditor.cs
+  ColorCurvesEditor.cs
+  ColorLookupEditor.cs
+  DepthOfFieldEditor.cs
+  FilmGrainEditor.cs
+  LiftGammaGainEditor.cs
+  MotionBlurEditor.cs
+  ScreenSpaceLensFlareEditor.cs
+  ShadowsMidtonesHighlightsEditor.cs
+  TonemappingEditor.cs
+ PostProcessDataEditor.cs
+ RendererFeatures/
+  DecalRendererFeatureEditor.cs
+  FullScreenPassRendererFeatureEditor.cs
+  NewPostProcessTemplateDropdownItems.cs
+  RenderObjectsPassFeatureEditor.cs
+  ScreenSpaceAmbientOcclusionEditor.cs
+  ScreenSpaceShadowsEditor.cs
+ RenderStateDataEditor.cs
+ SavedParameter.cs
+ SceneTemplates/URPBasicScenePipeline.cs
+ ScriptableRendererDataEditor.cs
+ ScriptableRendererFeatureProvider.cs
+ ScriptTemplates/ScriptTemplates.cs
+ Settings/PropertyDrawers/
+  URPDefaultVolumeProfileSettingsPropertyDrawer.cs
+  URPRenderGraphPropertyDrawer.cs
+  URPShaderStrippingSettingsPropertyDrawer.cs
+ ShaderBuildPreprocessor.cs
+ ShaderGraph/AssetCallbacks/
+  CreateCanvasShaderGraph.cs
+  CreateFullscreenShaderGraph.cs
+  CreateLitShaderGraph.cs
+  CreateSixWayShaderGraph.cs
+  CreateUnlitShaderGraph.cs
+ ShaderGraph/
+  Includes/DecalMeshBiasTypeEnum.cs
+  Nodes/UniversalSampleBufferNode.cs
+  Targets/
+   UniversalCanvasSubTarget.cs
+   UniversalDecalSubTarget.cs
+   UniversalFullscreenSubTarget.cs
+   UniversalLitSubTarget.cs
+   UniversalSixWaySubTarget.cs
+   UniversalSubTarget.cs
+   UniversalTarget.cs
+   UniversalUnlitSubTarget.cs
+  UniversalBlockFields.cs
+  UniversalFields.cs
+  UniversalMetadata.cs
+  UniversalProperties.cs
+  UniversalStructFields.cs
+  UniversalStructs.cs
+ ShaderGUI/
+  BaseShaderGUI.cs
+  ParticleGUI.cs
+  ShaderGraphLitGUI.cs
+  ShadergraphSpriteGUI.cs
+  ShaderGraphUnlitGUI.cs
+  Shaders/
+   BakedLitShader.cs
+   LitShader.cs
+   ParticlesLitShader.cs
+   ParticlesSimpleLitShader.cs
+   ParticlesUnlitShader.cs
+   SimpleLitShader.cs
+   UnlitShader.cs
+  ShadingModels/
+   BakedLitGUI.cs
+   LitDetailGUI.cs
+   LitGUI.cs
+   SimpleLitGUI.cs
+  SixWayGUI.cs
+  TerrainLitShaderGUI.cs
+ ShaderScriptableStripper.cs
+ ShaderStripTool.cs
+ ShaderUtils.cs
+ TrackballUIDrawer.cs
+ UniversalAdditionalCameraDataEditor.cs
+ UniversalAdditionalLightDataEditor.cs
+ UniversalAnalytics.cs
+ UniversalRendererDataEditor.cs
+ UniversalRenderPipelineAsset/
+  SerializedUniversalRenderPipelineAsset.cs
+  UniversalRenderPipelineAssetUI.Drawers.cs
+  UniversalRenderPipelineAssetUI.Skin.cs
+ UniversalRenderPipelineAssetEditor.cs
+ UniversalRenderPipelineLightEditor.cs
+ UniversalRenderPipelineMaterialUpgrader.cs
+ UniversalRenderPipelineVolumeComponentEditor.cs
+ UniversalSpeedTree8MaterialUpgrader.cs
+ UniversalSpeedTree9MaterialUpgrader.cs
+ UpgradeCommon.cs
+ UpgradeUtility.cs
+ VFXGraph/
+  VFXAbstractParticleURPLitOutput.cs
+  VFXDecalURPOutput.cs
+  VFXShaderGraphGUI.cs
+  VFXURPBinder.cs
+  VFXURPLitMeshOutput.cs
+  VFXURPLitPlanarPrimitiveOutput.cs
+  VFXURPLitQuadStripOutput.cs
+  VFXURPSubOutput.cs
+Temp/obj/Unity.RenderPipelines.Universal.Editor/.NETStandard,Version=v2.1.AssemblyAttributes.cs
+
+[metadataReferences]
+Assets/ExternalDependencyManager/Editor/1.2.187/
+ Google.IOSResolver.dll
+ Google.JarResolver.dll
+ Google.PackageManagerResolver.dll
+ Google.VersionHandlerImpl.dll
+Assets/
+ ExternalDependencyManager/Editor/Google.VersionHandler.dll
+ Firebase/
+  Editor/Firebase.Editor.dll
+  Plugins/
+   Firebase.Analytics.dll
+   Firebase.App.dll
+   Firebase.Auth.dll
+   Firebase.Platform.dll
+   Firebase.TaskExtension.dll
+   Google.MiniJson.dll
+Library/PackageCache/com.unity.collab-proxy@1e5e48aff19d/Lib/Editor/
+ log4netPlastic.dll
+ Unity.Plastic.Antlr3.Runtime.dll
+ Unity.Plastic.Newtonsoft.Json.dll
+ unityplastic.dll
+Library/PackageCache/com.unity.collections@aea9d3bd5e19/
+ Unity.Collections.LowLevel.ILSupport/Unity.Collections.LowLevel.ILSupport.dll
+ Unity.Collections.Tests/
+  System.IO.Hashing/System.IO.Hashing.dll
+  System.Runtime.CompilerServices.Unsafe/System.Runtime.CompilerServices.Unsafe.dll
+Library/PackageCache/
+ com.unity.ext.nunit@031a54704bff/net40/unity-custom/nunit.framework.dll
+ com.unity.nuget.mono-cecil@d78732e851eb/Mono.Cecil.dll
+ com.unity.visualscripting@b4d700247d4b/Editor/VisualScripting.Core/Dependencies/
+  DotNetZip/Unity.VisualScripting.IonicZip.dll
+  YamlDotNet/Unity.VisualScripting.YamlDotNet.dll
+ com.unity.visualscripting@b4d700247d4b/
+  Editor/VisualScripting.Core/EditorAssetResources/Unity.VisualScripting.TextureAssets.dll
+  Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll
+Temp/bin/Debug/
+ Unity.Burst.dll
+ Unity.Burst.Editor.dll
+ Unity.Collections.dll
+ Unity.InputSystem.dll
+ Unity.Mathematics.dll
+ Unity.Mathematics.Editor.dll
+ Unity.Rendering.LightTransport.Runtime.dll
+ Unity.RenderPipeline.Universal.ShaderLibrary.dll
+ Unity.RenderPipelines.Core.Editor.dll
+ Unity.RenderPipelines.Core.Editor.Shared.dll
+ Unity.RenderPipelines.Core.Runtime.dll
+ Unity.RenderPipelines.Core.Runtime.Shared.dll
+ Unity.RenderPipelines.GPUDriven.Runtime.dll
+ Unity.RenderPipelines.Universal.2D.Runtime.dll
+ Unity.RenderPipelines.Universal.Config.Runtime.dll
+ Unity.RenderPipelines.Universal.Runtime.dll
+ Unity.Searcher.Editor.dll
+ Unity.ShaderGraph.Editor.dll
+ Unity.ShaderGraph.Utilities.dll
+ UnityEditor.TestRunner.dll
+ UnityEditor.UI.dll
+ UnityEngine.TestRunner.dll
+ UnityEngine.UI.dll
+
+[analyzerReferences]
+../../../../../../../Program Files/Unity/Hub/Editor/6000.2.10f1/Editor/Data/Tools/Unity.SourceGenerators/
+ Unity.Properties.SourceGenerator.dll
+ Unity.SourceGenerators.dll
+ Unity.UIToolkit.SourceGenerator.dll
+../../../../../.vscode/extensions/visualstudiotoolsforunity.vstuc-1.2.1/Analyzers/Microsoft.Unity.Analyzers.dll
+
+[analyzerConfigFiles]
+Temp/obj/Unity.RenderPipelines.Universal.Editor/Unity.RenderPipelines.Universal.Editor.GeneratedMSBuildEditorConfig.editorconfig

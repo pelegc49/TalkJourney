@@ -1,0 +1,342 @@
+version=1
+
+# This file caches language service data to improve the performance of C# Dev Kit.
+# It is not intended for manual editing. It can safely be deleted and will be
+# regenerated automatically. For more information, see https://aka.ms/lscache
+#
+# To control where cache files are stored, use the following VS Code setting:
+#   "dotnet.projectsystem.cacheInProjectFolder": true
+
+[project]
+language=C#
+primary
+lastDtbSucceeded
+
+[properties]
+AssemblyName=UnityEditor.TestRunner
+CommandLineArgsForDesignTimeEvaluation=-langversion:9.0 -define:UNITY_6000_2_10;UNITY_6000_2;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_6000_1_OR_NEWER;UNITY_6000_2_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_UNITY_CONSENT;ENABLE_UNITY_CLOUD_IDENTIFIERS;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_AMD;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_CLOUD_SERVICES_ENGINE_DIAGNOSTICS;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;ENABLE_MONO;NET_4_6;NET_UNITY_4_8;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;UNITY_TESTS_FRAMEWORK;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;UNITY_EDITOR_ONLY_COMPILATION
+CompilerGeneratedFilesOutputPath=
+MaxSupportedLangVersion=8.0
+ProjectAssetsFile=<PATH>Temp/obj/UnityEditor.TestRunner/project.assets.json
+RootNamespace=
+RunAnalyzers=
+RunAnalyzersDuringLiveAnalysis=
+SolutionPath=<PATH>../server.sln
+TargetFrameworkIdentifier=.NETStandard
+TargetPath=<PATH>Temp/bin/Debug/UnityEditor.TestRunner.dll
+TargetRefPath=
+TemporaryDependencyNodeTargetIdentifier=netstandard2.1
+
+[commandLineArguments]
+/noconfig
+/unsafe-
+/checked-
+/nowarn:0169,USG0001,1701,1702
+/fullpaths
+/nostdlib+
+/errorreport:prompt
+/define:UNITY_6000_2_10;UNITY_6000_2;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_6000_1_OR_NEWER;UNITY_6000_2_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_UNITY_CONSENT;ENABLE_UNITY_CLOUD_IDENTIFIERS;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_AMD;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_CLOUD_SERVICES_ENGINE_DIAGNOSTICS;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;ENABLE_MONO;NET_4_6;NET_UNITY_4_8;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;UNITY_TESTS_FRAMEWORK;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;UNITY_EDITOR_ONLY_COMPILATION;DEBUG;NETSTANDARD;NETSTANDARD2_1;NETSTANDARD1_0_OR_GREATER;NETSTANDARD1_1_OR_GREATER;NETSTANDARD1_2_OR_GREATER;NETSTANDARD1_3_OR_GREATER;NETSTANDARD1_4_OR_GREATER;NETSTANDARD1_5_OR_GREATER;NETSTANDARD1_6_OR_GREATER;NETSTANDARD2_0_OR_GREATER;NETSTANDARD2_1_OR_GREATER
+/highentropyva+
+/debug+
+/debug:portable
+/filealign:512
+/optimize-
+/out:Temp\obj\UnityEditor.TestRunner\UnityEditor.TestRunner.dll
+/target:library
+/warnaserror-
+/utf8output
+/deterministic+
+/langversion:9.0
+/warnaserror+:NU1605
+
+[sourceFiles]
+Library/PackageCache/com.unity.test-framework@d97b7cd61ded/UnityEditor.TestRunner/Api/Analytics/
+ AnalyticsReporter.cs
+ AnalyticsTestCallback.cs
+ RunFinishedData.cs
+ TestTreeData.cs
+Library/PackageCache/com.unity.test-framework@d97b7cd61ded/UnityEditor.TestRunner/Api/
+ CallbacksDelegator.cs
+ CallbacksHolder.cs
+ ExecutionSettings.cs
+ Filter.cs
+ ICallbacks.cs
+ ICallbacksDelegator.cs
+ ICallbacksHolder.cs
+ IErrorCallbacks.cs
+ IgnoreTest.cs
+ ITestAdaptor.cs
+ ITestAdaptorFactory.cs
+ ITestResultAdaptor.cs
+ ITestRunnerApi.cs
+ ITestRunSettings.cs
+ ITestTreeRebuildCallbacks.cs
+ ResultsWriter.cs
+ RunState.cs
+ TestAdaptor.cs
+ TestAdaptorFactory.cs
+ TestMode.cs
+ TestResultAdaptor.cs
+ TestRunnerApi.cs
+ TestRunProgress.cs
+ TestStatus.cs
+Library/PackageCache/com.unity.test-framework@d97b7cd61ded/UnityEditor.TestRunner/
+ AssemblyInfo.cs
+ CommandLineParser/
+  CommandLineOption.cs
+  CommandLineOptionSet.cs
+  ICommandLineOption.cs
+ CommandLineTest/
+  Executer.cs
+  ExecutionSettings.cs
+  IExecuter.cs
+  IRunData.cs
+  ISettingsBuilder.cs
+  LogSavingCallbacks.cs
+  LogWriter.cs
+  ResultsSavingCallbacks.cs
+  RunData.cs
+  RunSettings.cs
+  RunStateCallbacks.cs
+  SettingsBuilder.cs
+  SetupException.cs
+  TestStarter.cs
+  TestState.cs
+ GUI/
+  AssetsDatabaseHelper.cs
+  Controls/
+   BitUtility.cs
+   FlagEnumContentProvider.cs
+   FlagEnumUtility.cs
+   GenericItemContentProvider.cs
+   ISelectableItem.cs
+   ISelectionDropDownContentProvider.cs
+   MultiValueContentProvider.cs
+   SelectableItemContent.cs
+   SelectionDropDown.cs
+  GuiHelper.cs
+  IAssetsDatabaseHelper.cs
+  IGuiHelper.cs
+  TestAssets/
+   ActiveFolderTemplateAssetCreator.cs
+   CustomScriptAssemblyMappingFinder.cs
+   FolderPathTestCompilationContextProvider.cs
+   IActiveFolderTemplateAssetCreator.cs
+   ICustomScriptAssembly.cs
+   ICustomScriptAssemblyMappingFinder.cs
+   IFolderPathTestCompilationContextProvider.cs
+   ITestScriptAssetsCreator.cs
+   TestScriptAssetMenuItems.cs
+   TestScriptAssetsCreator.cs
+  TestListBuilder/TestTreeViewBuilder.cs
+  TestListTreeView/
+   Icons.cs
+   TestListTreeViewDataSource.cs
+   TestListTreeViewGUI.cs
+   TestTreeViewItem.cs
+  TestRunnerGUI.cs
+  TestRunnerResult.cs
+  TestRunnerUIFilter.cs
+  UITestRunnerFilter.cs
+  Views/TestListGUIBase.cs
+ NUnitExtension/Attributes/
+  AssetPipelineIgnore.cs
+  ITestPlayerBuildModifier.cs
+  TestPlayerBuildModifierAttribute.cs
+ NUnitExtension/TestRunnerStateSerializer.cs
+ RequireApiProfileAttribute.cs
+ RequirePlatformSupportAttribute.cs
+ TestBuildAssemblyFilter.cs
+ TestLaunchers/
+  EditModeLauncherContextSettings.cs
+  Helpers/
+   AttributeFinderBase.cs
+   DelayedCallback.cs
+   FilePathMetaInfo.cs
+   PlayerLauncherBuildOptions.cs
+   PostbuildCleanupAttributeFinder.cs
+   PostbuildCleanupWithJobDataAttributeFinder.cs
+   PrebuildSetupAttributeFinder.cs
+   PrebuildSetupWithJobDataAttributeFinder.cs
+   TestFiltering.cs
+  PlatformSetup/
+   AndroidPlatformSetup.cs
+   ApplePlatformSetup.cs
+   GameCorePlatformSetup.cs
+   IPlatformSetup.cs
+   LuminPlatformSetup.cs
+   PlatformSpecificSetup.cs
+   StadiaPlatformSetup.cs
+   SwitchPlatformSetup.cs
+   UwpPlatformSetup.cs
+   XboxOnePlatformSetup.cs
+  PlayerLauncher.cs
+  PlayerLauncherContextSettings.cs
+  PlayerLauncherTestRunSettings.cs
+  PlaymodeLauncher.cs
+  RemotePlayerLogController.cs
+  RemotePlayerTestController.cs
+  RuntimeTestLauncherBase.cs
+  TestLauncherBase.cs
+ TestResultSerializer.cs
+ TestRun/Data/
+  RunProgress.cs
+  TaskInfo.cs
+  TaskMode.cs
+  TestJobData.cs
+  TestProgress.cs
+ TestRun/
+  ITestJobDataHolder.cs
+  ITestJobRunner.cs
+  RequiredTestRunDataMissingException.cs
+  TaskList.cs
+  Tasks/
+   BuildActionTaskBase.cs
+   BuildNUnitFilterTask.cs
+   BuildTestTreeTask.cs
+   CleanupConstructDelegatorTask.cs
+   CleanUpContext.cs
+   CleanupTestControllerTask.cs
+   CleanupVerificationTask.cs
+   CreateBootstrapSceneTask.cs
+   DeleteBootstrapSceneTask.cs
+   EditModeRunTask.cs
+   EnableTestOutLoggerTask.cs
+   EnterPlayModeTask.cs
+   Events/
+    CreateEventsTask.cs
+    RegisterCallbackDelegatorEventsTask.cs
+    RegisterTestRunCallbackEventsTask.cs
+    RunFinishedInvocationEvent.cs
+    RunStartedInvocationEvent.cs
+    UpdateTestProgressTask.cs
+   ExitPlayModeTask.cs
+   FileCleanupVerifierTaskBase.cs
+   FilterTestTreeTask.cs
+   GenerateContextTask.cs
+   InitializeTestProgressTask.cs
+   LegacyPlayerRunTask.cs
+   MarkRunAsPlayModeTask.cs
+   PerformUndoTask.cs
+   Platform/
+    PlatformSpecificCleanupTask.cs
+    PlatformSpecificPostBuildTask.cs
+    PlatformSpecificSetupTask.cs
+    PlatformSpecificSuccessfulBuildTask.cs
+    PlatformSpecificSuccessfulLaunchTask.cs
+   Player/DetermineRuntimePlatformTask.cs
+   PlayModeRunTask.cs
+   PostbuildCleanupTask.cs
+   PostbuildCleanupWithTestDataTask.cs
+   PrebuildSetupTask.cs
+   PrebuildSetupWithTestDataTask.cs
+   PreparePlayModeRunTask.cs
+   RegisterFilesForCleanupVerificationTask.cs
+   ResetInteractionModeTask.cs
+   RestoreProjectSettingsTask.cs
+   SaveUndoIndexTask.cs
+   Scene/
+    CreateNewSceneTask.cs
+    ISceneWrapper.cs
+    ReloadModifiedScenesTask.cs
+    RemoveAdditionalUntitledSceneTask.cs
+    RestoreSceneSetupTask.cs
+    SaveModifiedSceneTask.cs
+    SceneWrapper.cs
+    StoreSceneSetupTask.cs
+   SetInteractionModeTask.cs
+   SetupConstructDelegatorTask.cs
+   TestTaskBase.cs
+   UnlockReloadAssembliesTask.cs
+  TestJobDataHolder.cs
+  TestJobRunner.cs
+  TestRunCanceledException.cs
+  WaitForPlayerRunTask.cs
+ TestRunner/Callbacks/
+  WindowResultUpdater.cs
+  WindowResultUpdaterDataHolder.cs
+ TestRunner/
+  EditModePCHelper.cs
+  EditModeRunner.cs
+  EditmodeWorkItemFactory.cs
+  EditorEnumeratorTestWorkItem.cs
+  EnumeratorStepHelper.cs
+  Messages/
+   EnterPlayMode.cs
+   ExitPlayMode.cs
+   RecompileScripts.cs
+   WaitForDomainReload.cs
+  Utils/
+   CachingTestListProvider.cs
+   EditorAssembliesProxy.cs
+   EditorAssemblyWrapper.cs
+   EditorCompilationInterfaceProxy.cs
+   EditorLoadedTestAssemblyProvider.cs
+   IEditorAssembliesProxy.cs
+   IEditorCompilationInterfaceProxy.cs
+   IEditorLoadedTestAssemblyProvider.cs
+   ITestListCache.cs
+   ITestListCacheData.cs
+   ITestListProvider.cs
+   TestListCache.cs
+   TestListCacheData.cs
+   TestListJob.cs
+   TestListProvider.cs
+ TestRunnerWindow.cs
+ TestRunnerWindowSettings.cs
+ TestSettings/
+  ITestSettings.cs
+  ITestSettingsDeserializer.cs
+  TestSettings.cs
+  TestSettingsDeserializer.cs
+ UnityTestProtocol/Data/
+  BuildSettings.cs
+  PlayerSettings.cs
+  PlayerSystemInfo.cs
+  QualitySettings.cs
+  ScreenSettings.cs
+ UnityTestProtocol/
+  ITestRunnerApiMapper.cs
+  IUtpLogger.cs
+  IUtpMessageReporter.cs
+  Messages/
+   BuildSettingsMessage.cs
+   EditorVersionMessage.cs
+   Message.cs
+   PlayerSettingsMessage.cs
+   PlayerSystemInfoMessage.cs
+   QualitySettingsMessage.cs
+   ScreenSettingsMessage.cs
+   TestFinishedMessage.cs
+   TestPlanMessage.cs
+   TestStartedMessage.cs
+  TesRunDataHolder.cs
+  TestRunData.cs
+  TestRunnerApiMapper.cs
+  TestState.cs
+  UnityTestProtocolListener.cs
+  UnityTestProtocolStarter.cs
+  UtpDebuglogger.cs
+  UtpMessageBuilder.cs
+  UtpMessageReporter.cs
+Temp/obj/UnityEditor.TestRunner/.NETStandard,Version=v2.1.AssemblyAttributes.cs
+
+[metadataReferences]
+Library/PackageCache/
+ com.unity.ext.nunit@031a54704bff/net40/unity-custom/nunit.framework.dll
+ com.unity.nuget.mono-cecil@d78732e851eb/
+  Mono.Cecil.dll
+  Mono.Cecil.Mdb.dll
+  Mono.Cecil.Pdb.dll
+  Mono.Cecil.Rocks.dll
+Temp/bin/Debug/UnityEngine.TestRunner.dll
+
+[analyzerReferences]
+../../../../../../../Program Files/Unity/Hub/Editor/6000.2.10f1/Editor/Data/Tools/Unity.SourceGenerators/
+ Unity.Properties.SourceGenerator.dll
+ Unity.SourceGenerators.dll
+ Unity.UIToolkit.SourceGenerator.dll
+../../../../../.vscode/extensions/visualstudiotoolsforunity.vstuc-1.2.1/Analyzers/Microsoft.Unity.Analyzers.dll
+
+[analyzerConfigFiles]
+Temp/obj/UnityEditor.TestRunner/UnityEditor.TestRunner.GeneratedMSBuildEditorConfig.editorconfig

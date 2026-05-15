@@ -255,6 +255,7 @@ namespace TalkJourney.BubbleSystem.Flow
             stageController.selectionSpeechMatcher = selectionSpeechMatcher;
             stageController.localizationServiceBehaviour = localizationServiceBehaviour;
             stageController.audioPlaybackManagerBehaviour = audioPlaybackManager;
+            stageController.guideController = FindFirstObjectByType<GuideController>();
 
             sentenceBubbleController.audioPlaybackManagerBehaviour = audioPlaybackManager;
             sentenceBubbleController.localizationServiceBehaviour = localizationServiceBehaviour;

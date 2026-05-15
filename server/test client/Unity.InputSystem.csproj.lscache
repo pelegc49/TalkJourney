@@ -1,0 +1,556 @@
+version=1
+
+# This file caches language service data to improve the performance of C# Dev Kit.
+# It is not intended for manual editing. It can safely be deleted and will be
+# regenerated automatically. For more information, see https://aka.ms/lscache
+#
+# To control where cache files are stored, use the following VS Code setting:
+#   "dotnet.projectsystem.cacheInProjectFolder": true
+
+[project]
+language=C#
+primary
+lastDtbSucceeded
+
+[properties]
+AssemblyName=Unity.InputSystem
+CommandLineArgsForDesignTimeEvaluation=-langversion:9.0 -define:UNITY_6000_2_10;UNITY_6000_2;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_6000_1_OR_NEWER;UNITY_6000_2_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_UNITY_CONSENT;ENABLE_UNITY_CLOUD_IDENTIFIERS;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_AMD;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_CLOUD_SERVICES_ENGINE_DIAGNOSTICS;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;UNITY_INPUT_SYSTEM_ENABLE_VR;UNITY_INPUT_SYSTEM_ENABLE_XR;UNITY_INPUT_SYSTEM_ENABLE_PHYSICS;UNITY_INPUT_SYSTEM_ENABLE_PHYSICS2D;UNITY_INPUT_SYSTEM_ENABLE_UI;HAS_SET_LOCAL_POSITION_AND_ROTATION;UNITY_INPUT_SYSTEM_PROJECT_WIDE_ACTIONS;UNITY_INPUT_SYSTEM_INPUT_ACTIONS_EDITOR_AUTO_SAVE_ON_FOCUS_LOST;UNITY_INPUT_SYSTEM_PLATFORM_SCROLL_DELTA;UNITY_INPUT_SYSTEM_INPUT_MODULE_SCROLL_DELTA;UNITY_INPUT_SYSTEM_INPUT_MODULE_NAVIGATION_DEVICE_TYPE;UNITY_INPUT_SYSTEM_SENDPOINTERHOVERTOPARENT;UNITY_INPUT_SYSTEM_ENABLE_ANALYTICS;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER
+CompilerGeneratedFilesOutputPath=
+MaxSupportedLangVersion=8.0
+ProjectAssetsFile=<PATH>Temp/obj/Unity.InputSystem/project.assets.json
+RootNamespace=
+RunAnalyzers=
+RunAnalyzersDuringLiveAnalysis=
+SolutionPath=<PATH>../server.sln
+TargetFrameworkIdentifier=.NETStandard
+TargetPath=<PATH>Temp/bin/Debug/Unity.InputSystem.dll
+TargetRefPath=
+TemporaryDependencyNodeTargetIdentifier=netstandard2.1
+
+[commandLineArguments]
+/noconfig
+/unsafe+
+/checked-
+/nowarn:0169,USG0001,1701,1702
+/fullpaths
+/nostdlib+
+/errorreport:prompt
+/define:UNITY_6000_2_10;UNITY_6000_2;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_6000_1_OR_NEWER;UNITY_6000_2_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_UNITY_CONSENT;ENABLE_UNITY_CLOUD_IDENTIFIERS;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_AMD;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_CLOUD_SERVICES_ENGINE_DIAGNOSTICS;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;UNITY_INPUT_SYSTEM_ENABLE_VR;UNITY_INPUT_SYSTEM_ENABLE_XR;UNITY_INPUT_SYSTEM_ENABLE_PHYSICS;UNITY_INPUT_SYSTEM_ENABLE_PHYSICS2D;UNITY_INPUT_SYSTEM_ENABLE_UI;HAS_SET_LOCAL_POSITION_AND_ROTATION;UNITY_INPUT_SYSTEM_PROJECT_WIDE_ACTIONS;UNITY_INPUT_SYSTEM_INPUT_ACTIONS_EDITOR_AUTO_SAVE_ON_FOCUS_LOST;UNITY_INPUT_SYSTEM_PLATFORM_SCROLL_DELTA;UNITY_INPUT_SYSTEM_INPUT_MODULE_SCROLL_DELTA;UNITY_INPUT_SYSTEM_INPUT_MODULE_NAVIGATION_DEVICE_TYPE;UNITY_INPUT_SYSTEM_SENDPOINTERHOVERTOPARENT;UNITY_INPUT_SYSTEM_ENABLE_ANALYTICS;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;DEBUG;NETSTANDARD;NETSTANDARD2_1;NETSTANDARD1_0_OR_GREATER;NETSTANDARD1_1_OR_GREATER;NETSTANDARD1_2_OR_GREATER;NETSTANDARD1_3_OR_GREATER;NETSTANDARD1_4_OR_GREATER;NETSTANDARD1_5_OR_GREATER;NETSTANDARD1_6_OR_GREATER;NETSTANDARD2_0_OR_GREATER;NETSTANDARD2_1_OR_GREATER
+/highentropyva+
+/debug+
+/debug:portable
+/filealign:512
+/optimize-
+/out:Temp\obj\Unity.InputSystem\Unity.InputSystem.dll
+/target:library
+/warnaserror-
+/utf8output
+/deterministic+
+/langversion:9.0
+/warnaserror+:NU1605
+
+[sourceFiles]
+Library/PackageCache/com.unity.inputsystem@be6c4fd0abf5/InputSystem/Actions/Composites/
+ AxisComposite.cs
+ ButtonWithOneModifier.cs
+ ButtonWithTwoModifiers.cs
+ OneModifierComposite.cs
+ TwoModifiersComposite.cs
+ Vector2Composite.cs
+ Vector3Composite.cs
+Library/PackageCache/com.unity.inputsystem@be6c4fd0abf5/InputSystem/Actions/
+ IInputActionCollection.cs
+ IInputInteraction.cs
+ InputAction.cs
+ InputActionAsset.cs
+ InputActionChange.cs
+ InputActionMap.cs
+ InputActionParameters.cs
+ InputActionPhase.cs
+ InputActionProperty.cs
+ InputActionRebindingExtensions.cs
+ InputActionReference.cs
+ InputActionSetupExtensions.cs
+ InputActionState.cs
+ InputActionTrace.cs
+ InputActionType.cs
+ InputBinding.cs
+ InputBindingComposite.cs
+ InputBindingCompositeContext.cs
+ InputBindingResolver.cs
+ InputControlScheme.cs
+ InputInteractionContext.cs
+ Interactions/
+  HoldInteraction.cs
+  MultiTapInteraction.cs
+  PressInteraction.cs
+  SlowTapInteraction.cs
+  TapInteraction.cs
+Library/PackageCache/com.unity.inputsystem@be6c4fd0abf5/InputSystem/
+ AssemblyInfo.cs
+ Controls/
+  AnyKeyControl.cs
+  AxisControl.cs
+  ButtonControl.cs
+  CommonUsages.cs
+  DeltaControl.cs
+  DiscreteButtonControl.cs
+  DoubleControl.cs
+  DpadControl.cs
+  InputControl.cs
+  InputControlAttribute.cs
+  InputControlExtensions.cs
+  InputControlLayout.cs
+  InputControlLayoutAttribute.cs
+  InputControlLayoutChange.cs
+  InputControlList.cs
+  InputControlPath.cs
+  InputProcessor.cs
+  IntegerControl.cs
+  KeyControl.cs
+  Processors/
+   AxisDeadzoneProcessor.cs
+   ClampProcessor.cs
+   CompensateDirectionProcessor.cs
+   CompensateRotationProcessor.cs
+   EditorWindowSpaceProcessor.cs
+   InvertProcessor.cs
+   InvertVector2Processor.cs
+   InvertVector3Processor.cs
+   NormalizeProcessor.cs
+   NormalizeVector2Processor.cs
+   NormalizeVector3Processor.cs
+   ScaleProcessor.cs
+   ScaleVector2Processor.cs
+   ScaleVector3Processor.cs
+   StickDeadzoneProcessor.cs
+  QuaternionControl.cs
+  StickControl.cs
+  TouchControl.cs
+  TouchPhaseControl.cs
+  TouchPressControl.cs
+  Vector2Control.cs
+  Vector3Control.cs
+ Devices/Commands/
+  DisableDeviceCommand.cs
+  EnableDeviceCommand.cs
+  EnableIMECompositionCommand.cs
+  IInputDeviceCommandInfo.cs
+  InitiateUserAccountPairingCommand.cs
+  InputDeviceCommand.cs
+  QueryCanRunInBackground.cs
+  QueryDimensionsCommand.cs
+  QueryEditorWindowCoordinatesCommand.cs
+  QueryEnabledStateCommand.cs
+  QueryKeyboardLayoutCommand.cs
+  QueryKeyNameCommand.cs
+  QueryPairedUserAccountCommand.cs
+  QuerySamplingFrequencyCommand.cs
+  QueryUserIdCommand.cs
+  RequestResetCommand.cs
+  RequestSyncCommand.cs
+  SetIMECursorPositionCommand.cs
+  SetSamplingFrequencyCommand.cs
+  WarpMousePositionCommand.cs
+ Devices/
+  Gamepad.cs
+  Haptics/
+   DualMotorRumble.cs
+   DualMotorRumbleCommand.cs
+   IDualMotorRumble.cs
+   IHaptics.cs
+  ICustomDeviceReset.cs
+  IEventMerger.cs
+  IEventPreProcessor.cs
+  IInputUpdateCallbackReceiver.cs
+  InputDevice.cs
+  InputDeviceBuilder.cs
+  InputDeviceChange.cs
+  InputDeviceDescription.cs
+  InputDeviceMatcher.cs
+  ITextInputReceiver.cs
+  Joystick.cs
+  Keyboard.cs
+  Mouse.cs
+  Pen.cs
+  Pointer.cs
+  Precompiled/
+   FastKeyboard.cs
+   FastMouse.cs
+   FastMouse.partial.cs
+   FastTouchscreen.cs
+  Remote/
+   InputRemoting.cs
+   RemoteInputPlayerConnection.cs
+  Sensor.cs
+  Touchscreen.cs
+  TrackedDevice.cs
+ Editor/Analytics/
+  InputActionsEditorSessionAnalytic.cs
+  InputBuildAnalytic.cs
+  InputComponentEditorAnalytic.cs
+  InputEditorAnalytics.cs
+  InputExitPlayModeAnalytic.cs
+  OnScreenStickEditorAnalytic.cs
+  PlayerInputEditorAnalytic.cs
+  PlayerInputManagerEditorAnalytic.cs
+  VirtualMouseInputEditorAnalytic.cs
+ Editor/AssetEditor/
+  InputActionAssetManager.cs
+  InputActionEditorToolbar.cs
+  InputActionEditorWindow.cs
+  InputActionPropertiesView.cs
+  InputActionTreeView.cs
+  InputActionTreeViewItems.cs
+  InputBindingPropertiesView.cs
+  NameAndParameterListView.cs
+  ParameterListView.cs
+  PropertiesViewBase.cs
+ Editor/AssetImporter/
+  IInputActionAssetEditor.cs
+  InputActionAssetEditor.cs
+  InputActionAssetIconLoader.cs
+  InputActionCodeGenerator.cs
+  InputActionImporter.cs
+  InputActionImporterEditor.cs
+ Editor/
+  BuildPipeline/LinkFileGenerator.cs
+  ControlPicker/
+   IInputControlPickerLayout.cs
+   InputControlDropdownItem.cs
+   InputControlPathEditor.cs
+   InputControlPicker.cs
+   InputControlPickerDropdown.cs
+   InputControlPickerState.cs
+   Layouts/
+    DefaultInputControlPickerLayout.cs
+    TouchscreenControlPickerLayout.cs
+  Debugger/
+   InputActionDebuggerWindow.cs
+   InputDebuggerWindow.cs
+   InputDeviceDebuggerWindow.cs
+   InputLatencyCalculator.cs
+   SampleFrequencyCalculator.cs
+  DeviceSimulator/InputSystemPlugin.cs
+  Dialog.cs
+  DownloadableSample.cs
+  EditorInputControlLayoutCache.cs
+  InputAssetEditorUtils.cs
+  InputDiagnostics.cs
+  InputLayoutCodeGenerator.cs
+  InputParameterEditor.cs
+  InputSystemPackageControl.cs
+  InputSystemPluginControl.cs
+  Internal/AdvancedDropdown/
+   AdvancedDropdown.cs
+   AdvancedDropdownDataSource.cs
+   AdvancedDropdownGUI.cs
+   AdvancedDropdownItem.cs
+   AdvancedDropdownState.cs
+   AdvancedDropdownWindow.cs
+   CallbackDataSource.cs
+   MultiLevelDataSource.cs
+  Internal/
+   BuildProviderHelpers.cs
+   EditorHelpers.cs
+   GUIHelpers.cs
+   InputActionSerializationHelpers.cs
+   InputControlTreeView.cs
+   InputEventTreeView.cs
+   InputStateWindow.cs
+   SerializedPropertyHelpers.cs
+   SerializedPropertyLinqExtensions.cs
+   TreeViewHelpers.cs
+  ProjectWideActions/
+   ProjectWideActionsAsset.cs
+   ProjectWideActionsBuildProvider.cs
+  PropertyDrawers/
+   GamepadButtonPropertyDrawer.cs
+   InputActionAssetDrawer.cs
+   InputActionAssetSearchProvider.cs
+   InputActionDrawer.cs
+   InputActionDrawerBase.cs
+   InputActionMapDrawer.cs
+   InputActionPropertyDrawer.cs
+   InputActionReferencePropertyDrawer.cs
+   InputActionReferenceSearchProviders.cs
+   InputControlPathDrawer.cs
+  Settings/
+   EditorPlayerSettingHelpers.cs
+   InputEditorUserSettings.cs
+   InputSettingsBuildProvider.cs
+   InputSettingsProvider.cs
+  UITKAssetEditor/Commands/
+   Commands.cs
+   ControlSchemeCommands.cs
+  UITKAssetEditor/
+   EnumerableExtensions.cs
+   ExpressionUtils.cs
+   InputActionsEditorConstants.cs
+   InputActionsEditorSettingsProvider.cs
+   InputActionsEditorState.cs
+   InputActionsEditorWindow.cs
+   InputActionsEditorWindowUtils.cs
+   ReactiveProperty.cs
+   SerializedInputAction.cs
+   SerializedInputActionMap.cs
+   SerializedInputBinding.cs
+   StateContainer.cs
+   Views/
+    ActionMapsView.cs
+    ActionPropertiesView.cs
+    ActionsTreeView.cs
+    BindingPropertiesView.cs
+    CollectionViewSelectionChangeFilter.cs
+    CompositeBindingPropertiesView.cs
+    CompositePartBindingPropertiesView.cs
+    ContextMenu.cs
+    ControlSchemesView.cs
+    CopyPasteHelper.cs
+    DropManipulator.cs
+    InputActionMapsTreeViewItem.cs
+    InputActionsEditorView.cs
+    InputActionsTreeViewItem.cs
+    IViewStateCollection.cs
+    MatchingControlPaths.cs
+    NameAndParametersListView.cs
+    PropertiesView.cs
+    Selectors.cs
+    ViewBase.cs
+    ViewStateCollection.cs
+    VisualElementExtensions.cs
+ Events/
+  ActionEvent.cs
+  DeltaStateEvent.cs
+  DeviceConfigurationEvent.cs
+  DeviceRemoveEvent.cs
+  DeviceResetEvent.cs
+  IInputEventTypeInfo.cs
+  IMECompositionEvent.cs
+  InputEvent.cs
+  InputEventBuffer.cs
+  InputEventListener.cs
+  InputEventPtr.cs
+  InputEventStream.cs
+  InputEventTrace.cs
+  StateEvent.cs
+  TextEvent.cs
+ IInputDiagnostics.cs
+ IInputRuntime.cs
+ InputAnalytics.cs
+ InputExtensions.cs
+ InputFeatureNames.cs
+ InputManager.cs
+ InputManagerStateMonitors.cs
+ InputMetrics.cs
+ InputSettings.cs
+ InputSystem.cs
+ InputSystemObject.cs
+ InputUpdateType.cs
+ NativeInputRuntime.cs
+ Plugins/Android/
+  AndroidAxis.cs
+  AndroidGameController.cs
+  AndroidKeyCode.cs
+  AndroidSensors.cs
+  AndroidSupport.cs
+ Plugins/DualShock/
+  DualShockGamepad.cs
+  DualShockGamepadHID.cs
+  DualShockSupport.cs
+  IDualShockHaptics.cs
+ Plugins/EnhancedTouch/
+  EnhancedTouchSupport.cs
+  Finger.cs
+  Touch.cs
+  TouchHistory.cs
+  TouchSimulation.cs
+ Plugins/HID/
+  HID.cs
+  HIDDescriptorWindow.cs
+  HIDParser.cs
+  HIDSupport.cs
+ Plugins/iOS/
+  InputSettingsiOS.cs
+  InputSettingsiOSProvider.cs
+  IOSGameController.cs
+  iOSPostProcessBuild.cs
+  iOSStepCounter.cs
+  iOSSupport.cs
+ Plugins/Linux/
+  LinuxSupport.cs
+  SDLDeviceBuilder.cs
+ Plugins/OnScreen/
+  OnScreenButton.cs
+  OnScreenControl.cs
+  OnScreenStick.cs
+  OnScreenSupport.cs
+ Plugins/OSX/
+  OSXGameController.cs
+  OSXSupport.cs
+ Plugins/PlayerInput/
+  DefaultInputActions.cs
+  InputValue.cs
+  PlayerInput.cs
+  PlayerInputEditor.cs
+  PlayerInputManager.cs
+  PlayerInputManagerEditor.cs
+  PlayerJoinBehavior.cs
+  PlayerNotifications.cs
+ Plugins/Steam/
+  IStreamControllerAPI.cs
+  SteamController.cs
+  SteamControllerType.cs
+  SteamHandle.cs
+  SteamIGAConverter.cs
+  SteamSupport.cs
+ Plugins/Switch/
+  SwitchProControllerHID.cs
+  SwitchSupportHID.cs
+ Plugins/UI/
+  BaseInputOverride.cs
+  ExtendedAxisEventData.cs
+  ExtendedPointerEventData.cs
+  ExtendedSubmitCancelEventData.cs
+  INavigationEventData.cs
+  InputSystemUIInputModule.cs
+  InputSystemUIInputModuleEditor.cs
+  MultiplayerEventSystem.cs
+  NavigationModel.cs
+  PointerModel.cs
+  StandaloneInputModuleEditor.cs
+  TrackedDeviceRaycaster.cs
+  UISupport.cs
+  VirtualMouseInput.cs
+ Plugins/
+  UnityRemote/UnityRemoteSupport.cs
+  Users/
+   InputUser.cs
+   InputUserAccountHandle.cs
+   InputUserChange.cs
+   InputUserPairingOptions.cs
+   InputUserSettings.cs
+  WebGL/
+   WebGLGamepad.cs
+   WebGLJoystick.cs
+   WebGLSupport.cs
+  XInput/
+   IXboxOneRumble.cs
+   XboxGamepadMacOS.cs
+   XInputController.cs
+   XInputControllerWindows.cs
+   XInputSupport.cs
+  XR/
+   Controls/PoseControl.cs
+   Devices/
+    GoogleVR.cs
+    Oculus.cs
+    OpenVR.cs
+    WindowsMR.cs
+   GenericXRDevice.cs
+   Haptics/
+    BufferedRumble.cs
+    GetCurrentHapticStateCommand.cs
+    GetHapticCapabilitiesCommand.cs
+    SendBufferedHapticsCommand.cs
+    SendHapticImpulseCommand.cs
+   TrackedPoseDriver.cs
+   XRLayoutBuilder.cs
+   XRSupport.cs
+ State/
+  IInputStateCallbackReceiver.cs
+  IInputStateChangeMonitor.cs
+  IInputStateTypeInfo.cs
+  InputState.cs
+  InputStateBlock.cs
+  InputStateBuffers.cs
+  InputStateHistory.cs
+ Utilities/
+  ArrayHelpers.cs
+  CallbackArray.cs
+  Comparers.cs
+  CSharpCodeHelpers.cs
+  DelegateHelpers.cs
+  DisplayStringFormatAttribute.cs
+  DynamicBitfield.cs
+  ExceptionHelpers.cs
+  FourCC.cs
+  InlinedArray.cs
+  InternedString.cs
+  JsonParser.cs
+  MemoryHelpers.cs
+  MiscHelpers.cs
+  NameAndParameters.cs
+  NamedValue.cs
+  NumberHelpers.cs
+  Observables/
+   ForDeviceEventObservable.cs
+   Observable.cs
+   Observer.cs
+   SelectManyObservable.cs
+   SelectObservable.cs
+   TakeNObservable.cs
+   WhereObservable.cs
+  OneOrMore.cs
+  PredictiveParser.cs
+  PrimitiveValue.cs
+  ReadOnlyArray.cs
+  SavedState.cs
+  SpriteUtilities.cs
+  StringHelpers.cs
+  Substring.cs
+  TypeHelpers.cs
+  TypeTable.cs
+Temp/obj/Unity.InputSystem/.NETStandard,Version=v2.1.AssemblyAttributes.cs
+
+[metadataReferences]
+Assets/ExternalDependencyManager/Editor/1.2.187/
+ Google.IOSResolver.dll
+ Google.JarResolver.dll
+ Google.PackageManagerResolver.dll
+ Google.VersionHandlerImpl.dll
+Assets/
+ ExternalDependencyManager/Editor/Google.VersionHandler.dll
+ Firebase/
+  Editor/Firebase.Editor.dll
+  Plugins/
+   Firebase.Analytics.dll
+   Firebase.App.dll
+   Firebase.Auth.dll
+   Firebase.Platform.dll
+   Firebase.TaskExtension.dll
+   Google.MiniJson.dll
+Library/PackageCache/com.unity.collab-proxy@1e5e48aff19d/Lib/Editor/
+ log4netPlastic.dll
+ Unity.Plastic.Antlr3.Runtime.dll
+ Unity.Plastic.Newtonsoft.Json.dll
+ unityplastic.dll
+Library/PackageCache/com.unity.collections@aea9d3bd5e19/
+ Unity.Collections.LowLevel.ILSupport/Unity.Collections.LowLevel.ILSupport.dll
+ Unity.Collections.Tests/
+  System.IO.Hashing/System.IO.Hashing.dll
+  System.Runtime.CompilerServices.Unsafe/System.Runtime.CompilerServices.Unsafe.dll
+Library/PackageCache/
+ com.unity.ext.nunit@031a54704bff/net40/unity-custom/nunit.framework.dll
+ com.unity.nuget.mono-cecil@d78732e851eb/Mono.Cecil.dll
+ com.unity.visualscripting@b4d700247d4b/Editor/VisualScripting.Core/Dependencies/
+  DotNetZip/Unity.VisualScripting.IonicZip.dll
+  YamlDotNet/Unity.VisualScripting.YamlDotNet.dll
+ com.unity.visualscripting@b4d700247d4b/
+  Editor/VisualScripting.Core/EditorAssetResources/Unity.VisualScripting.TextureAssets.dll
+  Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll
+Temp/bin/Debug/
+ UnityEditor.TestRunner.dll
+ UnityEditor.UI.dll
+ UnityEngine.TestRunner.dll
+ UnityEngine.UI.dll
+
+[analyzerReferences]
+../../../../../../../Program Files/Unity/Hub/Editor/6000.2.10f1/Editor/Data/Tools/Unity.SourceGenerators/
+ Unity.Properties.SourceGenerator.dll
+ Unity.SourceGenerators.dll
+ Unity.UIToolkit.SourceGenerator.dll
+../../../../../.vscode/extensions/visualstudiotoolsforunity.vstuc-1.2.1/Analyzers/Microsoft.Unity.Analyzers.dll
+
+[analyzerConfigFiles]
+Temp/obj/Unity.InputSystem/Unity.InputSystem.GeneratedMSBuildEditorConfig.editorconfig

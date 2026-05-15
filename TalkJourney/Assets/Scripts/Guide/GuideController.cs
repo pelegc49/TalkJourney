@@ -23,6 +23,9 @@ public class GuideController : MonoBehaviour
     [Tooltip("TextMeshProUGUI used for subtitles (UI). Optional but recommended.")]
     public TextMeshProUGUI subtitleText;
 
+    [Tooltip("Visual guide character. If assigned, will show/hide during playback with spatial audio.")]
+    public VisualGuide visualGuide;
+
     [Header("Services (auto-resolve if left empty)")]
     public LocalizationResolver localizationResolver;
     public AudioBackendClient audioBackendClient;
@@ -129,18 +132,27 @@ public class GuideController : MonoBehaviour
     }
 
     /// <summary>
-    /// Play a guide instruction: fetch localized text and remote audio, update subtitle UI and play audio.
+    /// Play a guide instruction: show visual guide, fetch localized text and remote audio, update subtitle UI and play audio.
+    /// Audio plays from the visual guide's position (spatial 3D audio).
     /// This method is safe to call multiple times; previous playback will be cancelled when a new call arrives.
     /// </summary>
     public async Task PlayInstruction(string dialogueKey)
     {
-        _playbackCts?.Cancel();
+        await EndCurrentInstructionAsync();
+
         _playbackCts?.Dispose();
         _playbackCts = new CancellationTokenSource();
+        var currentPlaybackCts = _playbackCts;
         var token = _playbackCts.Token;
 
         try
         {
+            // Show visual guide
+            if (visualGuide != null && Camera.main != null)
+            {
+                visualGuide.Show(Camera.main.transform);
+            }
+
             // Resolve text
             string subtitle = dialogueKey;
             try
@@ -183,32 +195,120 @@ public class GuideController : MonoBehaviour
             }
 
             // Play audio if available
-            if (clip != null && audioSource != null)
+            if (clip != null)
             {
-                audioSource.PlayOneShot(clip);
-                try
+                // Use visual guide's audio source for spatial 3D audio, otherwise use fallback
+                AudioSource effectiveAudioSource = visualGuide != null ? visualGuide.audioSource : audioSource;
+
+                if (effectiveAudioSource != null)
                 {
-                    await Task.Delay(TimeSpan.FromSeconds(clip.length), token);
+                    if (visualGuide != null)
+                    {
+                        visualGuide.StartTalking(clip);
+                    }
+                    else
+                    {
+                        effectiveAudioSource.PlayOneShot(clip);
+                    }
+
+                    try
+                    {
+                        await Task.Delay(TimeSpan.FromSeconds(clip.length), token);
+                    }
+                    catch (TaskCanceledException)
+                    {
+                        return;
+                    }
                 }
-                catch (TaskCanceledException) { }
             }
             else
             {
                 // If no audio, leave subtitle a short while so player can read
-                try { await Task.Delay(TimeSpan.FromSeconds(1.5f), token); } catch (TaskCanceledException) { }
+                try { await Task.Delay(TimeSpan.FromSeconds(1.5f), token); }
+                catch (TaskCanceledException)
+                {
+                    return;
+                }
+            }
+
+            if (token.IsCancellationRequested)
+            {
+                return;
             }
 
             // Clear subtitle after a short delay
             if (subtitleText != null)
             {
-                try { await Task.Delay(TimeSpan.FromSeconds(subtitleClearDelay), token); } catch (TaskCanceledException) { }
+                try { await Task.Delay(TimeSpan.FromSeconds(subtitleClearDelay), token); }
+                catch (TaskCanceledException)
+                {
+                    return;
+                }
+
                 if (!token.IsCancellationRequested)
                     subtitleText.text = string.Empty;
+            }
+
+            if (token.IsCancellationRequested)
+            {
+                return;
+            }
+
+            // Hide visual guide with disappear animation
+            if (visualGuide != null)
+            {
+                visualGuide.StopTalking();
+                await visualGuide.HideAsync();
             }
         }
         catch (Exception ex)
         {
             Debug.LogException(ex);
+        }
+        finally
+        {
+            if (_playbackCts == currentPlaybackCts)
+            {
+                _playbackCts = null;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Stops the current guide line immediately and waits for the visual guide to finish disappearing.
+    /// Safe to call even when no guide line is active.
+    /// </summary>
+    public async Task EndCurrentInstructionAsync()
+    {
+        var activePlaybackCts = _playbackCts;
+        if (activePlaybackCts != null)
+        {
+            activePlaybackCts.Cancel();
+        }
+
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+        }
+
+        if (visualGuide != null)
+        {
+            visualGuide.StopTalking();
+        }
+
+        if (subtitleText != null)
+        {
+            subtitleText.text = string.Empty;
+        }
+
+        if (visualGuide != null)
+        {
+            await visualGuide.HideAsync();
+        }
+
+        if (_playbackCts == activePlaybackCts)
+        {
+            _playbackCts = null;
         }
     }
 
