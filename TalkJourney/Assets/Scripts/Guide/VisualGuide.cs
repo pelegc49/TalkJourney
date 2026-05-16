@@ -44,6 +44,14 @@ public class VisualGuide : MonoBehaviour
     [Header("Look")]
     [Tooltip("Yaw offset applied when looking at the player (degrees). Use 180 if model faces backwards.)")]
     public float lookYawOffsetDegrees = 180f;
+
+    [Header("Eyes")]
+    [Tooltip("Optional explicit reference to the eyes normal GameObject. If empty, VisualGuide will search for a child named 'eyes normal'.")]
+    public GameObject eyesNormalObject;
+
+    [Tooltip("Optional explicit reference to the eyes happy GameObject. If empty, VisualGuide will search for a child named 'eyes happy'.")]
+    public GameObject eyesHappyObject;
+
     private Transform _playerCamera;
     private bool _isVisible = false;
     private bool _isTalking = false;
@@ -58,6 +66,9 @@ public class VisualGuide : MonoBehaviour
 
         if (audioSource == null)
             audioSource = GetComponent<AudioSource>();
+
+        ResolveEyeObjects();
+        SetTalkingEyes(false);
 
         _initialPosition = transform.position;
         _initialRotation = transform.rotation;
@@ -82,6 +93,7 @@ public class VisualGuide : MonoBehaviour
         _isVisible = true;
         _isHiding = false;
         gameObject.SetActive(true);
+        SetTalkingEyes(false);
 
         // Reset position to initial or near player
         if (_playerCamera != null)
@@ -121,6 +133,7 @@ public class VisualGuide : MonoBehaviour
         _isVisible = false;
         _isTalking = false;
         animator.SetBool(talkingParameter, false);
+        SetTalkingEyes(false);
 
         // Trigger disappear animation
         animator.SetBool(isVisibleParameter, false);
@@ -146,6 +159,7 @@ public class VisualGuide : MonoBehaviour
 
         _isTalking = true;
         animator.SetBool(talkingParameter, true);
+        SetTalkingEyes(true);
 
         if (clip != null && audioSource != null)
         {
@@ -168,6 +182,7 @@ public class VisualGuide : MonoBehaviour
     {
         _isTalking = false;
         animator.SetBool(talkingParameter, false);
+        SetTalkingEyes(false);
 
         if (audioSource != null)
         {
@@ -229,5 +244,45 @@ public class VisualGuide : MonoBehaviour
             targetViewPos,
             moveSpeed * Time.deltaTime
         );
+    }
+
+    private void ResolveEyeObjects()
+    {
+        if (eyesNormalObject == null)
+        {
+            eyesNormalObject = FindChildByName("eyes normal");
+        }
+
+        if (eyesHappyObject == null)
+        {
+            eyesHappyObject = FindChildByName("eyes happy");
+        }
+    }
+
+    private GameObject FindChildByName(string targetName)
+    {
+        var transforms = GetComponentsInChildren<Transform>(true);
+        for (int i = 0; i < transforms.Length; i++)
+        {
+            if (string.Equals(transforms[i].name, targetName, System.StringComparison.OrdinalIgnoreCase))
+            {
+                return transforms[i].gameObject;
+            }
+        }
+
+        return null;
+    }
+
+    private void SetTalkingEyes(bool isTalking)
+    {
+        if (eyesNormalObject != null)
+        {
+            eyesNormalObject.SetActive(!isTalking);
+        }
+
+        if (eyesHappyObject != null)
+        {
+            eyesHappyObject.SetActive(isTalking);
+        }
     }
 }
