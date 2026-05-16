@@ -541,7 +541,6 @@ Library/PackageCache/
  com.unity.testtools.codecoverage@19a841221620/lib/ReportGenerator/ReportGeneratorMerged.dll
 Temp/bin/Debug/
  Unity.Addressables.dll
- Unity.Profiling.Core.dll
  Unity.ResourceManager.dll
  Unity.ScriptableBuildPipeline.dll
  Unity.ScriptableBuildPipeline.Editor.dll

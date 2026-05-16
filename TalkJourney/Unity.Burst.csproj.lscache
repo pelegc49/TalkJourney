@@ -377,9 +377,7 @@ Temp/obj/Unity.Burst/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 ../../../../../../Program Files/Unity/Hub/Editor/6000.3.11f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Library/PackageCache/com.unity.burst@07790c2d06d9/Unity.Burst.Unsafe.dll
 Temp/bin/Debug/
- UnityEditor.TestRunner.dll
  UnityEditor.UI.dll
- UnityEngine.TestRunner.dll
  UnityEngine.UI.dll
 
 [analyzerReferences]

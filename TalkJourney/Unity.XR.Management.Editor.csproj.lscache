@@ -389,12 +389,10 @@ Library/PackageCache/
  com.unity.testtools.codecoverage@19a841221620/lib/ReportGenerator/ReportGeneratorMerged.dll
 Temp/bin/Debug/
  Unity.InputSystem.dll
- Unity.XR.CoreUtils.dll
  Unity.XR.CoreUtils.Editor.dll
  Unity.XR.Management.dll
  UnityEditor.TestRunner.dll
  UnityEditor.UI.dll
- UnityEngine.SpatialTracking.dll
  UnityEngine.TestRunner.dll
  UnityEngine.UI.dll
 

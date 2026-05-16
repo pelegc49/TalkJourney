@@ -652,9 +652,7 @@ Temp/bin/Debug/
  Unity.Collections.dll
  Unity.InputSystem.dll
  Unity.Mathematics.dll
- UnityEditor.TestRunner.dll
  UnityEditor.UI.dll
- UnityEngine.TestRunner.dll
  UnityEngine.UI.dll
 
 [analyzerReferences]

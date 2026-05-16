@@ -354,41 +354,12 @@ Library/PackageCache/
  com.unity.nuget.newtonsoft-json@4dfd81071c64/Runtime/Newtonsoft.Json.dll
  com.unity.testtools.codecoverage@19a841221620/lib/ReportGenerator/ReportGeneratorMerged.dll
 Temp/bin/Debug/
- Unity.Burst.dll
- Unity.Collections.dll
- Unity.InputSystem.dll
- Unity.InputSystem.ForUI.dll
- Unity.InternalAPIEngineBridge.004.dll
- Unity.Mathematics.dll
- Unity.Postprocessing.Runtime.dll
- Unity.RenderPipeline.Universal.ShaderLibrary.dll
- Unity.RenderPipelines.Core.Runtime.dll
- Unity.RenderPipelines.Core.Runtime.Shared.dll
- Unity.RenderPipelines.GPUDriven.Runtime.dll
- Unity.RenderPipelines.Universal.Config.Runtime.dll
- Unity.RenderPipelines.Universal.Runtime.dll
- Unity.TextMeshPro.dll
- Unity.UnifiedRayTracing.Runtime.dll
- Unity.XR.ARFoundation.dll
- Unity.XR.ARFoundation.InternalUtils.dll
- Unity.XR.ARSubsystems.dll
- Unity.XR.CoreUtils.dll
  Unity.XR.CoreUtils.Editor.dll
- Unity.XR.Hands.dll
- Unity.XR.Interaction.Toolkit.dll
  Unity.XR.Interaction.Toolkit.Editor.dll
- Unity.XR.Management.dll
- Unity.XR.Management.Editor.dll
- Unity.XR.OpenXR.dll
- Unity.XR.OpenXR.Features.MetaQuestSupport.dll
- Unity.XR.OpenXR.Features.OculusQuestSupport.dll
- Unity.XR.Simulation.dll
  UnityEditor.TestRunner.dll
  UnityEditor.UI.dll
- UnityEngine.SpatialTracking.dll
  UnityEngine.TestRunner.dll
  UnityEngine.UI.dll
- UnityEngine.XR.LegacyInputHelpers.dll
 
 [analyzerReferences]
 ../../../../../../Program Files/Unity/Hub/Editor/6000.3.11f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/

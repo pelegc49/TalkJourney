@@ -558,14 +558,10 @@ Library/PackageCache/
  com.unity.testtools.codecoverage@19a841221620/lib/ReportGenerator/ReportGeneratorMerged.dll
 Temp/bin/Debug/
  Unity.Addressables.dll
- Unity.InternalAPIEngineBridge.004.dll
  Unity.InternalAPIEngineBridge.013.dll
- Unity.Profiling.Core.dll
  Unity.ResourceManager.dll
  Unity.TextMeshPro.dll
- UnityEditor.TestRunner.dll
  UnityEditor.UI.dll
- UnityEngine.TestRunner.dll
  UnityEngine.UI.dll
 
 [analyzerReferences]
