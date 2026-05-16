@@ -397,10 +397,6 @@ Temp/bin/Debug/
  Unity.Addressables.dll
  Unity.Addressables.Editor.dll
  Unity.EditorCoroutines.Editor.dll
- Unity.Profiling.Core.dll
- Unity.ResourceManager.dll
- Unity.ScriptableBuildPipeline.dll
- Unity.ScriptableBuildPipeline.Editor.dll
  UnityEditor.TestRunner.dll
  UnityEditor.UI.dll
  UnityEngine.TestRunner.dll

@@ -406,9 +406,7 @@ Library/PackageCache/
  com.unity.testtools.codecoverage@19a841221620/lib/ReportGenerator/ReportGeneratorMerged.dll
 Temp/bin/Debug/
  Unity.Profiling.Core.dll
- UnityEditor.TestRunner.dll
  UnityEditor.UI.dll
- UnityEngine.TestRunner.dll
  UnityEngine.UI.dll
 
 [analyzerReferences]

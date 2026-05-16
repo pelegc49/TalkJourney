@@ -345,13 +345,8 @@ Library/PackageCache/
  com.unity.nuget.newtonsoft-json@4dfd81071c64/Runtime/Newtonsoft.Json.dll
  com.unity.testtools.codecoverage@19a841221620/lib/ReportGenerator/ReportGeneratorMerged.dll
 Temp/bin/Debug/
- Unity.Burst.dll
- Unity.Collections.dll
  Unity.InferenceEngine.dll
- Unity.Mathematics.dll
- UnityEditor.TestRunner.dll
  UnityEditor.UI.dll
- UnityEngine.TestRunner.dll
  UnityEngine.UI.dll
 
 [analyzerReferences]

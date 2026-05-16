@@ -354,29 +354,11 @@ Library/PackageCache/
  com.unity.nuget.newtonsoft-json@4dfd81071c64/Runtime/Newtonsoft.Json.dll
  com.unity.testtools.codecoverage@19a841221620/lib/ReportGenerator/ReportGeneratorMerged.dll
 Temp/bin/Debug/
- Unity.Burst.dll
- Unity.Collections.dll
- Unity.InputSystem.dll
- Unity.Mathematics.dll
- Unity.RenderPipeline.Universal.ShaderLibrary.dll
- Unity.RenderPipelines.Core.Runtime.dll
- Unity.RenderPipelines.Core.Runtime.Shared.dll
- Unity.RenderPipelines.GPUDriven.Runtime.dll
- Unity.RenderPipelines.Universal.Config.Runtime.dll
- Unity.RenderPipelines.Universal.Runtime.dll
- Unity.UnifiedRayTracing.Runtime.dll
- Unity.XR.CoreUtils.dll
  Unity.XR.CoreUtils.Editor.dll
  Unity.XR.Hands.Analytics.Editor.dll
  Unity.XR.Hands.dll
- Unity.XR.Management.dll
- Unity.XR.Management.Editor.dll
- Unity.XR.OpenXR.dll
- Unity.XR.OpenXR.Features.MetaQuestSupport.dll
- Unity.XR.OpenXR.Features.OculusQuestSupport.dll
  UnityEditor.TestRunner.dll
  UnityEditor.UI.dll
- UnityEngine.SpatialTracking.dll
  UnityEngine.TestRunner.dll
  UnityEngine.UI.dll
 

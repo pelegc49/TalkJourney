@@ -359,23 +359,10 @@ Library/PackageCache/
  com.unity.nuget.newtonsoft-json@4dfd81071c64/Runtime/Newtonsoft.Json.dll
  com.unity.testtools.codecoverage@19a841221620/lib/ReportGenerator/ReportGeneratorMerged.dll
 Temp/bin/Debug/
- Unity.Addressables.dll
- Unity.Addressables.Editor.dll
  Unity.AppUI.dll
  Unity.AppUI.Editor.dll
  Unity.AppUI.InternalAPIBridge.dll
  Unity.AppUI.Navigation.dll
- Unity.InputSystem.dll
- Unity.InternalAPIEditorBridge.013.dll
- Unity.InternalAPIEngineBridge.004.dll
- Unity.InternalAPIEngineBridge.013.dll
- Unity.Localization.dll
- Unity.Localization.Editor.dll
- Unity.Profiling.Core.dll
- Unity.ResourceManager.dll
- Unity.ScriptableBuildPipeline.dll
- Unity.ScriptableBuildPipeline.Editor.dll
- Unity.TextMeshPro.dll
  UnityEditor.TestRunner.dll
  UnityEditor.UI.dll
  UnityEngine.TestRunner.dll

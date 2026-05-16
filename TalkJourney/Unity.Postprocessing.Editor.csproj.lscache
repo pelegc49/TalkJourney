@@ -394,15 +394,11 @@ Library/PackageCache/
  com.unity.nuget.newtonsoft-json@4dfd81071c64/Runtime/Newtonsoft.Json.dll
  com.unity.testtools.codecoverage@19a841221620/lib/ReportGenerator/ReportGeneratorMerged.dll
 Temp/bin/Debug/
- Unity.InputSystem.dll
  Unity.Postprocessing.Runtime.dll
- Unity.XR.CoreUtils.dll
- Unity.XR.CoreUtils.Editor.dll
  Unity.XR.Management.dll
  Unity.XR.Management.Editor.dll
  UnityEditor.TestRunner.dll
  UnityEditor.UI.dll
- UnityEngine.SpatialTracking.dll
  UnityEngine.TestRunner.dll
  UnityEngine.UI.dll
 

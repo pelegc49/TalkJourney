@@ -448,7 +448,6 @@ Temp/bin/Debug/
  Unity.AI.Navigation.Updater.dll
  Unity.AppUI.dll
  Unity.AppUI.Editor.dll
- Unity.AppUI.InternalAPIBridge.dll
  Unity.AppUI.MVVM.dll
  Unity.AppUI.Navigation.dll
  Unity.AppUI.Navigation.Editor.dll
@@ -463,19 +462,15 @@ Temp/bin/Debug/
  Unity.EditorCoroutines.Editor.dll
  Unity.InferenceEngine.dll
  Unity.InferenceEngine.Editor.dll
- Unity.InferenceEngine.Editor.Visualizer.dll
  Unity.InferenceEngine.iOSBLAS.dll
  Unity.InferenceEngine.MacBLAS.dll
- Unity.InferenceEngine.Microsoft.Msagl.dll
  Unity.InferenceEngine.ONNX.Editor.dll
  Unity.InferenceEngine.Tokenization.dll
  Unity.InputSystem.dll
  Unity.InputSystem.ForUI.dll
  Unity.InternalAPIEditorBridge.007.dll
- Unity.InternalAPIEditorBridge.013.dll
  Unity.InternalAPIEngineBridge.004.dll
  Unity.InternalAPIEngineBridge.007.dll
- Unity.InternalAPIEngineBridge.013.dll
  Unity.Localization.dll
  Unity.Localization.Editor.dll
  Unity.Mathematics.dll
@@ -510,7 +505,6 @@ Temp/bin/Debug/
  Unity.Searcher.Editor.dll
  Unity.Settings.Editor.dll
  Unity.ShaderGraph.Editor.dll
- Unity.ShaderGraph.Utilities.dll
  Unity.TerrainTools.dll
  Unity.TerrainTools.Editor.dll
  Unity.TestTools.CodeCoverage.Editor.dll
@@ -561,17 +555,14 @@ Temp/bin/Debug/
  Unity.XR.OpenXR.Features.MetaQuestSupport.Editor.dll
  Unity.XR.OpenXR.Features.OculusQuestSupport.dll
  Unity.XR.OpenXR.Features.OculusQuestSupport.Editor.dll
- Unity.XR.OpenXR.Features.RuntimeDebugger.dll
  Unity.XR.OpenXR.Features.RuntimeDebugger.Editor.dll
  Unity.XR.Simulation.dll
  Unity.XR.Simulation.Editor.dll
  UnityEditor.SpatialTracking.dll
- UnityEditor.TestRunner.dll
  UnityEditor.UI.Analytics.dll
  UnityEditor.UI.dll
  UnityEditor.XR.LegacyInputHelpers.dll
  UnityEngine.SpatialTracking.dll
- UnityEngine.TestRunner.dll
  UnityEngine.UI.dll
  UnityEngine.XR.LegacyInputHelpers.dll
 

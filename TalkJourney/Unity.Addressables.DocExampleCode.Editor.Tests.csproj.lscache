@@ -415,9 +415,7 @@ Library/PackageCache/com.unity.ext.nunit@d8c07649098d/net40/unity-custom/nunit.f
 Temp/bin/Debug/
  Unity.Addressables.dll
  Unity.Addressables.Editor.dll
- Unity.Profiling.Core.dll
  Unity.ResourceManager.dll
- Unity.ScriptableBuildPipeline.dll
  Unity.ScriptableBuildPipeline.Editor.dll
  UnityEditor.TestRunner.dll
  UnityEditor.UI.dll

@@ -320,27 +320,10 @@ Temp/obj/Unity.XR.OpenXR.Features.MockRuntime/.NETStandard,Version=v2.1.Assembly
  UnityEditor.Android.Extensions.dll
 ../../../../../../Program Files/Unity/Hub/Editor/6000.3.11f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Temp/bin/Debug/
- Unity.Burst.dll
- Unity.Collections.dll
  Unity.InputSystem.dll
- Unity.Mathematics.dll
- Unity.RenderPipeline.Universal.ShaderLibrary.dll
- Unity.RenderPipelines.Core.Runtime.dll
- Unity.RenderPipelines.Core.Runtime.Shared.dll
- Unity.RenderPipelines.GPUDriven.Runtime.dll
- Unity.RenderPipelines.Universal.Config.Runtime.dll
- Unity.RenderPipelines.Universal.Runtime.dll
- Unity.UnifiedRayTracing.Runtime.dll
- Unity.XR.CoreUtils.dll
- Unity.XR.CoreUtils.Editor.dll
- Unity.XR.Management.dll
- Unity.XR.Management.Editor.dll
  Unity.XR.OpenXR.dll
  Unity.XR.OpenXR.Editor.dll
- UnityEditor.TestRunner.dll
  UnityEditor.UI.dll
- UnityEngine.SpatialTracking.dll
- UnityEngine.TestRunner.dll
  UnityEngine.UI.dll
 
 [analyzerReferences]

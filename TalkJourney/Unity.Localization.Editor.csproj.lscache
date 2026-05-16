@@ -543,13 +543,8 @@ Temp/bin/Debug/
  Unity.Addressables.dll
  Unity.Addressables.Editor.dll
  Unity.InternalAPIEditorBridge.013.dll
- Unity.InternalAPIEngineBridge.004.dll
- Unity.InternalAPIEngineBridge.013.dll
  Unity.Localization.dll
- Unity.Profiling.Core.dll
  Unity.ResourceManager.dll
- Unity.ScriptableBuildPipeline.dll
- Unity.ScriptableBuildPipeline.Editor.dll
  Unity.TextMeshPro.dll
  UnityEditor.TestRunner.dll
  UnityEditor.UI.dll
