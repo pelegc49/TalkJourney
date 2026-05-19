@@ -882,6 +882,17 @@
                     "action": "Menu Button",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "abdd9a4e-302c-4fe5-bcd5-6df8b3ec6d44",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
