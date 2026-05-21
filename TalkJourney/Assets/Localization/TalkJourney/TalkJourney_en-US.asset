@@ -102,6 +102,29 @@ MonoBehaviour:
     m_Localized: accuracy
     m_Metadata:
       m_Items: []
+  - m_Id: 13000156217208832
+    m_Localized: Great! you entered the door, now try to sit on the sofa using the
+      trigger button.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13000156259151872
+    m_Localized: Here you can see the question. Press the arrow to continue!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13000156259151873
+    m_Localized: By pressing on the speaker button, you can produce the sound of
+      what does the sentence sounds like.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13000156259151874
+    m_Localized: This is your selections, try to select one of the bubbles by saying
+      it out loud.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13000156259151875
+    m_Localized: Here you can see the volume of your voice.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

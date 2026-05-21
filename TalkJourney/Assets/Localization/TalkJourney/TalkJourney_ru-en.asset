@@ -102,6 +102,29 @@ MonoBehaviour:
     m_Localized: tokhnost'
     m_Metadata:
       m_Items: []
+  - m_Id: 13000156217208832
+    m_Localized: Otlikhno! Vy voshli, teper' poprobuyte sest' na divan, nazhav na
+      knopku.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13000156259151872
+    m_Localized: Zdes' vy vidite vopros. Nazhmite strelku, khtoby prodolzhit'!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13000156259151873
+    m_Localized: Nazhav na knopku dinamika, vy mozhete vosproizvesti zvuk, kotory
+      sootvetstvuyet zvukhaniyu predlozheniya.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13000156259151874
+    m_Localized: Vot vashi varianty, poprobuyte vybrat' odin iz puzyr'kov, proiznesya
+      yego vslukh.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13000156259151875
+    m_Localized: Zdes' vy mozhete uvidet' gromkost' svoyego golosa.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b7ab25ace7c770646a69d348aa36ddb0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 326056
+  packageName: C-Hunter
+  packageVersion: 1.0
+  assetPath: Assets/Zeuk Games/Characters/Drone Companions Starter Pack/Materials/eyes
+    - happy.mat
+  uploadId: 771699

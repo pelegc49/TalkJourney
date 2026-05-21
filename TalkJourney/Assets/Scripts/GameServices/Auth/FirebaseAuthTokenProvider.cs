@@ -20,6 +20,7 @@ namespace TalkJourney.GameServices.Auth
         {
             try
             {
+                Debug.Log("Firebase auth token fetch started.", this);
                 var dependencyStatus = await FirebaseApp.CheckAndFixDependenciesAsync();
                 if (dependencyStatus != DependencyStatus.Available)
                 {
@@ -55,7 +56,13 @@ namespace TalkJourney.GameServices.Auth
             }
             catch (Exception exception)
             {
-                Debug.LogWarning($"Firebase token fetch failed: {exception.Message}", this);
+                Debug.LogWarning($"Firebase token fetch failed: {exception}", this);
+
+                if (exception.InnerException != null)
+                {
+                    Debug.LogWarning($"Firebase token fetch inner exception: {exception.InnerException}", this);
+                }
+
                 return null;
             }
         }

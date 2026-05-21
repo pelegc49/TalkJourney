@@ -2,6 +2,7 @@ using TalkJourney.BubbleSystem.Audio;
 using TalkJourney.BubbleSystem.Localization;
 using TalkJourney.GameServices.Auth;
 using UnityEngine;
+using System.Threading.Tasks;
 
 namespace TalkJourney.GameServices
 {
@@ -33,6 +34,10 @@ namespace TalkJourney.GameServices
         [Header("Settings Persistence")]
         [Tooltip("When enabled, load the saved display language on startup and save changes automatically.")]
         public bool persistDisplayLanguage = true;
+
+        [Header("Auth Warmup")]
+        [Tooltip("When enabled, tries to fetch a Firebase auth token during startup to reduce first-request auth races on device builds.")]
+        public bool prewarmFirebaseAuthOnStart = true;
 
         [Tooltip("PlayerPrefs key used to store selected display language.")]
         public string displayLanguagePlayerPrefsKey = "TalkJourney.Settings.DisplayLanguage";
@@ -72,6 +77,7 @@ namespace TalkJourney.GameServices
 
             ResolveDependencies();
             WireLanguageBridge();
+            WireAudioAuthProvider();
         }
 
         private void OnEnable()
@@ -80,9 +86,16 @@ namespace TalkJourney.GameServices
             LocalizationResolver.OnLanguagePairChanged += OnLanguagePairChanged;
         }
 
-        private void Start()
+        private async void Start()
         {
             ApplyPersistedLanguagePreferencesIfAvailable();
+
+            if (!prewarmFirebaseAuthOnStart || firebaseAuthTokenProvider == null)
+            {
+                return;
+            }
+
+            await PrewarmFirebaseAuthAsync();
         }
 
         private void OnDestroy()
@@ -138,8 +151,6 @@ namespace TalkJourney.GameServices
             {
                 languageSyncBridge.localizationResolver = localizationResolver;
             }
-
-            WireAudioAuthProvider();
         }
 
         private void WireAudioAuthProvider()
@@ -218,6 +229,18 @@ namespace TalkJourney.GameServices
             }
 
             return System.Enum.TryParse(value.Trim(), true, out language);
+        }
+
+        private async Task PrewarmFirebaseAuthAsync()
+        {
+            var token = await firebaseAuthTokenProvider.GetAuthorizationTokenAsync();
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                Debug.LogWarning("Firebase auth prewarm did not return a token. Protected backend calls may fail until auth is available.", this);
+                return;
+            }
+
+            Debug.Log("Firebase auth prewarm succeeded.", this);
         }
 
     }

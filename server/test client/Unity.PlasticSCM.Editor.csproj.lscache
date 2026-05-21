@@ -1,0 +1,593 @@
+version=1
+
+# This file caches language service data to improve the performance of C# Dev Kit.
+# It is not intended for manual editing. It can safely be deleted and will be
+# regenerated automatically. For more information, see https://aka.ms/lscache
+#
+# To control where cache files are stored, use the following VS Code setting:
+#   "dotnet.projectsystem.cacheInProjectFolder": true
+
+[project]
+language=C#
+primary
+lastDtbSucceeded
+
+[properties]
+AssemblyName=Unity.PlasticSCM.Editor
+CommandLineArgsForDesignTimeEvaluation=-langversion:9.0 -define:UNITY_6000_2_10;UNITY_6000_2;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_6000_1_OR_NEWER;UNITY_6000_2_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_UNITY_CONSENT;ENABLE_UNITY_CLOUD_IDENTIFIERS;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_AMD;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_CLOUD_SERVICES_ENGINE_DIAGNOSTICS;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;ENABLE_MONO;NET_4_6;NET_UNITY_4_8;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;UNITY_EDITOR_ONLY_COMPILATION
+CompilerGeneratedFilesOutputPath=
+MaxSupportedLangVersion=8.0
+ProjectAssetsFile=<PATH>Temp/obj/Unity.PlasticSCM.Editor/project.assets.json
+RootNamespace=
+RunAnalyzers=
+RunAnalyzersDuringLiveAnalysis=
+SolutionPath=<PATH>../server.sln
+TargetFrameworkIdentifier=.NETStandard
+TargetPath=<PATH>Temp/bin/Debug/Unity.PlasticSCM.Editor.dll
+TargetRefPath=
+TemporaryDependencyNodeTargetIdentifier=netstandard2.1
+
+[commandLineArguments]
+/noconfig
+/unsafe-
+/checked-
+/nowarn:0169,USG0001,1701,1702
+/fullpaths
+/nostdlib+
+/errorreport:prompt
+/define:UNITY_6000_2_10;UNITY_6000_2;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_6000_1_OR_NEWER;UNITY_6000_2_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_UNITY_CONSENT;ENABLE_UNITY_CLOUD_IDENTIFIERS;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_AMD;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_CLOUD_SERVICES_ENGINE_DIAGNOSTICS;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;ENABLE_MONO;NET_4_6;NET_UNITY_4_8;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;UNITY_EDITOR_ONLY_COMPILATION;DEBUG;NETSTANDARD;NETSTANDARD2_1;NETSTANDARD1_0_OR_GREATER;NETSTANDARD1_1_OR_GREATER;NETSTANDARD1_2_OR_GREATER;NETSTANDARD1_3_OR_GREATER;NETSTANDARD1_4_OR_GREATER;NETSTANDARD1_5_OR_GREATER;NETSTANDARD1_6_OR_GREATER;NETSTANDARD2_0_OR_GREATER;NETSTANDARD2_1_OR_GREATER
+/highentropyva+
+/debug+
+/debug:portable
+/filealign:512
+/optimize-
+/out:Temp\obj\Unity.PlasticSCM.Editor\Unity.PlasticSCM.Editor.dll
+/target:library
+/warnaserror-
+/utf8output
+/deterministic+
+/langversion:9.0
+/warnaserror+:NU1605
+
+[sourceFiles]
+Library/PackageCache/com.unity.collab-proxy@1e5e48aff19d/Editor/
+ ApplicationDataPath.cs
+ AssemblyInfo.cs
+ AssetMenu/
+  AssetCopyPathOperation.cs
+  AssetFilesFilterPatternsMenuBuilder.cs
+  AssetMenuOperations.cs
+  AssetsSelection.cs
+  AssetUVCSOperations.cs
+  Dialogs/
+   AddToCloudDriveDialog.cs
+   CheckinDialog.cs
+   CheckinDialogOperations.cs
+  HierarchyViewAssetMenu.cs
+  HierarchyViewAssetSelection.cs
+  ProjectViewAssetSelection.cs
+  ProjectViewCloudDriveAssetMenu.cs
+  ProjectViewUVCSAssetMenu.cs
+ AssetOverlays/
+  AssetOverlay.cs
+  AssetStatus.cs
+  Cache/
+   AssetStatusCache.cs
+   BuildPathDictionary.cs
+   LocalStatusCache.cs
+   LockStatusCache.cs
+   RemoteStatusCache.cs
+  DrawAssetOverlayIcon.cs
+  DrawHierarchyOverlay.cs
+  DrawProjectOverlay.cs
+ AssetsUtils/
+  AssetsPath.cs
+  GetSelectedPaths.cs
+  LoadAsset.cs
+  Processor/
+   AssetsProcessor.cs
+   UnityCloudProjectLinkMonitor.cs
+   UVCSAssetModificationProcessor.cs
+   UVCSAssetPostprocessor.cs
+   UVCSAssetsProcessor.cs
+   WorkspaceOperationsMonitor.cs
+  ProjectPath.cs
+  RefreshAsset.cs
+  RepaintEditor.cs
+  SaveAssets.cs
+ AutoRefresh.cs
+ BoolSetting.cs
+ BuildGetEventExtraInfoFunction.cs
+ CheckWorkspaceTreeNodeStatus.cs
+ CloudDrive/
+  CloudDriveMenuItem.cs
+  CloudDrivePlugin.cs
+  CloudDriveWindow.cs
+  CreateWorkspace/
+   CollaboratorsListView.cs
+   CollaboratorsListViewHeaderState.cs
+   CollaboratorsListViewItem.cs
+   CollaboratorsMultiColumnHeader.cs
+   CreateWorkspaceDialog.cs
+   CreateWorkspacePanel.cs
+   CreateWorkspaceView.cs
+  GetProposedOrganizationProject.cs
+  RefreshAsset.cs
+  ShareWorkspace/
+   ShareWorkspaceDialog.cs
+   ShareWorkspacePanel.cs
+  Welcome/WelcomeView.cs
+  WindowStatusBar.cs
+  Workspaces/
+   CloudWorkspacesView.cs
+   DirectoryContent/
+    DeleteWorkspaceDialog.cs
+    DirectoryContentPanel.cs
+    DirectoryContentPanelMenu.cs
+    DrawExpandedTreeNode.cs
+    DrawItemNameBar.cs
+    DrawItemsGridView.cs
+    ImportInProjectDialog.cs
+    ItemsGridSelection.cs
+    ItemsGridView.cs
+    ItemsPosition.cs
+    NewNameDialog.cs
+    ProcessDragEvent.cs
+    ProcessItemsGridViewEvent.cs
+   DragAndDrop/AskUserForExistingFile.cs
+   Tree/
+    CloudWorkspacesSelection.cs
+    CloudWorkspacesTreeView.cs
+    CloudWorkspacesTreeViewItem.cs
+    CloudWorkspacesTreeViewMenu.cs
+ Configuration/
+  AutoConfig.cs
+  ChannelCertificateUiImpl.cs
+  ClientConfiguration.cs
+  CloudEdition/Welcome/
+   AutoLogin.cs
+   CloudEditionWelcomeWindow.cs
+   OrganizationPanel.cs
+   SignInPanel.cs
+   SignInWithEmailPanel.cs
+   WaitingSignInPanel.cs
+  ConfigurePartialWorkspace.cs
+  CredentialsDialog.cs
+  CredentialsUIImpl.cs
+  EncryptionConfigurationDialog.cs
+  MissingEncryptionPasswordPromptHandler.cs
+  SSOCredentialsDialog.cs
+  TeamEdition/TeamEditionConfigurationWindow.cs
+  ToolConfig.cs
+  WriteLogConfiguration.cs
+ Developer/
+  CheckinProgress.cs
+  GenericProgress.cs
+  IncomingChangesNotification.cs
+  ProgressOperationHandler.cs
+  ShelvedChangesNotification.cs
+  UpdateProgress.cs
+  UpdateReport/
+   UpdateReportDialog.cs
+   UpdateReportLineListViewItem.cs
+   UpdateReportListHeaderState.cs
+   UpdateReportListView.cs
+ DrawGuiModeSwitcher.cs
+ EnumExtensions.cs
+ ExternalLink.cs
+ FindUnityObject.cs
+ FindWorkspace.cs
+ GetRelativePath.cs
+ Gluon/
+  CheckinProgress.cs
+  IncomingChangesNotification.cs
+  ProgressOperationHandler.cs
+  ShelvedChangesNotification.cs
+  UpdateProgress.cs
+  UpdateReport/
+   ErrorListViewItem.cs
+   UpdateReportDialog.cs
+   UpdateReportListHeaderState.cs
+   UpdateReportListView.cs
+ HierarchyExtensions.cs
+ Hub/
+  CommandLineArguments.cs
+  Operations/
+   CreateWorkspace.cs
+   DownloadRepository.cs
+   OperationParams.cs
+  ParseArguments.cs
+  ProcessHubCommand.cs
+ IncomingChanges.cs
+ Inspector/
+  DrawInspectorOperations.cs
+  InspectorAssetSelection.cs
+ IntSetting.cs
+ LaunchPackageManager.cs
+ MetaPath.cs
+ OrganizationsInformation.cs
+ PackageEntryPoint.cs
+ PackageInfo.cs
+ ParentWindow.cs
+ PlasticApp.cs
+ ProjectLoadedCounter.cs
+ ProjectPackages.cs
+ QueryVisualElementsExtensions.cs
+ RecommendToEnableManualCheckout.cs
+ SceneView/DrawSceneOperations.cs
+ Settings/
+  DiffAndMergeOptionsFoldout.cs
+  OpenUVCSProjectSettings.cs
+  OtherOptionsFoldout.cs
+  PendingChangesOptionsFoldout.cs
+  ShelveAndSwitchOptionsFoldout.cs
+  UVCSProjectSettingsProvider.cs
+ StatusBar/
+  GUIContentNotification.cs
+  INotificationContent.cs
+  NotificationBar.cs
+  WindowStatusBar.cs
+ SwitchModeConfirmationDialog.cs
+ SwitchUVCSPlugin.cs
+ TestingPreference.cs
+ Tool/
+  AuthToken.cs
+  BringWindowToFront.cs
+  FindTool.cs
+  IsExeAvailable.cs
+  IsExeVersion.cs
+  LaunchInstaller.cs
+  LaunchTool.cs
+  PlasticExeLauncher.cs
+  ToolConstants.cs
+ UI/Avatar/
+  ApplyCircleMask.cs
+  AvatarImages.cs
+  GetAvatar.cs
+ UI/
+  CheckUnityException.cs
+  CloseWindowIfOpened.cs
+  DelayedActionByFramesRunner.cs
+  DelayedActionBySecondsRunner.cs
+  DialogWithCheckBox.cs
+  DockEditorWindow.cs
+  DrawActionButton.cs
+  DrawActionButtonWithMenu.cs
+  DrawActionHelpBox.cs
+  DrawActionToolbar.cs
+  DrawCopyableLabel.cs
+  DrawSearchField.cs
+  DrawSplitter.cs
+  DrawStaticElement.cs
+  DrawTextBlockWithLink.cs
+  DrawUserIcon.cs
+  DropDownTextField.cs
+  EditorDispatcher.cs
+  EditorProgressBar.cs
+  EditorProgressControls.cs
+  EditorVersion.cs
+  EditorWindowFocus.cs
+  EntryBuilder.cs
+  EnumPopupSetting.cs
+  Errors/
+   ErrorListViewItem.cs
+   ErrorsDialog.cs
+   ErrorsListHeaderState.cs
+   ErrorsListView.cs
+   ErrorsPanel.cs
+  FindEditorWindow.cs
+  GetOverlayRect.cs
+  GetPlasticShortcut.cs
+  GetWindowIfOpened.cs
+  GUIActionRunner.cs
+  GuiEnabled.cs
+  HandleMenuItem.cs
+  Images.cs
+  MeasureMaxWidth.cs
+  PlasticDialog.cs
+  PlasticSplitterGUILayout.cs
+  Progress/
+   DrawProgressForDialogs.cs
+   DrawProgressForOperations.cs
+   DrawProgressForViews.cs
+   DrawProgressForWindow.cs
+   LoadingSpinner.cs
+   OperationProgressData.cs
+   ProgressControlsForDialogs.cs
+   ProgressControlsForViews.cs
+   ProgressControlsForWindow.cs
+  ResponseType.cs
+  RunModal.cs
+  ScreenResolution.cs
+  ShowWindow.cs
+  SortOrderComparer.cs
+  TabButton.cs
+  Tree/
+   CenteredContentPanel.cs
+   DrawTreeViewItem.cs
+   EmptyStatePanel.cs
+   GetChangesOverlayIcon.cs
+   ListViewItemIds.cs
+   PlasticTreeView.cs
+   TableViewOperations.cs
+   TreeHeaderColumns.cs
+   TreeHeaderSettings.cs
+   TreeViewItemExtensions.cs
+   TreeViewItemIds.cs
+   TreeViewSessionState.cs
+  UIElements/
+   LoadingSpinner.cs
+   ProgressControlsForDialogs.cs
+   UIElementsExtensions.cs
+  UndoRedo/
+   UndoRedoHelper.cs
+   UndoRedoState.cs
+   UndoRedoTextArea.cs
+  UnityConstants.cs
+  UnityEvents.cs
+  UnityMenuItem.cs
+  UnityPlasticGuiMessage.cs
+  UnityPlasticTimer.cs
+  UnityStyles.cs
+  UnityThreadWaiter.cs
+ UnityConfigurationChecker.cs
+ UnityPlasticDllVersion.cs
+ UVCSConnectionMonitor.cs
+ UVCSMenuItem.cs
+ UVCSNotification.cs
+ UVCSPlugin.cs
+ UVCSPluginIsEnabledPreference.cs
+ UVCSToolbar/Headless/
+  HeadlessGluonUpdateProgress.cs
+  HeadlessGluonUpdateReport.cs
+  HeadlessGluonViewHost.cs
+  HeadlessMergeViewLauncher.cs
+  HeadlessProgressControls.cs
+  HeadlessUpdateProgress.cs
+  HeadlessUpdateReport.cs
+  HeadlessViewSwitcher.cs
+  HeadlessWorkspaceStatusChangeListener.cs
+  HeadlessWorkspaceWindow.cs
+ UVCSToolbar/PopupWindow/BranchesList/
+  BranchesListModel.cs
+  BranchesTreeView.cs
+  ErrorEmptyState.cs
+  LoadingEmptyState.cs
+  NoBranchesEmptyState.cs
+  PopupProgressBar.cs
+ UVCSToolbar/PopupWindow/
+  ControlledPopupWindow.cs
+  Operations/
+   ControlledPopupOperations.cs
+   ToolbarOperationsShortcut.cs
+   UncontrolledPopupOperations.cs
+  PopupWindowDrawing.cs
+  ToolbarMouseBoundary.cs
+  UncontrolledPopupWindow.cs
+ UVCSToolbar/
+  ToolbarController.cs
+  UVCSToolbar.cs
+  UVCSToolbarButtonData.cs
+ UVCSToolbarButtonIsShownPreference.cs
+ UVCSWindow.cs
+ VCSBuiltInPlugin.cs
+ Views/
+  ApplyShelveWithConflictsQuestionerBuilder.cs
+  Branch/
+   BranchesListHeaderState.cs
+   BranchesListView.cs
+   BranchesSelection.cs
+   BranchesTab.cs
+   BranchesTab_Operations.cs
+   BranchesViewMenu.cs
+   BranchListViewItem.cs
+   Dialogs/
+    CreateBranchDialog.cs
+    DeleteBranchDialog.cs
+    RenameBranchDialog.cs
+   SerializableBranchesTabState.cs
+  BrowseRepository/
+   BrowseRepositoryHeaderState.cs
+   BrowseRepositoryPanel.cs
+   BrowseRepositoryTreeView.cs
+   BrowseRepositoryViewItem.cs
+  Changesets/
+   ChangesetExplorerView.cs
+   ChangesetListViewItem.cs
+   ChangesetsListHeaderState.cs
+   ChangesetsListView.cs
+   ChangesetsSelection.cs
+   ChangesetsTab.cs
+   ChangesetsTab_Operations.cs
+   ChangesetsViewMenu.cs
+   Dialogs/LabelChangesetDialog.cs
+   GetChangesetsQuery.cs
+  ConfirmContinueWithPendingChangesDialog.cs
+  CreateWorkspace/
+   CreateWorkspaceView.cs
+   CreateWorkspaceViewState.cs
+   Dialogs/
+    CreateRepositoryDialog.cs
+    RepositoriesListHeaderState.cs
+    RepositoriesListView.cs
+    RepositoryExplorerDialog.cs
+    RepositoryListViewItem.cs
+   DrawCreateWorkspaceView.cs
+   PerformInitialCheckin.cs
+   ValidRepositoryName.cs
+  DateFilter.cs
+  Diff/
+   ChangeCategoryTreeViewItem.cs
+   ClientDiffTreeViewItem.cs
+   Dialogs/GetRestorePathDialog.cs
+   DiffPanel.cs
+   DiffSelection.cs
+   DiffTreeView.cs
+   DiffTreeViewMenu.cs
+   GetClientDiffInfos.cs
+   MergeCategoryTreeViewItem.cs
+   UnityDiffTree.cs
+  DownloadPlasticExeDialog.cs
+  EnableSwitchAndShelveFeatureDialog.cs
+  FileSystemOperation.cs
+  History/
+   HistoryListHeaderState.cs
+   HistoryListView.cs
+   HistoryListViewItem.cs
+   HistoryListViewMenu.cs
+   HistorySelection.cs
+   HistoryTab.cs
+   SaveAction.cs
+   SerializableHistoryTabState.cs
+  Labels/Dialogs/
+   CreateLabelDialog.cs
+   CreateLabelView.cs
+   RenameLabelDialog.cs
+  Labels/
+   LabelListViewItem.cs
+   LabelsListHeaderState.cs
+   LabelsListView.cs
+   LabelsSelection.cs
+   LabelsTab.cs
+   LabelsTab_Operations.cs
+   LabelsViewMenu.cs
+  LaunchDiffOperations.cs
+  Locks/
+   DrawLocksListViewItem.cs
+   LocksListHeaderState.cs
+   LocksListView.cs
+   LocksListViewItem.cs
+   LocksSelector.cs
+   LocksTab.cs
+   LocksViewMenu.cs
+  Merge/
+   ApplyShelveReport.cs
+   Developer/
+    ChangeCategoryTreeViewItem.cs
+    ChangeTreeViewItem.cs
+    DirectoryConflicts/
+     AddMoveMenu.cs
+     ChangeDeleteMenu.cs
+     ConflictResolutionState.cs
+     CycleMoveMenu.cs
+     DeleteChangeMenu.cs
+     DeleteMoveMenu.cs
+     DivergentMoveMenu.cs
+     DrawDirectoryResolutionPanel.cs
+     EvilTwinMenu.cs
+     LoadedTwiceMenu.cs
+     MergeViewDirectoryConflictMenu.cs
+     MoveAddMenu.cs
+     MoveDeleteMenu.cs
+     MovedEvilTwinMenu.cs
+    IsCurrent.cs
+    IsResolved.cs
+    MergeOptionsDialog.cs
+    MergeSelection.cs
+    MergeTab.cs
+    MergeTreeHeaderState.cs
+    MergeTreeView.cs
+    MergeViewFileConflictMenu.cs
+    MergeViewMenu.cs
+    SerializableMergeTabState.cs
+    UnityMergeTree.cs
+   DrawMergeOverview.cs
+   Gluon/
+    ChangeCategoryTreeViewItem.cs
+    ChangeTreeViewItem.cs
+    IncomingChangesSelection.cs
+    IncomingChangesTab.cs
+    IncomingChangesTreeHeaderState.cs
+    IncomingChangesTreeView.cs
+    IncomingChangesViewMenu.cs
+    UnityIncomingChangesTree.cs
+   IIncomingChangesTab.cs
+  PendingChanges/
+   ChangeCategoryTreeViewItem.cs
+   Changelists/
+    ChangelistMenu.cs
+    MoveToChangelistMenuBuilder.cs
+   ChangelistTreeViewItem.cs
+   ChangeTreeViewItem.cs
+   CreatedChangesetData.cs
+   CreatedChangesetEmptyStatePanel.cs
+   Dialogs/
+    CheckinConflictsDialog.cs
+    CreateChangelistDialog.cs
+    DependenciesDialog.cs
+    EmptyCommentDialog.cs
+    FilterRulesConfirmationDialog.cs
+    LaunchCheckinConflictsDialog.cs
+    LaunchDependenciesDialog.cs
+   DrawCommentTextArea.cs
+   DrawOperationSuccess.cs
+   FilesFilterPatternsMenuBuilder.cs
+   PendingChangesMultiColumnHeader.cs
+   PendingChangesSelection.cs
+   PendingChangesStatusSuccessNotificationContent.cs
+   PendingChangesTab.cs
+   PendingChangesTab_Operations.cs
+   PendingChangesTreeHeaderState.cs
+   PendingChangesTreeView.cs
+   PendingChangesViewMenu.cs
+   PendingChangesViewPendingChangeMenu.cs
+   PendingMergeLinks/
+    MergeLinkListViewItem.cs
+    MergeLinksListView.cs
+   UnityPendingChangesTree.cs
+  SelectNewCodeReviewBehavior.cs
+  ShelvePendingChangesDialog.cs
+  Shelves/
+   ShelveListViewItem.cs
+   ShelvesListHeaderState.cs
+   ShelvesListView.cs
+   ShelvesSelection.cs
+   ShelvesTab.cs
+   ShelvesViewMenu.cs
+  Welcome/
+   DownloadAndInstallOperation.cs
+   GetInstallerTmpFileName.cs
+   MacOSConfigWorkaround.cs
+   WelcomeView.cs
+ ViewSwitcher.cs
+ VisualElementExtensions.cs
+ WebApi/
+  CredentialsResponse.cs
+  CurrentUserAdminCheckResponse.cs
+  ErrorResponse.cs
+  SubscriptionDetailsResponse.cs
+  TokenExchangeResponse.cs
+  WebRestApiClient.cs
+ WorkspaceWindow.cs
+ _Deprecated/
+  CollabMigration/MigrateCollabProject.cs
+  CollabPlugin.cs
+  PlasticPlugin.cs
+  Settings/PlasticProjectSettingsProvider.cs
+  UI/CooldownWindowDelayer.cs
+  WebApi/
+   ChangesetFromCollabCommitResponse.cs
+   IsCollabProjectMigratedResponse.cs
+   OrganizationCredentials.cs
+Temp/obj/Unity.PlasticSCM.Editor/.NETStandard,Version=v2.1.AssemblyAttributes.cs
+
+[metadataReferences]
+Library/PackageCache/com.unity.collab-proxy@1e5e48aff19d/Lib/Editor/
+ Unity.Plastic.Newtonsoft.Json.dll
+ unityplastic.dll
+Library/PackageCache/com.unity.ext.nunit@031a54704bff/net40/unity-custom/nunit.framework.dll
+Temp/bin/Debug/
+ UnityEditor.TestRunner.dll
+ UnityEditor.UI.dll
+ UnityEngine.TestRunner.dll
+ UnityEngine.UI.dll
+
+[analyzerReferences]
+../../../../../../../Program Files/Unity/Hub/Editor/6000.2.10f1/Editor/Data/Tools/Unity.SourceGenerators/
+ Unity.Properties.SourceGenerator.dll
+ Unity.SourceGenerators.dll
+ Unity.UIToolkit.SourceGenerator.dll
+../../../../../.vscode/extensions/visualstudiotoolsforunity.vstuc-1.2.1/Analyzers/Microsoft.Unity.Analyzers.dll
+
+[analyzerConfigFiles]
+Temp/obj/Unity.PlasticSCM.Editor/Unity.PlasticSCM.Editor.GeneratedMSBuildEditorConfig.editorconfig

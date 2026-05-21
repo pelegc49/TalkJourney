@@ -30,6 +30,10 @@ namespace TalkJourney.BubbleSystem.Flow
         [Header("Speech")]
         public SelectionSpeechMatcher selectionSpeechMatcher;
 
+        [Header("Guide")]
+        [Tooltip("Optional guide controller. If assigned, stage transitions wait for the guide to finish hiding before loading the next stage.")]
+        public GuideController guideController;
+
         [Header("Dependency Injection")]
         [Tooltip("Component implementing localization service; injected into spawned selection bubble display controllers.")]
         public MonoBehaviour localizationServiceBehaviour;
@@ -188,17 +192,26 @@ namespace TalkJourney.BubbleSystem.Flow
                 return false;
             }
 
-            if (transitionAnimator == null)
-            {
-                return LoadStage(nextStage);
-            }
-
             _stageTransitionCoroutine = StartCoroutine(StageTransitionRoutine(nextStage));
             return true;
         }
 
         private System.Collections.IEnumerator StageTransitionRoutine(StageData nextStage)
         {
+            if (guideController != null)
+            {
+                var guideTeardownTask = guideController.EndCurrentInstructionAsync();
+                while (!guideTeardownTask.IsCompleted)
+                {
+                    yield return null;
+                }
+
+                if (guideTeardownTask.IsFaulted)
+                {
+                    Debug.LogException(guideTeardownTask.Exception, this);
+                }
+            }
+
             if (transitionAnimator != null && !string.IsNullOrEmpty(fadeOutBool))
             {
                 transitionAnimator.SetBool(fadeOutBool, true);

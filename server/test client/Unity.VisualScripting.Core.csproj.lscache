@@ -1,0 +1,573 @@
+version=1
+
+# This file caches language service data to improve the performance of C# Dev Kit.
+# It is not intended for manual editing. It can safely be deleted and will be
+# regenerated automatically. For more information, see https://aka.ms/lscache
+#
+# To control where cache files are stored, use the following VS Code setting:
+#   "dotnet.projectsystem.cacheInProjectFolder": true
+
+[project]
+language=C#
+primary
+lastDtbSucceeded
+
+[properties]
+AssemblyName=Unity.VisualScripting.Core
+CommandLineArgsForDesignTimeEvaluation=-langversion:9.0 -define:UNITY_6000_2_10;UNITY_6000_2;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_6000_1_OR_NEWER;UNITY_6000_2_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_UNITY_CONSENT;ENABLE_UNITY_CLOUD_IDENTIFIERS;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_AMD;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_CLOUD_SERVICES_ENGINE_DIAGNOSTICS;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;PACKAGE_INPUT_SYSTEM_EXISTS;PACKAGE_INPUT_SYSTEM_1_2_0_OR_NEWER_EXISTS;MODULE_ANIMATION_EXISTS;MODULE_PHYSICS_EXISTS;MODULE_PHYSICS_2D_EXISTS;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER
+CompilerGeneratedFilesOutputPath=
+MaxSupportedLangVersion=8.0
+ProjectAssetsFile=<PATH>Temp/obj/Unity.VisualScripting.Core/project.assets.json
+RootNamespace=
+RunAnalyzers=
+RunAnalyzersDuringLiveAnalysis=
+SolutionPath=<PATH>../server.sln
+TargetFrameworkIdentifier=.NETStandard
+TargetPath=<PATH>Temp/bin/Debug/Unity.VisualScripting.Core.dll
+TargetRefPath=
+TemporaryDependencyNodeTargetIdentifier=netstandard2.1
+
+[commandLineArguments]
+/noconfig
+/unsafe-
+/checked-
+/nowarn:0169,USG0001,1701,1702
+/fullpaths
+/nostdlib+
+/errorreport:prompt
+/define:UNITY_6000_2_10;UNITY_6000_2;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_6000_1_OR_NEWER;UNITY_6000_2_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_UNITY_CONSENT;ENABLE_UNITY_CLOUD_IDENTIFIERS;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_AMD;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_CLOUD_SERVICES_ENGINE_DIAGNOSTICS;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;PACKAGE_INPUT_SYSTEM_EXISTS;PACKAGE_INPUT_SYSTEM_1_2_0_OR_NEWER_EXISTS;MODULE_ANIMATION_EXISTS;MODULE_PHYSICS_EXISTS;MODULE_PHYSICS_2D_EXISTS;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;DEBUG;NETSTANDARD;NETSTANDARD2_1;NETSTANDARD1_0_OR_GREATER;NETSTANDARD1_1_OR_GREATER;NETSTANDARD1_2_OR_GREATER;NETSTANDARD1_3_OR_GREATER;NETSTANDARD1_4_OR_GREATER;NETSTANDARD1_5_OR_GREATER;NETSTANDARD1_6_OR_GREATER;NETSTANDARD2_0_OR_GREATER;NETSTANDARD2_1_OR_GREATER
+/highentropyva+
+/debug+
+/debug:portable
+/filealign:512
+/optimize-
+/out:Temp\obj\Unity.VisualScripting.Core\Unity.VisualScripting.Core.dll
+/target:library
+/warnaserror-
+/utf8output
+/deterministic+
+/langversion:9.0
+/warnaserror+:NU1605
+
+[sourceFiles]
+Library/PackageCache/com.unity.visualscripting@b4d700247d4b/Runtime/VisualScripting.Core/
+ Attributes/VisualScriptingHelpURLAttribute.cs
+ Cloning/
+  Cloner.cs
+  Cloners/
+   AnimationCurveCloner.cs
+   ArrayCloner.cs
+   DictionaryCloner.cs
+   EnumerableCloner.cs
+   FakeSerializationCloner.cs
+   FieldsCloner.cs
+   GradientCloner.cs
+   ListCloner.cs
+   ReflectedCloner.cs
+  Cloning.cs
+  CloningContext.cs
+  ICloner.cs
+  ISpecifiesCloner.cs
+ Collections/
+  AotDictionary.cs
+  AotList.cs
+  DebugDictionary.cs
+  FlexibleDictionary.cs
+  GuidCollection.cs
+  IKeyedCollection.cs
+  IMergedCollection.cs
+  INotifiedCollectionItem.cs
+  INotifyCollectionChanged.cs
+  IProxyableNotifyCollectionChanged.cs
+  ISet.cs
+  MergedCollection.cs
+  MergedKeyedCollection.cs
+  MergedList.cs
+  NoAllocEnumerator.cs
+  NonNullableCollection.cs
+  NonNullableDictionary.cs
+  NonNullableHashSet.cs
+  NonNullableList.cs
+  VariantCollection.cs
+  VariantKeyedCollection.cs
+  VariantList.cs
+  WatchedList.cs
+ Connections/
+  ConnectionCollection.cs
+  ConnectionCollectionBase.cs
+  GraphConnectionCollection.cs
+  IConnection.cs
+  IConnectionCollection.cs
+  InvalidConnectionException.cs
+ Decorators/
+  IDecoratorAttribute.cs
+  ValueAttribute.cs
+ Dependencies/
+  AssemblyQualifiedNameParser/ParsedAssemblyQualifiedName.cs
+  FullSerializer/Converters/
+   fsArrayConverter.cs
+   fsDateConverter.cs
+   fsDictionaryConverter.cs
+   fsEnumConverter.cs
+   fsForwardConverter.cs
+   fsGuidConverter.cs
+   fsIEnumerableConverter.cs
+   fsKeyValuePairConverter.cs
+   fsNullableConverter.cs
+   fsPrimitiveConverter.cs
+   fsReflectedConverter.cs
+   fsTypeConverter.cs
+   fsWeakReferenceConverter.cs
+   Unity/
+    AnimationCurve_DirectConverter.cs
+    Bounds_DirectConverter.cs
+    Gradient_DirectConverter.cs
+    GUIStyleState_DirectConverter.cs
+    GUIStyle_DirectConverter.cs
+    InputAction_DirectConverter.cs
+    Keyframe_DirectConverter.cs
+    LayerMask_DirectConverter.cs
+    RectOffset_DirectConverter.cs
+    Rect_DirectConverter.cs
+    UnityEvent_Converter.cs
+  FullSerializer/
+   fsAotCompilationManager.cs
+   fsBaseConverter.cs
+   fsConfig.cs
+   fsContext.cs
+   fsConverter.cs
+   fsConverterRegistrar.cs
+   fsData.cs
+   fsDirectConverter.cs
+   fsExceptions.cs
+   fsIgnoreAttribute.cs
+   fsISerializationCallbacks.cs
+   fsJsonParser.cs
+   fsJsonPrinter.cs
+   fsMemberSerialization.cs
+   fsObjectAttribute.cs
+   fsObjectProcessor.cs
+   fsPropertyAttribute.cs
+   fsResult.cs
+   fsSerializer.cs
+   Internal/
+    fsCyclicReferenceManager.cs
+    fsOption.cs
+    fsPortableReflection.cs
+    fsTypeExtensions.cs
+    fsVersionedType.cs
+    fsVersionManager.cs
+   Reflection/
+    fsMetaProperty.cs
+    fsMetaType.cs
+    fsReflectionUtility.cs
+    fsTypeCache.cs
+ EditorBinding/
+  AllowsNullAttribute.cs
+  DisableAnnotationAttribute.cs
+  EditorBindingUtility.cs
+  EditorTimeBinding.cs
+  ExpectedTypeAttribute.cs
+  IInspectableAttribute.cs
+  IncludeInSettingsAttribute.cs
+  InspectableAttribute.cs
+  InspectableIfAttribute.cs
+  Inspector/
+   InspectorActionDirectionAttribute.cs
+   InspectorAdaptiveWidthAttribute.cs
+   InspectorDelayedAttribute.cs
+   InspectorExpandTooltipAttribute.cs
+   InspectorLabelAttribute.cs
+   InspectorRangeAttribute.cs
+   InspectorTextAreaAttribute.cs
+   InspectorToggleLeftAttribute.cs
+   InspectorWideAttribute.cs
+   InspectViaImplementationsAttribute.cs
+  NullMeansSelfAttribute.cs
+  PredictableAttribute.cs
+  TypeIconAttribute.cs
+  TypeIconPriorityAttribute.cs
+  Typeset.cs
+  TypeSetAttribute.cs
+  WarnBeforeEditingAttribute.cs
+  WarnBeforeRemovingAttribute.cs
+ Ensure/
+  Ensure.cs
+  EnsureThat.Booleans.cs
+  EnsureThat.Collections.cs
+  EnsureThat.Comparables.cs
+  EnsureThat.cs
+  EnsureThat.Guids.cs
+  EnsureThat.NullableValueTypes.cs
+  EnsureThat.Objects.cs
+  EnsureThat.Reflection.cs
+  EnsureThat.Strings.cs
+  EnsureThat.Types.cs
+  EnsureThat.ValueTypes.cs
+  ExceptionMessages.cs
+  Extensions/
+   XComparable.cs
+   XString.cs
+ Events/
+  EmptyEventArgs.cs
+  EventBus.cs
+  EventHook.cs
+  EventHookComparer.cs
+  EventHooks.cs
+  EventMachine.cs
+  FrameDelayedCallback.cs
+  IEventGraph.cs
+  IEventMachine.cs
+  IGraphEventHandler.cs
+ Exceptions/
+  DebugUtility.cs
+  InvalidConversionException.cs
+  InvalidImplementationException.cs
+  UnexpectedEnumValueException.cs
+ Graphs/
+  Graph.cs
+  GraphData.cs
+  GraphDebugData.cs
+  GraphElement.cs
+  GraphElementCollection.cs
+  GraphInstances.cs
+  GraphNest.cs
+  GraphPointer.cs
+  GraphPointerException.cs
+  GraphReference.cs
+  GraphsExceptionUtility.cs
+  GraphSource.cs
+  GraphStack.cs
+  IGraph.cs
+  IGraphData.cs
+  IGraphDebugData.cs
+  IGraphElement.cs
+  IGraphElementCollection.cs
+  IGraphElementData.cs
+  IGraphElementDebugData.cs
+  IGraphElementWithData.cs
+  IGraphElementWithDebugData.cs
+  IGraphItem.cs
+  IGraphNest.cs
+  IGraphNester.cs
+  IGraphNesterElement.cs
+  IGraphParent.cs
+  IGraphParentElement.cs
+  IGraphRoot.cs
+  MergedGraphElementCollection.cs
+ Groups/GraphGroup.cs
+ Input/
+  MouseButton.cs
+  PressState.cs
+ Listeners/
+  AnimatorMessageListener.cs
+  GlobalMessageListener.cs
+  IGraphEventListener.cs
+  IGraphEventListenerData.cs
+  MessageListener.cs
+  MonoBehaviour/
+   UnityOnBecameInvisibleMessageListener.cs
+   UnityOnBecameVisibleMessageListener.cs
+   UnityOnCollisionEnter2DMessageListener.cs
+   UnityOnCollisionEnterMessageListener.cs
+   UnityOnCollisionExit2DMessageListener.cs
+   UnityOnCollisionExitMessageListener.cs
+   UnityOnCollisionStay2DMessageListener.cs
+   UnityOnCollisionStayMessageListener.cs
+   UnityOnControllerColliderHitMessageListener.cs
+   UnityOnJointBreak2DMessageListener.cs
+   UnityOnJointBreakMessageListener.cs
+   UnityOnMouseDownMessageListener.cs
+   UnityOnMouseDragMessageListener.cs
+   UnityOnMouseEnterMessageListener.cs
+   UnityOnMouseExitMessageListener.cs
+   UnityOnMouseOverMessageListener.cs
+   UnityOnMouseUpAsButtonMessageListener.cs
+   UnityOnMouseUpMessageListener.cs
+   UnityOnParticleCollisionMessageListener.cs
+   UnityOnTransformChildrenChangedMListener.cs
+   UnityOnTransformParentChangedMListener.cs
+   UnityOnTriggerEnter2DMListener.cs
+   UnityOnTriggerEnterMessageListener.cs
+   UnityOnTriggerExit2DMListener.cs
+   UnityOnTriggerExitMListener.cs
+   UnityOnTriggerStay2DMListener.cs
+   UnityOnTriggerStayMListener.cs
+  UI/
+   UnityOnButtonClickMessageListener.cs
+   UnityOnDropdownValueChangedMessageListener.cs
+   UnityOnInputFieldEndEditMessageListener.cs
+   UnityOnInputFieldValueChangedMessageListener.cs
+   UnityOnScrollbarValueChangedMessageListener.cs
+   UnityOnScrollRectValueChangedMessageListener.cs
+   UnityOnSliderValueChangedMessageListener.cs
+   UnityOnToggleValueChangedMessageListener.cs
+  UIInterfaces/
+   UnityOnBeginDragMessageListener.cs
+   UnityOnCancelMessageListener.cs
+   UnityOnDeselectMessageListener.cs
+   UnityOnDragMessageListener.cs
+   UnityOnDropMessageListener.cs
+   UnityOnEndDragMessageListener.cs
+   UnityOnMoveMessageListener.cs
+   UnityOnPointerClickMessageListener.cs
+   UnityOnPointerDownMessageListener.cs
+   UnityOnPointerEnterMessageListener.cs
+   UnityOnPointerExitMessageListener.cs
+   UnityOnPointerUpMessageListener.cs
+   UnityOnScrollMessageListener.cs
+   UnityOnSelectMessageListener.cs
+   UnityOnSubmitMessageListener.cs
+  UnityMessageListener.cs
+ Machines/
+  IMachine.cs
+  Machine.cs
+ Macros/
+  IMacro.cs
+  Macro.cs
+ Platforms/
+  AotIncompatibleAttribute.cs
+  IAotStubbable.cs
+  PlatformUtility.cs
+ Pooling/
+  ArrayPool.cs
+  DictionaryPool.cs
+  GenericPool.cs
+  HashSetPool.cs
+  IPoolable.cs
+  ListPool.cs
+  ManualPool.cs
+ Profiling/
+  ProfiledSegment.cs
+  ProfiledSegmentCollection.cs
+  ProfilingScope.cs
+  ProfilingUtility.cs
+ Properties/AssemblyInfo.cs
+ Reflection/
+  ActionDirection.cs
+  AttributeUtility.cs
+  ConversionUtility.cs
+  GenericClosingException.cs
+  IAttributeProvider.cs
+  IPrewarmable.cs
+  LooseAssemblyName.cs
+  Member.cs
+  MemberFilter.cs
+  MemberInfoComparer.cs
+  MemberUtility.cs
+  Namespace.cs
+  Operators/
+   AdditionHandler.cs
+   AmbiguousOperatorException.cs
+   AndHandler.cs
+   BinaryOperator.cs
+   BinaryOperatorHandler.cs
+   DecrementHandler.cs
+   DivisionHandler.cs
+   EqualityHandler.cs
+   ExclusiveOrHandler.cs
+   GreaterThanHandler.cs
+   GreaterThanOrEqualHandler.cs
+   IncrementHandler.cs
+   InequalityHandler.cs
+   InvalidOperatorException.cs
+   LeftShiftHandler.cs
+   LessThanHandler.cs
+   LessThanOrEqualHandler.cs
+   LogicalNegationHandler.cs
+   ModuloHandler.cs
+   MultiplicationHandler.cs
+   NumericNegationHandler.cs
+   OperatorException.cs
+   OperatorHandler.cs
+   OperatorUtility.cs
+   OrHandler.cs
+   PlusHandler.cs
+   RightShiftHandler.cs
+   SubtractionHandler.cs
+   UnaryOperator.cs
+   UnaryOperatorHandler.cs
+  Optimization/
+   Action_5.cs
+   Action_6.cs
+   Func_5.cs
+   Func_6.cs
+   InstanceActionInvokerBase.cs
+   InstanceActionInvoker_0.cs
+   InstanceActionInvoker_1.cs
+   InstanceActionInvoker_2.cs
+   InstanceActionInvoker_3.cs
+   InstanceActionInvoker_4.cs
+   InstanceActionInvoker_5.cs
+   InstanceFieldAccessor.cs
+   InstanceFunctionInvokerBase.cs
+   InstanceFunctionInvoker_0.cs
+   InstanceFunctionInvoker_1.cs
+   InstanceFunctionInvoker_2.cs
+   InstanceFunctionInvoker_3.cs
+   InstanceFunctionInvoker_4.cs
+   InstanceFunctionInvoker_5.cs
+   InstanceInvokerBase.cs
+   InstancePropertyAccessor.cs
+   InvokerBase.cs
+   IOptimizedAccessor.cs
+   IOptimizedInvoker.cs
+   OptimizedReflection.cs
+   ReflectionFieldAccessor.cs
+   ReflectionInvoker.cs
+   ReflectionPropertyAccessor.cs
+   StaticActionInvokerBase.cs
+   StaticActionInvoker_0.cs
+   StaticActionInvoker_1.cs
+   StaticActionInvoker_2.cs
+   StaticActionInvoker_3.cs
+   StaticActionInvoker_4.cs
+   StaticActionInvoker_5.cs
+   StaticFieldAccessor.cs
+   StaticFunctionInvokerBase.cs
+   StaticFunctionInvoker_0.cs
+   StaticFunctionInvoker_1.cs
+   StaticFunctionInvoker_2.cs
+   StaticFunctionInvoker_3.cs
+   StaticFunctionInvoker_4.cs
+   StaticFunctionInvoker_5.cs
+   StaticInvokerBase.cs
+   StaticPropertyAccessor.cs
+  RenamedAssemblyAttribute.cs
+  RenamedFromAttribute.cs
+  RenamedNamespaceAttribute.cs
+  RuntimeCodebase.cs
+  TypeFilter.cs
+  TypeName.cs
+  TypeNameDetail.cs
+  TypeQualifier.cs
+  TypesMatching.cs
+  TypeUtility.cs
+ Serialization/Converters/
+  LooseAssemblyNameConverter.cs
+  NamespaceConverter.cs
+  Ray2DConverter.cs
+  RayConverter.cs
+  UnityObjectConverter.cs
+ Serialization/
+  DictionaryAsset.cs
+  DoNotSerializeAttribute.cs
+  ISerializationDependency.cs
+  ISerializationDepender.cs
+  SerializableType.cs
+  Serialization.cs
+  SerializationData.cs
+  SerializationOperation.cs
+  SerializationVersionAttribute.cs
+  SerializeAsAttribute.cs
+  SerializeAttribute.cs
+ SerializedProperties/
+  ISerializedPropertyProvider.cs
+  SerializedPropertyProvider.cs
+  SerializedPropertyProviderAttribute.cs
+ StickyNote/StickyNote.cs
+ Unity/
+  IGizmoDrawer.cs
+  ISingleton.cs
+  IUnityObjectOwnable.cs
+  LudiqBehaviour.cs
+  LudiqScriptableObject.cs
+  MacroScriptableObject.cs
+  RequiresUnityAPIAttribute.cs
+  SceneSingleton.cs
+  Singleton.cs
+  SingletonAttribute.cs
+  UnityObjectOwnershipUtility.cs
+  UnityThread.cs
+ Utilities/
+  ComponentHolderProtocol.cs
+  CoroutineRunner.cs
+  CSharpNameUtility.cs
+  Empty.cs
+  EnumUtility.cs
+  ExceptionUtility.cs
+  HashUtility.cs
+  IAnalyticsIdentifiable.cs
+  IGettable.cs
+  IIdentifiable.cs
+  IInitializable.cs
+  LinqUtility.cs
+  OverrideStack.cs
+  Recursion.cs
+  ReferenceCollector.cs
+  ReferenceEqualityComparer.cs
+  RuntimeVSUsageUtility.cs
+  StringUtility.cs
+  UnityObjectUtility.cs
+  XColor.cs
+ Variables/
+  ApplicationVariables.cs
+  IGraphDataWithVariables.cs
+  IGraphWithVariables.cs
+  InspectorVariableNameAttribute.cs
+  ObjectVariables.cs
+  SavedVariables.cs
+  SceneVariables.cs
+  VariableDeclaration.cs
+  VariableDeclarationCollection.cs
+  VariableDeclarations.cs
+  VariableDeclarationsCloner.cs
+  VariableKind.cs
+  VariableKindAttribute.cs
+  Variables.cs
+  VariablesAsset.cs
+  VariablesSaver.cs
+Temp/obj/Unity.VisualScripting.Core/.NETStandard,Version=v2.1.AssemblyAttributes.cs
+
+[metadataReferences]
+Assets/ExternalDependencyManager/Editor/1.2.187/
+ Google.IOSResolver.dll
+ Google.JarResolver.dll
+ Google.PackageManagerResolver.dll
+ Google.VersionHandlerImpl.dll
+Assets/
+ ExternalDependencyManager/Editor/Google.VersionHandler.dll
+ Firebase/
+  Editor/Firebase.Editor.dll
+  Plugins/
+   Firebase.Analytics.dll
+   Firebase.App.dll
+   Firebase.Auth.dll
+   Firebase.Platform.dll
+   Firebase.TaskExtension.dll
+   Google.MiniJson.dll
+Library/PackageCache/com.unity.collab-proxy@1e5e48aff19d/Lib/Editor/
+ log4netPlastic.dll
+ Unity.Plastic.Antlr3.Runtime.dll
+ Unity.Plastic.Newtonsoft.Json.dll
+ unityplastic.dll
+Library/PackageCache/com.unity.collections@aea9d3bd5e19/
+ Unity.Collections.LowLevel.ILSupport/Unity.Collections.LowLevel.ILSupport.dll
+ Unity.Collections.Tests/
+  System.IO.Hashing/System.IO.Hashing.dll
+  System.Runtime.CompilerServices.Unsafe/System.Runtime.CompilerServices.Unsafe.dll
+Library/PackageCache/
+ com.unity.ext.nunit@031a54704bff/net40/unity-custom/nunit.framework.dll
+ com.unity.nuget.mono-cecil@d78732e851eb/Mono.Cecil.dll
+ com.unity.visualscripting@b4d700247d4b/Editor/VisualScripting.Core/Dependencies/
+  DotNetZip/Unity.VisualScripting.IonicZip.dll
+  YamlDotNet/Unity.VisualScripting.YamlDotNet.dll
+ com.unity.visualscripting@b4d700247d4b/
+  Editor/VisualScripting.Core/EditorAssetResources/Unity.VisualScripting.TextureAssets.dll
+  Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll
+Temp/bin/Debug/
+ Unity.InputSystem.dll
+ UnityEditor.TestRunner.dll
+ UnityEditor.UI.dll
+ UnityEngine.TestRunner.dll
+ UnityEngine.UI.dll
+
+[analyzerReferences]
+../../../../../../../Program Files/Unity/Hub/Editor/6000.2.10f1/Editor/Data/Tools/Unity.SourceGenerators/
+ Unity.Properties.SourceGenerator.dll
+ Unity.SourceGenerators.dll
+ Unity.UIToolkit.SourceGenerator.dll
+../../../../../.vscode/extensions/visualstudiotoolsforunity.vstuc-1.2.1/Analyzers/Microsoft.Unity.Analyzers.dll
+
+[analyzerConfigFiles]
+Temp/obj/Unity.VisualScripting.Core/Unity.VisualScripting.Core.GeneratedMSBuildEditorConfig.editorconfig

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 48dca5b99d113b8d11006bab44295342
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 326056
+  packageName: C-Hunter
+  packageVersion: 1.0
+  assetPath: Assets/Zeuk Games/Characters/Drone Companions Starter Pack/Standard
+    Assets/Effects/ToonShading/Shaders/ToonLit.shader
+  uploadId: 771699

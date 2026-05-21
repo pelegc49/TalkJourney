@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 67f112930da44cf4da0ff075d79769ea
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 326056
+  packageName: C-Hunter
+  packageVersion: 1.0
+  assetPath: Assets/Zeuk Games/Characters/Drone Companions Starter Pack/Scripts/DynamoBone/DynamoBone.cs
+  uploadId: 771699

@@ -102,6 +102,29 @@ MonoBehaviour:
     m_Localized: daiuk
     m_Metadata:
       m_Items: []
+  - m_Id: 13000156217208832
+    m_Localized: nehader! nikhnaset bedelet, akhsav nasa leshevet al hispa be'amtza'ot
+      kfator hahadek.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13000156259151872
+    m_Localized: kan tokhlu lir'ot et hashe'ela. lekhtzu al hakhatz kadi lehameshikh!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13000156259151873
+    m_Localized: al yedi lehitza al kfator harmakol, tokhlu lehapik et hatzlil shel
+      eikh hameshpat nishma.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13000156259151874
+    m_Localized: alu hivkhirot shlakh, nasa livkhor akhat mehavu'ot al yedi amirata
+      bekol ram.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13000156259151875
+    m_Localized: kan tokhel lir'ot et otzmat hakol shlakh.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
