@@ -19,7 +19,7 @@ public class AudioZoneController : MonoBehaviour
     
     private Coroutine fadeCoroutine;
     private int activeTriggers = 0;
-    private string playerTag = "Player"; 
+    private string playerTag = "MainCamera"; 
 
     void Awake()
     {
