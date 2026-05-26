@@ -14,7 +14,7 @@ public class GuideTrigger : MonoBehaviour
     public bool triggerOnce = true;
 
     [Tooltip("Tag used to identify the player collider. Defaults to 'Player'.")]
-    public string playerTag = "Player";
+    public string playerTag = "MainCamera";
 
     private bool _hasTriggered = false;
 
