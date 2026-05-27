@@ -1,5 +1,7 @@
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using TalkJourney.BubbleSystem.Data;
 using TalkJourney.BubbleSystem.Events;
 using TalkJourney.BubbleSystem.Flow;
@@ -14,6 +16,34 @@ namespace TalkJourney.BubbleSystem.Bubbles
     {
         [Header("Data")]
         public SelectionBubbleData selectionData;
+
+        [Header("Visuals")]
+        [Tooltip("Primary text label shown on the selection bubble.")]
+        public TMP_Text primaryText;
+
+        [Tooltip("Optional explicit RectTransform for the primary text. If empty, the TMP text RectTransform is used.")]
+        public RectTransform primaryTextRectTransform;
+
+        [Tooltip("Minimum bubble size in pixels.")]
+        public Vector2 minimumBubbleSize = new Vector2(50f, 50f);
+
+        [Tooltip("Extra width/height padding added around the primary text in pixels.")]
+        public Vector2 bubblePadding = new Vector2(32f, 16f);
+
+        [Tooltip("Extra width/height padding added to the primary text RectTransform around its content.")]
+        public Vector2 primaryTextPadding = Vector2.zero;
+
+        [Tooltip("When enabled, the primary text will stop growing wider than its parent and wrap onto multiple lines instead.")]
+        public bool constrainPrimaryTextWidthToParent = true;
+
+        [Tooltip("Optional explicit maximum width for the primary text in pixels. Set to 0 to use the parent width.")]
+        public float primaryTextMaximumWidth = 0f;
+
+        [Tooltip("When enabled, the selection bubble root is resized to the exact preferred text size, subject to the width cap.")]
+        public bool matchPrimaryTextAndBubbleToContent = true;
+
+        [Tooltip("Optional explicit RectTransform for the bubble root. If empty, this component's RectTransform is used.")]
+        public RectTransform bubbleRectTransform;
 
         [Header("Dependencies")]
         [Tooltip("Pointer interaction adapter for click handling.")]
@@ -58,10 +88,14 @@ namespace TalkJourney.BubbleSystem.Bubbles
         private bool _isBypassEnabled;
         private ILocalizationService _localizationService;
         private IStageController _stageController;
+        private RectTransform _rectTransform;
+        private LayoutElement _layoutElement;
         private readonly StringBuilder _normalizeBuffer = new StringBuilder(128);
 
         private void Awake()
         {
+            _rectTransform = GetComponent<RectTransform>();
+            _layoutElement = GetComponent<LayoutElement>();
             RefreshDependencies();
         }
 
@@ -80,6 +114,8 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
             // Subscribe to language change events
             LocalizationResolver.OnLanguageChanged += OnLanguageChanged;
+
+            RefreshSelectionVisuals();
         }
 
         private void OnDisable()
@@ -100,6 +136,14 @@ namespace TalkJourney.BubbleSystem.Bubbles
         {
             // Language changed - reset activation state and update display if needed
             _hasActivated = false;
+            RefreshSelectionVisuals();
+        }
+
+        public void Initialize(SelectionBubbleData data)
+        {
+            selectionData = data;
+            RefreshDependencies();
+            RefreshSelectionVisuals();
         }
 
         public bool TryActivateFromRecognizedText(string recognizedText)
@@ -162,6 +206,26 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 feedbackAudioSource = GetComponent<AudioSource>();
             }
 
+            if (primaryText == null)
+            {
+                primaryText = GetComponentInChildren<TMP_Text>(true);
+            }
+
+            if (primaryTextRectTransform == null && primaryText != null)
+            {
+                primaryTextRectTransform = primaryText.rectTransform;
+            }
+
+            if (bubbleRectTransform == null)
+            {
+                bubbleRectTransform = _rectTransform != null ? _rectTransform : GetComponent<RectTransform>();
+            }
+
+            if (_layoutElement == null)
+            {
+                _layoutElement = GetComponent<LayoutElement>();
+            }
+
             if (_stageController == null)
             {
                 _stageController = FindFirstObjectByType<StageController>(FindObjectsInactive.Include);
@@ -171,6 +235,8 @@ namespace TalkJourney.BubbleSystem.Bubbles
             {
                 Debug.LogWarning("SelectionBubbleController could not resolve IStageController. Selection activation will be disabled.", this);
             }
+
+            RefreshSelectionVisuals();
         }
 
         public void SetBypassEnabled(bool isEnabled)
@@ -244,6 +310,124 @@ namespace TalkJourney.BubbleSystem.Bubbles
                     feedbackAudioSource.PlayOneShot(clip);
                 }
             }
+        }
+
+        public void RefreshSelectionVisuals()
+        {
+            if (selectionData == null)
+            {
+                return;
+            }
+
+            if (primaryText == null)
+            {
+                primaryText = GetComponentInChildren<TMP_Text>(true);
+            }
+
+            if (primaryText == null)
+            {
+                return;
+            }
+
+            if (_layoutElement == null)
+            {
+                _layoutElement = GetComponent<LayoutElement>();
+                if (_layoutElement == null)
+                {
+                    _layoutElement = gameObject.AddComponent<LayoutElement>();
+                }
+            }
+
+            if (primaryTextRectTransform == null)
+            {
+                primaryTextRectTransform = primaryText.rectTransform;
+            }
+
+            if (bubbleRectTransform == null)
+            {
+                bubbleRectTransform = _rectTransform != null ? _rectTransform : GetComponent<RectTransform>();
+            }
+
+            var resolvedText = ResolvePrimary(selectionData.bubble != null ? selectionData.bubble.primaryTextKey : null);
+            primaryText.text = resolvedText;
+            primaryText.ForceMeshUpdate();
+
+            var shouldConstrainWidth = constrainPrimaryTextWidthToParent || primaryTextMaximumWidth > 0f;
+            primaryText.textWrappingMode = shouldConstrainWidth ? TextWrappingModes.Normal : TextWrappingModes.NoWrap;
+            primaryText.overflowMode = TextOverflowModes.Overflow;
+
+            var textWidthLimit = GetPrimaryTextWidthLimit();
+            var preferred = shouldConstrainWidth
+                ? primaryText.GetPreferredValues(primaryText.text, textWidthLimit, Mathf.Infinity)
+                : primaryText.GetPreferredValues(primaryText.text, Mathf.Infinity, Mathf.Infinity);
+
+            var textWidth = Mathf.Max(0f, preferred.x + primaryTextPadding.x);
+            var textHeight = Mathf.Max(0f, preferred.y + primaryTextPadding.y);
+
+            if (shouldConstrainWidth && !float.IsInfinity(textWidthLimit))
+            {
+                textWidth = Mathf.Min(textWidth, textWidthLimit);
+            }
+
+            if (primaryTextRectTransform != null)
+            {
+                primaryTextRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, textWidth);
+                primaryTextRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, textHeight);
+            }
+
+            if (!matchPrimaryTextAndBubbleToContent)
+            {
+                return;
+            }
+
+            var bubbleWidth = Mathf.Max(minimumBubbleSize.x, textWidth + bubblePadding.x);
+            var bubbleHeight = Mathf.Max(minimumBubbleSize.y, textHeight + bubblePadding.y);
+
+            if (bubbleRectTransform != null)
+            {
+                bubbleRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, bubbleWidth);
+                bubbleRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, bubbleHeight);
+            }
+
+            _layoutElement.preferredWidth = bubbleWidth;
+            _layoutElement.preferredHeight = bubbleHeight;
+            _layoutElement.minWidth = minimumBubbleSize.x;
+            _layoutElement.minHeight = minimumBubbleSize.y;
+
+            if (_rectTransform != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(_rectTransform);
+            }
+
+            var parentRect = transform.parent as RectTransform;
+            if (parentRect != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(parentRect);
+            }
+        }
+
+        private float GetPrimaryTextWidthLimit()
+        {
+            var widthLimit = primaryTextMaximumWidth > 0f ? primaryTextMaximumWidth : Mathf.Infinity;
+
+            if (!constrainPrimaryTextWidthToParent || primaryTextRectTransform == null)
+            {
+                return widthLimit;
+            }
+
+            var parentRect = primaryTextRectTransform.parent as RectTransform;
+            if (parentRect == null)
+            {
+                return widthLimit;
+            }
+
+            var parentWidthLimit = Mathf.Max(0f, parentRect.rect.width - bubblePadding.x);
+            if (parentWidthLimit <= 0f)
+            {
+                return widthLimit;
+            }
+
+            return float.IsInfinity(widthLimit) ? parentWidthLimit : Mathf.Min(widthLimit, parentWidthLimit);
         }
 
         private bool MatchesRecognizedText(string recognizedText)

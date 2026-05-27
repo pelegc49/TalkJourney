@@ -53,6 +53,12 @@ namespace TalkJourney.BubbleSystem.Bubbles
         [Tooltip("Extra width/height padding added around the primary text in pixels.")]
         public Vector2 bubblePadding = new Vector2(32f, 16f);
 
+        [Tooltip("When enabled, the primary text will stop growing wider than its parent and wrap onto multiple lines instead.")]
+        public bool constrainPrimaryTextWidthToParent = false;
+
+        [Tooltip("Optional explicit maximum width for the primary text in pixels. Set to 0 to use the parent width.")]
+        public float primaryTextMaximumWidth = 0f;
+
         [Tooltip("When enabled, PrimaryText_UI RectTransform is resized to the exact preferred text size and DisplayBubble is matched 1:1 to it.")]
         public bool matchPrimaryTextAndDisplayBubbleToContent = true;
 
@@ -277,9 +283,24 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 return minimumBubbleSize;
             }
 
-            var preferred = primaryText.GetPreferredValues(primaryText.text, Mathf.Infinity, Mathf.Infinity);
+            var textWidthLimit = GetPrimaryTextWidthLimit(primaryRect);
+            var shouldConstrainWidth = constrainPrimaryTextWidthToParent || primaryTextMaximumWidth > 0f;
+
+            primaryText.textWrappingMode = shouldConstrainWidth
+                ? TextWrappingModes.Normal
+                : TextWrappingModes.NoWrap;
+
+            var preferred = shouldConstrainWidth
+                ? primaryText.GetPreferredValues(primaryText.text, textWidthLimit, Mathf.Infinity)
+                : primaryText.GetPreferredValues(primaryText.text, Mathf.Infinity, Mathf.Infinity);
+
             var textWidth = Mathf.Max(0f, preferred.x + primaryTextPadding.x);
             var textHeight = Mathf.Max(0f, preferred.y + primaryTextPadding.y);
+
+            if (shouldConstrainWidth && !float.IsInfinity(textWidthLimit))
+            {
+                textWidth = Mathf.Min(textWidth, textWidthLimit);
+            }
 
             primaryRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, textWidth);
             primaryRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, textHeight);
@@ -295,6 +316,30 @@ namespace TalkJourney.BubbleSystem.Bubbles
             }
 
             return new Vector2(Mathf.Max(textWidth, bubbleWidth), Mathf.Max(textHeight, bubbleHeight));
+        }
+
+        private float GetPrimaryTextWidthLimit(RectTransform primaryRect)
+        {
+            var widthLimit = primaryTextMaximumWidth > 0f ? primaryTextMaximumWidth : Mathf.Infinity;
+
+            if (!constrainPrimaryTextWidthToParent || primaryRect == null)
+            {
+                return widthLimit;
+            }
+
+            var parentRect = primaryRect.parent as RectTransform;
+            if (parentRect == null)
+            {
+                return widthLimit;
+            }
+
+            var parentWidthLimit = Mathf.Max(0f, parentRect.rect.width - bubblePadding.x);
+            if (parentWidthLimit <= 0f)
+            {
+                return widthLimit;
+            }
+
+            return float.IsInfinity(widthLimit) ? parentWidthLimit : Mathf.Min(widthLimit, parentWidthLimit);
         }
 
         private RectTransform ResolvePrimaryTextRectTransform()

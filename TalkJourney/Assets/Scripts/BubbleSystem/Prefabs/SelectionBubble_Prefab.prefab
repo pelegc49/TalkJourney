@@ -190,6 +190,8 @@ MonoBehaviour:
   transliteratorLocaleCode: en-he
   minimumBubbleSize: {x: 50, y: 50}
   bubblePadding: {x: 32, y: 16}
+  constrainPrimaryTextWidthToParent: 0
+  primaryTextMaximumWidth: 0
   matchPrimaryTextAndDisplayBubbleToContent: 1
   matchTransliteratorTextAndTransliteratorBubbleToContent: 1
   primaryTextRectTransform: {fileID: 1891915454015958432}
@@ -280,6 +282,15 @@ MonoBehaviour:
       visualElementPrefab: {fileID: 0}
     isCorrect: 0
     nextStage: {fileID: 0}
+  primaryText: {fileID: 5758754462421847196}
+  primaryTextRectTransform: {fileID: 1891915454015958432}
+  minimumBubbleSize: {x: 50, y: 50}
+  bubblePadding: {x: 32, y: 16}
+  primaryTextPadding: {x: 0, y: 0}
+  constrainPrimaryTextWidthToParent: 1
+  primaryTextMaximumWidth: 0
+  matchPrimaryTextAndBubbleToContent: 1
+  bubbleRectTransform: {fileID: 794289408900105944}
   interactable: {fileID: 1884320560938301556}
   localizationServiceBehaviour: {fileID: 0}
   stageControllerBehaviour: {fileID: 0}

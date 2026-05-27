@@ -60,6 +60,10 @@ namespace TalkJourney.BubbleSystem.Flow
         private readonly List<SelectionBubbleController> _activeSelectionBubbles = new List<SelectionBubbleController>();
         private Coroutine _stageTransitionCoroutine;
 
+        [Header("Selection Text Layout")]
+        [Tooltip("Maximum width in pixels for selection bubble text before it wraps onto a new line.")]
+        public float selectionBubbleMaxTextWidth = 280f;
+
         private void Start()
         {
             if (autoStartInitialStage && initialStage != null)
@@ -284,22 +288,12 @@ namespace TalkJourney.BubbleSystem.Flow
                 }
 
                 var instance = Instantiate(selectionBubblePrefab, selectionBubbleParent);
-                instance.selectionData = selectionData;
+                instance.Initialize(selectionData);
                 instance.stageControllerBehaviour = this;
                 instance.localizationServiceBehaviour = localizationServiceBehaviour;
+                instance.primaryTextMaximumWidth = selectionBubbleMaxTextWidth;
                 instance.RefreshDependencies();
                 _activeSelectionBubbles.Add(instance);
-
-                var displayBubble = instance.GetComponent<DisplayBubbleController>();
-                if (displayBubble != null)
-                {
-                    displayBubble.matchPrimaryTextAndDisplayBubbleToContent = true;
-                    displayBubble.bubbleData = selectionData.bubble;
-                    displayBubble.localizationServiceBehaviour = localizationServiceBehaviour;
-                    displayBubble.audioPlaybackManagerBehaviour = audioPlaybackManagerBehaviour;
-                    displayBubble.RefreshDependencies();
-                    displayBubble.RefreshLocalizedTexts();
-                }
             }
 
             PushActiveSelectionsToSpeechMatcher();
