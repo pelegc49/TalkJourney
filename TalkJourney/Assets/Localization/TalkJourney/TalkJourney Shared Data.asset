@@ -83,8 +83,8 @@ MonoBehaviour:
     m_Key: results.duration
     m_Metadata:
       m_Items: []
-  - m_Id: 1170213644660750
-    m_Key: results.total_selection
+  - m_Id: 20321086568263680
+    m_Key: results.total_selections
     m_Metadata:
       m_Items: []
   - m_Id: 1170213644660751
@@ -117,6 +117,54 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13000156259151875
     m_Key: guide.VoiceIndicator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983936
+    m_Key: StageRestaurant1.Question
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983937
+    m_Key: StageRestaurant1.Answer1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983938
+    m_Key: StageRestaurant1.Answer2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983939
+    m_Key: StageRestaurant1.Answer3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983940
+    m_Key: StageRestaurant2.Question
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983941
+    m_Key: StageRestaurant2.Answer1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983942
+    m_Key: StageRestaurant2.Answer2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983943
+    m_Key: StageRestaurant2.Answer3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983944
+    m_Key: StageRestaurant3.Question
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983945
+    m_Key: StageRestaurant3.Answer1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983946
+    m_Key: StageRestaurant3.Answer2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983947
+    m_Key: StageRestaurant3.Answer3
     m_Metadata:
       m_Items: []
   m_Metadata:

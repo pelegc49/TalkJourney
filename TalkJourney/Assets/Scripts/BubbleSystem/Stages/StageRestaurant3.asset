@@ -10,12 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7076c2b2a8348b24fab88618f7938e77, type: 3}
-  m_Name: Stage_02
+  m_Name: StageRestaurant3
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Data.StageData
   stageId: stage2
   stageNotes: 
   sentenceBubbles:
-  - primaryTextKey: do
+  - primaryTextKey: Great!
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: What
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: would
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
@@ -27,23 +35,34 @@ MonoBehaviour:
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  - primaryTextKey: sushi
+  - primaryTextKey: to
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  fullSentenceAudioIdentifier: Do you like sushi?
+  - primaryTextKey: eat?
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  fullSentenceAudioIdentifier: Great! What would you like to eat?
   selectionBubbles:
   - bubble:
-      primaryTextKey: yes
-      audioIdentifier: 
-      visualType: 0
-      visualElementPrefab: {fileID: 0}
-    isCorrect: 1
-    nextStage: {fileID: 0}
-  - bubble:
-      primaryTextKey: no
+      primaryTextKey: Flower
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
     isCorrect: 0
+    nextStage: {fileID: 0}
+  - bubble:
+      primaryTextKey: Clock
+      audioIdentifier: 
+      visualType: 0
+      visualElementPrefab: {fileID: 0}
+    isCorrect: 0
+    nextStage: {fileID: 0}
+  - bubble:
+      primaryTextKey: Pizza
+      audioIdentifier: 
+      visualType: 0
+      visualElementPrefab: {fileID: 0}
+    isCorrect: 1
     nextStage: {fileID: 0}

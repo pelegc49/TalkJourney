@@ -86,10 +86,6 @@ MonoBehaviour:
     m_Localized: meshookh
     m_Metadata:
       m_Items: []
-  - m_Id: 1170213644660750
-    m_Localized: mivkhar kolel
-    m_Metadata:
-      m_Items: []
   - m_Id: 1170213644660751
     m_Localized: nikon
     m_Metadata:
@@ -123,6 +119,58 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13000156259151875
     m_Localized: kan tokhel lir'ot et otzmat hakol shlakh.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086568263680
+    m_Localized: sakh kel hivkhirot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983936
+    m_Localized: shlum! tirtza leshtot mishehu?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983937
+    m_Localized: shmala
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983938
+    m_Localized: kos mim
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983939
+    m_Localized: ne'el
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983940
+    m_Localized: meula! meh tirtza lakhul?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983941
+    m_Localized: ferah
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983942
+    m_Localized: shia'on
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983943
+    m_Localized: fitza
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983944
+    m_Localized: meula! az meh hahazmana hasofit shlakh?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983945
+    m_Localized: ani rotza pitza vekos mim bebaksha
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983946
+    m_Localized: rek tan lei et hapitza vehamim shli
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983947
+    m_Localized: ani rofe
     m_Metadata:
       m_Items: []
   references:

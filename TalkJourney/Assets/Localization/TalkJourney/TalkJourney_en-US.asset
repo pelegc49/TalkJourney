@@ -86,10 +86,6 @@ MonoBehaviour:
     m_Localized: duration
     m_Metadata:
       m_Items: []
-  - m_Id: 1170213644660750
-    m_Localized: total selection
-    m_Metadata:
-      m_Items: []
   - m_Id: 1170213644660751
     m_Localized: correct
     m_Metadata:
@@ -123,6 +119,58 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13000156259151875
     m_Localized: Here you can see the volume of your voice.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086568263680
+    m_Localized: total selections
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983936
+    m_Localized: Hello! Would you like to drink something?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983937
+    m_Localized: 'Dress '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983938
+    m_Localized: Cup of water
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983939
+    m_Localized: 'Shoe '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983940
+    m_Localized: Great! What would you like to eat?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983941
+    m_Localized: Flower
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983942
+    m_Localized: Clock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983943
+    m_Localized: Pizza
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983944
+    m_Localized: Awesome! So what is your final order?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983945
+    m_Localized: I would like a pizza and a cup of water please
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983946
+    m_Localized: Just give me my pizza and my water
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983947
+    m_Localized: I am a doctor
     m_Metadata:
       m_Items: []
   references:

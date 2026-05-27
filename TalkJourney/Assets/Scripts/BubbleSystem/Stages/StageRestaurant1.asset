@@ -10,45 +10,57 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7076c2b2a8348b24fab88618f7938e77, type: 3}
-  m_Name: Stage_01
+  m_Name: StageRestaurant1
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Data.StageData
-  stageId: stage1
+  stageId: StageRestaurant1
   stageNotes: 
   sentenceBubbles:
-  - primaryTextKey: what
+  - primaryTextKey: Hello!
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  - primaryTextKey: is
+  - primaryTextKey: Would
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  - primaryTextKey: your
+  - primaryTextKey: you
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  - primaryTextKey: name
+  - primaryTextKey: like
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  fullSentenceAudioIdentifier: what is your name?
+  - primaryTextKey: to
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: drink
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: something?
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  fullSentenceAudioIdentifier: Hello! Would you like to drink something?
   selectionBubbles:
   - bubble:
-      primaryTextKey: Reuven
-      audioIdentifier: 
-      visualType: 0
-      visualElementPrefab: {fileID: 0}
-    isCorrect: 1
-    nextStage: {fileID: 11400000, guid: 41636b1289cb3954c9ea0716fc6951bd, type: 2}
-  - bubble:
-      primaryTextKey: Peleg
+      primaryTextKey: Dress
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
     isCorrect: 0
     nextStage: {fileID: 0}
   - bubble:
-      primaryTextKey: Moshe
+      primaryTextKey: Cup of water
+      audioIdentifier: 
+      visualType: 0
+      visualElementPrefab: {fileID: 0}
+    isCorrect: 1
+    nextStage: {fileID: 11400000, guid: 41636b1289cb3954c9ea0716fc6951bd, type: 2}
+  - bubble:
+      primaryTextKey: Shoe
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}

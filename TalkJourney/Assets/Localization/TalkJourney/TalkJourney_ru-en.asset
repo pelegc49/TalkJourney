@@ -86,10 +86,6 @@ MonoBehaviour:
     m_Localized: prodolzhitel'nost'
     m_Metadata:
       m_Items: []
-  - m_Id: 1170213644660750
-    m_Localized: polny vybor
-    m_Metadata:
-      m_Items: []
   - m_Id: 1170213644660751
     m_Localized: pravil'ny
     m_Metadata:
@@ -123,6 +119,58 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13000156259151875
     m_Localized: Zdes' vy mozhete uvidet' gromkost' svoyego golosa.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086568263680
+    m_Localized: obshkheye kolikhestvo vyborov
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983936
+    m_Localized: Zdravstvuyte! Khotite khto-nibud' vypit'?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983937
+    m_Localized: Odevat'sya
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983938
+    m_Localized: Stakan vody
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983939
+    m_Localized: Obuv'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983940
+    m_Localized: Otlikhno! khto by vy khoteli s"yest'?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983941
+    m_Localized: Tsvetok
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983942
+    m_Localized: khasy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983943
+    m_Localized: Pitstsa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983944
+    m_Localized: Otlikhno! Itak, kakoy vash okonkhatel'ny zakaz?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983945
+    m_Localized: YA by khotel pitstsu i stakan vody, pozhaluysta.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983946
+    m_Localized: Prosto dayte mne pitstsu i vodu.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20321086626983947
+    m_Localized: YA vrakh
     m_Metadata:
       m_Items: []
   references:
