@@ -12,57 +12,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7076c2b2a8348b24fab88618f7938e77, type: 3}
   m_Name: StageRestaurant3
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Data.StageData
-  stageId: stage2
+  stageId: StageRestaurant3
   stageNotes: 
   sentenceBubbles:
-  - primaryTextKey: Great!
+  - primaryTextKey: Awesome!
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  - primaryTextKey: What
+  - primaryTextKey: So
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  - primaryTextKey: would
+  - primaryTextKey: what
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  - primaryTextKey: you
+  - primaryTextKey: is
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  - primaryTextKey: like
+  - primaryTextKey: your
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  - primaryTextKey: to
+  - primaryTextKey: final
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  - primaryTextKey: eat?
+  - primaryTextKey: order?
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  fullSentenceAudioIdentifier: Great! What would you like to eat?
+  fullSentenceAudioIdentifier: StageRestaurant3.Question
   selectionBubbles:
   - bubble:
-      primaryTextKey: Flower
-      audioIdentifier: 
-      visualType: 0
-      visualElementPrefab: {fileID: 0}
-    isCorrect: 0
-    nextStage: {fileID: 0}
-  - bubble:
-      primaryTextKey: Clock
-      audioIdentifier: 
-      visualType: 0
-      visualElementPrefab: {fileID: 0}
-    isCorrect: 0
-    nextStage: {fileID: 0}
-  - bubble:
-      primaryTextKey: Pizza
+      primaryTextKey: StageRestaurant3.Answer1
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
     isCorrect: 1
+    nextStage: {fileID: 0}
+  - bubble:
+      primaryTextKey: StageRestaurant3.Answer2
+      audioIdentifier: 
+      visualType: 0
+      visualElementPrefab: {fileID: 0}
+    isCorrect: 0
+    nextStage: {fileID: 0}
+  - bubble:
+      primaryTextKey: StageRestaurant3.Answer3
+      audioIdentifier: 
+      visualType: 0
+      visualElementPrefab: {fileID: 0}
+    isCorrect: 0
     nextStage: {fileID: 0}

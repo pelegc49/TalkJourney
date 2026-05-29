@@ -173,6 +173,50 @@ MonoBehaviour:
     m_Localized: I am a doctor
     m_Metadata:
       m_Items: []
+  - m_Id: 20949972205301761
+    m_Localized: to
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20949972205301762
+    m_Localized: drink
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20949972205301768
+    m_Localized: final
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20952378917908480
+    m_Localized: Hello!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20952378947268608
+    m_Localized: Would
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20952378947268609
+    m_Localized: something?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20952378947268610
+    m_Localized: Great!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20952378947268611
+    m_Localized: eat?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20952378947268612
+    m_Localized: Awesome!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20952378947268613
+    m_Localized: So
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20952378947268614
+    m_Localized: order?
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

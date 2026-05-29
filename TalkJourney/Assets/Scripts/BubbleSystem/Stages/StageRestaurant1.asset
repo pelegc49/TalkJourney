@@ -43,24 +43,24 @@ MonoBehaviour:
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  fullSentenceAudioIdentifier: Hello! Would you like to drink something?
+  fullSentenceAudioIdentifier: StageRestaurant1.Question
   selectionBubbles:
   - bubble:
-      primaryTextKey: Dress
+      primaryTextKey: StageRestaurant1.Answer1
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
     isCorrect: 0
     nextStage: {fileID: 0}
   - bubble:
-      primaryTextKey: Cup of water
+      primaryTextKey: StageRestaurant1.Answer2
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
     isCorrect: 1
     nextStage: {fileID: 11400000, guid: 41636b1289cb3954c9ea0716fc6951bd, type: 2}
   - bubble:
-      primaryTextKey: Shoe
+      primaryTextKey: StageRestaurant1.Answer3
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
