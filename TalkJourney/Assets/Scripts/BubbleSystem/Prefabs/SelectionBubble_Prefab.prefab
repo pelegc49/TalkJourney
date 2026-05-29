@@ -283,10 +283,18 @@ MonoBehaviour:
     isCorrect: 0
     nextStage: {fileID: 0}
   primaryText: {fileID: 5758754462421847196}
+  transliteratorTextObject: {fileID: 5165588314125888735}
+  transliteratorAnimator: {fileID: 355721160126778855}
+  transliteratorVisibleBool: IsVisible
   primaryTextRectTransform: {fileID: 1891915454015958432}
   minimumBubbleSize: {x: 50, y: 50}
   bubblePadding: {x: 32, y: 16}
+  matchTransliteratorTextAndBubbleToContent: 1
   primaryTextPadding: {x: 0, y: 0}
+  transliteratorTextRectTransform: {fileID: 0}
+  transliteratorTextPadding: {x: 20, y: 20}
+  transliteratorBubbleRectTransform: {fileID: 0}
+  transliteratorBubblePadding: {x: 20, y: 20}
   constrainPrimaryTextWidthToParent: 1
   primaryTextMaximumWidth: 0
   matchPrimaryTextAndBubbleToContent: 1

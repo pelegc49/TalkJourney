@@ -21,6 +21,15 @@ namespace TalkJourney.BubbleSystem.Bubbles
         [Tooltip("Primary text label shown on the selection bubble.")]
         public TMP_Text primaryText;
 
+        [Tooltip("Root object of TransliteratorText_UI shown only while hovering.")]
+        public GameObject transliteratorTextObject;
+
+        [Tooltip("Optional animator controlling transliterator show/hide. If assigned, hover enter/exit will fire triggers instead of instant disable.")]
+        public Animator transliteratorAnimator;
+
+        [Tooltip("Animator bool parameter name used for transliterator visibility.")]
+        public string transliteratorVisibleBool = "IsVisible";
+
         [Tooltip("Optional explicit RectTransform for the primary text. If empty, the TMP text RectTransform is used.")]
         public RectTransform primaryTextRectTransform;
 
@@ -30,8 +39,23 @@ namespace TalkJourney.BubbleSystem.Bubbles
         [Tooltip("Extra width/height padding added around the primary text in pixels.")]
         public Vector2 bubblePadding = new Vector2(32f, 16f);
 
+        [Tooltip("When enabled, TransliteratorText_UI RectTransform is resized to the exact preferred text size and the transliterator bubble is matched 1:1 to it.")]
+        public bool matchTransliteratorTextAndBubbleToContent = true;
+
         [Tooltip("Extra width/height padding added to the primary text RectTransform around its content.")]
         public Vector2 primaryTextPadding = Vector2.zero;
+
+        [Tooltip("Optional explicit RectTransform for TransliteratorText_UI. If empty, TMP_Text on transliteratorTextObject is used.")]
+        public RectTransform transliteratorTextRectTransform;
+
+        [Tooltip("Extra width/height padding added to TransliteratorText_UI around its content.")]
+        public Vector2 transliteratorTextPadding = Vector2.zero;
+
+        [Tooltip("Optional explicit RectTransform for TransliteratorBubble image. If empty, it is auto-resolved under TransliteratorText_UI/TransliteratorBubble.")]
+        public RectTransform transliteratorBubbleRectTransform;
+
+        [Tooltip("Extra width/height padding added to TransliteratorBubble around TransliteratorText_UI.")]
+        public Vector2 transliteratorBubblePadding = Vector2.zero;
 
         [Tooltip("When enabled, the primary text will stop growing wider than its parent and wrap onto multiple lines instead.")]
         public bool constrainPrimaryTextWidthToParent = true;
@@ -88,6 +112,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
         private bool _isBypassEnabled;
         private ILocalizationService _localizationService;
         private IStageController _stageController;
+        private bool _isTransliteratorVisible;
         private RectTransform _rectTransform;
         private LayoutElement _layoutElement;
         private readonly StringBuilder _normalizeBuffer = new StringBuilder(128);
@@ -107,6 +132,8 @@ namespace TalkJourney.BubbleSystem.Bubbles
             if (interactable != null)
             {
                 interactable.Clicked += ActivateFromClick;
+                interactable.HoverEntered += OnHoverEntered;
+                interactable.HoverExited += OnHoverExited;
             }
 
             BubbleEventBus.SelectionCorrect += OnSelectionCorrect;
@@ -114,8 +141,10 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
             // Subscribe to language change events
             LocalizationResolver.OnLanguageChanged += OnLanguageChanged;
+            LocalizationResolver.OnTransliteratorChanged += RefreshTransliteratorText;
 
             RefreshSelectionVisuals();
+            SetTransliteratorVisible(false, immediate: true);
         }
 
         private void OnDisable()
@@ -123,6 +152,8 @@ namespace TalkJourney.BubbleSystem.Bubbles
             if (interactable != null)
             {
                 interactable.Clicked -= ActivateFromClick;
+                interactable.HoverEntered -= OnHoverEntered;
+                interactable.HoverExited -= OnHoverExited;
             }
 
             BubbleEventBus.SelectionCorrect -= OnSelectionCorrect;
@@ -130,6 +161,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
             // Unsubscribe from language change events
             LocalizationResolver.OnLanguageChanged -= OnLanguageChanged;
+            LocalizationResolver.OnTransliteratorChanged -= RefreshTransliteratorText;
         }
 
         private void OnLanguageChanged()
@@ -144,6 +176,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
             selectionData = data;
             RefreshDependencies();
             RefreshSelectionVisuals();
+            SetTransliteratorVisible(false, immediate: true);
         }
 
         public bool TryActivateFromRecognizedText(string recognizedText)
@@ -204,6 +237,11 @@ namespace TalkJourney.BubbleSystem.Bubbles
             if (feedbackAudioSource == null && autoResolveFeedbackAudioSource)
             {
                 feedbackAudioSource = GetComponent<AudioSource>();
+            }
+
+            if (transliteratorAnimator == null)
+            {
+                transliteratorAnimator = feedbackAnimator;
             }
 
             if (primaryText == null)
@@ -329,6 +367,8 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 return;
             }
 
+            RefreshTransliteratorText();
+
             if (_layoutElement == null)
             {
                 _layoutElement = GetComponent<LayoutElement>();
@@ -404,6 +444,172 @@ namespace TalkJourney.BubbleSystem.Bubbles
             {
                 LayoutRebuilder.ForceRebuildLayoutImmediate(parentRect);
             }
+        }
+
+        private void OnHoverEntered()
+        {
+            SetTransliteratorVisible(true);
+        }
+
+        private void OnHoverExited()
+        {
+            SetTransliteratorVisible(false);
+        }
+
+        private void RefreshTransliteratorText()
+        {
+            var transliteratorText = ResolveTransliteratorTextComponent();
+            if (selectionData == null || transliteratorText == null)
+            {
+                return;
+            }
+
+            transliteratorText.text = ResolveTransliterator(selectionData.bubble != null ? selectionData.bubble.primaryTextKey : null);
+            transliteratorText.ForceMeshUpdate();
+
+            ApplyTransliteratorPreferredBubbleSize();
+        }
+
+        private void ApplyTransliteratorPreferredBubbleSize()
+        {
+            if (!matchTransliteratorTextAndBubbleToContent)
+            {
+                return;
+            }
+
+            ResizeTransliteratorTextAndBubbleToContent();
+        }
+
+        private Vector2 ResizeTransliteratorTextAndBubbleToContent()
+        {
+            var transliteratorText = ResolveTransliteratorTextComponent();
+            var transliteratorRect = ResolveTransliteratorTextRectTransform();
+            if (transliteratorText == null || transliteratorRect == null)
+            {
+                return Vector2.zero;
+            }
+
+            var preferred = transliteratorText.GetPreferredValues(transliteratorText.text, Mathf.Infinity, Mathf.Infinity);
+            var textWidth = Mathf.Max(0f, preferred.x + transliteratorTextPadding.x);
+            var textHeight = Mathf.Max(0f, preferred.y + transliteratorTextPadding.y);
+
+            transliteratorRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, textWidth);
+            transliteratorRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, textHeight);
+
+            var bubbleWidth = Mathf.Max(0f, textWidth + transliteratorBubblePadding.x);
+            var bubbleHeight = Mathf.Max(0f, textHeight + transliteratorBubblePadding.y);
+
+            var transliteratorBubbleRect = ResolveTransliteratorBubbleRectTransform(transliteratorRect);
+            if (transliteratorBubbleRect != null)
+            {
+                transliteratorBubbleRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, bubbleWidth);
+                transliteratorBubbleRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, bubbleHeight);
+            }
+
+            return new Vector2(Mathf.Max(textWidth, bubbleWidth), Mathf.Max(textHeight, bubbleHeight));
+        }
+
+        private RectTransform ResolveTransliteratorTextRectTransform()
+        {
+            if (transliteratorTextRectTransform != null)
+            {
+                return transliteratorTextRectTransform;
+            }
+
+            var transliteratorText = ResolveTransliteratorTextComponent();
+            if (transliteratorText != null)
+            {
+                return transliteratorText.rectTransform;
+            }
+
+            return null;
+        }
+
+        private TMP_Text ResolveTransliteratorTextComponent()
+        {
+            if (transliteratorTextObject == null)
+            {
+                return null;
+            }
+
+            return transliteratorTextObject.GetComponent<TMP_Text>();
+        }
+
+        private RectTransform ResolveTransliteratorBubbleRectTransform(RectTransform transliteratorRect)
+        {
+            if (transliteratorBubbleRectTransform != null)
+            {
+                return transliteratorBubbleRectTransform;
+            }
+
+            if (transliteratorRect == null)
+            {
+                return null;
+            }
+
+            var transliteratorBubble = transliteratorRect.Find("TransliteratorBubble") as RectTransform;
+            if (transliteratorBubble != null)
+            {
+                return transliteratorBubble;
+            }
+
+            var image = transliteratorRect.GetComponentInChildren<Image>(true);
+            return image != null ? image.rectTransform : null;
+        }
+
+        private void SetTransliteratorVisible(bool isVisible, bool immediate = false)
+        {
+            _isTransliteratorVisible = isVisible;
+
+            var hasAnimator = transliteratorAnimator != null && !string.IsNullOrWhiteSpace(transliteratorVisibleBool);
+            if (hasAnimator)
+            {
+                SetTransliteratorObjectsActive(true);
+                transliteratorAnimator.SetBool(transliteratorVisibleBool, isVisible);
+
+                if (!isVisible && immediate)
+                {
+                    SetTransliteratorObjectsActive(false);
+                }
+
+                return;
+            }
+
+            SetTransliteratorObjectsActive(isVisible);
+        }
+
+        private void SetTransliteratorObjectsActive(bool isActive)
+        {
+            if (transliteratorTextObject != null)
+            {
+                transliteratorTextObject.SetActive(isActive);
+            }
+        }
+
+        private string ResolveTransliterator(string key)
+        {
+            if (_localizationService == null || string.IsNullOrWhiteSpace(key))
+            {
+                return key ?? string.Empty;
+            }
+
+            var localizationResolver = localizationServiceBehaviour as LocalizationResolver;
+            if (localizationResolver == null)
+            {
+                localizationResolver = FindFirstObjectByType<LocalizationResolver>(FindObjectsInactive.Include);
+            }
+
+            if (localizationResolver != null)
+            {
+                var transliteratorCode = localizationResolver.GetCurrentTransliteratorCode();
+                if (!string.IsNullOrWhiteSpace(transliteratorCode)
+                    && _localizationService.TryResolveForLocaleCode(key, transliteratorCode, out var transliteratedValue))
+                {
+                    return transliteratedValue;
+                }
+            }
+
+            return _localizationService.Resolve(key);
         }
 
         private float GetPrimaryTextWidthLimit()
