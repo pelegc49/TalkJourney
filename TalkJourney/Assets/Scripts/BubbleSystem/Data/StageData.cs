@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,11 +19,12 @@ namespace TalkJourney.BubbleSystem.Data
         public string stageNotes;
 
         [Header("Sentence Bubble")]
-        [Tooltip("Ordered display bubbles that form the sentence for this stage.")]
-        public List<BubbleData> sentenceBubbles = new List<BubbleData>(); // sentenceBubble that built by DisplayBubbles
+        [Tooltip("Localization key for the full sentence. The sentence will be resolved, split into display bubbles, and transliterated at runtime.")]
+        public string sentenceLocalizationKey;
 
-        [Tooltip("Optional full sentence audio identifier for single-clip playback mode.")]
-        public string fullSentenceAudioIdentifier; // id of the audio or the name of it in the database
+        [HideInInspector]
+        [Obsolete("Use sentenceLocalizationKey instead.")]
+        public List<BubbleData> sentenceBubbles = new List<BubbleData>(); // sentenceBubble that built by DisplayBubbles
 
         [Header("Selection Bubbles")]
         [Tooltip("Branching options available in this stage.")]

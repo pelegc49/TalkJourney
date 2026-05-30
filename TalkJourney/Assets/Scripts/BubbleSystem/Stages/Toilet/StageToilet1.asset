@@ -14,55 +14,79 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Data.StageData
   stageId: StageToilet1
   stageNotes: Hey you! You want to pass? What are you looking for?
+  sentenceLocalizationKey: StageToilet1.Question
   sentenceBubbles:
   - primaryTextKey: Hey
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: you!
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: You
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: want
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: to
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: pass?
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: What
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: are
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: you
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: looking
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: for?
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  fullSentenceAudioIdentifier: StageToilet1.Question
   selectionBubbles:
   - bubble:
       primaryTextKey: StageToilet1.Answer1
+      primaryTextOverride: 
+      transliteratorTextOverride: 
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
@@ -70,6 +94,8 @@ MonoBehaviour:
     nextStage: {fileID: 11400000, guid: 1e43643814bbdef48b222734282e78b9, type: 2}
   - bubble:
       primaryTextKey: StageToilet1.Answer2
+      primaryTextOverride: 
+      transliteratorTextOverride: 
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
@@ -77,6 +103,8 @@ MonoBehaviour:
     nextStage: {fileID: 0}
   - bubble:
       primaryTextKey: StageToilet1.Answer3
+      primaryTextOverride: 
+      transliteratorTextOverride: 
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}

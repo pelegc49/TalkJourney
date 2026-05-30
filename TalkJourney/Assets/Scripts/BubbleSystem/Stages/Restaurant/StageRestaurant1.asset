@@ -14,39 +14,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Data.StageData
   stageId: StageRestaurant1
   stageNotes: 
+  sentenceLocalizationKey: StageRestaurant1.Question
   sentenceBubbles:
   - primaryTextKey: Hello!
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: Would
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: you
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: like
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: to
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: drink
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: something?
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  fullSentenceAudioIdentifier: StageRestaurant1.Question
   selectionBubbles:
   - bubble:
       primaryTextKey: StageRestaurant1.Answer1
+      primaryTextOverride: 
+      transliteratorTextOverride: 
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
@@ -54,6 +70,8 @@ MonoBehaviour:
     nextStage: {fileID: 0}
   - bubble:
       primaryTextKey: StageRestaurant1.Answer2
+      primaryTextOverride: 
+      transliteratorTextOverride: 
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
@@ -61,6 +79,8 @@ MonoBehaviour:
     nextStage: {fileID: 11400000, guid: 41636b1289cb3954c9ea0716fc6951bd, type: 2}
   - bubble:
       primaryTextKey: StageRestaurant1.Answer3
+      primaryTextOverride: 
+      transliteratorTextOverride: 
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}

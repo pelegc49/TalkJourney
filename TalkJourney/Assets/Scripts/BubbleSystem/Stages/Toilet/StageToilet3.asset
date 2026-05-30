@@ -14,59 +14,85 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Data.StageData
   stageId: StageToilet3
   stageNotes: Alright, you can go in. Why are you in such a hurry?
+  sentenceLocalizationKey: StageToilet3.Question
   sentenceBubbles:
   - primaryTextKey: Alright
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: you
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: can
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: go
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: in
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: Why
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: are
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: you
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: in
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: such
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: a
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: hurry?
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  fullSentenceAudioIdentifier: StageToilet3.Question
   selectionBubbles:
   - bubble:
       primaryTextKey: StageToilet3.Answer1
+      primaryTextOverride: 
+      transliteratorTextOverride: 
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
@@ -74,6 +100,8 @@ MonoBehaviour:
     nextStage: {fileID: 0}
   - bubble:
       primaryTextKey: StageToilet3.Answer2
+      primaryTextOverride: 
+      transliteratorTextOverride: 
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
@@ -81,6 +109,8 @@ MonoBehaviour:
     nextStage: {fileID: 0}
   - bubble:
       primaryTextKey: StageToilet3.Answer3
+      primaryTextOverride: 
+      transliteratorTextOverride: 
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}

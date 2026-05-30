@@ -14,67 +14,97 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Data.StageData
   stageId: StageTech3
   stageNotes: Perfect! We have a great model for that. How would you like to pay?
+  sentenceLocalizationKey: StageTech3.Question
   sentenceBubbles:
   - primaryTextKey: Perfect!
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: We
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: have
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: a
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: great
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: model
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: for
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: that
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: How
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: would
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: you
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: like
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: to
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: pay?
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  fullSentenceAudioIdentifier: StageTech3.Question
   selectionBubbles:
   - bubble:
       primaryTextKey: StageTech3.Answer1
+      primaryTextOverride: 
+      transliteratorTextOverride: 
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
@@ -82,6 +112,8 @@ MonoBehaviour:
     nextStage: {fileID: 0}
   - bubble:
       primaryTextKey: StageTech3.Answer2
+      primaryTextOverride: 
+      transliteratorTextOverride: 
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
@@ -89,6 +121,8 @@ MonoBehaviour:
     nextStage: {fileID: 0}
   - bubble:
       primaryTextKey: StageTech3.Answer3
+      primaryTextOverride: 
+      transliteratorTextOverride: 
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}

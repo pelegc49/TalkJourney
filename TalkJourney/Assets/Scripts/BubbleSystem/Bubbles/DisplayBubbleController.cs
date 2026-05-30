@@ -207,14 +207,14 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
             if (primaryText != null)
             {
-                primaryText.text = ResolveKey(bubbleData.primaryTextKey);
+                primaryText.text = ResolvePrimaryText(bubbleData);
                 primaryText.ForceMeshUpdate();
             }
 
             var transliteratorText = ResolveTransliteratorTextComponent();
             if (transliteratorText != null)
             {
-                transliteratorText.text = ResolveTransliterator(bubbleData.primaryTextKey);
+                transliteratorText.text = ResolveTransliteratorText(bubbleData);
                 transliteratorText.ForceMeshUpdate();
             }
 
@@ -477,7 +477,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
             BubbleEventBus.PublishBubbleClicked(bubbleData);
 
-            var bubbleContent = ResolveKey(bubbleData.primaryTextKey);
+            var bubbleContent = ResolvePrimaryText(bubbleData);
             if (!string.IsNullOrWhiteSpace(bubbleContent))
             {
                 _ = _audioPlaybackManager.PlayByTextAsync(bubbleContent);
@@ -511,6 +511,36 @@ namespace TalkJourney.BubbleSystem.Bubbles
             return _localizationService.Resolve(key);
         }
 
+        private string ResolvePrimaryText(BubbleData data)
+        {
+            if (data == null)
+            {
+                return string.Empty;
+            }
+
+            if (!string.IsNullOrWhiteSpace(data.primaryTextOverride))
+            {
+                return data.primaryTextOverride;
+            }
+
+            return ResolveKey(data.primaryTextKey);
+        }
+
+        private string ResolveTransliteratorText(BubbleData data)
+        {
+            if (data == null)
+            {
+                return string.Empty;
+            }
+
+            if (!string.IsNullOrWhiteSpace(data.transliteratorTextOverride))
+            {
+                return data.transliteratorTextOverride;
+            }
+
+            return ResolveTransliterator(data.primaryTextKey);
+        }
+
         private void RefreshTransliteratorText()
         {
             var transliteratorText = ResolveTransliteratorTextComponent();
@@ -520,7 +550,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
             }
 
             ApplyTextDirectionSettings();
-            transliteratorText.text = ResolveTransliterator(bubbleData.primaryTextKey);
+            transliteratorText.text = ResolveTransliteratorText(bubbleData);
             transliteratorText.ForceMeshUpdate();
 
             ApplyTransliteratorPreferredBubbleSize();

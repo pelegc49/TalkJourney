@@ -16,6 +16,12 @@ namespace TalkJourney.BubbleSystem.Data
         [Tooltip("Single localization key used for both primary text and transliteration lookup.")]
         public string primaryTextKey;
 
+        [Tooltip("Direct primary text used when the bubble is created from resolved sentence text instead of a localization key.")]
+        public string primaryTextOverride;
+
+        [Tooltip("Direct transliteration text used when the bubble is created from resolved sentence text instead of a localization key.")]
+        public string transliteratorTextOverride;
+
         [Header("Audio")]
         [Tooltip("Unique ID or endpoint suffix used by backend audio service.")]
         public string audioIdentifier;

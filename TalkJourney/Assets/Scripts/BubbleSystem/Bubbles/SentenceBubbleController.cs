@@ -53,9 +53,11 @@ namespace TalkJourney.BubbleSystem.Bubbles
         public SentencePlaybackMode playbackMode = SentencePlaybackMode.PreferFullSentenceClip;
 
         private readonly List<DisplayBubbleController> _spawnedBubbles = new List<DisplayBubbleController>();
+        private readonly List<BubbleData> _activeSentenceBubbleData = new List<BubbleData>();
         private IAudioPlaybackManager _audioPlaybackManager;
         private ILocalizationService _localizationService;
         private StageData _activeStage;
+        private Coroutine _pendingSentenceRebuild;
 
         private void Awake()
         {
@@ -74,6 +76,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
             // Subscribe to language change events to refresh bubbles when language switches
             LocalizationResolver.OnLanguageChanged += RefreshBubblesForLanguageChange;
+            LocalizationResolver.OnTransliteratorChanged += RefreshBubblesForLanguageChange;
         }
 
         private void OnDisable()
@@ -85,19 +88,32 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
             // Unsubscribe from language change events
             LocalizationResolver.OnLanguageChanged -= RefreshBubblesForLanguageChange;
+            LocalizationResolver.OnTransliteratorChanged -= RefreshBubblesForLanguageChange;
+
+            if (_pendingSentenceRebuild != null)
+            {
+                StopCoroutine(_pendingSentenceRebuild);
+                _pendingSentenceRebuild = null;
+            }
         }
 
         private void RefreshBubblesForLanguageChange()
         {
-            ApplySentenceLayoutDirection();
-
-            // Refresh all spawned display bubbles when language changes
-            foreach (var bubble in _spawnedBubbles)
+            if (_activeStage != null && _pendingSentenceRebuild == null)
             {
-                if (bubble != null)
-                {
-                    bubble.RefreshLocalizedTexts();
-                }
+                _pendingSentenceRebuild = StartCoroutine(RebuildSentenceAfterLocalizationChange());
+            }
+        }
+
+        private System.Collections.IEnumerator RebuildSentenceAfterLocalizationChange()
+        {
+            yield return null;
+
+            _pendingSentenceRebuild = null;
+
+            if (_activeStage != null)
+            {
+                RebuildSentence(_activeStage);
             }
         }
 
@@ -118,6 +134,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
         public void RebuildSentence(StageData stageData)
         {
             ClearSpawnedBubbles();
+            _activeSentenceBubbleData.Clear();
 
             // EnsureSentenceAreaLayout();
 
@@ -128,9 +145,10 @@ namespace TalkJourney.BubbleSystem.Bubbles
                 return;
             }
 
-            for (int i = 0; i < stageData.sentenceBubbles.Count; i++)
+            var sentenceBubbleData = BuildSentenceBubbleData(stageData);
+            for (int i = 0; i < sentenceBubbleData.Count; i++)
             {
-                var bubbleData = stageData.sentenceBubbles[i];
+                var bubbleData = sentenceBubbleData[i];
                 if (bubbleData == null)
                 {
                     continue;
@@ -144,6 +162,7 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
                 controller.Initialize(bubbleData);
                 _spawnedBubbles.Add(controller);
+                _activeSentenceBubbleData.Add(bubbleData);
             }
 
             var sentenceRect = sentenceBubbleParent as RectTransform;
@@ -213,17 +232,17 @@ namespace TalkJourney.BubbleSystem.Bubbles
 
         private List<string> BuildSentenceTexts()
         {
-            var texts = new List<string>(_activeStage.sentenceBubbles.Count);
+            var texts = new List<string>(_activeSentenceBubbleData.Count);
 
-            for (int i = 0; i < _activeStage.sentenceBubbles.Count; i++)
+            for (int i = 0; i < _activeSentenceBubbleData.Count; i++)
             {
-                var bubble = _activeStage.sentenceBubbles[i];
-                if (bubble == null || string.IsNullOrWhiteSpace(bubble.primaryTextKey))
+                var bubble = _activeSentenceBubbleData[i];
+                if (bubble == null)
                 {
                     continue;
                 }
 
-                var resolved = ResolveText(bubble.primaryTextKey).Trim();
+                var resolved = ResolvePrimaryText(bubble).Trim();
                 if (!string.IsNullOrWhiteSpace(resolved))
                 {
                     texts.Add(resolved);
@@ -241,6 +260,129 @@ namespace TalkJourney.BubbleSystem.Bubbles
             }
 
             return _localizationService.Resolve(key);
+        }
+
+        private string ResolvePrimaryText(BubbleData bubbleData)
+        {
+            if (bubbleData == null)
+            {
+                return string.Empty;
+            }
+
+            if (!string.IsNullOrWhiteSpace(bubbleData.primaryTextOverride))
+            {
+                return bubbleData.primaryTextOverride;
+            }
+
+            return ResolveText(bubbleData.primaryTextKey);
+        }
+
+        private string ResolveSentenceTransliteration(string sentenceKey, string fallbackText)
+        {
+            if (string.IsNullOrWhiteSpace(sentenceKey))
+            {
+                return fallbackText ?? string.Empty;
+            }
+
+            var transliteratorCode = GetCurrentTransliteratorCode();
+            if (!string.IsNullOrWhiteSpace(transliteratorCode)
+                && _localizationService != null
+                && _localizationService.TryResolveForLocaleCode(sentenceKey, transliteratorCode, out var transliteratedSentence))
+            {
+                return transliteratedSentence;
+            }
+
+            return fallbackText ?? string.Empty;
+        }
+
+        private List<BubbleData> BuildSentenceBubbleData(StageData stageData)
+        {
+            var bubbleDataList = new List<BubbleData>();
+
+            if (stageData == null)
+            {
+                return bubbleDataList;
+            }
+
+            if (!string.IsNullOrWhiteSpace(stageData.sentenceLocalizationKey))
+            {
+                var localizedSentence = ResolveText(stageData.sentenceLocalizationKey).Trim();
+                if (string.IsNullOrWhiteSpace(localizedSentence))
+                {
+                    localizedSentence = stageData.sentenceLocalizationKey.Trim();
+                }
+
+                var transliteratedSentence = ResolveSentenceTransliteration(stageData.sentenceLocalizationKey, localizedSentence).Trim();
+                bubbleDataList.AddRange(BuildWordBubbles(localizedSentence, transliteratedSentence));
+                return bubbleDataList;
+            }
+
+            if (stageData.sentenceBubbles != null && stageData.sentenceBubbles.Count > 0)
+            {
+                bubbleDataList.AddRange(stageData.sentenceBubbles);
+            }
+
+            return bubbleDataList;
+        }
+
+        private List<BubbleData> BuildWordBubbles(string localizedSentence, string transliteratedSentence)
+        {
+            var displayWords = SplitSentenceIntoWords(localizedSentence);
+            var transliteratedWords = SplitSentenceIntoWords(transliteratedSentence);
+            var bubbleCount = displayWords.Count;
+
+            var runtimeBubbles = new List<BubbleData>(bubbleCount);
+            for (int i = 0; i < bubbleCount; i++)
+            {
+                var bubble = new BubbleData
+                {
+                    primaryTextOverride = displayWords[i],
+                    transliteratorTextOverride = i < transliteratedWords.Count ? transliteratedWords[i] : displayWords[i],
+                    visualType = BubbleVisualType.Text,
+                    visualElementPrefab = fallbackDisplayBubblePrefab != null ? fallbackDisplayBubblePrefab.gameObject : null
+                };
+
+                runtimeBubbles.Add(bubble);
+            }
+
+            return runtimeBubbles;
+        }
+
+        private static List<string> SplitSentenceIntoWords(string sentence)
+        {
+            var words = new List<string>();
+            if (string.IsNullOrWhiteSpace(sentence))
+            {
+                return words;
+            }
+
+            var segments = sentence.Split(new[] { ' ', '\t', '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < segments.Length; i++)
+            {
+                var segment = segments[i].Trim();
+                if (!string.IsNullOrWhiteSpace(segment))
+                {
+                    words.Add(segment);
+                }
+            }
+
+            return words;
+        }
+
+        private string GetCurrentTransliteratorCode()
+        {
+            if (localizationServiceBehaviour is LocalizationResolver localizationResolver)
+            {
+                return localizationResolver.GetCurrentTransliteratorCode();
+            }
+
+            var sceneLocalizationResolver = FindFirstObjectByType<LocalizationResolver>(FindObjectsInactive.Include);
+            if (sceneLocalizationResolver != null)
+            {
+                return sceneLocalizationResolver.GetCurrentTransliteratorCode();
+            }
+
+            return string.Empty;
         }
 
         private void OnSpeakerClicked()

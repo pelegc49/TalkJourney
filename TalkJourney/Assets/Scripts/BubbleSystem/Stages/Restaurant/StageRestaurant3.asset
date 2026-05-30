@@ -14,39 +14,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Data.StageData
   stageId: StageRestaurant3
   stageNotes: 
+  sentenceLocalizationKey: StageRestaurant3.Question
   sentenceBubbles:
   - primaryTextKey: Awesome!
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: So
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: what
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: is
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: your
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: final
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
   - primaryTextKey: order?
+    primaryTextOverride: 
+    transliteratorTextOverride: 
     audioIdentifier: 
     visualType: 0
     visualElementPrefab: {fileID: 0}
-  fullSentenceAudioIdentifier: StageRestaurant3.Question
   selectionBubbles:
   - bubble:
       primaryTextKey: StageRestaurant3.Answer1
+      primaryTextOverride: 
+      transliteratorTextOverride: 
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
@@ -54,6 +70,8 @@ MonoBehaviour:
     nextStage: {fileID: 0}
   - bubble:
       primaryTextKey: StageRestaurant3.Answer2
+      primaryTextOverride: 
+      transliteratorTextOverride: 
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
@@ -61,6 +79,8 @@ MonoBehaviour:
     nextStage: {fileID: 0}
   - bubble:
       primaryTextKey: StageRestaurant3.Answer3
+      primaryTextOverride: 
+      transliteratorTextOverride: 
       audioIdentifier: 
       visualType: 0
       visualElementPrefab: {fileID: 0}
