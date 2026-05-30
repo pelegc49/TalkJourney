@@ -119,6 +119,14 @@ MonoBehaviour:
     m_Key: guide.VoiceIndicator
     m_Metadata:
       m_Items: []
+  - m_Id: 21430041763770368
+    m_Key: guide.Toilet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21430041801519104
+    m_Key: guide.Tech
+    m_Metadata:
+      m_Items: []
   - m_Id: 20321086626983936
     m_Key: StageRestaurant1.Question
     m_Metadata:
@@ -209,6 +217,242 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 20952378947268614
     m_Key: order?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030348877824
+    m_Key: StageToilet1.Question
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792384
+    m_Key: StageToilet1.Answer1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792385
+    m_Key: StageToilet1.Answer2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792386
+    m_Key: StageToilet1.Answer3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792387
+    m_Key: StageToilet2.Question
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792388
+    m_Key: StageToilet2.Answer1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792389
+    m_Key: StageToilet2.Answer2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792390
+    m_Key: StageToilet2.Answer3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792391
+    m_Key: StageToilet3.Question
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792392
+    m_Key: StageToilet3.Answer1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792393
+    m_Key: StageToilet3.Answer2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792394
+    m_Key: StageToilet3.Answer3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792395
+    m_Key: want
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792396
+    m_Key: pass?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792397
+    m_Key: are
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792398
+    m_Key: looking
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792399
+    m_Key: for?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792400
+    m_Key: nothing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792401
+    m_Key: free
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792402
+    m_Key: here
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792403
+    m_Key: going
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792404
+    m_Key: give
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792405
+    m_Key: me?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792406
+    m_Key: you!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792407
+    m_Key: Alright
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792408
+    m_Key: go
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792409
+    m_Key: in
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792410
+    m_Key: Why
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792411
+    m_Key: such
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792412
+    m_Key: hurry?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792413
+    m_Key: a
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792414
+    m_Key: StageTech1.Question
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792415
+    m_Key: StageTech1.Answer1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792416
+    m_Key: StageTech1.Answer2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792417
+    m_Key: StageTech1.Answer3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792418
+    m_Key: StageTech2.Question
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792419
+    m_Key: StageTech2.Answer1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792420
+    m_Key: StageTech2.Answer2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792421
+    m_Key: StageTech2.Answer3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792422
+    m_Key: StageTech3.Question
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792423
+    m_Key: StageTech3.Answer1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792424
+    m_Key: StageTech3.Answer2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792425
+    m_Key: StageTech3.Answer3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792426
+    m_Key: Welcome!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792427
+    m_Key: new
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792428
+    m_Key: device
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792429
+    m_Key: today?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792430
+    m_Key: Excellent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792431
+    m_Key: choice!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792432
+    m_Key: need
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792433
+    m_Key: use
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792434
+    m_Key: it
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792435
+    m_Key: mostly?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792436
+    m_Key: Perfect!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792437
+    m_Key: great
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792438
+    m_Key: model
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792439
+    m_Key: that
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792440
+    m_Key: how
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792441
+    m_Key: pay?
     m_Metadata:
       m_Items: []
   m_Metadata:

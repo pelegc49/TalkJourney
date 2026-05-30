@@ -217,6 +217,254 @@ MonoBehaviour:
     m_Localized: zakaz?
     m_Metadata:
       m_Items: []
+  - m_Id: 21405030348877824
+    m_Localized: Ey ty! Khokhesh' proyti? khto ty ishkhesh'?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792384
+    m_Localized: Tualet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792385
+    m_Localized: Klaviatura
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792386
+    m_Localized: Solntsezashkhitnye okhki
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792387
+    m_Localized: Zdes' nikhego ne dayetsya besplatno. khto vy mne dadite?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792388
+    m_Localized: Sobaka
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792389
+    m_Localized: Oblako
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792390
+    m_Localized: Moneta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792391
+    m_Localized: Khorosho, mozhete zakhodit'. Pokhemu vy tak speshite?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792392
+    m_Localized: YA khokhu s"yest' svoyu pitstsu zdes'.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792393
+    m_Localized: Mne okhen' nuzhno v tualet, pozhaluysta.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792394
+    m_Localized: Segodnya prekrasnaya pogoda.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792395
+    m_Localized: khotet'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792396
+    m_Localized: prokhodit'?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792397
+    m_Localized: yavlyayutsya
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792398
+    m_Localized: smotryashkhiy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792399
+    m_Localized: dlya?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792400
+    m_Localized: nikhego
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792401
+    m_Localized: besplatno
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792402
+    m_Localized: zdes'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792403
+    m_Localized: idushkhiy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792404
+    m_Localized: davat'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792405
+    m_Localized: mne?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792406
+    m_Localized: ty!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792407
+    m_Localized: Khorosho
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792408
+    m_Localized: idti
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792409
+    m_Localized: v
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792410
+    m_Localized: Pokhemu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792411
+    m_Localized: takoy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792412
+    m_Localized: toropit'sya?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792413
+    m_Localized: a
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792414
+    m_Localized: Dobro pozhalovat'! Vy ishkhete segodnya novoye ustroystvo?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792415
+    m_Localized: Banan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792416
+    m_Localized: Stul
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792417
+    m_Localized: Smartfon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792418
+    m_Localized: Otlikhny vybor! Dlya khego vy khashkhe vsego yego ispol'zuyete?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792419
+    m_Localized: Igry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792420
+    m_Localized: Plavaniye
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792421
+    m_Localized: Spyashkhiy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792422
+    m_Localized: Otlikhno! U nas yest' dlya etogo prekrasnaya model'. Kak by vy khoteli
+      oplatit'?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792423
+    m_Localized: YA oplakhu svoyey kreditnoy kartoy, pozhaluysta.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792424
+    m_Localized: YA lyublyu pitstsu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792425
+    m_Localized: Prosto voz'mi moi den'gi i day mne telefon.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792426
+    m_Localized: Dobro pozhalovat'!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792427
+    m_Localized: novy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792428
+    m_Localized: ustroystvo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792429
+    m_Localized: segodnya?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792430
+    m_Localized: Otlikhny
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792431
+    m_Localized: vybor!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792432
+    m_Localized: nuzhdat'sya
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792433
+    m_Localized: ispol'zovat'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792434
+    m_Localized: eto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792435
+    m_Localized: po bol'shey khasti?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792436
+    m_Localized: Ideal'ny!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792437
+    m_Localized: bol'shoy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792438
+    m_Localized: model'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792439
+    m_Localized: khto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792440
+    m_Localized: kak
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792441
+    m_Localized: platit'?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21430041763770368
+    m_Localized: Otlikhno! Teper' vydite iz restorana i idite pryamo k tualetam.
+      Tam yest' paren', s kotorym vam nuzhno poznakomit'sya.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21430041801519104
+    m_Localized: Otlikhno! Teper' prodolzhayte idti pryamo v tom zhe napravlenii,
+      v kotorom vy prishli ot restorana, i vy uvidite magazin elektroniki pryamo
+      vperedi.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

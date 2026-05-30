@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7076c2b2a8348b24fab88618f7938e77, type: 3}
+  m_Name: StageTech3
+  m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Data.StageData
+  stageId: StageTech3
+  stageNotes: Perfect! We have a great model for that. How would you like to pay?
+  sentenceBubbles:
+  - primaryTextKey: Perfect!
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: We
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: have
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: a
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: great
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: model
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: for
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: that
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: How
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: would
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: you
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: like
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: to
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: pay?
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  fullSentenceAudioIdentifier: StageTech3.Question
+  selectionBubbles:
+  - bubble:
+      primaryTextKey: StageTech3.Answer1
+      audioIdentifier: 
+      visualType: 0
+      visualElementPrefab: {fileID: 0}
+    isCorrect: 1
+    nextStage: {fileID: 0}
+  - bubble:
+      primaryTextKey: StageTech3.Answer2
+      audioIdentifier: 
+      visualType: 0
+      visualElementPrefab: {fileID: 0}
+    isCorrect: 0
+    nextStage: {fileID: 0}
+  - bubble:
+      primaryTextKey: StageTech3.Answer3
+      audioIdentifier: 
+      visualType: 0
+      visualElementPrefab: {fileID: 0}
+    isCorrect: 0
+    nextStage: {fileID: 0}

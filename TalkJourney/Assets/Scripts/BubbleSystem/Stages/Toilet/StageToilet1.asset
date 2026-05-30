@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7076c2b2a8348b24fab88618f7938e77, type: 3}
+  m_Name: StageToilet1
+  m_EditorClassIdentifier: Assembly-CSharp::TalkJourney.BubbleSystem.Data.StageData
+  stageId: StageToilet1
+  stageNotes: Hey you! You want to pass? What are you looking for?
+  sentenceBubbles:
+  - primaryTextKey: Hey
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: you!
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: You
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: want
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: to
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: pass?
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: What
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: are
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: you
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: looking
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  - primaryTextKey: for?
+    audioIdentifier: 
+    visualType: 0
+    visualElementPrefab: {fileID: 0}
+  fullSentenceAudioIdentifier: StageToilet1.Question
+  selectionBubbles:
+  - bubble:
+      primaryTextKey: StageToilet1.Answer1
+      audioIdentifier: 
+      visualType: 0
+      visualElementPrefab: {fileID: 0}
+    isCorrect: 1
+    nextStage: {fileID: 11400000, guid: 1e43643814bbdef48b222734282e78b9, type: 2}
+  - bubble:
+      primaryTextKey: StageToilet1.Answer2
+      audioIdentifier: 
+      visualType: 0
+      visualElementPrefab: {fileID: 0}
+    isCorrect: 0
+    nextStage: {fileID: 0}
+  - bubble:
+      primaryTextKey: StageToilet1.Answer3
+      audioIdentifier: 
+      visualType: 0
+      visualElementPrefab: {fileID: 0}
+    isCorrect: 0
+    nextStage: {fileID: 0}

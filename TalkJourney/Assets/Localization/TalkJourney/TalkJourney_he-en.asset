@@ -217,6 +217,252 @@ MonoBehaviour:
     m_Localized: lehajemin?
     m_Metadata:
       m_Items: []
+  - m_Id: 21405030348877824
+    m_Localized: hai ata! ata rotza le'evur? meh ata mekhafsh?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792384
+    m_Localized: shairutim
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792385
+    m_Localized: mekledet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792386
+    m_Localized: mikhaekofi shuemesh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792387
+    m_Localized: shum dvar kan le bekhinam. meh ata holekh letat lei?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792388
+    m_Localized: klav
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792389
+    m_Localized: anan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792390
+    m_Localized: mitba
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792391
+    m_Localized: basder, ata yekhul lehikans. lema ata kel kekh mimher?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792392
+    m_Localized: ani rotza lakhul et hapitza shli kan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792393
+    m_Localized: ani mimsh tzrikh lehishtamesh beshirutim bebaksha
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792394
+    m_Localized: mezeg ha'avir nehader hayom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792395
+    m_Localized: makhsor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792396
+    m_Localized: la'avor?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792397
+    m_Localized: hem
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792398
+    m_Localized: mekhafsh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792399
+    m_Localized: avur?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792400
+    m_Localized: shum davar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792401
+    m_Localized: leshoakhrer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792402
+    m_Localized: khan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792403
+    m_Localized: holekh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792404
+    m_Localized: latet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792405
+    m_Localized: li?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792406
+    m_Localized: "\u05D0\u05B7\u05EA\u05B8\u05D4!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792407
+    m_Localized: beeseder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792408
+    m_Localized: lalehet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792409
+    m_Localized: be
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792410
+    m_Localized: medu'a
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792411
+    m_Localized: khaza
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792412
+    m_Localized: lemaher?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792413
+    m_Localized: a
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792414
+    m_Localized: brukhim hab'im! mekhafshim mekhshir hadsh hayom?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792415
+    m_Localized: beanana
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792416
+    m_Localized: khise
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792417
+    m_Localized: smartfon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792418
+    m_Localized: bekhira metzuyanet! lema ata tzrikh lehishtamesh beza be'ikar?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792419
+    m_Localized: geiming
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792420
+    m_Localized: shaehiya
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792421
+    m_Localized: yishuen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792422
+    m_Localized: mushlam! yesh lenu model meula leza. eikh tirtza leshlam?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792423
+    m_Localized: ashlam bekartis esrai bebaksha
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792424
+    m_Localized: ani ohev pitza
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792425
+    m_Localized: pashut kakh et hakhsef shli vetan lei et hatalfon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792426
+    m_Localized: kabealat fanim!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792427
+    m_Localized: hadash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792428
+    m_Localized: hatiken
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792429
+    m_Localized: hayom?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792430
+    m_Localized: me'ula
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792431
+    m_Localized: beekhira!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792432
+    m_Localized: tzorekh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792433
+    m_Localized: lehishemetamesh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792434
+    m_Localized: za
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792435
+    m_Localized: larov?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792436
+    m_Localized: mushlam!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792437
+    m_Localized: "\u05D2\u05B8\u05D3\u05D5\u05B9\u05DC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792438
+    m_Localized: degem
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792439
+    m_Localized: za
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792440
+    m_Localized: ekh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21405030411792441
+    m_Localized: lekhaalem?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21430041763770368
+    m_Localized: meula! akhsav, tz'u mehamasada velekhu yesher lekivun hashirutim.
+      yesh shem bekhor she'atam tzrikhim lifgosh.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21430041801519104
+    m_Localized: mushlam! akhsav, hameshiku yesher be'uto kivun bediyuk shelav be'atam
+      mehamasada, vetar'u et hanot hatekhnologya mimsh lifnehem.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
