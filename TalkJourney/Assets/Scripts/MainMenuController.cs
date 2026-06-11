@@ -6,8 +6,11 @@ public class MainMenuController : MonoBehaviour
 {
     [SerializeField] private GameObject aboutUsPanel;
     [SerializeField] private GameObject buttons;
+    [SerializeField] private GameObject aboutUsButton;
 
     private float animationDuration = 0.5f;
+
+
     public void onStartPressed()
     {
         SceneManager.LoadScene("City");
@@ -22,11 +25,30 @@ public class MainMenuController : MonoBehaviour
 
     public void onAboutUsPressed()
     {
-        //setTimeout to activate the about us panel after 0.4 seconds to allow the buttons to slide away first
-        StartCoroutine(ActivateAboutUsPanelAfterDelay(0.4f));
-        // move buttons away to x=-270 to make room for about us panel
-        StartCoroutine(SlideButtonsRoutine(new Vector3(-270, 45, 0)));
+        if (aboutUsPanel.activeSelf)
+        {
+            //setTimeout to deactivate the about us panel after 0.1 seconds to allow the buttons to slide back first
+            StartCoroutine(SetActiveAboutUsPanelAfterDelay(0.1f, false));
+            // move buttons back to x=0
+            StartCoroutine(SlideButtonsRoutine(new Vector3(0, buttons.transform.localPosition.y, 0)));
+        }
+        else
+        {
+            //setTimeout to activate the about us panel after 0.4 seconds to allow the buttons to slide away first
+            StartCoroutine(SetActiveAboutUsPanelAfterDelay(0.4f, true));
+            // move buttons away to x=-270 to make room for about us panel
+            StartCoroutine(SlideButtonsRoutine(new Vector3(-270, buttons.transform.localPosition.y, 0)));
+        }
+        aboutUsButton.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        StartCoroutine(ReenableAboutUsButtonAfterDelay(animationDuration+0.02f));
+
     }
+    private IEnumerator ReenableAboutUsButtonAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        aboutUsButton.GetComponent<UnityEngine.UI.Button>().interactable = true;
+    }
+
     private IEnumerator SlideButtonsRoutine(Vector3 targetPosition)
     {
         Vector3 startPosition = buttons.transform.localPosition;
@@ -46,9 +68,9 @@ public class MainMenuController : MonoBehaviour
         // mitigating floating point inaccuracies from the lerp.
         buttons.transform.localPosition = targetPosition;
     }
-    private IEnumerator ActivateAboutUsPanelAfterDelay(float delay)
+    private IEnumerator SetActiveAboutUsPanelAfterDelay(float delay,bool set)
     {
         yield return new WaitForSeconds(delay);
-        aboutUsPanel.SetActive(true);
+        aboutUsPanel.SetActive(set);
     }
 }
