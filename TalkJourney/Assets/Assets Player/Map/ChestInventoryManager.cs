@@ -36,6 +36,9 @@ public class ChestInventoryManager : MonoBehaviour
 
     private float hideAt = float.PositiveInfinity;
     private float checkReleasedAt = float.PositiveInfinity;
+
+
+    private string handTag = "Hand"; // Tag to identify hand colliders
     void Start()
     {
         Debug.Log("ChestInventoryManager started. Initializing tablet and input actions.");
@@ -73,6 +76,7 @@ public class ChestInventoryManager : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (!other.CompareTag(handTag)) return;
         Debug.Log("Trigger entered by: " + other.name);
         // Identify exactly which hand entered the chest trigger
         XRBaseInteractor interactor = other.GetComponentInChildren<XRDirectInteractor>(false);
@@ -89,6 +93,7 @@ public class ChestInventoryManager : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
+        if (!other.CompareTag(handTag)) return;
         Debug.Log("Trigger exited by: " + other.name);
         // Identify exactly which hand exited the chest trigger
         XRBaseInteractor interactor = other.GetComponentInChildren<XRDirectInteractor>(false);

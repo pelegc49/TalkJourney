@@ -1,2 +1,5 @@
 Proof of Concept/Assets/StreamingAssets/google-services-desktop.json
 TalkJourney/Assets/Localization/Google Sheets Service.asset
+TalkJourney/ProjectSettings/AndroidResolverDependencies.xml
+TalkJourney/Assets/Plugins/Android/settingsTemplate.gradle
+TalkJourney/Assets/Plugins/Android/mainTemplate.gradle
