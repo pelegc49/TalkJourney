@@ -189,7 +189,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &3128877150862483405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,12 +260,14 @@ MonoBehaviour:
   selectionBubbleParent: {fileID: 0}
   selectionBubblePrefab: {fileID: 0}
   selectionSpeechMatcher: {fileID: 3984251827163612947}
+  guideController: {fileID: 0}
   localizationServiceBehaviour: {fileID: 0}
   audioPlaybackManagerBehaviour: {fileID: 3933484982578997305}
   transitionAnimator: {fileID: 7658032646213365320}
   fadeOutBool: FadeOut
   fadeInBool: FadeIn
   fadeDuration: 1.5
+  selectionBubbleMaxTextWidth: 280
 --- !u!114 &2047445298037219905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,7 +337,7 @@ AudioSource:
   m_GameObject: {fileID: 598673396303755336}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -1988262800917362808, guid: 7184cb9452d4eed45a7d7d0d3d16a522, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
