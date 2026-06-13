@@ -55,11 +55,16 @@ public class VolumeSettings : MonoBehaviour
 
     public void LoadVolume()
     {
-        masterSlider.value = PlayerPrefs.GetFloat("masterVolume");
-        environmentSlider.value = PlayerPrefs.GetFloat("environmentVolume");
-        voiceSlider.value = PlayerPrefs.GetFloat("voiceVolume");
-        SFXSlider.value = PlayerPrefs.GetFloat("sfxVolume");
-        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        if (PlayerPrefs.HasKey("masterVolume"))
+            masterSlider.value = PlayerPrefs.GetFloat("masterVolume");
+        if (PlayerPrefs.HasKey("environmentVolume"))
+            environmentSlider.value = PlayerPrefs.GetFloat("environmentVolume");
+        if (PlayerPrefs.HasKey("voiceVolume"))
+            voiceSlider.value = PlayerPrefs.GetFloat("voiceVolume");
+        if (PlayerPrefs.HasKey("sfxVolume"))
+            SFXSlider.value = PlayerPrefs.GetFloat("sfxVolume");
+        if (PlayerPrefs.HasKey("musicVolume"))
+            musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
 
         SetMusicVolume();
         SetSFXVolume();
@@ -71,17 +76,6 @@ public class VolumeSettings : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (PlayerPrefs.HasKey("musicVolume"))
-        {
-            LoadVolume();
-        }
-        else
-        {
-            SetMusicVolume();
-            SetSFXVolume();
-            SetMasterVolume();
-            SetEnvironmentVolume();
-            SetVoiceVolume();
-        }
+        LoadVolume();
     }
 }
