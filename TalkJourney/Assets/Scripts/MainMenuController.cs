@@ -14,7 +14,6 @@ public class MainMenuController : MonoBehaviour
     public void onStartPressed()
     {
         SceneManager.LoadScene("City");
-        //SceneManager.UnloadSceneAsync("MainMenu");
     }
 
     public void onExitPressed()

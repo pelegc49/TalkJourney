@@ -3,10 +3,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Firebase;
 using Firebase.Auth;
+using Firebase.Database;
 using TalkJourney.GameServices.Auth;
 using TalkJourney.BubbleSystem.Localization;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.Localization.SmartFormat.Utilities;
 
 namespace TalkJourney.BubbleSystem.Audio
 {
@@ -84,13 +86,23 @@ namespace TalkJourney.BubbleSystem.Audio
             {
                 ApplyVoiceSettingsForDisplayLanguage(localizationResolver.selectedLanguage);
             }
+            getTTSEndpoint();
         }
 
         private void OnDisable()
         {
             LocalizationResolver.OnDisplayLanguageChanged -= OnDisplayLanguageChanged;
         }
-
+        private async void getTTSEndpoint()
+        {
+            string databaseUrl = "https://talk-journey-default-rtdb.firebaseio.com/";
+            var app = FirebaseApp.DefaultInstance;
+            FirebaseDatabase database = FirebaseDatabase.GetInstance(app, databaseUrl);
+            string ip_ = (await database.GetReference("ip").GetValueAsync()).Value.ToString();
+            string port_ = (await database.GetReference("port").GetValueAsync()).Value.ToString();
+            string endpoint = $"http://{ip_}:{port_}/api/get-audio";
+            ttsPostUrl = endpoint;
+        }
         public async Task<AudioRequestResult> RequestAudioFromTextAsync(string text, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(text))
