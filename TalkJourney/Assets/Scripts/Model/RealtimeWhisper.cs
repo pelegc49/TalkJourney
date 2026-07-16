@@ -4,6 +4,7 @@ using Unity.InferenceEngine;
 using UnityEngine.Networking;
 using Firebase;
 using Firebase.Auth;
+using Firebase.Database;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +16,7 @@ using System.Text.RegularExpressions;
 using Unity.Profiling;
 using TalkJourney.BubbleSystem.Speech;
 using System;
+
 
 
 #if ENABLE_INPUT_SYSTEM
@@ -188,9 +190,20 @@ public class RealtimeWhisper : MonoBehaviour, ISpeechRecognitionService
         }
 
         _instance = this;
+        getSTTEndpoint();
         DontDestroyOnLoad(gameObject);
     }
 
+    private async void getSTTEndpoint()
+    {
+        string databaseUrl = "https://talk-journey-default-rtdb.firebaseio.com/";
+        var app = FirebaseApp.DefaultInstance;
+        FirebaseDatabase database = FirebaseDatabase.GetInstance(app, databaseUrl);
+        string ip_ = (await database.GetReference("ip").GetValueAsync()).Value.ToString();
+        string port_ = (await database.GetReference("port").GetValueAsync()).Value.ToString();
+        string endpoint = $"http://{ip_}:{port_}/api/transcribe";
+        cloudTranscriptionFunctionUrl = endpoint;
+    }
     private void SetThinkingState(bool value)
     {
         if (isThinking == value)
